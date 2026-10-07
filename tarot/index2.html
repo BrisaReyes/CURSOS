@@ -1,0 +1,1938 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Curso de Tarot — Arcanos Menores</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================================
+           CARTAS CLICKEABLES
+        ========================================================= */
+
+        .arcana-list span {
+            cursor: pointer;
+            display: none;
+        }
+
+        .arcana-list span.visible {
+            display: block;
+        }
+
+
+        /* =========================================================
+           VENTANA DE CARTA
+        ========================================================= */
+
+        .modal-carta {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.92);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-carta.activa {
+            display: flex;
+        }
+
+
+        /* =========================================================
+           CONTENIDO DE LA VENTANA
+        ========================================================= */
+
+        .contenido-carta {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 35px;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #18070b,
+                    #080507
+                );
+
+            border:
+                1px solid
+                rgba(190, 40, 60, 0.60);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.90),
+                0 0 50px rgba(130, 0, 20, 0.30);
+        }
+
+
+        /* =========================================================
+           IMAGEN
+        ========================================================= */
+
+        .imagen-carta {
+            display: block;
+            width: 300px;
+            max-width: 100%;
+            margin: 0 auto 28px;
+            border-radius: 8px;
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.80);
+        }
+
+
+        /* =========================================================
+           NOMBRE DE LA CARTA
+        ========================================================= */
+
+        .contenido-carta h2 {
+            color: #f3eeee;
+            font-size: 29px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================================================
+           TÍTULO SIGNIFICADO
+        ========================================================= */
+
+        .contenido-carta h3 {
+            color: #c9828c;
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 28px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================================================
+           TEXTO
+        ========================================================= */
+
+        .contenido-carta p {
+            color: #c0b5b8;
+            font-size: 16px;
+            line-height: 1.9;
+            max-width: 650px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+
+        /* =========================================================
+           BOTÓN CERRAR
+        ========================================================= */
+
+        .cerrar-carta {
+            position: absolute;
+            top: 10px;
+            right: 17px;
+            background: transparent;
+            border: none;
+            color: #d05a6b;
+            font-size: 36px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        .cerrar-carta:hover {
+            color: #ffffff;
+        }
+
+
+        /* =========================================================
+           BOTÓN VER MÁS CARTAS
+        ========================================================= */
+
+        .boton-mas-cartas {
+            display: block;
+            margin: 30px auto 5px;
+            padding: 13px 30px;
+
+            color: #f3eeee;
+
+            background:
+                rgba(130, 0, 25, 0.65);
+
+            border:
+                1px solid
+                rgba(190, 70, 85, 0.55);
+
+            border-radius: 30px;
+
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .boton-mas-cartas:hover {
+            background:
+                rgba(165, 0, 30, 0.9);
+
+            border-color:
+                rgba(220, 100, 115, 0.75);
+
+            transform:
+                translateY(-3px);
+        }
+
+
+        /* =========================================================
+           CARTAS INVERTIDAS
+           MISMO ESTILO QUE CRUZ CELTA
+        ========================================================= */
+
+        .subtitulo-invertidas {
+            margin-top: 40px !important;
+        }
+
+        .cartas-invertidas .study-grid {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            width: 100%;
+            max-width: 850px;
+
+            margin: 30px auto 0;
+        }
+
+        .cartas-invertidas .study-card {
+            min-height: 190px;
+
+            padding:
+                28px 22px;
+
+            text-align: center;
+
+            background:
+                rgba(20, 5, 9, 0.55);
+
+            border:
+                1px solid
+                rgba(150, 35, 50, 0.25);
+
+            border-radius: 14px;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .cartas-invertidas .study-card:hover {
+            transform:
+                translateY(-4px);
+
+            border-color:
+                rgba(190, 55, 70, 0.60);
+
+            background:
+                rgba(35, 7, 12, 0.75);
+        }
+
+
+        /* =========================================================
+           TIRADAS DE TAROT
+        ========================================================= */
+
+        .tirada-introduccion {
+            max-width: 650px;
+            margin: 0 auto 35px;
+            text-align: center;
+        }
+
+        .tirada-introduccion .tirada-numero {
+            margin-bottom: 10px;
+        }
+
+        .tirada-introduccion h3 {
+            color: #eee9e4;
+            font-size: 25px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .tirada-introduccion p {
+            color: #a8a0a3;
+            font-size: 15px;
+            line-height: 1.8;
+            margin: 0 auto;
+        }
+
+        .tiradas-grid {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            width: 100%;
+            max-width: 850px;
+
+            margin: 30px auto 0;
+        }
+
+        .tirada-card {
+            min-height: 190px;
+
+            padding:
+                28px 22px;
+
+            text-align: center;
+
+            background:
+                rgba(20, 5, 9, 0.55);
+
+            border:
+                1px solid
+                rgba(150, 35, 50, 0.25);
+
+            border-radius: 14px;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .tirada-card:hover {
+            transform:
+                translateY(-4px);
+
+            border-color:
+                rgba(190, 55, 70, 0.60);
+
+            background:
+                rgba(35, 7, 12, 0.75);
+        }
+
+        .tirada-numero {
+            display: block;
+            margin-bottom: 12px;
+
+            color: #a93648;
+
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .tirada-card h3 {
+            color: #eee9e4;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 14px;
+        }
+
+        .tirada-card p {
+            max-width: 100%;
+            margin: 0;
+
+            color: #928a8e;
+
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           NAVEGACIÓN
+        ========================================================= */
+
+        .navegacion-curso {
+            text-align: center;
+            padding: 35px 20px 10px;
+        }
+
+        .navegacion-curso p {
+            color: #8f8589;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .btn-siguiente {
+            display: inline-block;
+
+            padding:
+                13px 30px;
+
+            color: #f3eeee;
+
+            background:
+                rgba(130, 0, 25, 0.65);
+
+            border:
+                1px solid
+                rgba(190, 70, 85, 0.55);
+
+            border-radius: 30px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            letter-spacing: 0.5px;
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .btn-siguiente:hover {
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(165, 0, 30, 0.9);
+
+            border-color:
+                rgba(220, 100, 115, 0.75);
+
+            box-shadow:
+                0 8px 30px
+                rgba(130, 0, 20, 0.30);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 800px) {
+
+            .cartas-invertidas .study-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                max-width: 650px;
+            }
+
+            .tiradas-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                max-width: 650px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .cartas-invertidas .study-grid {
+                grid-template-columns:
+                    1fr;
+
+                max-width: 350px;
+            }
+
+            .tiradas-grid {
+                grid-template-columns:
+                    1fr;
+
+                max-width: 350px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<main class="container">
+
+
+    <!-- =========================================================
+         BIENVENIDA
+    ========================================================== -->
+
+    <section class="welcome">
+
+        <div class="hero-glow"></div>
+
+        <div class="moon">☾</div>
+
+        <h1>ARCANOS MENORES</h1>
+
+        <p>ASTRO ROJO</p>
+
+        <span>
+            Curso de Tarot
+        </span>
+
+    </section>
+
+
+    <!-- =========================================================
+         INTRODUCCIÓN
+    ========================================================== -->
+
+    <section class="lesson">
+
+        <h2>¿QUÉ SON LOS ARCANOS MENORES?</h2>
+
+        <p>
+            Los Arcanos Menores están formados por
+            <strong>56 cartas</strong> y representan situaciones,
+            experiencias y acontecimientos que forman parte
+            de nuestra vida cotidiana.
+        </p>
+
+        <p>
+            A diferencia de los Arcanos Mayores, que suelen
+            representar grandes procesos, aprendizajes y
+            momentos importantes de nuestra vida, los Arcanos
+            Menores nos ayudan a observar cómo esas energías
+            se manifiestan en situaciones concretas.
+        </p>
+
+        <p>
+            Los 56 Arcanos Menores están divididos en
+            <strong>cuatro palos</strong>:
+            Bastos, Copas, Espadas y Oros.
+        </p>
+
+        <p>
+            Cada palo está relacionado con un elemento y con
+            un área diferente de la experiencia humana.
+            Comprender estos cuatro grupos es fundamental
+            para comenzar a interpretar las cartas con mayor
+            profundidad.
+        </p>
+
+    </section>
+
+
+    <!-- =========================================================
+         LOS CUATRO PALOS
+    ========================================================== -->
+
+    <section class="lesson">
+
+        <h2>LOS CUATRO PALOS</h2>
+
+        <div class="study-grid">
+
+            <div class="study-card">
+
+                <div class="card-icon">🔥</div>
+
+                <h3>BASTOS</h3>
+
+                <p>
+                    Fuego, acción, energía, deseo,
+                    creatividad, iniciativa y movimiento.
+                </p>
+
+            </div>
+
+
+            <div class="study-card">
+
+                <div class="card-icon">💧</div>
+
+                <h3>COPAS</h3>
+
+                <p>
+                    Agua, emociones, sentimientos,
+                    vínculos, intuición y mundo afectivo.
+                </p>
+
+            </div>
+
+
+            <div class="study-card">
+
+                <div class="card-icon">⚔</div>
+
+                <h3>ESPADAS</h3>
+
+                <p>
+                    Aire, pensamiento, comunicación,
+                    decisiones, conflictos y verdad.
+                </p>
+
+            </div>
+
+
+            <div class="study-card">
+
+                <div class="card-icon">🪙</div>
+
+                <h3>OROS</h3>
+
+                <p>
+                    Tierra, materia, trabajo, dinero,
+                    estabilidad, recursos y seguridad.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         LAS 56 CARTAS
+    ========================================================== -->
+
+    <section class="lesson">
+
+        <h2>LAS 56 CARTAS</h2>
+
+        <div class="arcana-list">
+
+
+            <!-- BASTOS -->
+
+            <span onclick="abrirCarta(0)">
+                As de Bastos
+            </span>
+
+            <span onclick="abrirCarta(1)">
+                Dos de Bastos
+            </span>
+
+            <span onclick="abrirCarta(2)">
+                Tres de Bastos
+            </span>
+
+            <span onclick="abrirCarta(3)">
+                Cuatro de Bastos
+            </span>
+
+            <span onclick="abrirCarta(4)">
+                Cinco de Bastos
+            </span>
+
+            <span onclick="abrirCarta(5)">
+                Seis de Bastos
+            </span>
+
+            <span onclick="abrirCarta(6)">
+                Siete de Bastos
+            </span>
+
+            <span onclick="abrirCarta(7)">
+                Ocho de Bastos
+            </span>
+
+            <span onclick="abrirCarta(8)">
+                Nueve de Bastos
+            </span>
+
+            <span onclick="abrirCarta(9)">
+                Diez de Bastos
+            </span>
+
+            <span onclick="abrirCarta(10)">
+                Sota de Bastos
+            </span>
+
+            <span onclick="abrirCarta(11)">
+                Caballero de Bastos
+            </span>
+
+            <span onclick="abrirCarta(12)">
+                Reina de Bastos
+            </span>
+
+            <span onclick="abrirCarta(13)">
+                Rey de Bastos
+            </span>
+
+
+            <!-- COPAS -->
+
+            <span onclick="abrirCarta(14)">
+                As de Copas
+            </span>
+
+            <span onclick="abrirCarta(15)">
+                Dos de Copas
+            </span>
+
+            <span onclick="abrirCarta(16)">
+                Tres de Copas
+            </span>
+
+            <span onclick="abrirCarta(17)">
+                Cuatro de Copas
+            </span>
+
+            <span onclick="abrirCarta(18)">
+                Cinco de Copas
+            </span>
+
+            <span onclick="abrirCarta(19)">
+                Seis de Copas
+            </span>
+
+            <span onclick="abrirCarta(20)">
+                Siete de Copas
+            </span>
+
+            <span onclick="abrirCarta(21)">
+                Ocho de Copas
+            </span>
+
+            <span onclick="abrirCarta(22)">
+                Nueve de Copas
+            </span>
+
+            <span onclick="abrirCarta(23)">
+                Diez de Copas
+            </span>
+
+            <span onclick="abrirCarta(24)">
+                Sota de Copas
+            </span>
+
+            <span onclick="abrirCarta(25)">
+                Caballero de Copas
+            </span>
+
+            <span onclick="abrirCarta(26)">
+                Reina de Copas
+            </span>
+
+            <span onclick="abrirCarta(27)">
+                Rey de Copas
+            </span>
+
+
+            <!-- ESPADAS -->
+
+            <span onclick="abrirCarta(28)">
+                As de Espadas
+            </span>
+
+            <span onclick="abrirCarta(29)">
+                Dos de Espadas
+            </span>
+
+            <span onclick="abrirCarta(30)">
+                Tres de Espadas
+            </span>
+
+            <span onclick="abrirCarta(31)">
+                Cuatro de Espadas
+            </span>
+
+            <span onclick="abrirCarta(32)">
+                Cinco de Espadas
+            </span>
+
+            <span onclick="abrirCarta(33)">
+                Seis de Espadas
+            </span>
+
+            <span onclick="abrirCarta(34)">
+                Siete de Espadas
+            </span>
+
+            <span onclick="abrirCarta(35)">
+                Ocho de Espadas
+            </span>
+
+            <span onclick="abrirCarta(36)">
+                Nueve de Espadas
+            </span>
+
+            <span onclick="abrirCarta(37)">
+                Diez de Espadas
+            </span>
+
+            <span onclick="abrirCarta(38)">
+                Sota de Espadas
+            </span>
+
+            <span onclick="abrirCarta(39)">
+                Caballero de Espadas
+            </span>
+
+            <span onclick="abrirCarta(40)">
+                Reina de Espadas
+            </span>
+
+            <span onclick="abrirCarta(41)">
+                Rey de Espadas
+            </span>
+
+
+            <!-- OROS -->
+
+            <span onclick="abrirCarta(42)">
+                As de Oros
+            </span>
+
+            <span onclick="abrirCarta(43)">
+                Dos de Oros
+            </span>
+
+            <span onclick="abrirCarta(44)">
+                Tres de Oros
+            </span>
+
+            <span onclick="abrirCarta(45)">
+                Cuatro de Oros
+            </span>
+
+            <span onclick="abrirCarta(46)">
+                Cinco de Oros
+            </span>
+
+            <span onclick="abrirCarta(47)">
+                Seis de Oros
+            </span>
+
+            <span onclick="abrirCarta(48)">
+                Siete de Oros
+            </span>
+
+            <span onclick="abrirCarta(49)">
+                Ocho de Oros
+            </span>
+
+            <span onclick="abrirCarta(50)">
+                Nueve de Oros
+            </span>
+
+            <span onclick="abrirCarta(51)">
+                Diez de Oros
+            </span>
+
+            <span onclick="abrirCarta(52)">
+                Sota de Oros
+            </span>
+
+            <span onclick="abrirCarta(53)">
+                Caballero de Oros
+            </span>
+
+            <span onclick="abrirCarta(54)">
+                Reina de Oros
+            </span>
+
+            <span onclick="abrirCarta(55)">
+                Rey de Oros
+            </span>
+
+        </div>
+
+
+        <button
+            id="boton-mas"
+            class="boton-mas-cartas"
+            onclick="mostrarMasCartas()"
+        >
+            VER MÁS CARTAS ↓
+        </button>
+
+    </section>
+
+
+    <!-- =========================================================
+         CARTAS INVERTIDAS
+    ========================================================== -->
+
+    <section class="lesson cartas-invertidas">
+
+        <h2>CARTAS INVERTIDAS</h2>
+
+        <p>
+            Las cartas invertidas aparecen cuando una carta se muestra
+            en posición contraria a la habitual. Su interpretación permite
+            observar cómo se expresa esa energía cuando está bloqueada,
+            contenida, retrasada o manifestándose de forma interna.
+
+            Una carta invertida no representa necesariamente algo
+            negativo. Su significado depende de la carta, la pregunta,
+            su posición en la tirada y el contexto general de la lectura.
+        </p>
+
+
+        <div class="study-grid">
+
+            <div class="study-card">
+
+                <div class="card-icon">↕</div>
+
+                <h3>ENERGÍA BLOQUEADA</h3>
+
+                <p>
+                    La energía representada por la carta puede estar
+                    presente, pero encontrar dificultades para
+                    desarrollarse o expresarse con libertad.
+                </p>
+
+            </div>
+
+
+            <div class="study-card">
+
+                <div class="card-icon">☾</div>
+
+                <h3>ENERGÍA INTERNA</h3>
+
+                <p>
+                    La carta puede manifestarse principalmente en el
+                    mundo interior, mostrando procesos que todavía no
+                    se hacen visibles externamente.
+                </p>
+
+            </div>
+
+
+            <div class="study-card">
+
+                <div class="card-icon">⌛</div>
+
+                <h3>RETRASO</h3>
+
+                <p>
+                    La energía puede encontrarse detenida o avanzar
+                    más lentamente de lo esperado, indicando que el
+                    proceso necesita tiempo para desarrollarse.
+                </p>
+
+            </div>
+
+
+            <div class="study-card">
+
+                <div class="card-icon">◐</div>
+
+                <h3>MENOR INTENSIDAD</h3>
+
+                <p>
+                    La cualidad principal de la carta puede aparecer
+                    debilitada o manifestarse de una manera menos
+                    evidente dentro de la situación.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         TIRADAS DE TAROT — CRUZ CELTA
+    ========================================================== -->
+
+    <section class="lesson">
+
+        <h2>TIRADAS DE TAROT</h2>
+
+
+        <div class="tirada-introduccion">
+
+            <span class="tirada-numero">
+                TIRADA
+            </span>
+
+            <h3>
+                CRUZ CELTA
+            </h3>
+
+            <p>
+                La Cruz Celta es una de las tiradas más completas
+                del Tarot. Está formada por diez cartas y permite
+                analizar una situación en profundidad, observando
+                diferentes aspectos de la experiencia.
+            </p>
+
+        </div>
+
+
+        <div class="tiradas-grid">
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    01
+                </span>
+
+                <h3>
+                    ENERGÍA ACTUAL
+                </h3>
+
+                <p>
+                    Representa la energía que domina la situación
+                    en este momento.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    02
+                </span>
+
+                <h3>
+                    DESAFÍO
+                </h3>
+
+                <p>
+                    Muestra aquello que genera tensión, dificultad
+                    o resistencia dentro de la situación.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    03
+                </span>
+
+                <h3>
+                    BASE DE LA SITUACIÓN
+                </h3>
+
+                <p>
+                    Señala aquello que sostiene o fundamenta
+                    la situación desde su origen.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    04
+                </span>
+
+                <h3>
+                    PASADO RECIENTE
+                </h3>
+
+                <p>
+                    Representa acontecimientos o energías recientes
+                    que todavía influyen en el presente.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    05
+                </span>
+
+                <h3>
+                    POSIBLE EVOLUCIÓN
+                </h3>
+
+                <p>
+                    Muestra hacia dónde puede desarrollarse
+                    la situación si mantiene su dinámica actual.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    06
+                </span>
+
+                <h3>
+                    FUTURO CERCANO
+                </h3>
+
+                <p>
+                    Indica las energías o acontecimientos que pueden
+                    manifestarse próximamente.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    07
+                </span>
+
+                <h3>
+                    ACTITUD PERSONAL
+                </h3>
+
+                <p>
+                    Refleja la manera en que la persona enfrenta,
+                    percibe o participa en la situación.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    08
+                </span>
+
+                <h3>
+                    ENTORNO
+                </h3>
+
+                <p>
+                    Representa la influencia de las personas
+                    y circunstancias que rodean la situación.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    09
+                </span>
+
+                <h3>
+                    ESPERANZAS Y TEMORES
+                </h3>
+
+                <p>
+                    Muestra deseos, expectativas, preocupaciones
+                    o miedos relacionados con la situación.
+                </p>
+
+            </div>
+
+
+            <div class="tirada-card">
+
+                <span class="tirada-numero">
+                    10
+                </span>
+
+                <h3>
+                    RESULTADO
+                </h3>
+
+                <p>
+                    Representa la tendencia final de la situación
+                    según las energías mostradas por la tirada.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="navegacion-curso">
+
+            <p>
+                Continúa con la siguiente lección del curso.
+            </p>
+
+            <a
+                href="index3.html"
+                class="btn-siguiente"
+            >
+                SIGUIENTE LECCIÓN →
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     VENTANA DE LA CARTA
+========================================================== -->
+
+<div
+    id="modal-carta"
+    class="modal-carta"
+>
+
+    <div class="contenido-carta">
+
+        <button
+            class="cerrar-carta"
+            onclick="cerrarCarta()"
+            aria-label="Cerrar"
+        >
+            ×
+        </button>
+
+
+        <img
+            id="imagen-carta"
+            class="imagen-carta"
+            src=""
+            alt=""
+        >
+
+
+        <h2 id="nombre-carta"></h2>
+
+
+        <h3>
+            Significado
+        </h3>
+
+        <p id="significado-carta"></p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   56 ARCANOS MENORES
+========================================================= */
+
+const cartas = [
+
+    /* =========================
+       BASTOS
+    ========================== */
+
+    {
+        nombre: "AS DE BASTOS",
+        imagen: "../images/aceofwands.jpeg",
+        significado:
+        "Representa un comienzo lleno de energía, entusiasmo y posibilidades. Es la chispa inicial que impulsa un proyecto, una idea, una relación o una etapa nueva. Habla de iniciativa, deseo, creatividad y voluntad para actuar. Es una carta que invita a aprovechar una oportunidad y poner en movimiento aquello que todavía se encuentra en estado potencial.",
+        simbolismo:
+        "El bastón representa la fuerza vital, la creatividad y la energía del fuego. La vegetación que aparece alrededor simboliza crecimiento y fertilidad. El As muestra esta energía en su estado inicial: una fuerza que acaba de despertar y que puede desarrollarse si recibe acción y dirección."
+    },
+
+    {
+        nombre: "DOS DE BASTOS",
+        imagen: "../images/twoofwands.jpeg",
+        significado:
+        "Habla de planificación, decisiones y posibilidades futuras. La persona ya posee una base, pero comienza a preguntarse qué camino quiere tomar. Puede representar proyectos, expansión, deseos de explorar nuevas experiencias o la necesidad de elegir entre permanecer en lo conocido y avanzar hacia algo diferente.",
+        simbolismo:
+        "La figura que observa el horizonte representa visión y planificación. El mundo sostenido en la mano simboliza las posibilidades que existen más allá del entorno conocido. Los bastos representan los caminos de acción que todavía deben elegirse."
+    },
+
+    {
+        nombre: "TRES DE BASTOS",
+        imagen: "../images/threeofwands.jpeg",
+        significado:
+        "Representa expansión, crecimiento y expectativas positivas. Es una carta relacionada con proyectos que comienzan a avanzar y con resultados que todavía están en camino. También puede señalar viajes, nuevas oportunidades y la capacidad de mirar hacia el futuro con una visión más amplia.",
+        simbolismo:
+        "La figura mirando hacia el horizonte representa expectativa y visión de futuro. Los tres bastos firmes simbolizan una energía que ya está establecida y comienza a expandirse. El horizonte abierto habla de posibilidades que todavía están por desarrollarse."
+    },
+
+    {
+        nombre: "CUATRO DE BASTOS",
+        imagen: "../images/fourofwands.jpeg",
+        significado:
+        "Representa celebración, estabilidad, alegría y unión. Puede señalar reuniones, encuentros familiares, logros compartidos o un momento en el que se disfruta aquello que se ha conseguido. También habla de una base estable sobre la cual continuar creciendo.",
+        simbolismo:
+        "Los cuatro bastos forman una estructura que transmite estabilidad y protección. Las flores y la celebración representan alegría, unión y frutos obtenidos después del esfuerzo. Es una imagen de armonía y de un momento para disfrutar."
+    },
+
+    {
+        nombre: "CINCO DE BASTOS",
+        imagen: "../images/fiveofwands.jpeg",
+        significado:
+        "Representa competencia, desacuerdos, tensión y diferentes fuerzas intentando imponerse. No necesariamente habla de un conflicto grave, sino de una situación donde existen opiniones, intereses o deseos diferentes. También puede enseñar a crecer mediante la competencia y los desafíos.",
+        simbolismo:
+        "Los bastos cruzados representan fuerzas diferentes que chocan entre sí. La ausencia de un vencedor claro muestra que todavía existe competencia. La carta simboliza aprendizaje a través del desafío y la necesidad de encontrar una forma de canalizar la energía."
+    },
+
+    {
+        nombre: "SEIS DE BASTOS",
+        imagen: "../images/sixofwands.jpeg",
+        significado:
+        "Es una carta de victoria, reconocimiento y confianza. Representa el reconocimiento obtenido después de un esfuerzo y la sensación de avanzar con mayor seguridad. Puede hablar de éxito, aprobación, buenas noticias y una posición favorable frente a los demás.",
+        simbolismo:
+        "El basto elevado representa triunfo y reconocimiento. La corona de laurel simboliza victoria y honor. La figura que avanza rodeada por otras personas muestra que el logro es visible y puede ser reconocido por el entorno."
+    },
+
+    {
+        nombre: "SIETE DE BASTOS",
+        imagen: "../images/sevenofwands.jpeg",
+        significado:
+        "Representa defensa, resistencia y determinación. La persona se encuentra en una posición donde necesita proteger lo que ha conseguido o defender sus ideas. Habla de valentía, firmeza y capacidad para mantenerse de pie incluso cuando aparecen obstáculos.",
+        simbolismo:
+        "La figura elevada posee una posición de ventaja. Los bastos que aparecen desde abajo representan desafíos y fuerzas externas. La postura defensiva simboliza la necesidad de proteger aquello que se considera importante."
+    },
+
+    {
+        nombre: "OCHO DE BASTOS",
+        imagen: "../images/eightofwands.jpeg",
+        significado:
+        "Representa rapidez, movimiento y acontecimientos que comienzan a desarrollarse rápidamente. Puede anunciar noticias, mensajes, viajes o situaciones que avanzan después de un período de espera. Es una carta de dinamismo y acción.",
+        simbolismo:
+        "Los ocho bastos avanzando por el aire representan movimiento rápido y directo. El espacio abierto indica ausencia de grandes obstáculos. La carta muestra una energía que ya está en marcha y difícilmente permanece detenida."
+    },
+
+    {
+        nombre: "NUEVE DE BASTOS",
+        imagen: "../images/nineofwands.jpeg",
+        significado:
+        "Representa resistencia, experiencia y perseverancia. La persona puede encontrarse cansada después de atravesar dificultades, pero todavía conserva la voluntad para continuar. También habla de proteger lo conseguido y aprender de experiencias anteriores.",
+        simbolismo:
+        "La figura herida representa las experiencias acumuladas. Los bastos detrás simbolizan aquello que se ha construido y protegido. La carta muestra cansancio, pero también la fuerza necesaria para mantenerse firme."
+    },
+
+    {
+        nombre: "DIEZ DE BASTOS",
+        imagen: "../images/tenofwands.jpeg",
+        significado:
+        "Representa responsabilidades, obligaciones y una carga que puede haberse vuelto demasiado pesada. La persona lleva adelante muchas tareas al mismo tiempo y puede sentir que todo depende de ella. Invita a reconocer qué responsabilidades son realmente necesarias.",
+        simbolismo:
+        "Los diez bastos reunidos representan la acumulación de responsabilidades. La figura que los carga tiene dificultad para ver el camino con claridad. La imagen simboliza cómo el exceso de obligaciones puede limitar la visión y el movimiento."
+    },
+
+    {
+        nombre: "SOTA DE BASTOS",
+        imagen: "../images/pageofwands.jpeg",
+        significado:
+        "Representa entusiasmo, curiosidad y ganas de descubrir algo nuevo. Puede anunciar una idea, una noticia o una oportunidad que despierta interés. Es una energía joven, espontánea y abierta a experimentar.",
+        simbolismo:
+        "La figura observa el basto con curiosidad, mostrando interés por aquello que está comenzando. El paisaje abierto representa posibilidades, descubrimiento y aventura. El basto simboliza una idea o impulso que recién comienza a desarrollarse."
+    },
+
+    {
+        nombre: "CABALLERO DE BASTOS",
+        imagen: "../images/knightofwands.jpeg",
+        significado:
+        "Representa acción, pasión, movimiento y deseo de avanzar. Es una energía intensa que puede impulsar decisiones rápidas, viajes o cambios importantes. Su aspecto desafiante es la impulsividad y actuar antes de pensar completamente las consecuencias.",
+        simbolismo:
+        "El caballo en movimiento representa velocidad y deseo de avanzar. El basto simboliza pasión y voluntad. La energía del fuego aparece en su forma más dinámica, mostrando entusiasmo, valentía e impulso."
+    },
+
+    {
+        nombre: "REINA DE BASTOS",
+        imagen: "../images/queenofwands.jpeg",
+        significado:
+        "Representa confianza, magnetismo, creatividad e independencia. Es una energía cálida que sabe lo que quiere y tiene capacidad para inspirar a otras personas. Habla de seguridad personal, entusiasmo y capacidad para transformar ideas en acciones.",
+        simbolismo:
+        "La figura sentada transmite seguridad y autoridad. El girasol representa vitalidad, crecimiento y luminosidad. El basto simboliza creatividad y fuerza personal."
+    },
+
+    {
+        nombre: "REY DE BASTOS",
+        imagen: "../images/kingofwands.jpeg",
+        significado:
+        "Representa liderazgo, visión, iniciativa y capacidad para dirigir. Es una persona que tiene una idea clara de lo que quiere conseguir y posee energía para convertirla en realidad. Habla de autoridad, creatividad y decisión.",
+        simbolismo:
+        "El rey sentado representa autoridad y liderazgo. El basto simboliza poder creativo y capacidad de acción. La presencia del fuego expresa pasión, iniciativa y visión."
+    },
+
+
+    /* =========================
+       COPAS
+    ========================== */
+
+    {
+        nombre: "AS DE COPAS",
+        imagen: "../images/aceofcups.jpeg",
+        significado:
+        "Representa un comienzo emocional, apertura del corazón y nacimiento de sentimientos. Puede señalar amor, conexión, sensibilidad, intuición y una nueva experiencia afectiva. Es una carta de receptividad y de emociones que comienzan a fluir.",
+        simbolismo:
+        "La copa representa el mundo emocional y la capacidad de recibir sentimientos. El agua simboliza emociones profundas y movimiento interior. La fuente que desborda muestra abundancia afectiva y apertura."
+    },
+
+    {
+        nombre: "DOS DE COPAS",
+        imagen: "../images/twoofcups.jpeg",
+        significado:
+        "Representa unión, reciprocidad, atracción y conexión entre dos personas. Puede hablar de una relación amorosa, amistad, asociación o encuentro donde existe reconocimiento mutuo. Es una carta de equilibrio emocional y vínculo.",
+        simbolismo:
+        "Las dos copas representan intercambio y reciprocidad. Las figuras enfrentadas muestran reconocimiento mutuo. El símbolo que se encuentra sobre ellas representa la unión de dos energías."
+    },
+
+    {
+        nombre: "TRES DE COPAS",
+        imagen: "../images/threeofcups.jpeg",
+        significado:
+        "Representa celebración, amistad, encuentros y alegría compartida. Habla de disfrutar con otras personas y de momentos donde existe apoyo emocional. También puede señalar reuniones, fiestas y buenas noticias compartidas.",
+        simbolismo:
+        "Las tres figuras levantando sus copas representan unión y celebración. Las frutas y flores simbolizan abundancia y alegría. La carta muestra el valor de compartir los buenos momentos."
+    },
+
+    {
+        nombre: "CUATRO DE COPAS",
+        imagen: "../images/fourofcups.jpeg",
+        significado:
+        "Representa introspección, apatía o dificultad para reconocer una oportunidad emocional. Puede aparecer cuando una persona se encuentra demasiado concentrada en lo que falta y no observa aquello que se le está ofreciendo.",
+        simbolismo:
+        "La figura sentada muestra una actitud de contemplación y desconexión. Las copas representan opciones emocionales que ya existen. La copa ofrecida desde un lugar externo simboliza una oportunidad que puede estar siendo ignorada."
+    },
+
+    {
+        nombre: "CINCO DE COPAS",
+        imagen: "../images/fiveofcups.jpeg",
+        significado:
+        "Representa tristeza, decepción y atención puesta en aquello que se perdió. Puede señalar duelo emocional o arrepentimiento. Sin embargo, también recuerda que no todo está perdido y que todavía existen posibilidades que pueden ser recuperadas.",
+        simbolismo:
+        "Las copas derramadas representan pérdidas y decepciones. Las copas que permanecen de pie simbolizan aquello que todavía existe. El puente y el camino muestran que es posible continuar después de una experiencia difícil."
+    },
+
+    {
+        nombre: "SEIS DE COPAS",
+        imagen: "../images/sixofcups.jpeg",
+        significado:
+        "Representa recuerdos, nostalgia, infancia y vínculos con el pasado. Puede señalar el regreso de una persona, una situación conocida o sentimientos que resurgen. También habla de inocencia, ternura y generosidad.",
+        simbolismo:
+        "Las flores dentro de las copas representan recuerdos que conservan valor emocional. La presencia de niños simboliza inocencia y pasado. El entorno conocido refuerza la conexión con la memoria."
+    },
+
+    {
+        nombre: "SIETE DE COPAS",
+        imagen: "../images/sevenofcups.jpeg",
+        significado:
+        "Representa múltiples posibilidades, deseos, fantasías y dificultad para elegir. Puede señalar una imaginación muy activa, pero también confusión cuando existen demasiadas opciones. Invita a distinguir entre lo que realmente se desea y aquello que solamente parece atractivo.",
+        simbolismo:
+        "Las siete copas contienen imágenes diferentes que representan deseos, miedos y posibilidades. La figura que las observa debe elegir entre ellas. La carta simboliza la distancia entre fantasía y realidad."
+    },
+
+    {
+        nombre: "OCHO DE COPAS",
+        imagen: "../images/eightofcups.jpeg",
+        significado:
+        "Representa alejamiento, búsqueda interior y decisión de dejar atrás algo que ya no satisface. Puede señalar una separación, un cambio emocional o la necesidad de buscar un sentido más profundo.",
+        simbolismo:
+        "La figura que se aleja representa una decisión emocional difícil. Las copas abandonadas muestran aquello que ya no proporciona satisfacción. La luna y el camino representan búsqueda interior y transformación."
+    },
+
+    {
+        nombre: "NUEVE DE COPAS",
+        imagen: "../images/nineofcups.jpeg",
+        significado:
+        "Representa satisfacción, placer y deseos cumplidos. Es una carta asociada con bienestar emocional y disfrute de los resultados obtenidos. También invita a reconocer aquello que ya se posee.",
+        simbolismo:
+        "Las nueve copas alineadas representan abundancia emocional y satisfacción. La figura sentada delante de ellas muestra orgullo por lo conseguido. El espacio cerrado simboliza un bienestar que ya está presente."
+    },
+
+    {
+        nombre: "DIEZ DE COPAS",
+        imagen: "../images/tenofcups.jpeg",
+        significado:
+        "Representa felicidad emocional, unión familiar, armonía y sensación de plenitud. Puede hablar de relaciones estables, vínculos afectivos sólidos y un sentimiento profundo de pertenencia.",
+        simbolismo:
+        "El arco de copas representa plenitud emocional. El arcoíris simboliza armonía y bendición. La familia representa unión, pertenencia y felicidad compartida."
+    },
+
+    {
+        nombre: "SOTA DE COPAS",
+        imagen: "../images/pageofcups.jpeg",
+        significado:
+        "Representa sensibilidad, imaginación, intuición y apertura emocional. Puede anunciar una noticia afectiva, una propuesta o el nacimiento de un sentimiento. También habla de creatividad y espontaneidad.",
+        simbolismo:
+        "La copa contiene un pez que representa lo inesperado dentro del mundo emocional. La figura joven simboliza sensibilidad y curiosidad. El agua representa intuición y profundidad afectiva."
+    },
+
+    {
+        nombre: "CABALLERO DE COPAS",
+        imagen: "../images/knightofcups.jpeg",
+        significado:
+        "Representa romanticismo, propuestas, acercamientos y movimiento emocional. Puede señalar una persona que expresa sentimientos o una situación que avanza guiada por el corazón.",
+        simbolismo:
+        "El caballero lleva una copa como si ofreciera un sentimiento o propuesta. El caballo tranquilo representa un movimiento guiado por las emociones. El agua simboliza sensibilidad e intuición."
+    },
+
+    {
+        nombre: "REINA DE COPAS",
+        imagen: "../images/queenofcups.jpeg",
+        significado:
+        "Representa sensibilidad, intuición, empatía y profundidad emocional. Es una energía capaz de comprender lo que sucede más allá de las palabras. Habla de amor, percepción emocional y conexión interior.",
+        simbolismo:
+        "La copa elaborada representa profundidad emocional. La reina contempla el recipiente con atención, mostrando introspección. El agua alrededor simboliza intuición y sensibilidad."
+    },
+
+    {
+        nombre: "REY DE COPAS",
+        imagen: "../images/kingofcups.jpeg",
+        significado:
+        "Representa madurez emocional, equilibrio y capacidad para controlar los sentimientos sin negarlos. Habla de una persona sensible pero estable, capaz de comprender las emociones y actuar con serenidad.",
+        simbolismo:
+        "El rey permanece sentado mientras el agua se mueve a su alrededor, mostrando estabilidad emocional en medio de las circunstancias. La copa representa sentimientos y el trono representa control y madurez."
+    },
+
+
+    /* =========================
+       ESPADAS
+    ========================== */
+
+    {
+        nombre: "AS DE ESPADAS",
+        imagen: "../images/aceofswords.jpeg",
+        significado:
+        "Representa claridad, verdad, decisión y una nueva comprensión. Puede señalar una conversación importante, una revelación o la necesidad de tomar una decisión desde la razón. Es una carta de lucidez.",
+        simbolismo:
+        "La espada elevada representa pensamiento y verdad. La corona simboliza claridad y victoria intelectual. La montaña representa los desafíos que pueden superarse mediante la razón."
+    },
+
+    {
+        nombre: "DOS DE ESPADAS",
+        imagen: "../images/twoofswords.jpeg",
+        significado:
+        "Representa indecisión, bloqueo y dificultad para elegir. La persona puede evitar mirar una realidad porque tomar una decisión implica enfrentarse a emociones o consecuencias difíciles.",
+        simbolismo:
+        "Las dos espadas cruzadas representan dos opciones enfrentadas. La venda simboliza aquello que la persona todavía no quiere ver. El agua detrás representa emociones contenidas."
+    },
+
+    {
+        nombre: "TRES DE ESPADAS",
+        imagen: "../images/threeofswords.jpeg",
+        significado:
+        "Representa dolor emocional, decepción, separación o una verdad que duele. Es una carta que muestra la necesidad de reconocer una herida para poder comenzar a procesarla.",
+        simbolismo:
+        "El corazón atravesado representa dolor afectivo. Las tres espadas simbolizan pensamientos o palabras que penetran profundamente. La lluvia representa tristeza y purificación emocional."
+    },
+
+    {
+        nombre: "CUATRO DE ESPADAS",
+        imagen: "../images/fourofswords.jpeg",
+        significado:
+        "Representa descanso, pausa, recuperación y necesidad de silencio. Después de una etapa de tensión, la mente necesita detenerse para recuperar claridad y energía.",
+        simbolismo:
+        "La figura recostada representa descanso y recuperación. La espada debajo simboliza aquello que permanece presente en la mente. Las otras espadas representan experiencias o pensamientos que necesitan una pausa."
+    },
+
+    {
+        nombre: "CINCO DE ESPADAS",
+        imagen: "../images/fiveofswords.jpeg",
+        significado:
+        "Representa conflicto, discusiones y victorias que pueden tener un costo. Puede señalar una situación donde alguien consigue imponerse, pero el resultado deja tensión o resentimiento.",
+        simbolismo:
+        "Las espadas tomadas representan el deseo de vencer. Las figuras alejándose muestran las consecuencias emocionales del conflicto. El cielo nublado simboliza tensión y falta de armonía."
+    },
+
+    {
+        nombre: "SEIS DE ESPADAS",
+        imagen: "../images/sixofswords.jpeg",
+        significado:
+        "Representa transición, alejamiento de una situación difícil y búsqueda de tranquilidad. Es una carta de movimiento hacia una etapa más estable, aunque el proceso pueda incluir tristeza o nostalgia.",
+        simbolismo:
+        "La barca representa transición y desplazamiento. Las espadas dentro de ella simbolizan pensamientos y experiencias que todavía acompañan a la persona. El agua tranquila muestra el paso hacia una situación más serena."
+    },
+
+    {
+        nombre: "SIETE DE ESPADAS",
+        imagen: "../images/sevenofswords.jpeg",
+        significado:
+        "Representa estrategia, discreción, independencia y situaciones donde no todo se muestra abiertamente. Puede hablar de ocultamiento, evasión o de la necesidad de actuar con inteligencia.",
+        simbolismo:
+        "La figura alejándose con las espadas representa estrategia y movimiento discreto. Las espadas que quedan atrás muestran información o recursos que no fueron tomados. La carta invita a observar qué se está ocultando."
+    },
+
+    {
+        nombre: "OCHO DE ESPADAS",
+        imagen: "../images/eightofswords.jpeg",
+        significado:
+        "Representa sensación de bloqueo, miedo y pensamientos que limitan. La persona puede sentirse atrapada aunque existan caminos de salida. La carta invita a cuestionar las propias creencias y recuperar libertad mental.",
+        simbolismo:
+        "Las espadas alrededor representan pensamientos y límites. La venda muestra una percepción parcial de la realidad. Las ataduras simbolizan la sensación de no poder actuar, aunque el entorno no sea completamente cerrado."
+    },
+
+    {
+        nombre: "NUEVE DE ESPADAS",
+        imagen: "../images/nineofswords.jpeg",
+        significado:
+        "Representa preocupación, ansiedad, pensamientos repetitivos y miedo. Muchas veces muestra un sufrimiento mental que puede sentirse más grande durante la noche o en momentos de soledad.",
+        simbolismo:
+        "Las nueve espadas sobre la pared representan pensamientos que pesan sobre la mente. La figura en la cama muestra preocupación y angustia. La oscuridad representa los temores internos."
+    },
+
+    {
+        nombre: "DIEZ DE ESPADAS",
+        imagen: "../images/tenofswords.jpeg",
+        significado:
+        "Representa final, agotamiento y cierre de una etapa difícil. Puede señalar una experiencia que llegó a su límite. Aunque la imagen sea intensa, también contiene la idea de que después del final comienza una nueva etapa.",
+        simbolismo:
+        "Las diez espadas representan el punto máximo de una experiencia dolorosa. La figura caída muestra el final de un ciclo. El amanecer en el horizonte simboliza que después de la noche existe una nueva posibilidad."
+    },
+
+    {
+        nombre: "SOTA DE ESPADAS",
+        imagen: "../images/pageofswords.jpeg",
+        significado:
+        "Representa curiosidad, observación, inteligencia y necesidad de investigar. Puede señalar noticias, conversaciones, preguntas o una persona que observa atentamente antes de actuar.",
+        simbolismo:
+        "La espada elevada representa atención y pensamiento. La postura alerta muestra vigilancia y curiosidad. El viento alrededor simboliza movimiento de ideas e información."
+    },
+
+    {
+        nombre: "CABALLERO DE ESPADAS",
+        imagen: "../images/knightofswords.jpeg",
+        significado:
+        "Representa rapidez mental, acción decidida y palabras directas. Puede señalar una situación que avanza rápidamente o una persona que actúa con determinación, aunque a veces puede hacerlo de manera impulsiva.",
+        simbolismo:
+        "El caballo en movimiento representa velocidad. La espada levantada simboliza decisión y pensamiento rápido. El viento muestra una energía mental intensa y dinámica."
+    },
+
+    {
+        nombre: "REINA DE ESPADAS",
+        imagen: "../images/queenofswords.jpeg",
+        significado:
+        "Representa inteligencia, independencia, claridad y capacidad para establecer límites. Es una energía que observa la realidad con objetividad y no teme tomar decisiones difíciles.",
+        simbolismo:
+        "La espada vertical representa verdad y claridad. La reina sentada simboliza autoridad intelectual. El cielo abierto muestra una mente que busca comprender sin dejarse dominar por las emociones."
+    },
+
+    {
+        nombre: "REY DE ESPADAS",
+        imagen: "../images/kingofswords.jpeg",
+        significado:
+        "Representa autoridad intelectual, lógica, justicia y capacidad de decisión. Habla de una persona que utiliza la razón para analizar situaciones y establecer reglas claras.",
+        simbolismo:
+        "La espada representa pensamiento y justicia. El trono simboliza autoridad. La postura firme muestra control mental, objetividad y capacidad para tomar decisiones."
+    },
+
+
+    /* =========================
+       OROS
+    ========================== */
+
+    {
+        nombre: "AS DE OROS",
+        imagen: "../images/aceofpentacles.jpeg",
+        significado:
+        "Representa una nueva oportunidad material, económica o práctica. Puede señalar trabajo, dinero, estabilidad o el comienzo de algo que tiene potencial para crecer de manera concreta.",
+        simbolismo:
+        "La moneda representa materia, recursos y valor. El jardín simboliza crecimiento y prosperidad. El camino muestra que una oportunidad inicial puede conducir hacia una nueva etapa."
+    },
+
+    {
+        nombre: "DOS DE OROS",
+        imagen: "../images/twoofpentacles.jpeg",
+        significado:
+        "Representa adaptación, equilibrio y capacidad para manejar varias responsabilidades. Puede señalar cambios económicos o situaciones donde es necesario organizar diferentes aspectos de la vida al mismo tiempo.",
+        simbolismo:
+        "Las dos monedas unidas representan equilibrio entre diferentes responsabilidades. El movimiento alrededor de ellas simboliza adaptación. Las olas del fondo muestran circunstancias cambiantes."
+    },
+
+    {
+        nombre: "TRES DE OROS",
+        imagen: "../images/threeofpentacles.jpeg",
+        significado:
+        "Representa trabajo, aprendizaje, colaboración y reconocimiento de habilidades. Es una carta relacionada con construir algo junto a otras personas y mejorar mediante la práctica.",
+        simbolismo:
+        "La construcción representa un proyecto en desarrollo. Las tres personas muestran colaboración entre diferentes habilidades. Los oros simbolizan el resultado concreto del trabajo."
+    },
+
+    {
+        nombre: "CUATRO DE OROS",
+        imagen: "../images/fourofpentacles.jpeg",
+        significado:
+        "Representa seguridad, conservación y necesidad de controlar los recursos. Puede señalar estabilidad económica, pero también miedo a perder aquello que se posee o dificultad para compartir.",
+        simbolismo:
+        "La figura sostiene las monedas y protege su cuerpo con ellas. Esta postura representa apego, control y necesidad de seguridad. Los oros simbolizan recursos materiales."
+    },
+
+    {
+        nombre: "CINCO DE OROS",
+        imagen: "../images/fiveofpentacles.jpeg",
+        significado:
+        "Representa dificultades materiales, sensación de exclusión o una etapa de carencia. Puede hablar de preocupaciones económicas o emocionales, pero también recuerda que la ayuda puede encontrarse cerca aunque no siempre sea reconocida.",
+        simbolismo:
+        "Las figuras caminando en el frío representan dificultad y vulnerabilidad. La ventana iluminada simboliza refugio y ayuda disponible. Los cinco oros representan recursos que todavía existen."
+    },
+
+    {
+        nombre: "SEIS DE OROS",
+        imagen: "../images/sixofpentacles.jpeg",
+        significado:
+        "Representa generosidad, ayuda, intercambio y equilibrio entre dar y recibir. Puede señalar apoyo económico, reconocimiento o una situación donde los recursos se comparten de manera justa.",
+        simbolismo:
+        "La balanza representa equilibrio y justicia. Las monedas entregadas simbolizan generosidad. Las figuras que reciben muestran la importancia del intercambio y la ayuda."
+    },
+
+    {
+        nombre: "SIETE DE OROS",
+        imagen: "../images/sevenofpentacles.jpeg",
+        significado:
+        "Representa paciencia, evaluación y espera de resultados. La persona ha invertido esfuerzo y ahora necesita observar cómo está creciendo aquello que sembró.",
+        simbolismo:
+        "La planta con monedas representa un proyecto que está creciendo. La figura observándola simboliza paciencia y evaluación. La tierra representa el tiempo necesario para obtener resultados."
+    },
+
+    {
+        nombre: "OCHO DE OROS",
+        imagen: "../images/eightofpentacles.jpeg",
+        significado:
+        "Representa trabajo, práctica, aprendizaje y perfeccionamiento. Es una carta que muestra que la habilidad se construye mediante constancia y dedicación.",
+        simbolismo:
+        "La persona trabajando sobre los oros representa práctica y concentración. Los pentáculos repetidos muestran progreso mediante la repetición. La construcción simboliza perfeccionamiento."
+    },
+
+    {
+        nombre: "NUEVE DE OROS",
+        imagen: "../images/nineofpentacles.jpeg",
+        significado:
+        "Representa independencia, bienestar, estabilidad y disfrute de los propios logros. Habla de una persona que ha construido una situación favorable mediante esfuerzo y constancia.",
+        simbolismo:
+        "El jardín representa prosperidad y cuidado. Los nueve oros simbolizan los frutos del trabajo. El halcón representa control y disciplina, mientras que la figura disfruta de lo conseguido."
+    },
+
+    {
+        nombre: "DIEZ DE OROS",
+        imagen: "../images/tenofpentacles.jpeg",
+        significado:
+        "Representa estabilidad, patrimonio, familia y seguridad a largo plazo. Puede señalar logros materiales duraderos, raíces familiares y aquello que se construye pensando también en las generaciones futuras.",
+        simbolismo:
+        "Los diez oros muestran abundancia y continuidad. La familia representa legado y pertenencia. La arquitectura y los animales simbolizan estabilidad, protección y patrimonio."
+    },
+
+    {
+        nombre: "SOTA DE OROS",
+        imagen: "../images/pageofpentacles.jpeg",
+        significado:
+        "Representa aprendizaje, estudio y una oportunidad concreta que comienza a desarrollarse. Es una energía paciente y práctica que busca adquirir conocimientos y convertirlos en resultados.",
+        simbolismo:
+        "La figura contempla el oro con atención, mostrando concentración y valoración de una oportunidad. El paisaje verde representa crecimiento. El oro simboliza conocimiento práctico y recursos."
+    },
+
+    {
+        nombre: "CABALLERO DE OROS",
+        imagen: "../images/knightofpentacles.jpeg",
+        significado:
+        "Representa responsabilidad, constancia, paciencia y trabajo sostenido. Es una energía que avanza lentamente pero de manera segura. Habla de compromiso y construcción a largo plazo.",
+        simbolismo:
+        "El caballo detenido representa estabilidad y paciencia. El oro sostenido simboliza responsabilidad sobre los recursos. El campo cultivado muestra trabajo constante y resultados construidos con tiempo."
+    },
+
+    {
+        nombre: "REINA DE OROS",
+        imagen: "../images/queenofpentacles.jpeg",
+        significado:
+        "Representa abundancia, cuidado, estabilidad y capacidad para crear bienestar. Es una energía práctica que sabe administrar recursos y al mismo tiempo cuidar de las personas que la rodean.",
+        simbolismo:
+        "La reina sostiene el oro con cuidado, mostrando valoración de los recursos. La naturaleza representa fertilidad y abundancia. El entorno protegido simboliza seguridad y bienestar."
+    },
+
+    {
+        nombre: "REY DE OROS",
+        imagen: "../images/kingofpentacles.jpeg",
+        significado:
+        "Representa estabilidad, prosperidad, experiencia y dominio de los recursos materiales. Habla de una persona que ha construido seguridad mediante esfuerzo, paciencia y capacidad para administrar.",
+        simbolismo:
+        "El rey rodeado de símbolos de abundancia representa prosperidad y estabilidad. El oro simboliza recursos y patrimonio. El trono y la naturaleza representan autoridad, seguridad y éxito material."
+    }
+
+];
+
+
+/* =========================================================
+   ABRIR CARTA
+========================================================= */
+
+function abrirCarta(numero) {
+
+    const carta = cartas[numero];
+
+    document.getElementById("imagen-carta").src =
+        carta.imagen;
+
+    document.getElementById("imagen-carta").alt =
+        carta.nombre;
+
+    document.getElementById("nombre-carta").textContent =
+        carta.nombre;
+
+    document.getElementById("significado-carta").textContent =
+        carta.significado;
+
+    document
+        .getElementById("modal-carta")
+        .classList.add("activa");
+
+    document.body.style.overflow = "hidden";
+}
+
+
+/* =========================================================
+   CERRAR CARTA
+========================================================= */
+
+function cerrarCarta() {
+
+    document
+        .getElementById("modal-carta")
+        .classList.remove("activa");
+
+    document.body.style.overflow = "";
+}
+
+
+/* =========================================================
+   CERRAR HACIENDO CLICK AFUERA
+========================================================= */
+
+document
+    .getElementById("modal-carta")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === this) {
+                cerrarCarta();
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   CERRAR CON ESCAPE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+            cerrarCarta();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MOSTRAR 14 → 28 → 42 → 56
+========================================================= */
+
+const cantidadInicial = 14;
+
+const cantidadPorClick = 14;
+
+let cartasVisibles = cantidadInicial;
+
+
+function actualizarCartas() {
+
+    const todasLasCartas =
+        document.querySelectorAll(".arcana-list span");
+
+    todasLasCartas.forEach(
+        function(carta, indice) {
+
+            if (indice < cartasVisibles) {
+
+                carta.classList.add("visible");
+
+            } else {
+
+                carta.classList.remove("visible");
+
+            }
+
+        }
+    );
+
+
+    const boton =
+        document.getElementById("boton-mas");
+
+
+    if (
+        cartasVisibles >=
+        todasLasCartas.length
+    ) {
+
+        boton.textContent =
+            "OCULTAR ↑";
+
+    } else {
+
+        boton.textContent =
+            "VER MÁS CARTAS ↓";
+
+    }
+
+}
+
+
+function mostrarMasCartas() {
+
+    const todasLasCartas =
+        document.querySelectorAll(".arcana-list span");
+
+
+    if (
+        cartasVisibles >=
+        todasLasCartas.length
+    ) {
+
+        cartasVisibles =
+            cantidadInicial;
+
+    } else {
+
+        cartasVisibles +=
+            cantidadPorClick;
+
+    }
+
+
+    actualizarCartas();
+
+}
+
+
+actualizarCartas();
+
+</script>
+
+</body>
+
+</html>
+

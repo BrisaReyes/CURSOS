@@ -1,0 +1,577 @@
+
+/* =========================================================
+   ASTRO ROJO — CURSO DE TAROT
+   ARCANOS MAYORES
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #3a080d 0%,
+            #16090c 35%,
+            #08070b 75%,
+            #050406 100%
+        );
+
+    color: #eee9e4;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
+.container {
+    width: 100%;
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    padding: 70px 30px 80px;
+}
+
+
+/* =========================================================
+   BIENVENIDA
+========================================================= */
+
+.welcome {
+    position: relative;
+
+    text-align: center;
+
+    padding: 35px 20px 50px;
+
+    margin-bottom: 30px;
+
+    overflow: hidden;
+}
+
+
+/* BRILLO */
+
+.hero-glow {
+    position: absolute;
+
+    width: 330px;
+    height: 330px;
+
+    left: 50%;
+    top: -60px;
+
+    transform: translateX(-50%);
+
+    background: rgba(150, 0, 25, 0.25);
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    pointer-events: none;
+}
+
+
+/* LUNA */
+
+.moon {
+    position: relative;
+    z-index: 1;
+
+    font-size: 48px;
+
+    color: #d9a0a7;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 15px rgba(190, 30, 50, 0.7),
+        0 0 35px rgba(150, 0, 25, 0.4);
+}
+
+
+/* TITULO */
+
+.welcome h1 {
+    position: relative;
+    z-index: 1;
+
+    font-size: 48px;
+
+    font-weight: 400;
+
+    letter-spacing: 7px;
+
+    color: #f3eeee;
+
+    margin-bottom: 15px;
+
+    text-shadow:
+        0 0 20px rgba(150, 0, 25, 0.35);
+}
+
+
+/* SUBTITULO */
+
+.welcome p {
+    position: relative;
+    z-index: 1;
+
+    font-size: 21px;
+
+    color: #d6a0a7;
+
+    margin-bottom: 18px;
+
+    letter-spacing: 1px;
+}
+
+
+/* DESCRIPCION */
+
+.welcome span {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    color: #a69b9f;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   BLOQUES DE CLASE
+========================================================= */
+
+.lesson {
+    position: relative;
+
+    margin: 0 auto 30px;
+
+    padding: 35px 40px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(100, 0, 15, 0.025)
+        );
+
+    border: 1px solid rgba(150, 35, 50, 0.35);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+
+/* BRILLO INTERNO */
+
+.lesson::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 18px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(160, 0, 30, 0.10),
+            transparent 60%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   TITULOS DE LAS CLASES
+========================================================= */
+
+.lesson h2 {
+    position: relative;
+    z-index: 1;
+
+    text-align: center;
+
+    font-size: 25px;
+
+    font-weight: 400;
+
+    color: #eee9e4;
+
+    margin-bottom: 25px;
+
+    letter-spacing: 1px;
+}
+
+.lesson h2::after {
+    content: "";
+
+    display: block;
+
+    width: 55px;
+    height: 1px;
+
+    margin: 14px auto 0;
+
+    background: #a93648;
+}
+
+
+/* =========================================================
+   TEXTO
+========================================================= */
+
+.lesson p {
+    position: relative;
+    z-index: 1;
+
+    max-width: 800px;
+
+    margin: 0 auto 18px;
+
+    color: #a8a0a3;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    text-align: center;
+}
+
+.lesson p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   TARJETAS DE APRENDIZAJE
+========================================================= */
+
+.study-grid {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 25px;
+}
+
+.study-card {
+    padding: 25px 20px;
+
+    text-align: center;
+
+    background: rgba(20, 5, 9, 0.55);
+
+    border: 1px solid rgba(150, 35, 50, 0.25);
+
+    border-radius: 14px;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+.study-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(190, 55, 70, 0.60);
+
+    background: rgba(35, 7, 12, 0.75);
+}
+
+
+/* ICONOS */
+
+.card-icon {
+    font-size: 28px;
+
+    color: #c9828c;
+
+    margin-bottom: 14px;
+
+    text-shadow:
+        0 0 15px rgba(170, 20, 40, 0.5);
+}
+
+
+/* TITULO */
+
+.study-card h3 {
+    color: #eee9e4;
+
+    font-size: 18px;
+
+    font-weight: 400;
+
+    margin-bottom: 12px;
+}
+
+
+/* TEXTO */
+
+.study-card p {
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+    color: #928a8e;
+}
+
+
+/* =========================================================
+   LISTA DE ARCANOS
+========================================================= */
+
+.arcana-list {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px 25px;
+
+    margin-top: 25px;
+}
+
+
+/* CADA ARCANO */
+
+.arcana-list span {
+    display: block;
+
+    padding: 12px 15px;
+
+    color: #b8adb0;
+
+    background: rgba(15, 5, 8, 0.45);
+
+    border: 1px solid rgba(150, 35, 50, 0.20);
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.arcana-list span:hover {
+    color: #eee9e4;
+
+    background: rgba(130, 0, 25, 0.12);
+
+    border-color: rgba(190, 55, 70, 0.50);
+}
+
+
+/* =========================================================
+   NAVEGACION
+========================================================= */
+
+.navegacion-curso {
+    text-align: center;
+
+    padding: 35px 20px 10px;
+}
+
+.navegacion-curso p {
+    color: #8f8589;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   BOTON SIGUIENTE
+========================================================= */
+
+.btn-siguiente {
+    display: inline-block;
+
+    padding: 13px 30px;
+
+    color: #f3eeee;
+
+    background: rgba(130, 0, 25, 0.65);
+
+    border: 1px solid rgba(190, 70, 85, 0.55);
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    letter-spacing: 0.5px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.btn-siguiente:hover {
+    transform: translateY(-3px);
+
+    background: rgba(165, 0, 30, 0.9);
+
+    border-color: rgba(220, 100, 115, 0.75);
+
+    box-shadow:
+        0 8px 30px rgba(130, 0, 20, 0.30);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .container {
+        padding: 55px 20px 60px;
+    }
+
+    .study-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .arcana-list {
+        grid-template-columns: 1fr;
+    }
+
+    .lesson {
+        padding: 30px 25px;
+    }
+
+    .welcome h1 {
+        font-size: 38px;
+    }
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .container {
+        padding: 40px 15px 50px;
+    }
+
+    .welcome {
+        padding: 25px 10px 35px;
+    }
+
+    .moon {
+        font-size: 40px;
+    }
+
+    .welcome h1 {
+        font-size: 29px;
+        letter-spacing: 4px;
+    }
+
+    .welcome p {
+        font-size: 18px;
+    }
+
+    .welcome span {
+        font-size: 13px;
+    }
+
+    .lesson {
+        padding: 25px 18px;
+    }
+
+    .lesson h2 {
+        font-size: 21px;
+    }
+
+    .lesson p {
+        font-size: 14px;
+    }
+
+    .study-card {
+        padding: 22px 18px;
+    }
+
+    .btn-siguiente {
+        padding: 12px 25px;
+    }
+}
+
+
+.siguiente-leccion {
+    text-align: center;
+    margin: 50px auto 20px;
+}
+
+.siguiente-leccion a {
+    display: inline-block;
+    padding: 14px 32px;
+    color: #eee9e4;
+    background: rgba(130, 0, 25, 0.65);
+    border: 1px solid rgba(190, 70, 85, 0.55);
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+
+.siguiente-leccion a:hover {
+    background: rgba(165, 0, 30, 0.9);
+    transform: translateY(-2px);
+}
