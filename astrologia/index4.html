@@ -1,234 +1,2029 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interpretación de la carta natal — Astro Rojo</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#10070b">
+    <meta name="description" content="ASTRO ROJO: aprende los aspectos planetarios, conjunción, oposición, cuadratura, trígono, sextil, orbes y patrones de interpretación astrológica.">
+
+    <title>Aspectos planetarios — ASTRO ROJO</title>
+
+    <style>
+        :root {
+            --rojo: #ff173b;
+            --rojo-claro: #ff536b;
+            --rojo-oscuro: #a40023;
+            --fondo: #10070b;
+            --fondo-oscuro: #090407;
+            --tarjeta: #1b0a10;
+            --borde: #641629;
+            --texto: #f9edef;
+            --texto-suave: #c8b4ba;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--fondo);
+            color: var(--texto);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.75;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        textarea {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1120px, 91%);
+            margin: auto;
+        }
+
+        /* PORTADA */
+
+        .hero {
+            min-height: 590px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(ellipse at 76% 45%, #4c091b 0%, transparent 38%),
+                linear-gradient(135deg, #210710, #10070b 58%, #080407);
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            width: min(1120px, 91%);
+            margin: auto;
+            padding: 90px 0;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--rojo-claro);
+            font-size: 0.76rem;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            margin-top: 25px;
+            font-size: clamp(3.2rem, 9vw, 7rem);
+            line-height: 0.98;
+            letter-spacing: -3px;
+            color: #fff1f3;
+        }
+
+        .hero h1 span {
+            color: var(--rojo);
+            text-shadow: 0 0 35px #ff173b33;
+        }
+
+        .hero-subtitle {
+            margin-top: 27px;
+            font-size: 1.35rem;
+            color: var(--rojo-claro);
+        }
+
+        .hero-description {
+            max-width: 560px;
+            color: var(--texto-suave);
+            margin-top: 18px;
+            font-size: 1.02rem;
+        }
+
+        .hero-note {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 13px;
+            margin-top: 32px;
+            color: #e5cbd1;
+            font-size: 0.7rem;
+            letter-spacing: 1.3px;
+        }
+
+        .hero-note span:first-child {
+            color: var(--rojo);
+            font-size: 1.4rem;
+        }
+
+        .hero-note i {
+            height: 4px;
+            width: 4px;
+            background: var(--rojo);
+            border-radius: 50%;
+        }
+
+        .hero-orbit {
+            position: absolute;
+            border: 1px solid #ff173b35;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .orbit-one {
+            width: 490px;
+            height: 490px;
+            right: -70px;
+            top: 55px;
+        }
+
+        .orbit-two {
+            width: 370px;
+            height: 370px;
+            right: -10px;
+            top: 115px;
+            border-color: #ff536b45;
+        }
+
+        .hero-moon {
+            position: absolute;
+            right: 95px;
+            top: 155px;
+            width: 270px;
+            height: 270px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rojo);
+        }
+
+        .hero-moon > span {
+            font-size: 13rem;
+            line-height: 1;
+            text-shadow: 0 0 55px #ff173b55;
+        }
+
+        .moon-ring {
+            position: absolute;
+            inset: 0;
+            border: 1px solid #ff536b44;
+            border-radius: 50%;
+        }
+
+        .moon-star {
+            position: absolute;
+            color: var(--rojo-claro);
+        }
+
+        .star-one {
+            top: 10px;
+            right: 25px;
+            font-size: 25px;
+        }
+
+        .star-two {
+            bottom: 35px;
+            left: 5px;
+            font-size: 32px;
+        }
+
+        .star-three {
+            top: 85px;
+            left: 5px;
+            font-size: 17px;
+        }
+
+        /* FRANJA */
+
+        .course-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: #16080d;
+            border-bottom: 1px solid var(--borde);
+            padding: 25px 4%;
+        }
+
+        .course-strip-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            padding: 8px;
+        }
+
+        .strip-icon {
+            color: var(--rojo);
+            font-size: 1.8rem;
+        }
+
+        .course-strip-item strong,
+        .course-strip-item small {
+            display: block;
+        }
+
+        .course-strip-item strong {
+            font-size: 0.94rem;
+        }
+
+        .course-strip-item small {
+            color: var(--texto-suave);
+            font-size: 0.76rem;
+        }
+
+        /* SECCIONES */
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-dark {
+            background: var(--fondo-oscuro);
+            border-top: 1px solid #47101e;
+            border-bottom: 1px solid #47101e;
+        }
+
+        .section-heading {
+            max-width: 780px;
+            margin: 0 auto 48px;
+            text-align: center;
+        }
+
+        .section-number {
+            color: var(--rojo);
+            font-size: 0.74rem;
+            letter-spacing: 2.5px;
+            font-weight: bold;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2rem, 5vw, 3.1rem);
+            line-height: 1.2;
+            margin-top: 15px;
+        }
+
+        .section-heading h2 span {
+            color: var(--rojo);
+        }
+
+        .section-heading > p {
+            color: var(--texto-suave);
+            margin-top: 17px;
+        }
+
+        /* INTRODUCCIÓN */
+
+        .intro-layout {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .intro-visual {
+            text-align: center;
+        }
+
+        .intro-circle {
+            width: min(310px, 100%);
+            aspect-ratio: 1;
+            border: 1px solid #c91b3f;
+            border-radius: 50%;
+            margin: auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, #4a0b1b, #18070e 67%);
+            box-shadow: 0 0 65px #ff173b12;
+        }
+
+        .intro-circle::before,
+        .intro-circle::after {
+            content: "";
+            position: absolute;
+            inset: 17px;
+            border: 1px solid #ff536b50;
+            border-radius: 50%;
+        }
+
+        .intro-circle::after {
+            inset: 42px;
+            border-style: dashed;
+        }
+
+        .intro-sun {
+            font-size: 5rem;
+            color: var(--rojo);
+        }
+
+        .intro-moon,
+        .intro-star {
+            position: absolute;
+            color: var(--rojo-claro);
+        }
+
+        .intro-moon {
+            top: 40px;
+            right: 58px;
+            font-size: 2rem;
+        }
+
+        .intro-star {
+            left: 55px;
+            bottom: 57px;
+            font-size: 1.8rem;
+        }
+
+        .intro-zodiac {
+            position: absolute;
+            top: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ff8497;
+            font-size: 1rem;
+            letter-spacing: 5px;
+            white-space: nowrap;
+        }
+
+        .intro-zodiac.second {
+            top: auto;
+            bottom: 27px;
+        }
+
+        .intro-zodiac.third {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            opacity: 0.7;
+        }
+
+        .intro-visual > p {
+            margin-top: 22px;
+            color: var(--texto-suave);
+            font-size: 0.85rem;
+        }
+
+        .mini-label {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            color: var(--rojo-claro);
+            font-weight: bold;
+        }
+
+        .intro-text h3 {
+            font-size: 1.8rem;
+            margin: 12px 0 20px;
+        }
+
+        .intro-text > p {
+            color: var(--texto-suave);
+            margin-bottom: 18px;
+        }
+
+        .highlight-box {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            background: #350b18;
+            border-left: 3px solid var(--rojo);
+            padding: 18px;
+            margin-top: 25px;
+        }
+
+        .highlight-box > span {
+            color: var(--rojo);
+            font-size: 1.3rem;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: #f0dce1;
+        }
+
+        /* TARJETAS */
+
+        .aspect-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .aspect-card {
+            position: relative;
+            background: linear-gradient(145deg, #270914, #13060b);
+            border: 1px solid var(--borde);
+            border-radius: 14px;
+            padding: 28px;
+            overflow: hidden;
+            transition: transform 0.25s, border-color 0.25s;
+        }
+
+        .aspect-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--rojo);
+        }
+
+        .aspect-top {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            margin-bottom: 18px;
+        }
+
+        .aspect-symbol {
+            width: 62px;
+            height: 62px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #ff2346, #99001e);
+            box-shadow: 0 0 22px #ff173b20;
+        }
+
+        .aspect-category {
+            color: #e57b8e;
+            font-size: 0.67rem;
+            letter-spacing: 1.5px;
+        }
+
+        .aspect-card h3 {
+            font-size: 1.3rem;
+            line-height: 1.3;
+        }
+
+        .aspect-card p {
+            color: var(--texto-suave);
+            font-size: 0.93rem;
+            margin-bottom: 13px;
+        }
+
+        .aspect-card h4 {
+            color: var(--rojo-claro);
+            font-size: 0.92rem;
+            margin: 16px 0 6px;
+        }
+
+        .aspect-card strong {
+            color: #fff0f3;
+        }
+
+        .degree {
+            display: inline-block;
+            border: 1px solid #a81a37;
+            border-radius: 5px;
+            padding: 5px 10px;
+            color: #ff9cab;
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        .wide-card {
+            grid-column: 1 / -1;
+        }
+
+        /* TABLA DE ASPECTOS */
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            background: #17070d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 620px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid #4c1827;
+        }
+
+        th {
+            background: #350b18;
+            color: var(--rojo-claro);
+            font-size: 0.83rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            color: var(--texto-suave);
+            font-size: 0.91rem;
+        }
+
+        td strong {
+            color: #fff0f3;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ORBES */
+
+        .orbs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .orbs-card {
+            background: #1b080e;
+            border: 1px solid var(--borde);
+            border-radius: 13px;
+            padding: 25px;
+        }
+
+        .orbs-card > span {
+            color: var(--rojo);
+            font-size: 2rem;
+        }
+
+        .orbs-card h3 {
+            margin: 12px 0;
+        }
+
+        .orbs-card p {
+            color: var(--texto-suave);
+            font-size: 0.92rem;
+        }
+
+        .orbs-card strong {
+            color: var(--rojo-claro);
+        }
+
+        /* PATRONES */
+
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .pattern-card {
+            background: #1b080e;
+            border: 1px solid var(--borde);
+            border-radius: 13px;
+            padding: 27px;
+        }
+
+        .pattern-card h3 {
+            color: var(--rojo-claro);
+            margin-bottom: 12px;
+        }
+
+        .pattern-card p {
+            color: var(--texto-suave);
+            font-size: 0.93rem;
+        }
+
+        .pattern-card ul {
+            padding-left: 20px;
+            margin-top: 12px;
+            color: var(--texto-suave);
+        }
+
+        .pattern-card li {
+            margin: 7px 0;
+        }
+
+        /* MÉTODO */
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .step-card {
+            background: linear-gradient(145deg, #270914, #13060b);
+            border: 1px solid var(--borde);
+            border-radius: 13px;
+            padding: 25px;
+        }
+
+        .step-number {
+            color: var(--rojo);
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .step-symbol {
+            display: block;
+            font-size: 2.2rem;
+            color: var(--rojo-claro);
+            margin: 14px 0;
+        }
+
+        .step-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: var(--texto-suave);
+            font-size: 0.9rem;
+        }
+
+        .formula {
+            text-align: center;
+            padding: 25px;
+            margin-top: 28px;
+            background: #310b17;
+            border: 1px solid #a91837;
+            border-radius: 13px;
+        }
+
+        .formula p {
+            color: var(--texto-suave);
+        }
+
+        .formula strong {
+            color: var(--rojo-claro);
+        }
+
+        .formula-equation {
+            font-size: clamp(1.05rem, 3vw, 1.5rem);
+            margin-bottom: 10px;
+        }
+
+        /* PRÁCTICA */
+
+        .practice-box {
+            max-width: 850px;
+            margin: auto;
+            padding: 32px;
+            border: 1px solid #8b1530;
+            border-radius: 16px;
+            background: linear-gradient(145deg, #300a17, #16070d);
+        }
+
+        .exercise {
+            padding: 22px 0;
+            border-bottom: 1px solid #592033;
+        }
+
+        .exercise:last-of-type {
+            border-bottom: 0;
+        }
+
+        .exercise h3 {
+            color: var(--rojo-claro);
+            margin-bottom: 10px;
+        }
+
+        .exercise p {
+            color: var(--texto-suave);
+        }
+
+        .practice-box label {
+            display: block;
+            margin: 12px 0 7px;
+            color: #ff8296;
+            font-weight: bold;
+        }
+
+        .practice-box textarea {
+            width: 100%;
+            min-height: 110px;
+            padding: 13px;
+            color: var(--texto);
+            background: #10050a;
+            border: 1px solid #762037;
+            border-radius: 8px;
+            resize: vertical;
+        }
+
+        .practice-box textarea:focus {
+            outline: 1px solid var(--rojo);
+        }
+
+        .button {
+            display: inline-block;
+            border: 1px solid #ff536b;
+            border-radius: 7px;
+            padding: 12px 20px;
+            margin-top: 18px;
+            background: linear-gradient(135deg, #ff2346, #a40023);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            box-shadow: 0 0 22px #ff173b35;
+            transform: translateY(-2px);
+        }
+
+        #mensaje {
+            margin-top: 14px;
+            color: #ffb0bd;
+        }
+
+        /* CIERRE */
+
+        .final-section {
+            text-align: center;
+            padding: 95px 20px;
+            background:
+                radial-gradient(ellipse at center, #4b0b1b, #10070b 65%);
+            border-top: 1px solid var(--borde);
+        }
+
+        .final-orbit {
+            color: var(--rojo);
+            font-size: 4rem;
+            margin-bottom: 18px;
+        }
+
+        .final-section h2 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.25;
+            margin: 20px 0;
+        }
+
+        .final-section h2 span {
+            color: var(--rojo);
+        }
+
+        .final-section > p {
+            max-width: 680px;
+            margin: 0 auto;
+            color: var(--texto-suave);
+        }
+
+        .next-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* PIE */
+
+        .footer {
+            text-align: center;
+            padding: 32px 15px;
+            background: #090407;
+            border-top: 1px solid #42101d;
+        }
+
+        .footer-brand {
+            display: inline-block;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .footer-brand strong {
+            color: var(--rojo);
+        }
+
+        .footer-brand .brand-symbol {
+            color: var(--rojo);
+            margin-right: 7px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            color: var(--texto-suave);
+            font-size: 0.86rem;
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: #94717a;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+            .hero-moon {
+                right: -65px;
+                opacity: 0.4;
+            }
+
+            .orbit-one {
+                right: -210px;
+            }
+
+            .orbit-two {
+                right: -150px;
+            }
+
+            .course-strip {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .orbs-grid,
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .hero {
+                min-height: 570px;
+            }
+
+            .hero-content {
+                padding: 75px 0;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .hero-moon {
+                width: 180px;
+                height: 180px;
+                top: 320px;
+                right: 5px;
+                opacity: 0.2;
+            }
+
+            .hero-moon > span {
+                font-size: 9rem;
+            }
+
+            .intro-layout,
+            .aspect-grid,
+            .orbs-grid,
+            .pattern-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-layout {
+                gap: 35px;
+            }
+
+            .wide-card {
+                grid-column: auto;
+            }
+
+            .course-strip {
+                padding: 18px 3%;
+            }
+
+            .course-strip-item {
+                justify-content: flex-start;
+                gap: 8px;
+            }
+
+            .course-strip-item strong {
+                font-size: 0.82rem;
+            }
+
+            .course-strip-item small {
+                font-size: 0.7rem;
+            }
+
+            .section {
+                padding: 65px 0;
+            }
+
+            .practice-box {
+                padding: 23px;
+            }
+
+            .hero-note {
+                max-width: 310px;
+                line-height: 1.8;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<main class="container">
 
-    <header class="welcome">
-        <span class="simbolo">◎</span>
-        <p class="etiqueta">ASTRO ROJO · LECCIÓN 4</p>
-        <h1>Interpretar la <span>carta natal</span></h1>
-        <p class="subtitulo">
-            Aprendé a reconocer los aspectos planetarios y a integrar
-            los componentes de una carta en una lectura coherente.
-        </p>
-    </header>
+<main>
 
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">01</span>
+    <!-- PORTADA -->
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-orbit orbit-one"></div>
+        <div class="hero-orbit orbit-two"></div>
+
+        <div class="hero-content">
+
+            <span class="eyebrow">
+                ✦ APRENDE A LEER LAS CONEXIONES DEL CIELO ✦
+            </span>
+
+            <h1>
+                ASPECTOS<br>
+                <span>PLANETARIOS</span>
+            </h1>
+
+            <p class="hero-subtitle">Curso de Astrología · Interpretación avanzada</p>
+
+            <p class="hero-description">
+                Descubre cómo se relacionan los planetas entre sí.
+                Aprende a reconocer conjunciones, oposiciones,
+                cuadraturas, trígonos y sextiles para interpretar
+                una carta natal de manera integrada.
+            </p>
+
+            <div class="hero-note">
+                <span>☾</span>
+                <span>ÁNGULOS</span>
+                <i></i>
+                <span>ORBES</span>
+                <i></i>
+                <span>PATRONES</span>
+            </div>
+
+        </div>
+
+        <div class="hero-moon" aria-hidden="true">
+            <span>☾</span>
+            <div class="moon-ring"></div>
+            <div class="moon-star star-one">✦</div>
+            <div class="moon-star star-two">✧</div>
+            <div class="moon-star star-three">✦</div>
+        </div>
+
+    </section>
+
+
+    <!-- FRANJA -->
+
+    <section class="course-strip">
+
+        <div class="course-strip-item">
+            <span class="strip-icon">☌</span>
             <div>
-                <p class="etiqueta">RELACIONES ENTRE PLANETAS</p>
-                <h2>¿Qué son los aspectos?</h2>
+                <strong>Conjunción</strong>
+                <small>Unión de funciones</small>
             </div>
         </div>
 
-        <div class="introduccion">
-            <p>
-                Los aspectos son relaciones angulares entre dos puntos
-                de una carta natal. En la astrología, se interpretan
-                como formas de interacción entre sus significados.
-            </p>
-            <p>
-                Los aspectos se calculan considerando los grados de
-                separación y un margen llamado orbe. Los criterios
-                utilizados pueden variar según la escuela astrológica.
-            </p>
-        </div>
-
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-icono">☌</span>
-                <h3>Conjunción · 0°</h3>
-                <p>Dos puntos se encuentran próximos. Se interpreta como una combinación intensa de sus funciones.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">⚹</span>
-                <h3>Sextil · 60°</h3>
-                <p>Se asocia tradicionalmente con oportunidades de cooperación y desarrollo.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">□</span>
-                <h3>Cuadratura · 90°</h3>
-                <p>Se interpreta como tensión simbólica que puede invitar a tomar decisiones y realizar ajustes.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">△</span>
-                <h3>Trígono · 120°</h3>
-                <p>Se relaciona con fluidez, afinidad y facilidad de integración entre funciones.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">☍</span>
-                <h3>Oposición · 180°</h3>
-                <p>Se interpreta como polaridad, contraste y búsqueda de equilibrio entre dos extremos.</p>
-            </article>
-        </div>
-    </section>
-
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">02</span>
+        <div class="course-strip-item">
+            <span class="strip-icon">☍</span>
             <div>
-                <p class="etiqueta">LECTURA INTEGRADA</p>
-                <h2>Cómo construir una interpretación</h2>
+                <strong>Oposición</strong>
+                <small>Polaridad y equilibrio</small>
             </div>
         </div>
 
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-numero">PASO 1</span>
-                <h3>Observá los datos</h3>
-                <p>Verificá fecha, hora y lugar de nacimiento. Si la hora no es segura, aclaralo antes de interpretar las casas.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">PASO 2</span>
-                <h3>Empezá por lo principal</h3>
-                <p>Estudiá el Sol, la Luna y el Ascendente, sin reducir toda la carta a esas tres posiciones.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">PASO 3</span>
-                <h3>Analizá los planetas</h3>
-                <p>Identificá cada planeta, el signo donde está y la casa que ocupa.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">PASO 4</span>
-                <h3>Buscá conexiones</h3>
-                <p>Observá los aspectos relevantes y cómo relacionan los temas de diferentes planetas.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">PASO 5</span>
-                <h3>Integrá los temas</h3>
-                <p>Buscá coincidencias, matices y contrastes. Evitá interpretar cada posición de manera aislada.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">PASO 6</span>
-                <h3>Redactá con claridad</h3>
-                <p>Explicá los símbolos con lenguaje comprensible y presentá las interpretaciones como posibilidades de reflexión.</p>
-            </article>
-        </div>
-    </section>
-
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">03</span>
+        <div class="course-strip-item">
+            <span class="strip-icon">□</span>
             <div>
-                <p class="etiqueta">EJEMPLO DIDÁCTICO</p>
-                <h2>Cómo combinar los símbolos</h2>
+                <strong>Cuadratura</strong>
+                <small>Tensión y acción</small>
             </div>
         </div>
 
-        <div class="introduccion">
-            <p>
-                Imaginá una carta con Mercurio en Géminis en la casa 3.
-                En el lenguaje astrológico, Mercurio se relaciona con
-                la comunicación; Géminis, con la curiosidad y el intercambio;
-                y la casa 3, con el aprendizaje cotidiano y el entorno próximo.
-            </p>
-            <p>
-                Una lectura simbólica posible sería destacar el interés
-                por aprender, conversar y explorar distintas ideas.
-                No significa que todas las personas con esa posición
-                tengan necesariamente esas características.
-            </p>
-        </div>
-    </section>
-
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">04</span>
+        <div class="course-strip-item">
+            <span class="strip-icon">△</span>
             <div>
-                <p class="etiqueta">PRÁCTICA FINAL</p>
-                <h2>Comprobá lo aprendido</h2>
+                <strong>Trígono y sextil</strong>
+                <small>Fluidez y oportunidades</small>
             </div>
         </div>
 
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-icono">01</span>
-                <h3>Pregunta uno</h3>
-                <p>¿Qué información representa principalmente el signo solar dentro de una interpretación astrológica?</p>
-                <details>
-                    <summary>Ver orientación</summary>
-                    <p>Se asocia simbólicamente con identidad, vitalidad y expresión personal. Se interpreta junto con el resto de la carta.</p>
-                </details>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">02</span>
-                <h3>Pregunta dos</h3>
-                <p>¿Qué datos son especialmente importantes para calcular el Ascendente?</p>
-                <details>
-                    <summary>Ver orientación</summary>
-                    <p>La fecha, la hora y el lugar de nacimiento. La precisión de la hora es importante.</p>
-                </details>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">03</span>
-                <h3>Pregunta tres</h3>
-                <p>¿Por qué no conviene interpretar un planeta sin observar el resto de la carta?</p>
-                <details>
-                    <summary>Ver orientación</summary>
-                    <p>Porque el signo, la casa y los aspectos aportan contexto y matices a la interpretación.</p>
-                </details>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">04</span>
-                <h3>Pregunta cuatro</h3>
-                <p>¿Qué diferencia hay entre un signo y una casa astrológica?</p>
-                <details>
-                    <summary>Ver orientación</summary>
-                    <p>El signo describe un estilo simbólico; la casa se relaciona con un área de experiencia.</p>
-                </details>
-            </article>
-        </div>
     </section>
 
-    <section class="principio">
-        <span class="principio-simbolo">✦</span>
-        <p class="etiqueta">CIERRE DEL MÓDULO</p>
-        <h2>La carta se interpreta como un conjunto</h2>
+
+    <!-- INTRODUCCIÓN -->
+
+    <section class="section" id="introduccion">
+
+        <div class="section-heading">
+            <span class="section-number">01 / INTRODUCCIÓN</span>
+            <h2>Los planetas no actúan <span>aislados</span></h2>
+            <p>
+                Los aspectos describen relaciones angulares entre
+                planetas y otros puntos de una carta natal.
+            </p>
+        </div>
+
+        <div class="intro-layout">
+
+            <div class="intro-visual">
+                <div class="intro-circle">
+                    <span class="intro-sun">✧</span>
+                    <span class="intro-moon">☾</span>
+                    <span class="intro-star">✦</span>
+                    <span class="intro-zodiac">☉ · ☽ · ☿</span>
+                    <span class="intro-zodiac second">♀ · ♂ · ♃</span>
+                    <span class="intro-zodiac third">♄ · ♅ · ♆</span>
+                </div>
+                <p>Un sistema de símbolos conectados</p>
+            </div>
+
+            <div class="intro-text">
+
+                <span class="mini-label">COMPRENDER LAS RELACIONES</span>
+
+                <h3>¿Qué es un aspecto planetario?</h3>
+
+                <p>
+                    En astrología, un aspecto es una relación angular
+                    entre dos puntos de la carta. Los cinco aspectos
+                    principales son la conjunción, la oposición,
+                    la cuadratura, el trígono y el sextil.
+                </p>
+
+                <p>
+                    Cada aspecto se interpreta según los planetas
+                    implicados, el ángulo que forman, la diferencia
+                    respecto del ángulo exacto y el contexto de la carta.
+                </p>
+
+                <p>
+                    Por ejemplo, una relación entre Venus y Saturno
+                    combina simbolismos asociados con los vínculos
+                    y los valores con otros relacionados con límites,
+                    compromiso y responsabilidad.
+                </p>
+
+                <div class="highlight-box">
+                    <span>✦</span>
+                    <p>
+                        Un aspecto no es automáticamente bueno o malo.
+                        Puede representar recursos, tensiones, aprendizajes
+                        o combinaciones de estos temas según el contexto.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOS CINCO ASPECTOS -->
+
+    <section class="section section-dark" id="cinco-aspectos">
+
+        <div class="section-heading">
+            <span class="section-number">02 / LOS CINCO ASPECTOS PRINCIPALES</span>
+            <h2>Cinco formas de <span>relacionar los planetas</span></h2>
+            <p>
+                Cada ángulo ofrece una perspectiva diferente sobre
+                cómo interactúan dos funciones simbólicas.
+            </p>
+        </div>
+
+        <div class="aspect-grid">
+
+            <article class="aspect-card">
+
+                <div class="aspect-top">
+                    <span class="aspect-symbol">☌</span>
+                    <div>
+                        <span class="aspect-category">0 GRADOS</span>
+                        <h3>Conjunción</h3>
+                    </div>
+                </div>
+
+                <p>
+                    Ocurre cuando dos planetas se encuentran próximos
+                    al mismo grado zodiacal. Sus simbolismos se combinan
+                    y pueden actuar de forma muy vinculada.
+                </p>
+
+                <h4>¿Cómo se interpreta?</h4>
+
+                <p>
+                    Se estudia qué funciones se unen y cómo interactúan.
+                    La conjunción puede intensificar un tema, concentrar
+                    energía o hacer que dos necesidades se experimenten
+                    de manera inseparable.
+                </p>
+
+                <h4>Ejemplo: Sol y Mercurio</h4>
+
+                <p>
+                    Simbólicamente, puede relacionar la identidad con
+                    el pensamiento y la comunicación. La expresión
+                    concreta depende del signo, la casa y otros factores.
+                </p>
+
+                <span class="degree">Ángulo de referencia: 0°</span>
+
+            </article>
+
+
+            <article class="aspect-card">
+
+                <div class="aspect-top">
+                    <span class="aspect-symbol">☍</span>
+                    <div>
+                        <span class="aspect-category">180 GRADOS</span>
+                        <h3>Oposición</h3>
+                    </div>
+                </div>
+
+                <p>
+                    Se produce cuando dos puntos están aproximadamente
+                    frente a frente en la rueda zodiacal.
+                </p>
+
+                <h4>¿Cómo se interpreta?</h4>
+
+                <p>
+                    Puede simbolizar una polaridad entre dos funciones,
+                    necesidades o áreas de experiencia. La tarea consiste
+                    en reconocer ambos lados y buscar formas de
+                    relacionarlos sin negar ninguno.
+                </p>
+
+                <h4>Ejemplo: Luna y Saturno</h4>
+
+                <p>
+                    Puede invitar a explorar la relación simbólica entre
+                    necesidades emocionales y responsabilidad, límites
+                    o autocontrol.
+                </p>
+
+                <span class="degree">Ángulo de referencia: 180°</span>
+
+            </article>
+
+
+            <article class="aspect-card">
+
+                <div class="aspect-top">
+                    <span class="aspect-symbol">□</span>
+                    <div>
+                        <span class="aspect-category">90 GRADOS</span>
+                        <h3>Cuadratura</h3>
+                    </div>
+                </div>
+
+                <p>
+                    Relaciona dos puntos separados aproximadamente
+                    por un ángulo recto.
+                </p>
+
+                <h4>¿Cómo se interpreta?</h4>
+
+                <p>
+                    Tradicionalmente se asocia con fricción, diferencias
+                    de ritmo o necesidades que exigen una respuesta activa.
+                    Puede servir como símbolo de un área de esfuerzo,
+                    adaptación y aprendizaje.
+                </p>
+
+                <h4>Ejemplo: Marte y Saturno</h4>
+
+                <p>
+                    Puede representar una tensión simbólica entre el deseo
+                    de actuar y la necesidad de esperar, estructurar
+                    o respetar límites.
+                </p>
+
+                <span class="degree">Ángulo de referencia: 90°</span>
+
+            </article>
+
+
+            <article class="aspect-card">
+
+                <div class="aspect-top">
+                    <span class="aspect-symbol">△</span>
+                    <div>
+                        <span class="aspect-category">120 GRADOS</span>
+                        <h3>Trígono</h3>
+                    </div>
+                </div>
+
+                <p>
+                    Se forma cuando dos puntos están separados por
+                    aproximadamente 120 grados.
+                </p>
+
+                <h4>¿Cómo se interpreta?</h4>
+
+                <p>
+                    Se asocia con fluidez, facilidad de cooperación
+                    o talentos que pueden desarrollarse de manera
+                    relativamente espontánea. Sin embargo, una facilidad
+                    también puede quedar sin aprovechar.
+                </p>
+
+                <h4>Ejemplo: Sol y Júpiter</h4>
+
+                <p>
+                    Puede relacionar identidad y expansión, favoreciendo
+                    simbólicamente la confianza, el entusiasmo o el deseo
+                    de explorar posibilidades.
+                </p>
+
+                <span class="degree">Ángulo de referencia: 120°</span>
+
+            </article>
+
+
+            <article class="aspect-card wide-card">
+
+                <div class="aspect-top">
+                    <span class="aspect-symbol">⚹</span>
+                    <div>
+                        <span class="aspect-category">60 GRADOS</span>
+                        <h3>Sextil</h3>
+                    </div>
+                </div>
+
+                <p>
+                    Se produce cuando dos puntos se encuentran separados
+                    por aproximadamente 60 grados.
+                </p>
+
+                <h4>¿Cómo se interpreta?</h4>
+
+                <p>
+                    Se asocia con oportunidades de cooperación, intercambio
+                    y desarrollo de capacidades. A menudo se interpreta
+                    como una conexión que puede aprovecharse mediante
+                    iniciativa, práctica y atención consciente.
+                </p>
+
+                <h4>Ejemplo: Mercurio y Venus</h4>
+
+                <p>
+                    Puede vincular el pensamiento con el afecto y los valores,
+                    favoreciendo simbólicamente la expresión amable,
+                    la escritura creativa o el diálogo sobre asuntos
+                    importantes.
+                </p>
+
+                <span class="degree">Ángulo de referencia: 60°</span>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- TABLA RESUMEN -->
+
+    <section class="section" id="resumen">
+
+        <div class="section-heading">
+            <span class="section-number">03 / GUÍA RÁPIDA</span>
+            <h2>Comparar los <span>aspectos principales</span></h2>
+            <p>
+                Una referencia rápida para recordar sus ángulos
+                y significados tradicionales.
+            </p>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Ángulo exacto</th>
+                        <th>Interpretación tradicional</th>
+                        <th>Pregunta orientativa</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><strong>Conjunción</strong></td>
+                        <td>0°</td>
+                        <td>Unión o combinación</td>
+                        <td>¿Qué funciones se mezclan?</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Oposición</strong></td>
+                        <td>180°</td>
+                        <td>Polaridad y equilibrio</td>
+                        <td>¿Qué dos necesidades debo integrar?</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Cuadratura</strong></td>
+                        <td>90°</td>
+                        <td>Tensión y acción</td>
+                        <td>¿Qué diferencia exige atención?</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Trígono</strong></td>
+                        <td>120°</td>
+                        <td>Fluidez y facilidad</td>
+                        <td>¿Qué capacidad puedo desarrollar?</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Sextil</strong></td>
+                        <td>60°</td>
+                        <td>Cooperación y oportunidad</td>
+                        <td>¿Qué oportunidad puedo aprovechar?</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="highlight-box">
+            <span>✦</span>
+            <p>
+                Los significados son convenciones interpretativas de la
+                astrología. No describen resultados científicos garantizados
+                ni determinan inevitablemente la personalidad o el futuro.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ARMÓNICOS Y DESAFIANTES -->
+
+    <section class="section section-dark" id="armonicos">
+
+        <div class="section-heading">
+            <span class="section-number">04 / ASPECTOS ARMÓNICOS Y DESAFIANTES</span>
+            <h2>Fluidez, tensión y <span>posibilidades de desarrollo</span></h2>
+            <p>
+                Las palabras “armónico” y “desafiante” describen
+                categorías tradicionales. No equivalen a bueno y malo.
+            </p>
+        </div>
+
+        <div class="aspect-grid">
+
+            <article class="aspect-card">
+
+                <div class="aspect-top">
+                    <span class="aspect-symbol">△</span>
+                    <div>
+                        <span class="aspect-category">FACILIDAD RELATIVA</span>
+                        <h3>Trígonos y sextiles</h3>
+                    </div>
+                </div>
+
+                <p>
+                    Suelen asociarse con cooperación entre funciones
+                    planetarias, recursos disponibles y formas de expresión
+                    que pueden sentirse más naturales.
+                </p>
+
+                <h4>Su potencial</h4>
+                <p>
+                    Facilitar el uso de capacidades, la conexión entre
+                    intereses o la búsqueda de soluciones mediante
+                    recursos que ya se encuentran disponibles.
+                </p>
+
+                <h4>Su posible desafío</h4>
+                <p>
+                    Dar por sentadas esas capacidades, no desarrollarlas
+                    o confiar demasiado en una facilidad sin reconocer
+                    cuándo hace falta actuar.
+                </p>
+
+            </article>
+
+
+            <article class="aspect-card">
+
+                <div class="aspect-top">
+                    <span class="aspect-symbol">□</span>
+                    <div>
+                        <span class="aspect-category">MAYOR FRICCIÓN</span>
+                        <h3>Cuadraturas y oposiciones</h3>
+                    </div>
+                </div>
+
+                <p>
+                    Tradicionalmente se relacionan con tensiones entre
+                    funciones, objetivos diferentes o necesidades que
+                    parecen competir entre sí.
+                </p>
+
+                <h4>Su potencial</h4>
+                <p>
+                    Hacer visibles contradicciones, estimular decisiones
+                    y promover cambios en la manera de actuar o de
+                    comprender una situación.
+                </p>
+
+                <h4>Su posible desafío</h4>
+                <p>
+                    Reaccionar sin reflexión, quedarse atrapado entre
+                    extremos o interpretar toda diferencia como
+                    un conflicto imposible de resolver.
+                </p>
+
+            </article>
+
+        </div>
+
+        <div class="formula">
+            <p class="formula-equation">
+                <strong>Facilidad</strong> no significa éxito automático.
+                <strong>Tensión</strong> no significa fracaso inevitable.
+            </p>
+            <p>
+                El contexto de la carta y la manera en que se interpretan
+                los símbolos son fundamentales.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ORBES -->
+
+    <section class="section" id="orbes">
+
+        <div class="section-heading">
+            <span class="section-number">05 / LOS ORBES</span>
+            <h2>¿Qué es el <span>orbe de un aspecto?</span></h2>
+            <p>
+                El orbe es la diferencia angular entre la posición exacta
+                de un aspecto y el ángulo real entre dos planetas.
+            </p>
+        </div>
+
+        <div class="orbs-grid">
+
+            <article class="orbs-card">
+                <span>◎</span>
+                <h3>Aspecto exacto</h3>
+                <p>
+                    Si dos planetas están separados por exactamente
+                    120 grados, el trígono tiene un orbe de 0°.
+                    El ángulo coincide con el valor exacto del aspecto.
+                </p>
+            </article>
+
+            <article class="orbs-card">
+                <span>◉</span>
+                <h3>Orbe pequeño</h3>
+                <p>
+                    Si un trígono mide 117°, su diferencia respecto
+                    de 120° es de <strong>3°</strong>. En muchos métodos
+                    astrológicos, se considera una relación relativamente
+                    cercana.
+                </p>
+            </article>
+
+            <article class="orbs-card">
+                <span>○</span>
+                <h3>Orbe amplio</h3>
+                <p>
+                    Cuanto mayor sea la diferencia respecto del ángulo
+                    exacto, más importante es revisar el criterio
+                    utilizado para decidir si el aspecto se considera
+                    válido.
+                </p>
+            </article>
+
+        </div>
+
+        <div class="highlight-box">
+            <span>✦</span>
+            <p>
+                <strong>No existe un único sistema universal de orbes.</strong>
+                Los límites varían según la tradición, el planeta,
+                el aspecto y el programa astrológico. Algunos métodos
+                admiten orbes más amplios para el Sol y la Luna;
+                otros utilizan criterios más estrictos.
+            </p>
+        </div>
+
+        <div class="section-heading" style="margin-top: 55px; margin-bottom: 25px;">
+            <h2 style="font-size: 1.8rem;">Calcula un orbe</h2>
+            <p>
+                Introduce el ángulo exacto del aspecto y el ángulo real
+                entre los dos puntos.
+            </p>
+        </div>
+
+        <div class="practice-box">
+
+            <label for="anguloAspecto">Ángulo exacto del aspecto</label>
+
+            <select id="anguloAspecto"
+                style="width:100%;padding:13px;background:#10050a;color:#f9edef;border:1px solid #762037;border-radius:8px;">
+
+                <option value="0">Conjunción — 0°</option>
+                <option value="60">Sextil — 60°</option>
+                <option value="90">Cuadratura — 90°</option>
+                <option value="120" selected>Trígono — 120°</option>
+                <option value="180">Oposición — 180°</option>
+
+            </select>
+
+            <label for="anguloReal">Ángulo real entre los planetas</label>
+
+            <input id="anguloReal"
+                type="number"
+                min="0"
+                max="180"
+                step="0.1"
+                value="117"
+                placeholder="Ejemplo: 117"
+                style="width:100%;padding:13px;background:#10050a;color:#f9edef;border:1px solid #762037;border-radius:8px;">
+
+            <button class="button" type="button" onclick="calcularOrbe()">
+                Calcular diferencia
+            </button>
+
+            <p id="resultadoOrbe" aria-live="polite" style="margin-top:18px;color:#ffb0bd;"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- PATRONES PLANETARIOS -->
+
+    <section class="section section-dark" id="patrones">
+
+        <div class="section-heading">
+            <span class="section-number">06 / PATRONES ENTRE PLANETAS</span>
+            <h2>Cuando varios aspectos <span>forman una estructura</span></h2>
+            <p>
+                A veces, los aspectos se conectan y crean configuraciones
+                que se estudian como una unidad.
+            </p>
+        </div>
+
+        <div class="pattern-grid">
+
+            <article class="pattern-card">
+                <h3>Gran trígono</h3>
+                <p>
+                    Configuración tradicional formada por tres puntos
+                    conectados mediante trígonos, habitualmente asociados
+                    con una figura triangular.
+                </p>
+                <ul>
+                    <li>Se relaciona con facilidad de circulación entre funciones.</li>
+                    <li>Puede simbolizar recursos que se apoyan mutuamente.</li>
+                    <li>Conviene preguntar cómo se ponen esos recursos en práctica.</li>
+                </ul>
+            </article>
+
+            <article class="pattern-card">
+                <h3>T cuadrada</h3>
+                <p>
+                    Configuración que combina una oposición y dos
+                    cuadraturas que conectan con un tercer punto.
+                </p>
+                <ul>
+                    <li>Permite estudiar una tensión compartida por tres funciones.</li>
+                    <li>El punto que recibe las dos cuadraturas suele analizarse con atención.</li>
+                    <li>La interpretación depende de los planetas, signos y casas implicados.</li>
+                </ul>
+            </article>
+
+            <article class="pattern-card">
+                <h3>Gran cruz</h3>
+                <p>
+                    Configuración de cuatro puntos conectados mediante
+                    oposiciones y cuadraturas.
+                </p>
+                <ul>
+                    <li>Relaciona varios polos de una carta.</li>
+                    <li>Invita a observar tensiones entre diferentes áreas.</li>
+                    <li>No implica por sí misma un destino negativo.</li>
+                </ul>
+            </article>
+
+            <article class="pattern-card">
+                <h3>Yod</h3>
+                <p>
+                    Configuración tradicional con dos sextiles que
+                    conectan con un mismo punto mediante dos quincuncios.
+                    El quincuncio corresponde aproximadamente a 150°.
+                </p>
+                <ul>
+                    <li>Su interpretación varía entre escuelas astrológicas.</li>
+                    <li>Se estudia la relación entre los tres puntos.</li>
+                    <li>Conviene confirmar los ángulos y orbes antes de identificarla.</li>
+                </ul>
+            </article>
+
+        </div>
+
+        <div class="highlight-box">
+            <span>✦</span>
+            <p>
+                Para reconocer un patrón no alcanza con encontrar varios
+                aspectos sueltos: hay que verificar que los puntos formen
+                la configuración angular correspondiente y considerar
+                los orbes utilizados.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- INTEGRACIÓN -->
+
+    <section class="section" id="integracion">
+
+        <div class="section-heading">
+            <span class="section-number">07 / INTEGRACIÓN</span>
+            <h2>Cómo unir todos los elementos <span>de la carta natal</span></h2>
+            <p>
+                El objetivo no es enumerar posiciones, sino comprender
+                las relaciones entre los símbolos.
+            </p>
+        </div>
+
+        <div class="steps-grid">
+
+            <article class="step-card">
+                <span class="step-number">PASO 01</span>
+                <span class="step-symbol">☉</span>
+                <h3>Identifica los planetas</h3>
+                <p>
+                    Reconoce qué funciones representan los planetas
+                    implicados: identidad, emociones, comunicación,
+                    deseo, vínculos, expansión o límites.
+                </p>
+            </article>
+
+            <article class="step-card">
+                <span class="step-number">PASO 02</span>
+                <span class="step-symbol">♈</span>
+                <h3>Incorpora los signos</h3>
+                <p>
+                    Observa cómo se expresa cada función según su signo.
+                    Considera sus elementos, modalidades y características
+                    simbólicas sin reducirlos a estereotipos.
+                </p>
+            </article>
+
+            <article class="step-card">
+                <span class="step-number">PASO 03</span>
+                <span class="step-symbol">⌂</span>
+                <h3>Ubica las casas</h3>
+                <p>
+                    Identifica las áreas de experiencia asociadas
+                    con cada planeta y observa si el aspecto conecta
+                    dos ámbitos diferentes de la vida.
+                </p>
+            </article>
+
+            <article class="step-card">
+                <span class="step-number">PASO 04</span>
+                <span class="step-symbol">☌</span>
+                <h3>Analiza los aspectos</h3>
+                <p>
+                    Comprueba el ángulo, el orbe y la relación entre
+                    los planetas. Distingue entre conexiones más fluidas
+                    y relaciones tradicionalmente desafiantes.
+                </p>
+            </article>
+
+            <article class="step-card">
+                <span class="step-number">PASO 05</span>
+                <span class="step-symbol">✧</span>
+                <h3>Busca repeticiones</h3>
+                <p>
+                    Si varios factores apuntan a temas similares,
+                    considera esa repetición como parte del hilo
+                    conductor de la lectura.
+                </p>
+            </article>
+
+            <article class="step-card">
+                <span class="step-number">PASO 06</span>
+                <span class="step-symbol">☾</span>
+                <h3>Redacta una síntesis</h3>
+                <p>
+                    Integra los símbolos en una interpretación abierta,
+                    coherente y equilibrada. Incluye matices, recursos
+                    y posibles desafíos sin presentar certezas absolutas.
+                </p>
+            </article>
+
+        </div>
+
+        <div class="formula">
+            <p class="formula-equation">
+                <strong>Planetas</strong> +
+                <strong>Signos</strong> +
+                <strong>Casas</strong> +
+                <strong>Aspectos</strong> =
+                <strong>Síntesis de la carta</strong>
+            </p>
+            <p>
+                Una interpretación integrada busca conexiones y patrones,
+                no una lista de significados independientes.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- EJEMPLO INTEGRADO -->
+
+    <section class="section section-dark" id="ejemplo-integrado">
+
+        <div class="section-heading">
+            <span class="section-number">08 / EJEMPLO INTEGRADO</span>
+            <h2>De dos planetas a una <span>interpretación completa</span></h2>
+            <p>
+                Observemos un ejemplo hipotético para practicar
+                la relación entre planeta, signo, casa y aspecto.
+            </p>
+        </div>
+
+        <div class="aspect-grid">
+
+            <article class="aspect-card wide-card">
+
+                <div class="aspect-top">
+                    <span class="aspect-symbol">☉</span>
+                    <div>
+                        <span class="aspect-category">EJEMPLO HIPOTÉTICO</span>
+                        <h3>Sol en Aries en Casa 10 en cuadratura con Saturno</h3>
+                    </div>
+                </div>
+
+                <h4>1. El Sol</h4>
+                <p>
+                    Simboliza la identidad, la vitalidad y el deseo
+                    de desarrollar una dirección propia.
+                </p>
+
+                <h4>2. Aries y Casa 10</h4>
+                <p>
+                    Aries aporta un estilo asociado con la iniciativa,
+                    mientras la Casa 10 se relaciona con las metas,
+                    las responsabilidades públicas y la vocación.
+                </p>
+
+                <h4>3. La cuadratura con Saturno</h4>
+                <p>
+                    Saturno introduce temas simbólicos de estructura,
+                    límites y responsabilidad. La cuadratura invita
+                    a explorar posibles tensiones entre actuar con
+                    rapidez y construir objetivos de forma sostenida.
+                </p>
+
+                <h4>4. La síntesis</h4>
+                <p>
+                    Una lectura posible sería explorar cómo una persona
+                    combina iniciativa y ambición con paciencia,
+                    planificación y manejo de responsabilidades.
+                    No significa que vaya a fracasar ni que tenga
+                    necesariamente problemas con la autoridad.
+                </p>
+
+                <div class="highlight-box">
+                    <span>✦</span>
+                    <p>
+                        Esta síntesis es un ejemplo educativo. Una lectura
+                        real debe considerar la posición completa de Saturno,
+                        sus aspectos, los regentes y el resto de la carta.
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRÁCTICA -->
+
+    <section class="section" id="practica">
+
+        <div class="section-heading">
+            <span class="section-number">09 / PRÁCTICA</span>
+            <h2>Entrena tu mirada <span>astrológica</span></h2>
+            <p>
+                Responde las preguntas y guarda tus ejercicios
+                para continuar estudiando.
+            </p>
+        </div>
+
+        <div class="practice-box">
+
+            <div class="exercise">
+                <h3>Ejercicio 1 · Reconocer los aspectos</h3>
+                <p>
+                    Explica la diferencia simbólica entre conjunción,
+                    oposición y cuadratura.
+                </p>
+                <label for="respuesta1">Tu respuesta</label>
+                <textarea id="respuesta1" placeholder="Describe el ángulo y el significado tradicional de cada uno..."></textarea>
+            </div>
+
+            <div class="exercise">
+                <h3>Ejercicio 2 · Calcular un orbe</h3>
+                <p>
+                    Un trígono tiene un ángulo real de 116°.
+                    ¿Cuál es su orbe respecto de 120°?
+                </p>
+                <label for="respuesta2">Tu cálculo</label>
+                <textarea id="respuesta2" placeholder="Escribe la operación y el resultado..."></textarea>
+            </div>
+
+            <div class="exercise">
+                <h3>Ejercicio 3 · Aspectos armónicos y desafiantes</h3>
+                <p>
+                    ¿Por qué un trígono no garantiza resultados positivos
+                    y una cuadratura no implica necesariamente algo negativo?
+                </p>
+                <label for="respuesta3">Tu explicación</label>
+                <textarea id="respuesta3" placeholder="Reflexiona sobre el contexto y la interpretación..."></textarea>
+            </div>
+
+            <div class="exercise">
+                <h3>Ejercicio 4 · Interpretación integrada</h3>
+                <p>
+                    Interpreta de forma simbólica una cuadratura entre
+                    Marte y Saturno. ¿Qué representa cada planeta y
+                    qué tipo de relación sugiere el aspecto?
+                </p>
+                <label for="respuesta4">Tu interpretación</label>
+                <textarea id="respuesta4" placeholder="Integra los dos planetas y el aspecto..."></textarea>
+            </div>
+
+            <div class="exercise">
+                <h3>Ejercicio 5 · Patrones planetarios</h3>
+                <p>
+                    ¿Qué diferencia hay entre encontrar una cuadratura
+                    aislada y reconocer una T cuadrada?
+                </p>
+                <label for="respuesta5">Tu respuesta</label>
+                <textarea id="respuesta5" placeholder="Explica cómo se relacionan los aspectos en una configuración..."></textarea>
+            </div>
+
+            <button class="button" type="button" onclick="descargarRespuestas()">
+                Descargar mis respuestas
+            </button>
+
+            <p id="mensaje" aria-live="polite"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CIERRE -->
+
+    <section class="final-section">
+
+        <div class="final-orbit">☾</div>
+
+        <span class="eyebrow">EL ARTE DE INTEGRAR</span>
+
+        <h2>
+            Una carta es más que sus posiciones.<br>
+            <span>Es la relación entre sus símbolos.</span>
+        </h2>
+
         <p>
-            Una buena lectura organiza la información, explica las
-            conexiones y reconoce los matices. Aprender astrología
-            requiere práctica, comparación de símbolos y pensamiento crítico.
+            Ahora conoces los principales aspectos, la función de los
+            orbes y algunas configuraciones planetarias. El próximo paso
+            es aplicar este método a cartas completas, relacionando
+            planetas, signos, casas y aspectos sin perder de vista
+            el conjunto.
         </p>
-    </section>
 
-    <section class="siguiente-leccion">
-        <p class="etiqueta">FIN DE ESTA ETAPA</p>
-        <h2>Ya conocés los fundamentos</h2>
-        <p>Volvé a las lecciones anteriores para repasar o profundizar los conceptos.</p>
-        <a href="index.html" class="boton-principal">← INDEX</a>
-        <br><br>
-        <a href="index2.html" class="boton-principal">INDEX 2</a>
-        <br><br>
-        <a href="index3.html" class="boton-principal">INDEX 3</a>
-    </section>
+        <div class="next-links">
 
-    <footer class="footer">
-        <span class="footer-simbolo">☾</span>
-        <p>ASTRO ROJO</p>
-        <span>Astrología · Tarot · Autoconocimiento</span>
-    </footer>
+            <a href="index3.html" class="button">
+                ← Volver a las doce casas
+            </a>
+
+            <a href="index.html" class="button">
+                Volver a la introducción
+            </a>
+
+        </div>
+
+    </section>
 
 </main>
+
+
+<!-- PIE DE PÁGINA -->
+
+<footer class="footer">
+
+    <a href="#inicio" class="footer-brand">
+        <span class="brand-symbol">☾</span>
+        <span>ASTRO <strong>ROJO</strong></span>
+    </a>
+
+    <p>Un espacio de aprendizaje, simbolismo y autoconocimiento.</p>
+
+    <span class="footer-copy">ASTRO ROJO © 2026</span>
+
+</footer>
+
+
+<script>
+    function calcularOrbe() {
+        const anguloExacto = Number(
+            document.getElementById("anguloAspecto").value
+        );
+
+        const entrada = document.getElementById("anguloReal").value;
+        const resultado = document.getElementById("resultadoOrbe");
+
+        if (entrada.trim() === "") {
+            resultado.textContent = "Introduce el ángulo real entre los planetas.";
+            return;
+        }
+
+        const anguloReal = Number(entrada);
+
+        if (
+            !Number.isFinite(anguloReal) ||
+            anguloReal < 0 ||
+            anguloReal > 180
+        ) {
+            resultado.textContent =
+                "Introduce un ángulo válido entre 0° y 180°.";
+            return;
+        }
+
+        const orbe = Math.abs(anguloExacto - anguloReal);
+
+        resultado.textContent =
+            "El orbe es de " +
+            orbe.toLocaleString("es-AR", {
+                maximumFractionDigits: 2
+            }) +
+            "°.";
+
+    }
+
+    function descargarRespuestas() {
+        const preguntas = [
+            ["Ejercicio 1 — Reconocer los aspectos", "respuesta1"],
+            ["Ejercicio 2 — Calcular un orbe", "respuesta2"],
+            ["Ejercicio 3 — Aspectos armónicos y desafiantes", "respuesta3"],
+            ["Ejercicio 4 — Interpretación integrada", "respuesta4"],
+            ["Ejercicio 5 — Patrones planetarios", "respuesta5"]
+        ];
+
+        const contenido = [
+            "ASTRO ROJO — Aspectos planetarios",
+            "",
+            ...preguntas.flatMap(([titulo, id]) => [
+                titulo,
+                document.getElementById(id).value,
+                ""
+            ])
+        ].join("\n");
+
+        const archivo = new Blob(
+            [contenido],
+            { type: "text/plain;charset=utf-8" }
+        );
+
+        const url = URL.createObjectURL(archivo);
+        const enlace = document.createElement("a");
+
+        enlace.href = url;
+        enlace.download = "astro-rojo-practica-aspectos.txt";
+
+        document.body.appendChild(enlace);
+        enlace.click();
+        enlace.remove();
+
+        URL.revokeObjectURL(url);
+
+        document.getElementById("mensaje").textContent =
+            "Se inició la descarga de tus respuestas.";
+    }
+</script>
+
 </body>
 </html>
 
