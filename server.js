@@ -185,30 +185,43 @@ auto_return: "approved"
 
 });
 
+
 app.get("/api/pago-aprobado", async (req, res) => {
-try {
-const paymentId =
-req.query.payment_id || req.query.collection_id;
+    try {
+        const paymentId =
+            req.query.payment_id ||
+            req.query.collection_id;
 
-    const usuarioId = obtenerUsuario(req);
+        if (!paymentId) {
+            return res.redirect(`${INICIO_URL}?pago=pendiente`);
+        }
 
-    if (!paymentId || !usuarioId) {
-        return res.redirect(INICIO_URL);
+        // Mercado Pago confirma el pago y devuelve
+        // el usuario asociado a ese pago.
+        const resultado = await verificarPago(String(paymentId));
+
+        if (!resultado || typeof resultado !== "string") {
+            return res.redirect(`${INICIO_URL}?pago=pendiente`);
+        }
+
+        // Recuperamos la identidad aunque la cookie
+        // no haya llegado en la vuelta de Mercado Pago.
+        res.setHeader(
+            "Set-Cookie",
+            `${COOKIE_NAME}=${encodeURIComponent(resultado)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=31536000`
+        );
+
+        // El acceso se comprueba en PostgreSQL
+        // al intentar entrar al curso.
+        return res.redirect(CURSO_URL);
+
+    } catch (error) {
+        console.error("Error al confirmar pago:", error);
+
+        return res.redirect(`${INICIO_URL}?pago=pendiente`);
     }
-
-    const resultado = await verificarPago(String(paymentId));
-
-    if (resultado !== usuarioId) {
-        return res.redirect(INICIO_URL);
-    }
-
-    res.redirect(CURSO_URL);
-} catch (error) {
-    console.error("Error al confirmar pago:", error);
-    res.redirect(`${INICIO_URL}?pago=pendiente`);
-}
-
 });
+
 
 app.post("/api/mp-webhook", async (req, res) => {
 res.sendStatus(200);
