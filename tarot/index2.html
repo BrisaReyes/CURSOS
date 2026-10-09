@@ -5,58 +5,225 @@ HTML
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#10070b">
-<meta name="description" content="ASTRO ROJO — Curso de Tarot: Arcanos Menores, cartas invertidas y métodos de lectura.">
+<meta name="description" content="ASTRO ROJO — Curso de Tarot: Arcanos Menores, cuatro palos, cartas invertidas y métodos de lectura.">
 <title>ASTRO ROJO — Arcanos Menores</title>
 
 <style>
 :root {
   --bg: #0b080a;
-  --panel: #171116;
+  --panel: #151014;
+  --panel2: #1b1217;
   --red: #e51b3e;
   --red2: #ff526d;
   --cream: #f4edf0;
   --muted: #b8a9b0;
   --line: rgba(255,255,255,.11);
+  --gold: #d6b47b;
+  --radius: 22px;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
   margin: 0;
-  background: radial-gradient(ellipse at 80% 0%, #32101a 0, transparent 35%), var(--bg);
+  background:
+    radial-gradient(ellipse at 80% 0%, #32101a 0, transparent 35%),
+    var(--bg);
   color: var(--cream);
   font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   line-height: 1.65;
 }
 
-button, input { font: inherit; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+  font: inherit;
+}
 
 .wrap {
-  width: min(1160px, calc(100% - 30px));
+  width: min(1160px, calc(100% - 34px));
   margin: auto;
 }
 
-section { padding: 55px 0; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(11,8,10,.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  font-weight: 900;
+  letter-spacing: .17em;
+  font-size: .88rem;
+}
+
+.brand span {
+  color: var(--red2);
+}
+
+.navlinks {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  font-size: .83rem;
+  color: var(--muted);
+}
+
+.navlinks a:hover {
+  color: white;
+}
+
+.navlinks .next {
+  color: white;
+  background: var(--red);
+  padding: 9px 13px;
+  border-radius: 999px;
+}
+
+.hero {
+  padding: 76px 0 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero:after {
+  content: "☾";
+  position: absolute;
+  right: 5%;
+  top: 4px;
+  font-size: clamp(150px,25vw,310px);
+  line-height: 1;
+  color: rgba(229,27,62,.10);
+  pointer-events: none;
+}
+
+.eyebrow {
+  color: var(--red2);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem,8vw,6.5rem);
+  line-height: .94;
+  letter-spacing: -.065em;
+  max-width: 850px;
+  margin: 18px 0;
+}
+
+.hero h1 span {
+  display: block;
+  color: var(--red2);
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -.045em;
+}
+
+.hero p {
+  max-width: 680px;
+  color: #d0c1c7;
+  font-size: 1.08rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.btn {
+  border: 1px solid var(--line);
+  background: #20151b;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn.primary {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--red2);
+}
+
+.course-strip {
+  border-block: 1px solid var(--line);
+  background: rgba(255,255,255,.025);
+}
+
+.strip-inner {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+}
+
+.strip-item {
+  padding: 19px 20px;
+  border-right: 1px solid var(--line);
+}
+
+.strip-item:last-child {
+  border: 0;
+}
+
+.strip-item strong {
+  display: block;
+  font-size: 1.05rem;
+}
+
+.strip-item small {
+  color: var(--muted);
+}
+
+section {
+  padding: 70px 0;
+}
 
 .section-head {
   display: flex;
   justify-content: space-between;
-  align-items: end;
   gap: 25px;
-  margin-bottom: 25px;
+  align-items: end;
+  margin-bottom: 28px;
 }
 
 .section-head h2 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.04;
+  font-size: clamp(2rem,5vw,3.5rem);
+  line-height: 1.02;
   letter-spacing: -.045em;
-  margin: 8px 0;
-  font-style: normal;
-  font-family: inherit;
+  margin: 8px 0 0;
 }
 
 .section-head p {
@@ -65,25 +232,79 @@ section { padding: 55px 0; }
   margin: 0;
 }
 
-.eyebrow {
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 20px;
+}
+
+.feature {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg,#21131a,#110d10);
+}
+
+.feature h3 {
+  font-size: 1.35rem;
+  margin: 0 0 10px;
+}
+
+.feature p {
+  color: #cbbdc3;
+  margin: 0;
+}
+
+.feature-mark {
+  font-family: Georgia,serif;
+  font-size: 4rem;
   color: var(--red2);
-  text-transform: uppercase;
-  letter-spacing: .2em;
+  line-height: 1;
+  margin-bottom: 15px;
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 14px;
+}
+
+.topic {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  min-height: 160px;
+}
+
+.topic .num {
+  color: var(--red2);
   font-size: .72rem;
+  letter-spacing: .15em;
   font-weight: 800;
+}
+
+.topic h3 {
+  margin: 10px 0 6px;
+}
+
+.topic p {
+  color: var(--muted);
+  font-size: .91rem;
+  margin: 0;
 }
 
 .toolbar {
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
+  flex-wrap: wrap;
   margin: 20px 0 24px;
 }
 
 .search {
   flex: 1;
   min-width: 220px;
-  background: var(--panel);
+  background: #171116;
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 13px 17px;
@@ -91,7 +312,9 @@ section { padding: 55px 0; }
   outline: none;
 }
 
-.search:focus { border-color: var(--red2); }
+.search:focus {
+  border-color: var(--red2);
+}
 
 .filters {
   display: flex;
@@ -99,32 +322,27 @@ section { padding: 55px 0; }
   flex-wrap: wrap;
 }
 
-.filter, .btn {
+.filter {
   border: 1px solid var(--line);
-  color: #e9dfe3;
-  background: var(--panel);
+  color: #d5c8ce;
+  background: #171116;
   padding: 10px 14px;
   border-radius: 999px;
   cursor: pointer;
-  transition: .2s;
 }
 
-.filter.active, .filter:hover, .btn.primary {
+.filter.active,
+.filter:hover {
   background: var(--red);
   border-color: var(--red);
   color: white;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  border-color: var(--red2);
-}
-
 .suit-intro {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin: 35px 0 15px;
+  gap: 16px;
+  margin: 38px 0 16px;
   padding-bottom: 13px;
   border-bottom: 1px solid var(--line);
 }
@@ -132,7 +350,6 @@ section { padding: 55px 0; }
 .suit-symbol {
   width: 47px;
   height: 47px;
-  flex-shrink: 0;
   display: grid;
   place-items: center;
   border: 1px solid rgba(229,27,62,.5);
@@ -155,31 +372,31 @@ section { padding: 55px 0; }
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(7,minmax(0,1fr));
   gap: 12px;
 }
 
 .tarot-card {
   cursor: pointer;
   text-align: left;
-  background: linear-gradient(160deg, #1b1217, #100c0f);
+  background: linear-gradient(160deg,#1b1217,#100c0f);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 9px;
   color: white;
+  transition: transform .2s,border-color .2s;
   min-width: 0;
-  transition: transform .2s, border-color .2s;
 }
 
 .tarot-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: var(--red2);
 }
 
 .tarot-card img {
   display: block;
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 2/3;
   object-fit: cover;
   border-radius: 8px;
   background: #29151d;
@@ -187,28 +404,16 @@ section { padding: 55px 0; }
 
 .tarot-card strong {
   display: block;
-  font-size: .82rem;
-  line-height: 1.3;
+  font-size: .8rem;
+  line-height: 1.25;
   margin: 9px 2px 3px;
 }
 
 .tarot-card small {
   display: block;
   color: var(--muted);
-  font-size: .72rem;
+  font-size: .7rem;
   margin: 0 2px 3px;
-}
-
-.img-fallback {
-  aspect-ratio: 2 / 3;
-  border-radius: 8px;
-  background: linear-gradient(145deg, #3a111c, #10090d);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--red2);
-  font-family: Georgia, serif;
-  font-size: 2rem;
 }
 
 .more-row {
@@ -217,17 +422,21 @@ section { padding: 55px 0; }
   margin: 18px 0 6px;
 }
 
-.show-more { padding: 10px 18px; }
+.show-more {
+  font-size: .9rem;
+  padding: 10px 18px;
+}
 
-.note {
-  font-size: .82rem;
+.empty {
+  display: none;
   color: var(--muted);
-  margin-top: 15px;
+  padding: 25px;
+  text-align: center;
 }
 
 .info-band {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3,1fr);
   gap: 14px;
 }
 
@@ -235,17 +444,27 @@ section { padding: 55px 0; }
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 23px;
-  background: linear-gradient(145deg, #1c1217, #100c0e);
+  background: linear-gradient(145deg,#1c1217,#100c0e);
 }
 
-.info-card h3 { margin: 0 0 8px; }
-.info-card p { color: var(--muted); margin: 0; }
-.symbol { color: var(--red2); font-size: 1.6rem; }
+.info-card h3 {
+  margin: 0 0 8px;
+}
+
+.info-card p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.symbol {
+  color: var(--red2);
+  font-size: 1.6rem;
+}
 
 .steps {
   counter-reset: step;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4,1fr);
   gap: 12px;
 }
 
@@ -257,7 +476,7 @@ section { padding: 55px 0; }
   background: var(--panel);
 }
 
-.step::before {
+.step:before {
   content: "0" counter(step);
   display: block;
   color: var(--red2);
@@ -266,54 +485,43 @@ section { padding: 55px 0; }
   margin-bottom: 12px;
 }
 
-.step h3 { font-size: 1rem; margin: 0 0 7px; }
-.step p { color: var(--muted); font-size: .9rem; margin: 0; }
-
-.topic-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
+.step h3 {
+  font-size: 1rem;
+  margin: 0 0 7px;
 }
 
-.topic {
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 17px;
-  background: var(--panel);
+.step p {
+  color: var(--muted);
+  font-size: .9rem;
+  margin: 0;
 }
-
-.topic .num {
-  color: var(--red2);
-  font-size: .72rem;
-  letter-spacing: .15em;
-  font-weight: 800;
-}
-
-.topic h3 { margin: 8px 0 5px; font-size: 1rem; }
-.topic p { color: var(--muted); font-size: .88rem; margin: 0; }
 
 .ethics {
   border: 1px solid rgba(229,27,62,.35);
-  background: linear-gradient(120deg, rgba(229,27,62,.12), rgba(255,255,255,.02));
-  border-radius: 22px;
-  padding: clamp(23px, 5vw, 44px);
+  background: linear-gradient(120deg,rgba(229,27,62,.12),rgba(255,255,255,.02));
+  border-radius: var(--radius);
+  padding: clamp(23px,5vw,44px);
 }
 
 .ethics h2 {
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.8rem,4vw,3rem);
   margin: 8px 0;
 }
 
-.ethics p { color: #d1c3c9; max-width: 820px; }
+.ethics p {
+  color: #d1c3c9;
+  max-width: 820px;
+}
 
 .final-section {
   text-align: center;
-  padding: 60px 0 75px;
+  padding: 65px 0 80px;
 }
 
 .final-section h2 {
-  font-family: Georgia, serif;
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-family: Georgia,serif;
+  font-style: italic;
+  font-size: clamp(2rem,6vw,4.3rem);
   font-weight: 500;
   margin: 12px auto;
 }
@@ -345,12 +553,14 @@ section { padding: 55px 0; }
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,.84);
+  background: rgba(0,0,0,.82);
   padding: 18px;
   backdrop-filter: blur(8px);
 }
 
-.modal.open { display: flex; }
+.modal.open {
+  display: flex;
+}
 
 .modal-box {
   position: relative;
@@ -366,8 +576,8 @@ section { padding: 55px 0; }
 
 .modal-close {
   position: absolute;
-  right: 13px;
-  top: 11px;
+  right: 15px;
+  top: 12px;
   border: 1px solid var(--line);
   border-radius: 50%;
   width: 38px;
@@ -380,7 +590,7 @@ section { padding: 55px 0; }
 
 .modal-content {
   display: grid;
-  grid-template-columns: minmax(150px, .7fr) 1.3fr;
+  grid-template-columns: minmax(150px,.7fr) 1.3fr;
   gap: 25px;
   padding-top: 15px;
 }
@@ -399,8 +609,15 @@ section { padding: 55px 0; }
   margin: 8px 0;
 }
 
-.modal-content p { color: #d2c4ca; }
-.modal-content h3 { margin-bottom: 3px; color: var(--red2); font-size: 1rem; }
+.modal-content p {
+  color: #d2c4ca;
+}
+
+.modal-content h3 {
+  margin-bottom: 3px;
+  color: var(--red2);
+  font-size: 1rem;
+}
 
 .pill {
   display: inline-block;
@@ -411,491 +628,62 @@ section { padding: 55px 0; }
   font-size: .78rem;
 }
 
-@media(max-width: 900px) {
-  .cards-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .topic-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.note {
+  font-size: .82rem;
+  color: var(--muted);
+  margin-top: 10px;
 }
 
-@media(max-width: 600px) {
-  section { padding: 43px 0; }
-  .wrap { width: calc(100% - 24px); }
+.hidden {
+  display: none !important;
+}
+
+@media(max-width:900px) {
+  .cards-grid { grid-template-columns: repeat(5,minmax(0,1fr)); }
+  .topic-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .steps { grid-template-columns: repeat(2,1fr); }
+  .navlinks { gap: 10px; }
+  .navlinks a:not(.next) { display: none; }
+}
+
+@media(max-width:600px) {
+  .wrap { width: min(100% - 24px,1160px); }
+  .hero { padding: 53px 0 39px; }
+  .strip-inner { grid-template-columns: repeat(2,1fr); }
+  .strip-item:nth-child(2) { border-right: 0; }
+  .strip-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  section { padding: 48px 0; }
   .section-head { display: block; }
   .section-head p { margin-top: 12px; }
-  .cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .intro-grid,.info-band { grid-template-columns: 1fr; }
+  .cards-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; }
   .tarot-card { padding: 6px; }
   .tarot-card strong { font-size: .74rem; }
-  .tarot-card small { font-size: .67rem; }
-  .info-band { grid-template-columns: 1fr; }
-  .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .suit-intro { margin-top: 28px; }
+  .modal-content { grid-template-columns: 1fr; }
+  .modal-content img {
+    max-height: 320px;
+    width: auto;
+    max-width: 100%;
+    margin: auto;
+  }
+  .modal-box { padding: 17px; }
   .steps { gap: 9px; }
   .step { padding: 15px; }
-  .modal-content { grid-template-columns: 1fr; }
-  .modal-content img { max-height: 320px; width: auto; max-width: 100%; margin: auto; }
-  .modal-box { padding: 17px; }
-  .suit-intro { margin-top: 29px; }
+  .hero:after { right: -12%; top: 20px; }
+}
+
+.tarot-image.image-missing {
+  object-fit: contain;
+  background: #180d12;
+  padding: 12px;
+  color: #ff526d;
+  font-size: 12px;
+}
+
+#cartas .section-head h2 {
+  font-style: normal !important;
+  font-family: inherit !important;
 }
 </style>
 </head>
-
-<body>
-<main>
-
-<section id="cartas">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">BIBLIOTECA VISUAL · ARCANOS MENORES</div>
-        <h2>Explorá las 56 cartas<br>y aprendé a interpretar.</h2>
-      </div>
-      <p>Mostrá las cartas de cada palo de a seis. Tocá una imagen para estudiar su significado, su lectura invertida y sus símbolos.</p>
-    </div>
-
-    <div class="toolbar">
-      <input id="searchCards" class="search" type="search" placeholder="Buscar carta, palo o palabra clave…" aria-label="Buscar cartas">
-      <div class="filters" id="filters">
-        <button class="filter active" data-filter="Todos">Todos</button>
-        <button class="filter" data-filter="Bastos">Bastos</button>
-        <button class="filter" data-filter="Copas">Copas</button>
-        <button class="filter" data-filter="Espadas">Espadas</button>
-        <button class="filter" data-filter="Oros">Oros</button>
-      </div>
-    </div>
-
-    <div id="cardLibrary"></div>
-    <p class="note">Tocá cualquier carta para abrir su interpretación. Las imágenes se buscan en la carpeta <code>cursos/images/</code>. Si alguna no aparece, revisá el nombre y la extensión exacta.</p>
-  </div>
-</section>
-
-<section id="invertidas">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">04 · Cartas invertidas</div>
-        <h2>Otra perspectiva,<br>no una condena.</h2>
-      </div>
-      <p>Una carta invertida puede hablar de una energía interiorizada, un bloqueo, un exceso o una oportunidad de revisar algo. Su sentido depende de la pregunta y de las cartas vecinas.</p>
-    </div>
-
-    <div class="info-band">
-      <article class="info-card">
-        <div class="symbol">↻</div>
-        <h3>Energía hacia adentro</h3>
-        <p>El tema puede estar ocurriendo en privado o todavía no expresarse de manera visible.</p>
-      </article>
-      <article class="info-card">
-        <div class="symbol">⟷</div>
-        <h3>Desequilibrio o exceso</h3>
-        <p>La cualidad de la carta puede estar sobreactuada, debilitada o fuera de contexto.</p>
-      </article>
-      <article class="info-card">
-        <div class="symbol">✧</div>
-        <h3>Revisión consciente</h3>
-        <p>Preguntá qué necesita atención y qué pequeño cambio ayudaría a recuperar el equilibrio.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="lectura">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">05 · Cómo hacer una lectura completa</div>
-        <h2>De una carta a<br>una historia coherente.</h2>
-      </div>
-      <p>Interpretar no es recitar definiciones aisladas. Es construir una lectura clara que responda la pregunta y respete los matices de cada símbolo.</p>
-    </div>
-
-    <div class="steps">
-      <article class="step"><h3>Preparación</h3><p>Buscá un momento tranquilo y definí el tema que querés explorar.</p></article>
-      <article class="step"><h3>Pregunta</h3><p>Formulá una pregunta abierta, concreta y centrada en lo que podés comprender.</p></article>
-      <article class="step"><h3>Elección de tirada</h3><p>Elegí una carta para enfocar o una tirada que aporte distintas perspectivas.</p></article>
-      <article class="step"><h3>Selección de cartas</h3><p>Extraé las cartas y observá primero las imágenes antes de consultar significados.</p></article>
-      <article class="step"><h3>Interpretación individual</h3><p>Considerá palo, número, figura, orientación y posición dentro de la tirada.</p></article>
-      <article class="step"><h3>Combinación de cartas</h3><p>Buscá repeticiones, contrastes, elementos dominantes y cambios de ritmo.</p></article>
-      <article class="step"><h3>Síntesis final</h3><p>Uní las ideas en un mensaje claro, evitando contradicciones artificiales.</p></article>
-      <article class="step"><h3>Consejo</h3><p>Cerrá con una reflexión práctica que ayude a decidir o mirar la situación de otra manera.</p></article>
-    </div>
-  </div>
-</section>
-
-<section id="combinaciones">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">06 · Combinaciones y práctica</div>
-        <h2>Las cartas conversan<br>entre sí.</h2>
-      </div>
-      <p>Una combinación no tiene una traducción única. El sentido aparece al considerar la pregunta, la posición y la relación entre las cartas.</p>
-    </div>
-
-    <div class="info-band">
-      <article class="info-card"><div class="symbol">＋</div><h3>Repetición</h3><p>Varias cartas del mismo palo pueden destacar emociones, pensamiento, acción o mundo material.</p></article>
-      <article class="info-card"><div class="symbol">⇄</div><h3>Contraste</h3><p>Dos cartas diferentes pueden mostrar una tensión entre lo que se desea, lo que se siente y lo que se hace.</p></article>
-      <article class="info-card"><div class="symbol">◎</div><h3>Práctica diaria</h3><p>Elegí una carta, anotá una observación y al final del día revisá qué asociaciones te resultaron útiles.</p></article>
-    </div>
-  </div>
-</section>
-
-<section id="tiradas">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">07 · Tiradas de Tarot</div>
-        <h2>La Cruz Celta.</h2>
-      </div>
-      <p>Una tirada clásica de diez posiciones para explorar una situación desde distintos ángulos. Las posiciones orientan la lectura; no reemplazan tu criterio.</p>
-    </div>
-
-    <div class="topic-grid">
-      <article class="topic"><div class="num">01</div><h3>Situación actual</h3><p>El centro del asunto en este momento.</p></article>
-      <article class="topic"><div class="num">02</div><h3>Desafío</h3><p>La tensión o el factor que cruza la situación.</p></article>
-      <article class="topic"><div class="num">03</div><h3>Base</h3><p>Lo que sostiene el tema o actúa desde el fondo.</p></article>
-      <article class="topic"><div class="num">04</div><h3>Pasado reciente</h3><p>Lo que viene influyendo desde atrás.</p></article>
-      <article class="topic"><div class="num">05</div><h3>Posible evolución</h3><p>Una dirección que puede desarrollarse.</p></article>
-      <article class="topic"><div class="num">06</div><h3>Futuro cercano</h3><p>El próximo movimiento posible si todo sigue igual.</p></article>
-      <article class="topic"><div class="num">07</div><h3>Actitud personal</h3><p>Tu posición, recursos o respuesta ante el tema.</p></article>
-      <article class="topic"><div class="num">08</div><h3>Entorno</h3><p>Influencias, vínculos y circunstancias externas.</p></article>
-      <article class="topic"><div class="num">09</div><h3>Esperanzas y temores</h3><p>Expectativas, deseos y preocupaciones.</p></article>
-      <article class="topic"><div class="num">10</div><h3>Resultado</h3><p>Una síntesis posible, no un destino inalterable.</p></article>
-    </div>
-  </div>
-</section>
-
-<section id="etica">
-  <div class="wrap">
-    <div class="ethics">
-      <div class="eyebrow">08 · Ética del Tarot</div>
-      <h2>Una lectura debe abrir preguntas, no quitar libertad.</h2>
-      <p>Presentá las interpretaciones como posibilidades y herramientas de reflexión. Evitá asegurar acontecimientos inevitables, alimentar el miedo o reemplazar decisiones médicas, legales o financieras por una tirada. Respetá la intimidad de las personas y recordá que quien consulta conserva siempre su capacidad de elegir.</p>
-    </div>
-  </div>
-</section>
-
-<section class="final-section">
-  <div class="wrap">
-    <div class="eyebrow">ASTRO ROJO · ESTUDIO II</div>
-    <h2>Leer los símbolos es aprender a observar.</h2>
-    <p>Practicá con las 56 cartas, registrá tus asociaciones y volvé a las imágenes: cuanto más observes, más matices vas a descubrir.</p>
-    <a class="btn primary" href="index3.html">Continuar al siguiente módulo ↗</a>
-    <div style="margin-top:14px"><a class="btn" href="#cartas">Volver a las cartas ↑</a></div>
-  </div>
-</section>
-
-</main>
-
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <span>Curso de Tarot · Arcanos Menores</span>
-    <span>Estudio II · ASTRO ROJO</span>
-  </div>
-</footer>
-
-<div class="modal" id="cardModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-box">
-    <button class="modal-close" id="closeModal" aria-label="Cerrar">×</button>
-    <div id="modalContent"></div>
-  </div>
-</div>
-
-<script>
-const suitsMeta = {
-  Bastos: {
-    symbol: "♧",
-    element: "Fuego",
-    desc: "Iniciativa, deseo, creatividad y movimiento.",
-    theme: "la acción, el deseo y la creatividad"
-  },
-  Copas: {
-    symbol: "♡",
-    element: "Agua",
-    desc: "Emociones, vínculos, intuición y sensibilidad.",
-    theme: "las emociones, los vínculos y la intuición"
-  },
-  Espadas: {
-    symbol: "⚔",
-    element: "Aire",
-    desc: "Pensamiento, verdad, decisiones y conflictos.",
-    theme: "el pensamiento, las decisiones y los conflictos"
-  },
-  Oros: {
-    symbol: "◇",
-    element: "Tierra",
-    desc: "Recursos, trabajo, cuerpo y estabilidad.",
-    theme: "los recursos, el trabajo y la estabilidad"
-  }
-};
-
-const ranks = [
-  ["ace", "As", "inicio, semilla y potencial"],
-  ["two", "Dos", "elección, dualidad y equilibrio"],
-  ["three", "Tres", "crecimiento, expresión y colaboración"],
-  ["four", "Cuatro", "estructura, pausa y estabilidad"],
-  ["five", "Cinco", "tensión, desafío y aprendizaje"],
-  ["six", "Seis", "armonía, intercambio y recuperación"],
-  ["seven", "Siete", "prueba, perseverancia y estrategia"],
-  ["eight", "Ocho", "práctica, avance y dedicación"],
-  ["nine", "Nueve", "madurez, autonomía y culminación"],
-  ["ten", "Diez", "cierre de ciclo y plenitud"],
-  ["page", "Sota", "curiosidad, aprendizaje y apertura"],
-  ["knight", "Caballero", "acción, impulso y búsqueda"],
-  ["queen", "Reina", "madurez, receptividad y dominio interior"],
-  ["king", "Rey", "autoridad, dirección y responsabilidad"]
-];
-
-const suitData = [
-  ["Bastos", "wands", "Fuego"],
-  ["Copas", "cups", "Agua"],
-  ["Espadas", "swords", "Aire"],
-  ["Oros", "pentacles", "Tierra"]
-];
-
-const cards = [];
-
-suitData.forEach(([suit, suffix, element]) => {
-  ranks.forEach(([id, rank, short]) => {
-    const title = rank + " de " + suit;
-    const theme = suitsMeta[suit].theme;
-
-    cards.push({
-      id: id + "of" + suffix,
-      suit,
-      element,
-      rank,
-      title,
-      image: id + "of" + suffix + ".jpeg",
-      short,
-      meaning: `En ${suit.toLowerCase()}, esta carta habla de ${short}. Su lectura invita a observar cómo se expresa ${theme} en tu situación, sin tomar el símbolo como un destino fijo. Prestá atención a la pregunta y a la posición que ocupa la carta.`,
-      reverse: `En su aspecto invertido, puede señalar bloqueos, excesos o una energía que necesita revisión en torno a ${theme}. Preguntate qué necesita atención, qué está trabado y qué pequeño cambio ayudaría antes de actuar.`,
-      symbol: `El palo de ${suit.toLowerCase()} aporta el elemento ${element.toLowerCase()}. Observá los gestos, los objetos, los colores y el entorno de la ilustración: funcionan como pistas para matizar el significado según la pregunta y las cartas que la acompañan.`
-    });
-  });
-});
-
-const library = document.getElementById("cardLibrary");
-const search = document.getElementById("searchCards");
-let activeFilter = "Todos";
-const expandedSuits = new Set();
-
-function cardImage(path, title) {
-  return `<img
-    src="../images/${path}"
-    data-filename="${path}"
-    data-attempt="0"
-    alt="${title}"
-    loading="lazy"
-    class="tarot-image">`;
-}
-
-function attachImageFallbacks(root) {
-  root.querySelectorAll("img.tarot-image").forEach(img => {
-    img.onerror = function () {
-      const file = this.dataset.filename || "";
-      const base = file.replace(/\.(jpeg|jpg|png|webp|gif)$/i, "");
-
-      const roots = [
-        "../images/",
-        "images/",
-        "/images/",
-        "../Images/",
-        "Images/"
-      ];
-
-      const extensions = [
-        ".jpeg", ".jpg", ".png", ".webp", ".gif",
-        ".JPEG", ".JPG", ".PNG"
-      ];
-
-      const attempt = Number(this.dataset.attempt || 0);
-      const total = roots.length * extensions.length;
-
-      if (attempt < total) {
-        this.dataset.attempt = String(attempt + 1);
-        this.src =
-          roots[Math.floor(attempt / extensions.length)] +
-          base +
-          extensions[attempt % extensions.length];
-        return;
-      }
-
-      const fallback = document.createElement("div");
-      fallback.className = "img-fallback";
-      fallback.textContent = "☾";
-      fallback.setAttribute("role", "img");
-      fallback.setAttribute(
-        "aria-label",
-        "No se encontró la imagen de " + (this.alt || base)
-      );
-
-      this.replaceWith(fallback);
-    };
-  });
-}
-
-function renderCards() {
-  const query = search.value.trim().toLocaleLowerCase("es");
-  library.innerHTML = "";
-  let total = 0;
-
-  ["Bastos", "Copas", "Espadas", "Oros"].forEach(suit => {
-    if (activeFilter !== "Todos" && activeFilter !== suit) return;
-
-    const list = cards.filter(card =>
-      card.suit === suit &&
-      `${card.title} ${card.short} ${card.meaning} ${card.element}`
-        .toLocaleLowerCase("es")
-        .includes(query)
-    );
-
-    if (!list.length) return;
-
-    total += list.length;
-
-    const meta = suitsMeta[suit];
-    const expanded = expandedSuits.has(suit) || query.length > 0;
-    const visible = expanded ? list : list.slice(0, 6);
-
-    const section = document.createElement("div");
-    section.className = "suit-section";
-
-    section.innerHTML = `
-      <div class="suit-intro">
-        <div class="suit-symbol">${meta.symbol}</div>
-        <div>
-          <h3>${suit}</h3>
-          <p>${meta.element} · ${meta.desc}</p>
-        </div>
-      </div>
-
-      <div class="cards-grid">
-        ${visible.map(card => `
-          <button class="tarot-card"
-            data-card="${card.id}"
-            aria-label="Ver ${card.title}">
-            ${cardImage(card.image, card.title)}
-            <strong>${card.title}</strong>
-            <small>${card.short}</small>
-          </button>
-        `).join("")}
-      </div>
-
-      ${list.length > 6 && !query ? `
-        <div class="more-row">
-          <button class="btn show-more" data-toggle-suit="${suit}">
-            ${expanded ? "Ocultar cartas −" : "Mostrar más cartas +"}
-          </button>
-        </div>
-      ` : ""}
-    `;
-
-    library.appendChild(section);
-    attachImageFallbacks(section);
-  });
-
-  const oldMessage = document.getElementById("emptyCards");
-  if (oldMessage) oldMessage.remove();
-
-  if (!total) {
-    const message = document.createElement("p");
-    message.id = "emptyCards";
-    message.className = "note";
-    message.textContent = "No encontramos cartas con esa búsqueda.";
-    library.appendChild(message);
-  }
-}
-
-function openCard(id) {
-  const card = cards.find(item => item.id === id);
-  if (!card) return;
-
-  const meta = suitsMeta[card.suit];
-
-  document.getElementById("modalContent").innerHTML = `
-    <div class="modal-content">
-      <div>
-        ${cardImage(card.image, card.title)}
-        <p class="note">${card.suit} · ${meta.element}</p>
-      </div>
-
-      <div>
-        <span class="pill">ARCANO MENOR</span>
-        <h2 id="modalTitle">${card.title}</h2>
-        <p><strong>Clave:</strong> ${card.short}.</p>
-
-        <h3>Significado orientativo</h3>
-        <p>${card.meaning}</p>
-
-        <h3>Si aparece invertida</h3>
-        <p>${card.reverse}</p>
-
-        <h3>Simbolismo para observar</h3>
-        <p>${card.symbol}</p>
-
-        <p class="note">
-          Interpretá siempre en relación con la pregunta, la posición
-          y las demás cartas de la tirada.
-        </p>
-      </div>
-    </div>
-  `;
-
-  attachImageFallbacks(document.getElementById("modalContent"));
-  document.getElementById("cardModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-library.addEventListener("click", event => {
-  const toggle = event.target.closest("[data-toggle-suit]");
-
-  if (toggle) {
-    const suit = toggle.dataset.toggleSuit;
-
-    if (expandedSuits.has(suit)) {
-      expandedSuits.delete(suit);
-    } else {
-      expandedSuits.add(suit);
-    }
-
-    renderCards();
-    return;
-  }
-
-  const button = event.target.closest("[data-card]");
-  if (button) openCard(button.dataset.card);
-});
-
-search.addEventListener("input", renderCards);
-
-document.getElementById("filters").addEventListener("click", event => {
-  const button = event.target.closest("[data-filter]");
-  if (!button) return;
-
-  activeFilter = button.dataset.filter;
-
-  document.querySelectorAll(".filter").forEach(item => {
-    item.classList.toggle("active", item === button);
-  });
-
-  renderCards();
-});
-
-function closeModal() {
-  document.getElementById("cardModal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-document.getElementById("closeModal").addEventListener("click", closeModal);
-
-document.getElementById("cardModal").addEventListener("click", event => {
-  if (event.target.id === "cardModal") closeModal();
-});
-
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closeModal();
-});
-
-renderCards();
-</script>
-</body>
-</html>
