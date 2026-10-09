@@ -1,1738 +1,1110 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="theme-color" content="#10070b">
+    <meta name="description" content="Curso de Tarot de ASTRO ROJO. Aprende los Arcanos Mayores, los símbolos y el lenguaje del Tarot.">
 
-    <title>Curso de Tarot — Astro Rojo</title>
+    <title>ASTRO ROJO — Curso de Tarot</title>
 
     <link rel="stylesheet" href="style.css">
 
     <style>
+        /* IDENTIDAD VISUAL DEL CURSO */
 
-        /* =====================================================
-           CARTAS CLICKEABLES
-        ===================================================== */
+        .etiqueta {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 8px 16px;
+            border: 1px solid rgba(190, 55, 70, .4);
+            border-radius: 30px;
+            color: #d6a0a7;
+            font-size: 11px;
+            letter-spacing: 3px;
+        }
+
+        .welcome h1 {
+            color: #f3eeee;
+        }
+
+        .welcome h1 strong {
+            color: #d94a60;
+            font-weight: 400;
+        }
+
+        .separador {
+            width: 70px;
+            height: 1px;
+            margin: 25px auto;
+            background: linear-gradient(90deg, transparent, #c23b50, transparent);
+        }
+
+        .numero-leccion {
+            display: block;
+            margin-bottom: 12px;
+            color: #c9828c;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        /* ARCANOS */
 
         .arcana-list span {
+            position: relative;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 48px;
         }
 
+        .arcana-list span .numero-arcano {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 30px;
+            height: 30px;
+            border: 1px solid rgba(190, 55, 70, .35);
+            border-radius: 50%;
+            color: #d6a0a7;
+            font-size: 11px;
+        }
 
-        /* =====================================================
-           SIMBOLOGÍA
-        ===================================================== */
+        .arcana-list span:hover .numero-arcano {
+            background: rgba(150, 0, 25, .25);
+            border-color: #c23b50;
+        }
 
-        .simbolos-grid {
+        .ayuda {
+            margin-top: 18px !important;
+            color: #c9828c !important;
+            font-size: 12px !important;
+        }
 
+        /* SIMBOLOGÍA */
+
+        .simbolos-grid,
+        .colores-grid {
             position: relative;
             z-index: 1;
-
             display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 15px;
-
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
             margin-top: 25px;
-
         }
 
-
-        .simbolo {
-
-            padding: 20px;
-
-            background:
-                rgba(15, 5, 8, 0.45);
-
-            border:
-                1px solid rgba(150, 35, 50, 0.20);
-
-            border-radius: 12px;
-
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                border-color 0.3s ease;
-
+        .simbolo-card,
+        .color-tarot {
+            padding: 24px 17px;
+            background: rgba(20, 5, 9, .55);
+            border: 1px solid rgba(150, 35, 50, .25);
+            border-radius: 14px;
+            text-align: center;
+            transition: .3s ease;
         }
 
-
-        .simbolo:hover {
-
-            transform: translateY(-3px);
-
-            background:
-                rgba(35, 7, 12, 0.75);
-
-            border-color:
-                rgba(190, 55, 70, 0.50);
-
+        .simbolo-card:hover,
+        .color-tarot:hover {
+            transform: translateY(-4px);
+            border-color: rgba(190, 55, 70, .6);
         }
 
-
-        .simbolo h3 {
-
-            color: #c9828c;
-
-            font-size: 17px;
-
-            font-weight: 400;
-
-            margin-bottom: 9px;
-
+        .simbolo-icono {
+            display: block;
+            margin-bottom: 12px;
+            color: #d6a0a7;
+            font-size: 30px;
         }
 
-
-        .simbolo p {
-
-            margin: 0;
-
-            color: #928a8e;
-
-            font-size: 13px;
-
-            line-height: 1.7;
-
-            text-align: left;
-
-        }
-
-
-        .simbolo strong {
-
+        .simbolo-card h3,
+        .color-tarot h3 {
+            margin-bottom: 10px;
             color: #eee9e4;
-
+            font-size: 16px;
+            font-weight: 400;
         }
 
+        .simbolo-card p,
+        .color-tarot p {
+            margin: 0;
+            color: #928a8e;
+            font-size: 13px;
+            line-height: 1.7;
+        }
 
-        /* =====================================================
-           VENTANA
-        ===================================================== */
+        .color-muestra {
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 15px;
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 50%;
+            box-shadow: 0 0 18px rgba(0, 0, 0, .3);
+        }
+
+        /* MODAL DE LOS ARCANOS */
 
         .modal-carta {
-
-            display: none;
-
             position: fixed;
-
             inset: 0;
-
             z-index: 9999;
-
-            background:
-                rgba(0, 0, 0, 0.92);
-
+            display: none;
             align-items: center;
-
             justify-content: center;
-
             padding: 20px;
-
-        }
-
-
-        .modal-carta.activa {
-
-            display: flex;
-
-        }
-
-
-        /* =====================================================
-           CONTENIDO
-        ===================================================== */
-
-        .contenido-carta {
-
-            position: relative;
-
-            width: 100%;
-
-            max-width: 800px;
-
-            max-height: 92vh;
-
             overflow-y: auto;
-
-            padding: 35px;
-
-            text-align: center;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    #18070b,
-                    #080507
-                );
-
-            border:
-                1px solid rgba(190, 40, 60, 0.60);
-
-            border-radius: 18px;
-
-            box-shadow:
-                0 25px 80px rgba(0, 0, 0, 0.90),
-                0 0 50px rgba(130, 0, 20, 0.30);
-
+            background: rgba(3, 2, 4, .88);
+            backdrop-filter: blur(8px);
         }
 
+        .modal-carta.activo {
+            display: flex;
+        }
 
-        /* =====================================================
-           IMAGEN
-        ===================================================== */
+        .contenido-modal {
+            position: relative;
+            width: 100%;
+            max-width: 720px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 35px;
+            background:
+                radial-gradient(circle at top, rgba(100, 0, 20, .22), transparent 55%),
+                #10090c;
+            border: 1px solid rgba(190, 55, 70, .5);
+            border-radius: 20px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, .6);
+        }
+
+        .cerrar-modal {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(190, 55, 70, .35);
+            border-radius: 50%;
+            background: rgba(30, 5, 10, .8);
+            color: #eee9e4;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cerrar-modal:hover {
+            background: #7e1025;
+        }
+
+        .modal-etiqueta {
+            margin-bottom: 12px;
+            color: #c9828c;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        .contenido-modal h2 {
+            margin: 0 30px 22px;
+            color: #f3eeee;
+            font-size: 27px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .contenido-modal h2::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 1px;
+            margin: 13px auto 0;
+            background: #a93648;
+        }
 
         .imagen-carta {
-
             display: block;
-
-            width: 300px;
-
-            max-width: 100%;
-
-            margin: 0 auto 28px;
-
-            border-radius: 8px;
-
-            box-shadow:
-                0 15px 45px rgba(0, 0, 0, 0.80);
-
+            width: 100%;
+            max-width: 220px;
+            max-height: 320px;
+            object-fit: contain;
+            margin: 0 auto 25px;
+            border: 1px solid rgba(190, 55, 70, .35);
+            border-radius: 10px;
+            background: #090609;
         }
 
-
-        /* =====================================================
-           NOMBRE
-        ===================================================== */
-
-        .contenido-carta h2 {
-
-            color: #f3eeee;
-
-            font-size: 29px;
-
-            font-weight: 400;
-
-            letter-spacing: 2px;
-
-            margin-bottom: 22px;
-
+        .imagen-carta.oculta {
+            display: none;
         }
 
-
-        /* =====================================================
-           SIGNIFICADO
-        ===================================================== */
-
-        .contenido-carta p {
-
-            color: #c0b5b8;
-
-            font-size: 16px;
-
+        .texto-carta {
+            color: #b6aaae;
+            font-size: 14px;
             line-height: 1.9;
-
-            max-width: 650px;
-
-            margin: 0 auto;
-
-            text-align: left;
-
+            white-space: pre-line;
         }
 
+        .texto-carta p {
+            margin-bottom: 15px;
+        }
 
-        /* =====================================================
-           BOTÓN CERRAR
-        ===================================================== */
+        .texto-carta strong {
+            color: #e0a2ac;
+            font-weight: 400;
+        }
 
-        .cerrar-carta {
+        .modal-pie {
+            margin-top: 25px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(150, 35, 50, .25);
+            color: #82777c;
+            font-size: 12px;
+            text-align: center;
+        }
 
-            position: absolute;
+        /* NAVEGACIÓN */
 
-            top: 10px;
+        .navegacion-curso {
+            margin-top: 15px;
+        }
 
-            right: 17px;
+        .navegacion-curso .simbolo-final {
+            display: block;
+            margin-bottom: 15px;
+            color: #c9828c;
+            font-size: 27px;
+        }
 
-            background: transparent;
-
-            border: none;
-
-            color: #d05a6b;
-
-            font-size: 36px;
-
-            line-height: 1;
-
+        .btn-siguiente {
             cursor: pointer;
-
-            z-index: 5;
-
         }
 
-
-        .cerrar-carta:hover {
-
-            color: #ffffff;
-
-        }
-
-
-        /* =====================================================
-           CELULAR
-        ===================================================== */
+        /* CELULAR */
 
         @media (max-width: 800px) {
-
-            .simbolos-grid {
-
-                grid-template-columns: 1fr;
-
+            .simbolos-grid,
+            .colores-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
-
         }
-
 
         @media (max-width: 500px) {
-
-            .contenido-carta {
-
-                padding: 30px 20px;
-
+            .simbolos-grid,
+            .colores-grid {
+                grid-template-columns: 1fr;
             }
 
+            .contenido-modal {
+                padding: 28px 19px;
+            }
+
+            .contenido-modal h2 {
+                font-size: 23px;
+            }
 
             .imagen-carta {
-
-                width: 230px;
-
+                max-width: 180px;
+                max-height: 260px;
             }
 
-
-            .contenido-carta h2 {
-
-                font-size: 23px;
-
+            .texto-carta {
+                font-size: 13px;
             }
-
-
-            .contenido-carta p {
-
-                font-size: 14px;
-
-                line-height: 1.8;
-
-            }
-
-
-            .simbolo {
-
-                padding: 18px;
-
-            }
-
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
     </style>
-
 </head>
-
 
 <body>
 
-
 <main class="container">
 
+    <!-- BIENVENIDA -->
 
-    <!-- =================================================
-         BIENVENIDA
-    ================================================== -->
-
-    <section class="welcome">
-
+    <header class="welcome">
         <div class="hero-glow"></div>
 
         <div class="moon">☾</div>
 
-        <h1>BIENVENIDO AL TAROT</h1>
+        <span class="etiqueta">FORMACIÓN · ASTRO ROJO</span>
 
-        <p>ASTRO ROJO</p>
+        <h1>TAROT <strong>ROJO</strong></h1>
+
+        <p>Curso de Tarot</p>
+
+        <div class="separador"></div>
 
         <span>
-            Curso de Tarot.
+            Descubrí el lenguaje simbólico de las cartas, explorá los
+            Arcanos Mayores y aprendé a construir interpretaciones con
+            profundidad, sensibilidad y criterio propio.
         </span>
+    </header>
 
+
+    <!-- INTRODUCCIÓN -->
+
+    <section class="lesson">
+        <span class="numero-leccion">LECCIÓN 01</span>
+
+        <h2>Introducción al Tarot</h2>
+
+        <p>
+            El Tarot es un sistema de imágenes y símbolos que permite
+            explorar experiencias humanas, emociones, decisiones,
+            conflictos y posibilidades. Cada carta representa un conjunto
+            de ideas que adquiere significado según la pregunta y el
+            contexto de una lectura.
+        </p>
+
+        <p>
+            Aprender Tarot no consiste únicamente en memorizar significados.
+            También requiere observar los detalles de las imágenes,
+            relacionar unas cartas con otras y comprender cómo cambia
+            la interpretación de acuerdo con la posición que ocupa cada una.
+        </p>
+
+        <div class="study-grid">
+
+            <article class="study-card">
+                <div class="card-icon">☾</div>
+                <h3>Intuición</h3>
+                <p>
+                    Observar las imágenes y reconocer las asociaciones
+                    personales sin perder de vista el contexto.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="card-icon">✧</div>
+                <h3>Simbología</h3>
+                <p>
+                    Comprender colores, personajes, objetos, números
+                    y elementos presentes en cada carta.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="card-icon">♧</div>
+                <h3>Interpretación</h3>
+                <p>
+                    Relacionar los significados para elaborar una lectura
+                    coherente, clara y reflexiva.
+                </p>
+            </article>
+
+        </div>
     </section>
 
 
-    <!-- =================================================
-         EL TAROT
-    ================================================== -->
+    <!-- ARCANOS MAYORES -->
 
     <section class="lesson">
+        <span class="numero-leccion">LECCIÓN 02</span>
 
-        <h2>El Tarot</h2>
+        <h2>Los 22 Arcanos Mayores</h2>
 
         <p>
-            El Tarot es una herramienta simbólica formada por
-            78 cartas. Cada carta contiene imágenes, símbolos,
-            personajes y situaciones que representan diferentes
-            aspectos de la experiencia humana.
+            Los Arcanos Mayores representan grandes temas y experiencias
+            de la vida: comienzos, decisiones, cambios, aprendizajes,
+            crisis, transformaciones y culminaciones.
         </p>
 
         <p>
-            Aprender Tarot no consiste solamente en memorizar
-            significados. El verdadero aprendizaje aparece cuando
-            comenzamos a comprender los símbolos, observar las
-            imágenes y relacionarlas con la pregunta y el contexto
-            de una lectura.
+            Seleccioná cualquier arcano para conocer su simbolismo,
+            su interpretación general y las preguntas que puede ayudarte
+            a explorar.
         </p>
-
-        <p>
-            La baraja está dividida en dos grandes grupos:
-            los Arcanos Mayores y los Arcanos Menores. En esta
-            primera parte del curso comenzaremos con los 22
-            Arcanos Mayores.
-        </p>
-
-    </section>
-
-
-    <!-- =================================================
-         ARCANOS MAYORES
-    ================================================== -->
-
-    <section class="lesson">
-
-        <h2>ARCANOS MAYORES</h2>
-
-        <p>
-            Los Arcanos Mayores están formados por 22 cartas.
-            Cada una representa una energía, un arquetipo,
-            una experiencia y un aprendizaje diferente.
-        </p>
-
-        <p>
-            Estas cartas pueden representar momentos importantes,
-            procesos internos, decisiones, desafíos y aprendizajes
-            que aparecen a lo largo de nuestro camino.
-        </p>
-
-        <p>
-            Hacé clic sobre cada carta para conocer su imagen
-            y estudiar su significado.
-        </p>
-
-
-        <!-- =================================================
-             LISTA DE LOS 22 ARCANOS
-        ================================================== -->
 
         <div class="arcana-list">
 
-            <span onclick="abrirCarta(0)">
-                0 — El Loco
+            <span onclick="abrirCarta(0)" role="button" tabindex="0" onkeydown="activarCarta(event,0)">
+                <b class="numero-arcano">0</b> El Loco
             </span>
 
-            <span onclick="abrirCarta(1)">
-                I — El Mago
+            <span onclick="abrirCarta(1)" role="button" tabindex="0" onkeydown="activarCarta(event,1)">
+                <b class="numero-arcano">I</b> El Mago
             </span>
 
-            <span onclick="abrirCarta(2)">
-                II — La Sacerdotisa
+            <span onclick="abrirCarta(2)" role="button" tabindex="0" onkeydown="activarCarta(event,2)">
+                <b class="numero-arcano">II</b> La Sacerdotisa
             </span>
 
-            <span onclick="abrirCarta(3)">
-                III — La Emperatriz
+            <span onclick="abrirCarta(3)" role="button" tabindex="0" onkeydown="activarCarta(event,3)">
+                <b class="numero-arcano">III</b> La Emperatriz
             </span>
 
-            <span onclick="abrirCarta(4)">
-                IV — El Emperador
+            <span onclick="abrirCarta(4)" role="button" tabindex="0" onkeydown="activarCarta(event,4)">
+                <b class="numero-arcano">IV</b> El Emperador
             </span>
 
-            <span onclick="abrirCarta(5)">
-                V — El Hierofante
+            <span onclick="abrirCarta(5)" role="button" tabindex="0" onkeydown="activarCarta(event,5)">
+                <b class="numero-arcano">V</b> El Hierofante
             </span>
 
-            <span onclick="abrirCarta(6)">
-                VI — Los Enamorados
+            <span onclick="abrirCarta(6)" role="button" tabindex="0" onkeydown="activarCarta(event,6)">
+                <b class="numero-arcano">VI</b> Los Enamorados
             </span>
 
-            <span onclick="abrirCarta(7)">
-                VII — El Carro
+            <span onclick="abrirCarta(7)" role="button" tabindex="0" onkeydown="activarCarta(event,7)">
+                <b class="numero-arcano">VII</b> El Carro
             </span>
 
-            <span onclick="abrirCarta(8)">
-                VIII — La Fuerza
+            <span onclick="abrirCarta(8)" role="button" tabindex="0" onkeydown="activarCarta(event,8)">
+                <b class="numero-arcano">VIII</b> La Fuerza
             </span>
 
-            <span onclick="abrirCarta(9)">
-                IX — El Ermitaño
+            <span onclick="abrirCarta(9)" role="button" tabindex="0" onkeydown="activarCarta(event,9)">
+                <b class="numero-arcano">IX</b> El Ermitaño
             </span>
 
-            <span onclick="abrirCarta(10)">
-                X — La Rueda de la Fortuna
+            <span onclick="abrirCarta(10)" role="button" tabindex="0" onkeydown="activarCarta(event,10)">
+                <b class="numero-arcano">X</b> La Rueda de la Fortuna
             </span>
 
-            <span onclick="abrirCarta(11)">
-                XI — La Justicia
+            <span onclick="abrirCarta(11)" role="button" tabindex="0" onkeydown="activarCarta(event,11)">
+                <b class="numero-arcano">XI</b> La Justicia
             </span>
 
-            <span onclick="abrirCarta(12)">
-                XII — El Colgado
+            <span onclick="abrirCarta(12)" role="button" tabindex="0" onkeydown="activarCarta(event,12)">
+                <b class="numero-arcano">XII</b> El Colgado
             </span>
 
-            <span onclick="abrirCarta(13)">
-                XIII — La Muerte
+            <span onclick="abrirCarta(13)" role="button" tabindex="0" onkeydown="activarCarta(event,13)">
+                <b class="numero-arcano">XIII</b> La Muerte
             </span>
 
-            <span onclick="abrirCarta(14)">
-                XIV — La Templanza
+            <span onclick="abrirCarta(14)" role="button" tabindex="0" onkeydown="activarCarta(event,14)">
+                <b class="numero-arcano">XIV</b> La Templanza
             </span>
 
-            <span onclick="abrirCarta(15)">
-                XV — El Diablo
+            <span onclick="abrirCarta(15)" role="button" tabindex="0" onkeydown="activarCarta(event,15)">
+                <b class="numero-arcano">XV</b> El Diablo
             </span>
 
-            <span onclick="abrirCarta(16)">
-                XVI — La Torre
+            <span onclick="abrirCarta(16)" role="button" tabindex="0" onkeydown="activarCarta(event,16)">
+                <b class="numero-arcano">XVI</b> La Torre
             </span>
 
-            <span onclick="abrirCarta(17)">
-                XVII — La Estrella
+            <span onclick="abrirCarta(17)" role="button" tabindex="0" onkeydown="activarCarta(event,17)">
+                <b class="numero-arcano">XVII</b> La Estrella
             </span>
 
-            <span onclick="abrirCarta(18)">
-                XVIII — La Luna
+            <span onclick="abrirCarta(18)" role="button" tabindex="0" onkeydown="activarCarta(event,18)">
+                <b class="numero-arcano">XVIII</b> La Luna
             </span>
 
-            <span onclick="abrirCarta(19)">
-                XIX — El Sol
+            <span onclick="abrirCarta(19)" role="button" tabindex="0" onkeydown="activarCarta(event,19)">
+                <b class="numero-arcano">XIX</b> El Sol
             </span>
 
-            <span onclick="abrirCarta(20)">
-                XX — El Juicio
+            <span onclick="abrirCarta(20)" role="button" tabindex="0" onkeydown="activarCarta(event,20)">
+                <b class="numero-arcano">XX</b> El Juicio
             </span>
 
-            <span onclick="abrirCarta(21)">
-                XXI — El Mundo
+            <span onclick="abrirCarta(21)" role="button" tabindex="0" onkeydown="activarCarta(event,21)">
+                <b class="numero-arcano">XXI</b> El Mundo
             </span>
 
         </div>
 
+        <p class="ayuda">✧ Tocá una carta para descubrir su significado.</p>
     </section>
 
 
-    <!-- =================================================
-         SIMBOLOGÍA DE LAS CARTAS
-    ================================================== -->
+    <!-- SÍMBOLOS -->
 
     <section class="lesson">
+        <span class="numero-leccion">LECCIÓN 03</span>
 
-        <h2>SIMBOLOGÍA DE LAS CARTAS</h2>
+        <h2>El lenguaje de los símbolos</h2>
 
         <p>
-            Cada Arcano Mayor contiene pequeños detalles que también
-            forman parte de su significado. Animales, objetos,
-            colores, paisajes y figuras ayudan a comprender el mensaje
-            profundo de cada carta.
+            Los símbolos permiten descubrir distintas capas de significado
+            en una carta. Su interpretación depende de la imagen completa,
+            de la pregunta y de las cartas que la acompañan.
         </p>
-
 
         <div class="simbolos-grid">
 
-
-            <div class="simbolo">
-
-                <h3>La Esfinge</h3>
-
-                <p>
-                    En <strong>El Carro</strong> representa las
-                    fuerzas opuestas que deben ser dirigidas y
-                    equilibradas mediante la voluntad.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>Las Columnas</h3>
-
-                <p>
-                    Representan los opuestos, el equilibrio y el
-                    conocimiento entre dos fuerzas diferentes.
-                    Son especialmente importantes en
-                    <strong>La Sacerdotisa</strong>.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>La Corona</h3>
-
-                <p>
-                    Simboliza autoridad, poder, conciencia y dominio
-                    sobre una determinada situación.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>El Agua</h3>
-
-                <p>
-                    Representa emociones, intuición, sensibilidad
-                    y el movimiento del mundo interior.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>Las Montañas</h3>
-
-                <p>
-                    Representan desafíos, aprendizajes y objetivos
-                    que requieren esfuerzo para ser alcanzados.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>El León</h3>
-
-                <p>
-                    En <strong>La Fuerza</strong> representa los
-                    instintos y emociones intensas que pueden ser
-                    guiados mediante paciencia y conciencia.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>El Perro</h3>
-
-                <p>
-                    En <strong>El Loco</strong> representa el
-                    instinto, la advertencia y aquello que acompaña
-                    al viajero durante su camino.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>La Rosa Blanca</h3>
-
-                <p>
-                    Representa pureza, inocencia, apertura y una
-                    intención libre de malicia.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>El Infinito</h3>
-
-                <p>
-                    Representa continuidad, energía y conexión.
-                    Aparece especialmente en
-                    <strong>El Mago</strong> y
-                    <strong>La Fuerza</strong>.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>Los Cuatro Elementos</h3>
-
-                <p>
-                    Bastos, Copas, Espadas y Oros representan
-                    fuego, agua, aire y tierra: las cuatro fuerzas
-                    fundamentales del Tarot.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>La Serpiente</h3>
-
-                <p>
-                    Puede representar transformación, conocimiento,
-                    tentación y energía instintiva.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
+            <article class="simbolo-card">
+                <span class="simbolo-icono">☀</span>
                 <h3>El Sol</h3>
-
                 <p>
-                    Representa claridad, vitalidad, verdad,
-                    conciencia y aquello que finalmente puede
-                    verse con claridad.
+                    Claridad, vitalidad, conciencia, expresión y aquello
+                    que puede verse con mayor transparencia.
                 </p>
+            </article>
 
-            </div>
-
-
-            <div class="simbolo">
-
+            <article class="simbolo-card">
+                <span class="simbolo-icono">☾</span>
                 <h3>La Luna</h3>
-
                 <p>
-                    Simboliza intuición, sueños, emociones profundas,
-                    misterio y aquello que todavía permanece oculto.
+                    Mundo interior, intuición, imaginación, incertidumbre
+                    y aspectos que todavía necesitan comprensión.
                 </p>
+            </article>
 
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>La Espada</h3>
-
+            <article class="simbolo-card">
+                <span class="simbolo-icono">♛</span>
+                <h3>La corona</h3>
                 <p>
-                    Representa pensamiento, verdad, decisión y
-                    capacidad para cortar con aquello que ya no sirve.
+                    Autoridad, responsabilidad, reconocimiento y la forma
+                    en que se ejerce el poder personal.
                 </p>
+            </article>
 
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>La Balanza</h3>
-
+            <article class="simbolo-card">
+                <span class="simbolo-icono">⚔</span>
+                <h3>La espada</h3>
                 <p>
-                    En <strong>La Justicia</strong> representa
-                    equilibrio, responsabilidad, consecuencias y
-                    búsqueda de verdad.
+                    Pensamiento, decisiones, conflictos, límites
+                    y la búsqueda de claridad.
                 </p>
+            </article>
 
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>Las Cadenas</h3>
-
+            <article class="simbolo-card">
+                <span class="simbolo-icono">♧</span>
+                <h3>La naturaleza</h3>
                 <p>
-                    En <strong>El Diablo</strong> representan
-                    apegos, dependencias y vínculos que pueden
-                    limitar nuestra libertad.
+                    Crecimiento, ciclos, fertilidad, renovación
+                    y relación con el entorno.
                 </p>
+            </article>
 
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>El Rayo</h3>
-
+            <article class="simbolo-card">
+                <span class="simbolo-icono">∞</span>
+                <h3>El infinito</h3>
                 <p>
-                    En <strong>La Torre</strong> representa una
-                    ruptura repentina, una revelación o la caída
-                    de una estructura.
+                    Continuidad, potencial, ciclos y posibilidades
+                    que no se agotan en una única interpretación.
                 </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>Las Estrellas</h3>
-
-                <p>
-                    Representan esperanza, inspiración, orientación
-                    y renovación después de una etapa difícil.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>Las Flores</h3>
-
-                <p>
-                    Representan crecimiento, belleza, renovación
-                    y aquello que comienza a desarrollarse.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>El Caballo</h3>
-
-                <p>
-                    Representa movimiento, impulso, transformación
-                    y dirección hacia un nuevo camino.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>El Ángel</h3>
-
-                <p>
-                    Representa mensajes, despertar, conciencia y
-                    conexión espiritual. Es fundamental en
-                    <strong>El Juicio</strong>.
-                </p>
-
-            </div>
-
-
-            <div class="simbolo">
-
-                <h3>El Círculo</h3>
-
-                <p>
-                    Representa totalidad, ciclos, unidad y aquello
-                    que se completa antes de comenzar nuevamente.
-                </p>
-
-            </div>
-
+            </article>
 
         </div>
-
     </section>
 
 
+    <!-- COLORES -->
 
+    <section class="lesson">
+        <span class="numero-leccion">LECCIÓN 04</span>
 
-<!-- =========================
-     COLORES EN EL TAROT
-========================== -->
+        <h2>Los colores en el Tarot</h2>
 
-<section class="lesson">
-
-
-<h2>COLORES EN EL TAROT</h2>
-
-<p>
-    Los colores que aparecen en las cartas del Tarot también transmiten
-    información simbólica. Observar sus tonos permite profundizar en la
-    interpretación y comprender mejor la energía representada.
-</p>
-
-<div class="colores-grid">
-
-    <div class="color-tarot">
-        <div class="color-muestra rojo"></div>
-        <h3>Rojo</h3>
         <p>
-            Representa <strong>pasión, energía, acción, deseo y fuerza vital</strong>.
-            Puede señalar impulso, movimiento y una gran intensidad emocional.
+            Los colores contribuyen al clima emocional de cada carta.
+            No tienen un único significado universal: deben interpretarse
+            en relación con la escena, los símbolos y la pregunta.
         </p>
-    </div>
 
-    <div class="color-tarot">
-        <div class="color-muestra blanco"></div>
-        <h3>Blanco</h3>
-        <p>
-            Simboliza <strong>pureza, claridad, inocencia y espiritualidad</strong>.
-            Puede indicar una energía limpia, sincera o un nuevo comienzo.
-        </p>
-    </div>
+        <div class="colores-grid">
 
-    <div class="color-tarot">
-        <div class="color-muestra negro"></div>
-        <h3>Negro</h3>
-        <p>
-            Representa <strong>misterio, inconsciente, profundidad y transformación</strong>.
-            También puede señalar aquello que todavía permanece oculto.
-        </p>
-    </div>
+            <article class="color-tarot">
+                <div class="color-muestra" style="background:#a71930;"></div>
+                <h3>Rojo</h3>
+                <p>
+                    Pasión, impulso, deseo, energía, coraje y acción.
+                    En algunos contextos también puede sugerir tensión.
+                </p>
+            </article>
 
-    <div class="color-tarot">
-        <div class="color-muestra amarillo"></div>
-        <h3>Amarillo y Dorado</h3>
-        <p>
-            Se relacionan con <strong>conciencia, inteligencia, claridad, éxito e iluminación</strong>.
-            Es un color asociado con la energía solar y el conocimiento.
-        </p>
-    </div>
+            <article class="color-tarot">
+                <div class="color-muestra" style="background:#e5bd54;"></div>
+                <h3>Amarillo y dorado</h3>
+                <p>
+                    Conciencia, vitalidad, claridad, confianza,
+                    abundancia y reconocimiento.
+                </p>
+            </article>
 
-    <div class="color-tarot">
-        <div class="color-muestra azul"></div>
-        <h3>Azul</h3>
-        <p>
-            Representa <strong>intuición, calma, espiritualidad y profundidad emocional</strong>.
-            Puede señalar reflexión, serenidad y conexión interior.
-        </p>
-    </div>
+            <article class="color-tarot">
+                <div class="color-muestra" style="background:#315b94;"></div>
+                <h3>Azul</h3>
+                <p>
+                    Serenidad, reflexión, profundidad emocional,
+                    comunicación y búsqueda interior.
+                </p>
+            </article>
 
-    <div class="color-tarot">
-        <div class="color-muestra verde"></div>
-        <h3>Verde</h3>
-        <p>
-            Simboliza <strong>crecimiento, naturaleza, renovación y abundancia</strong>.
-            Puede hablar de evolución, recuperación y desarrollo.
-        </p>
-    </div>
+            <article class="color-tarot">
+                <div class="color-muestra" style="background:#39805b;"></div>
+                <h3>Verde</h3>
+                <p>
+                    Crecimiento, renovación, equilibrio, naturaleza
+                    y desarrollo progresivo.
+                </p>
+            </article>
 
-    <div class="color-tarot">
-        <div class="color-muestra violeta"></div>
-        <h3>Violeta</h3>
-        <p>
-            Se relaciona con <strong>transformación espiritual, intuición y conexión interior</strong>.
-            Puede aparecer en momentos de cambio profundo.
-        </p>
-    </div>
+            <article class="color-tarot">
+                <div class="color-muestra" style="background:#eee9e4;"></div>
+                <h3>Blanco</h3>
+                <p>
+                    Apertura, claridad, sinceridad, pureza simbólica
+                    y nuevas posibilidades.
+                </p>
+            </article>
 
-    <div class="color-tarot">
-        <div class="color-muestra naranja"></div>
-        <h3>Naranja</h3>
-        <p>
-            Representa <strong>creatividad, vitalidad, entusiasmo y movimiento</strong>.
-            Puede indicar una energía activa y expresiva.
-        </p>
-    </div>
-
-    <div class="color-tarot">
-        <div class="color-muestra rosa"></div>
-        <h3>Rosa</h3>
-        <p>
-            Simboliza <strong>afecto, ternura, amor, sensibilidad y apertura emocional</strong>.
-            Puede aparecer especialmente en temas relacionados con los vínculos.
-        </p>
-    </div>
-
-    <div class="color-tarot">
-        <div class="color-muestra celeste"></div>
-        <h3>Celeste</h3>
-        <p>
-            Representa <strong>serenidad, comunicación, libertad y apertura</strong>.
-            Puede señalar tranquilidad y una mente más receptiva.
-        </p>
-    </div>
-
-</div>
-```
-
-</section>
-
-<style>
-
-.colores-grid {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    margin-top: 30px;
-}
-
-.color-tarot {
-    padding: 25px 22px;
-    background: rgba(15, 5, 8, 0.45);
-    border: 1px solid rgba(150, 35, 50, 0.20);
-    border-radius: 14px;
-    text-align: center;
-}
-
-.color-muestra {
-    width: 55px;
-    height: 55px;
-    margin: 0 auto 15px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.20);
-    box-shadow: 0 0 20px rgba(0,0,0,0.35);
-}
-
-.color-tarot h3 {
-    color: #eee9e4;
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 12px;
-}
-
-.color-tarot p {
-    color: #928a8e;
-    font-size: 13px;
-    line-height: 1.7;
-    margin: 0;
-}
-
-.color-tarot strong {
-    color: #c9828c;
-    font-weight: 400;
-}
-
-/* MUESTRAS DE COLOR */
-
-.rojo {
-    background: #b3122f;
-}
-
-.blanco {
-    background: #f3eeee;
-}
-
-.negro {
-    background: #050406;
-}
-
-.amarillo {
-    background: #d6ad35;
-}
-
-.azul {
-    background: #315b86;
-}
-
-.verde {
-    background: #3f7548;
-}
-
-.violeta {
-    background: #684477;
-}
-
-.naranja {
-    background: #c76528;
-}
-
-.rosa {
-    background: #b96b82;
-}
-
-.celeste {
-    background: #6fa7b8;
-}
-
-@media (max-width: 700px) {
-
-    .colores-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-</style>
-
-
-
-<!-- =================================================
-     NAVEGACIÓN DEL CURSO
-================================================== -->
-
-<section class="navegacion-curso">
-
-
-<p>
-    ¿Listo para continuar con los Arcanos Menores?
-</p>
-
-<a href="index2.html" class="btn-siguiente">
-    Siguiente: Arcanos Menores →
-</a>
-
-
-</section>
-
-
-
-
-    <!-- =================================================
-         MODAL
-    ================================================== -->
-
-    <div
-        id="modal-carta"
-        class="modal-carta"
-    >
-
-        <div class="contenido-carta">
-
-
-            <button
-                class="cerrar-carta"
-                onclick="cerrarCarta()"
-                aria-label="Cerrar"
-            >
-                ×
-            </button>
-
-
-            <img
-                id="imagen-carta"
-                class="imagen-carta"
-                src=""
-                alt=""
-            >
-
-
-            <h2 id="nombre-carta"></h2>
-
-
-            <p id="significado-carta"></p>
-
+            <article class="color-tarot">
+                <div class="color-muestra" style="background:#211c2a;"></div>
+                <h3>Negro</h3>
+                <p>
+                    Misterio, límites, introspección, cierre de etapas
+                    y aquello que aún no se conoce.
+                </p>
+            </article>
 
         </div>
+    </section>
 
-    </div>
 
+    <!-- CIERRE Y NAVEGACIÓN -->
+
+    <footer class="navegacion-curso">
+        <span class="simbolo-final">☾ ✧ ☽</span>
+
+        <p>
+            Cada carta forma parte de un lenguaje más amplio.
+            En la siguiente lección vamos a explorar los Arcanos Menores
+            y sus cuatro palos.
+        </p>
+
+        <a href="index2.html" class="btn-siguiente">
+            Siguiente: Arcanos Menores →
+        </a>
+    </footer>
 
 </main>
 
 
+<!-- VENTANA DE INTERPRETACIÓN -->
+
+<div
+    class="modal-carta"
+    id="modalCarta"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="nombreCarta"
+    onclick="cerrarSiFondo(event)"
+>
+    <div class="contenido-modal">
+
+        <button
+            class="cerrar-modal"
+            type="button"
+            aria-label="Cerrar"
+            onclick="cerrarCarta()"
+        >×</button>
+
+        <div class="modal-etiqueta">ASTRO ROJO · ARCANOS MAYORES</div>
+
+        <h2 id="nombreCarta">El Loco</h2>
+
+        <img
+            id="imagenCarta"
+            class="imagen-carta"
+            src="../images/thefool.jpeg"
+            alt="Carta del Tarot"
+        >
+
+        <div id="textoCarta" class="texto-carta"></div>
+
+        <div class="modal-pie">
+            El significado se enriquece al considerar la pregunta y las
+            cartas que acompañan la lectura.
+        </div>
+
+    </div>
+</div>
+
+
 <script>
-
-/* =========================================================
-   DATOS DE LOS ARCANOS MAYORES
-========================================================= */
-
-const cartas = [
-
-    {
-        nombre: "EL LOCO",
-        imagen: "../images/thefool.jpeg",
-        significado: `El Loco representa el comienzo de un viaje.
-Es la energía de quien se anima a avanzar sin tener
-completamente controlado lo que sucederá después.
-Habla de libertad, espontaneidad, curiosidad y apertura
-hacia nuevas experiencias.
-
-Esta carta puede aparecer cuando una persona está
-comenzando una etapa diferente, dejando atrás una
-situación conocida o sintiendo el impulso de probar
-algo nuevo. También representa la capacidad de confiar
-en la vida y aprender a medida que se avanza.
-
-En su aspecto positivo, El Loco habla de entusiasmo,
-valentía, autenticidad y libertad personal. En su aspecto
-desafiante puede señalar impulsividad, falta de planificación
-o decisiones tomadas sin considerar las consecuencias.
-
-Su enseñanza principal es aprender a avanzar sin permitir
-que el miedo a lo desconocido nos impida vivir nuevas
-experiencias.`
-    },
-
-
-    {
-        nombre: "EL MAGO",
-        imagen: "../images/themagician.jpeg",
-        significado: `El Mago representa la capacidad de transformar
-una idea en una acción concreta. Es una carta relacionada
-con la iniciativa, la creatividad, la comunicación y el
-uso consciente de nuestros recursos.
-
-Cuando aparece, suele señalar que existe una oportunidad
-para comenzar algo y que la persona posee herramientas
-suficientes para dar el primer paso.
-
-El Mago representa inteligencia, habilidad, concentración
-y capacidad de influir sobre una situación mediante
-nuestras decisiones.
-
-En su aspecto desafiante puede hablar de manipulación,
-exceso de confianza o utilizar las capacidades personales
-de manera poco ética.
-
-Su enseñanza es reconocer nuestro propio potencial y
-comprender que muchas veces el primer cambio comienza
-cuando decidimos actuar.`
-    },
-
-
-    {
-        nombre: "LA SACERDOTISA",
-        imagen: "../images/thehighpriestess.jpeg",
-        significado: `La Sacerdotisa representa el mundo interior,
-la intuición, el misterio y el conocimiento que todavía
-no se encuentra completamente visible.
-
-Es una carta que invita a observar antes de actuar.
-No todo necesita una respuesta inmediata y no toda la
-información se encuentra sobre la superficie.
-
-También está relacionada con los sueños, las percepciones,
-los secretos y aquello que sentimos aunque todavía no
-podamos explicar racionalmente.
-
-En su aspecto positivo representa sabiduría interior,
-sensibilidad, intuición y profundidad.
-
-En su aspecto desafiante puede señalar silencios excesivos,
-información oculta, dudas o una tendencia a encerrarse
-demasiado en el propio mundo interior.
-
-Su enseñanza es aprender a escuchar aquello que nuestra
-intuición intenta mostrarnos.`
-    },
-
-
-    {
-        nombre: "LA EMPERATRIZ",
-        imagen: "../images/theempress.jpeg",
-        significado: `La Emperatriz representa la creatividad,
-la abundancia, la fertilidad y la capacidad de hacer
-crecer aquello que valoramos.
-
-Es una energía relacionada con la creación en todas sus
-formas: proyectos, relaciones, ideas, vínculos y procesos
-personales.
-
-También representa sensibilidad, placer, belleza,
-expresión emocional y conexión con la naturaleza.
-
-Cuando aparece puede indicar un período fértil para crear,
-desarrollar proyectos o permitir que una situación madure.
-
-Su aspecto desafiante puede manifestarse como exceso de
-comodidad, dependencia emocional, sobreprotección o
-dificultad para poner límites.
-
-La enseñanza de La Emperatriz es comprender que aquello
-que queremos ver crecer necesita atención, cuidado y
-espacio para desarrollarse.`
-    },
-
-
-    {
-        nombre: "EL EMPERADOR",
-        imagen: "../images/theemperor.jpeg",
-        significado: `El Emperador representa estructura,
-estabilidad, autoridad, responsabilidad y capacidad
-de organización.
-
-Es una carta relacionada con construir bases firmes.
-Busca establecer orden y crear una estructura que permita
-sostener lo construido.
-
-Puede representar liderazgo, disciplina, organización,
-seguridad material y capacidad para tomar decisiones.
-
-En una lectura puede indicar la necesidad de establecer
-límites claros o asumir mayor responsabilidad.
-
-Su aspecto desafiante aparece cuando la necesidad de
-control se vuelve excesiva o existe rigidez.
-
-Su enseñanza es aprender a utilizar la autoridad de
-manera responsable y construir estabilidad sin perder
-flexibilidad.`
-    },
-
-
-    {
-        nombre: "EL HIEROFANTE",
-        imagen: "../images/thehierophant.jpeg",
-        significado: `El Hierofante representa conocimiento,
-tradición, enseñanza, valores y sistemas de creencias.
-
-Es una carta relacionada con aquello que aprendemos
-de otras personas y con los conocimientos que pasan
-de una generación a otra.
-
-Puede señalar estudios, maestros, instituciones,
-tradiciones, consejos o la necesidad de encontrar
-una estructura que permita comprender mejor una situación.
-
-También puede hablar de valores personales y de la
-importancia de preguntarnos qué principios realmente
-queremos seguir.
-
-Su aspecto desafiante puede representar dogmatismo
-o aceptar creencias sin cuestionarlas.
-
-Su enseñanza es aprender de la experiencia ajena sin
-dejar de desarrollar nuestro propio criterio.`
-    },
-
-
-    {
-        nombre: "LOS ENAMORADOS",
-        imagen: "../images/thelovers.jpeg",
-        significado: `Los Enamorados representan vínculos,
-elecciones, atracción y decisiones importantes.
-
-Aunque tradicionalmente se relacionan con el amor,
-esta carta también representa decisiones que nos
-obligan a elegir entre diferentes caminos.
-
-En el ámbito afectivo puede señalar conexión,
-atracción, sentimientos profundos y la necesidad
-de tomar una decisión dentro de un vínculo.
-
-Su aspecto desafiante puede mostrar indecisión,
-contradicciones internas o elecciones realizadas
-buscando solamente satisfacer deseos inmediatos.
-
-Su enseñanza es elegir desde la autenticidad y asumir
-responsabilidad por las decisiones que tomamos.`
-    },
-
-
-    {
-        nombre: "EL CARRO",
-        imagen: "../images/thechariot.jpeg",
-        significado: `El Carro representa movimiento,
-determinación, voluntad y avance.
-
-Es la carta de quien toma las riendas de una situación
-y decide avanzar hacia un objetivo.
-
-Habla de dirección, disciplina y capacidad para superar
-obstáculos.
-
-Puede representar viajes, cambios, movimiento físico
-o una etapa de fuerte impulso personal.
-
-En su aspecto desafiante puede señalar exceso de control,
-impulsividad o avanzar demasiado rápido.
-
-Su enseñanza es comprender que avanzar no significa
-simplemente moverse, sino saber hacia dónde queremos
-dirigir nuestra energía.`
-    },
-
-
-    {
-        nombre: "LA FUERZA",
-        imagen: "../images/strength.jpeg",
-        significado: `La Fuerza representa coraje, paciencia,
-autocontrol y fortaleza interior.
-
-Esta carta enseña que no toda batalla se gana mediante
-confrontación.
-
-La verdadera fuerza aparece cuando conseguimos mantener
-la calma frente a aquello que nos provoca miedo, enojo
-o inseguridad.
-
-También representa confianza, sensibilidad y capacidad
-para manejar nuestros impulsos sin reprimirlos.
-
-Su aspecto desafiante puede señalar represión emocional,
-orgullo o intentar controlar demasiado aquello que sentimos.
-
-Su enseñanza es descubrir que la fuerza interior también
-puede expresarse mediante serenidad y paciencia.`
-    },
-
-
-    {
-        nombre: "EL ERMITAÑO",
-        imagen: "../images/thehermit.jpeg",
-        significado: `El Ermitaño representa introspección,
-búsqueda interior, prudencia y sabiduría.
-
-Invita a disminuir el ruido exterior para poder escuchar
-nuestras propias respuestas.
-
-Puede aparecer cuando necesitamos alejarnos temporalmente
-de ciertas influencias para comprender mejor qué queremos.
-
-También representa experiencia y conocimiento adquirido
-a través del tiempo.
-
-Su aspecto desafiante puede convertirse en aislamiento,
-distancia emocional o dificultad para pedir ayuda.
-
-Su enseñanza es comprender que el silencio puede ayudarnos
-a descubrir nuestra propia dirección.`
-    },
-
-
-    {
-        nombre: "LA RUEDA DE LA FORTUNA",
-        imagen: "../images/wheeloffortune.jpeg",
-        significado: `La Rueda de la Fortuna representa ciclos,
-cambios y movimiento.
-
-Esta carta nos recuerda que ninguna situación permanece
-exactamente igual para siempre.
-
-Puede indicar un giro importante, una oportunidad,
-un cambio inesperado o el comienzo de una nueva etapa.
-
-También invita a comprender que existen circunstancias
-que no podemos controlar completamente.
-
-Su aspecto desafiante puede generar sensación de
-inestabilidad o dependencia excesiva de la suerte.
-
-Su enseñanza es aprender a adaptarnos a los cambios
-y aprovechar las oportunidades que aparecen.`
-    },
-
-
-    {
-        nombre: "LA JUSTICIA",
-        imagen: "../images/justice.jpeg",
-        significado: `La Justicia representa equilibrio,
-claridad, responsabilidad y consecuencias.
-
-Invita a observar una situación con la mayor objetividad
-posible y reconocer que nuestras decisiones producen
-determinados resultados.
-
-Puede aparecer cuando es necesario tomar una decisión,
-establecer límites o analizar una situación.
-
-También puede relacionarse con documentos, acuerdos
-y contratos.
-
-Su aspecto desafiante puede mostrar rigidez, juicio
-excesivo o dificultad para aceptar nuestra responsabilidad.
-
-Su enseñanza es actuar con honestidad y asumir las
-consecuencias de nuestras elecciones.`
-    },
-
-
-    {
-        nombre: "EL COLGADO",
-        imagen: "../images/thehangedman.jpeg",
-        significado: `El Colgado representa pausa, espera,
-entrega y cambio de perspectiva.
-
-Aparece cuando intentar avanzar de la misma manera
-de siempre puede no producir resultados.
-
-Invita a detenerse y observar una situación desde
-otro punto de vista.
-
-Puede señalar una etapa donde las cosas parecen estar
-suspendidas o donde necesitamos esperar antes de actuar.
-
-Su aspecto desafiante puede manifestarse como pasividad
-o permanecer demasiado tiempo esperando.
-
-Su enseñanza es descubrir que una pausa también puede
-ser parte del proceso.`
-    },
-
-
-    {
-        nombre: "LA MUERTE",
-        imagen: "../images/death.jpeg",
-        significado: `La Muerte representa transformación,
-cierre y renovación.
-
-No debe interpretarse automáticamente como una muerte
-física. En el Tarot simboliza principalmente el final
-de una etapa y la transformación necesaria para comenzar otra.
-
-Puede aparecer cuando una situación ya cumplió su ciclo.
-
-Habla de desprenderse de viejos patrones, hábitos,
-vínculos o formas de pensar.
-
-Su aspecto desafiante puede mostrar resistencia
-o miedo al cambio.
-
-Su enseñanza es comprender que cerrar una etapa
-también puede crear espacio para algo diferente.`
-    },
-
-
-    {
-        nombre: "LA TEMPLANZA",
-        imagen: "../images/temperance.jpeg",
-        significado: `La Templanza representa equilibrio,
-armonía, paciencia y adaptación.
-
-Habla de combinar diferentes energías hasta encontrar
-una forma más equilibrada de funcionar.
-
-Puede señalar procesos de recuperación, reconciliación,
-integración y crecimiento gradual.
-
-En relaciones puede representar diálogo, paciencia
-y necesidad de encontrar un ritmo compartido.
-
-Su aspecto desafiante puede aparecer como lentitud
-o dificultad para tomar una posición clara.
-
-Su enseñanza es comprender que algunos procesos necesitan
-tiempo y equilibrio.`
-    },
-
-
-    {
-        nombre: "EL DIABLO",
-        imagen: "../images/thedevil.jpeg",
-        significado: `El Diablo representa deseos, apegos,
-tentaciones, dependencia y aquello que puede ejercer
-una fuerte influencia sobre nosotros.
-
-También puede representar deseo, pasión, magnetismo,
-ambición y conexión con el mundo material.
-
-Invita a preguntarnos qué cosas nos están condicionando
-y si realmente somos libres para elegir.
-
-En relaciones puede mostrar atracción intensa,
-dependencia, celos o vínculos difíciles de soltar.
-
-Su enseñanza es reconocer nuestras propias cadenas
-para poder decidir cuáles queremos mantener y cuáles
-necesitamos comenzar a soltar.`
-    },
-
-
-    {
-        nombre: "LA TORRE",
-        imagen: "../images/thetower.jpeg",
-        significado: `La Torre representa cambios repentinos,
-revelaciones y estructuras que dejan de sostenerse.
-
-Puede aparecer cuando una situación construida sobre
-bases débiles necesita cambiar.
-
-A veces el cambio llega de manera inesperada y rompe
-una estructura que parecía estable.
-
-También puede representar descubrimientos, verdades
-que salen a la luz, rupturas o transformaciones importantes.
-
-Su aspecto desafiante es el miedo a perder seguridad.
-
-Su enseñanza es comprender que algunas estructuras
-deben caer para permitir construir algo más auténtico.`
-    },
-
-
-    {
-        nombre: "LA ESTRELLA",
-        imagen: "../images/thestar.jpeg",
-        significado: `La Estrella representa esperanza,
-inspiración, renovación y confianza.
-
-Aparece después de momentos difíciles y señala la
-posibilidad de recuperar claridad y tranquilidad.
-
-Es una carta relacionada con la autenticidad y con
-permitirnos volver a creer en aquello que queremos construir.
-
-También puede representar inspiración artística,
-sensibilidad y generosidad.
-
-Su aspecto desafiante puede mostrar idealización
-o expectativas excesivamente altas.
-
-Su enseñanza es mantener la esperanza sin dejar
-de actuar.`
-    },
-
-
-    {
-        nombre: "LA LUNA",
-        imagen: "../images/themoon.jpeg",
-        significado: `La Luna representa intuición, emociones,
-imaginación, incertidumbre y aquello que todavía no
-puede verse con claridad.
-
-Está profundamente relacionada con el mundo emocional
-y con las percepciones.
-
-Puede aparecer cuando existen dudas, información
-incompleta o situaciones donde todavía no conocemos
-toda la verdad.
-
-También puede señalar sueños, sensibilidad y miedos
-inconscientes.
-
-Su enseñanza es avanzar con cuidado y esperar a que
-la información necesaria se vuelva más clara.`
-    },
-
-
-    {
-        nombre: "EL SOL",
-        imagen: "../images/thesun.jpeg",
-        significado: `El Sol representa claridad, alegría,
-vitalidad, confianza y reconocimiento.
-
-Es una de las cartas más luminosas del Tarot.
-
-Está relacionada con aquello que puede verse claramente,
-con la autenticidad y con la posibilidad de disfrutar
-de una situación sin esconderse.
-
-Puede señalar éxito, energía, comunicación abierta
-y alegría compartida.
-
-Su aspecto desafiante puede manifestarse como exceso
-de confianza u orgullo.
-
-Su enseñanza es disfrutar de lo positivo manteniendo
-una mirada consciente y auténtica.`
-    },
-
-
-    {
-        nombre: "EL JUICIO",
-        imagen: "../images/judgement.jpeg",
-        significado: `El Juicio representa despertar,
-comprensión, revisión y renovación.
-
-Está relacionado con reconocer lo aprendido después
-de atravesar determinadas experiencias.
-
-Puede señalar una decisión importante, una segunda
-oportunidad o el comienzo de una nueva etapa.
-
-No se trata simplemente de juzgar lo ocurrido, sino
-de comprenderlo para poder avanzar de otra manera.
-
-Su aspecto desafiante puede ser quedarse atrapado
-en la culpa o el arrepentimiento.
-
-Su enseñanza es utilizar el pasado como aprendizaje
-y no como una condena permanente.`
-    },
-
-
-    {
-        nombre: "EL MUNDO",
-        imagen: "../images/theworld.jpeg",
-        significado: `El Mundo representa culminación,
-integración, realización y cierre de un ciclo.
-
-Es la carta que señala que un proceso ha llegado
-a un punto importante de conclusión.
-
-Después de recorrer diferentes experiencias,
-la persona puede reconocer todo lo que aprendió.
-
-Puede representar logros, viajes, expansión,
-integración y sensación de haber completado una etapa.
-
-Su aspecto desafiante puede aparecer cuando sabemos
-que un ciclo terminó pero nos cuesta dar el siguiente paso.
-
-Su enseñanza es reconocer el camino recorrido,
-integrar sus aprendizajes y permitirnos comenzar
-una nueva etapa desde una mayor conciencia.`
-    }
-
-];
-
-
-/* =========================================================
-   ABRIR CARTA
-========================================================= */
-
-function abrirCarta(numero) {
-
-    const carta = cartas[numero];
-
-
-    document.getElementById("imagen-carta").src =
-        carta.imagen;
-
-
-    document.getElementById("imagen-carta").alt =
-        carta.nombre;
-
-
-    document.getElementById("nombre-carta").textContent =
-        carta.nombre;
-
-
-    document.getElementById("significado-carta").textContent =
-        carta.significado;
-
-
-    document
-        .getElementById("modal-carta")
-        .classList.add("activa");
-
-
-    document.body.style.overflow = "hidden";
-
-}
-
-
-/* =========================================================
-   CERRAR CARTA
-========================================================= */
-
-function cerrarCarta() {
-
-    document
-        .getElementById("modal-carta")
-        .classList.remove("activa");
-
-
-    document.body.style.overflow = "";
-
-}
-
-
-/* =========================================================
-   CERRAR HACIENDO CLIC AFUERA
-========================================================= */
-
-document
-    .getElementById("modal-carta")
-    .addEventListener("click", function(event) {
-
-        if (event.target === this) {
-
-            cerrarCarta();
-
+    const cartas = [
+        {
+            nombre: "0 · El Loco",
+            imagen: "../images/thefool.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Loco representa el comienzo de un viaje, la libertad, la espontaneidad y la apertura a lo desconocido. Es la disposición a dar un paso sin tener todas las respuestas.
+
+<strong>En una lectura</strong>
+Puede señalar una oportunidad nueva, una decisión inesperada o la necesidad de recuperar la curiosidad. Invita a explorar, pero también a reconocer los riesgos de actuar sin considerar las consecuencias.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué comienzo te atrae y qué necesitás tener en cuenta antes de dar el primer paso?
+            `
+        },
+        {
+            nombre: "I · El Mago",
+            imagen: "../images/themagician.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Mago simboliza la iniciativa, la habilidad, la comunicación y la capacidad de transformar una idea en una acción concreta.
+
+<strong>En una lectura</strong>
+Puede indicar que existen recursos disponibles para avanzar. Habla de voluntad, creatividad y concentración. En su aspecto desafiante, invita a observar la manipulación, las promesas vacías o la dispersión de energía.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué recursos ya tenés y cómo podrías utilizarlos de manera consciente?
+            `
+        },
+        {
+            nombre: "II · La Sacerdotisa",
+            imagen: "../images/thehighpriestess.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Sacerdotisa representa la intuición, el silencio, el conocimiento interior y aquello que todavía no se ha revelado por completo.
+
+<strong>En una lectura</strong>
+Invita a observar antes de actuar y a distinguir la intuición de los temores. Puede señalar una etapa de estudio, reserva o reflexión. No significa necesariamente que exista un secreto: también puede hablar de información que aún falta comprender.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué necesitás escuchar dentro de vos antes de tomar una decisión?
+            `
+        },
+        {
+            nombre: "III · La Emperatriz",
+            imagen: "../images/theempress.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Emperatriz simboliza la creatividad, el cuidado, la abundancia, la sensualidad y la capacidad de nutrir algo para que crezca.
+
+<strong>En una lectura</strong>
+Puede hablar de proyectos fértiles, vínculos que necesitan atención o una mayor conexión con el cuerpo y las emociones. En su aspecto desafiante, invita a revisar la sobreprotección, la dependencia o el descuido de las propias necesidades.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué aspecto de tu vida necesita cuidado para desarrollarse?
+            `
+        },
+        {
+            nombre: "IV · El Emperador",
+            imagen: "../images/theemperor.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Emperador representa la estructura, los límites, la organización, la autoridad y la estabilidad construida mediante decisiones firmes.
+
+<strong>En una lectura</strong>
+Puede señalar la necesidad de ordenar una situación, asumir responsabilidades o establecer límites claros. En su aspecto desafiante, advierte sobre la rigidez, el control excesivo o la dificultad para adaptarse.
+
+<strong>Pregunta para reflexionar</strong>
+¿Dónde necesitás más estructura y dónde sería conveniente flexibilizarte?
+            `
+        },
+        {
+            nombre: "V · El Hierofante",
+            imagen: "../images/thehierophant.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Hierofante se relaciona con la tradición, la enseñanza, los valores compartidos y la búsqueda de orientación.
+
+<strong>En una lectura</strong>
+Puede representar un aprendizaje, una institución, un mentor o la revisión de las creencias que guían una decisión. También invita a distinguir entre una tradición que aporta sentido y una regla que limita el crecimiento personal.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué creencias te orientan y cuáles necesitás revisar?
+            `
+        },
+        {
+            nombre: "VI · Los Enamorados",
+            imagen: "../images/thelovers.jpeg",
+            texto: `
+<strong>Significado central</strong>
+Los Enamorados representan el vínculo, la atracción, los valores personales y las decisiones que requieren coherencia entre lo que se siente y lo que se elige.
+
+<strong>En una lectura</strong>
+Puede hablar de una relación significativa, una elección importante o la necesidad de comunicación honesta. No garantiza que una persona esté enamorada ni determina por sí sola el futuro de una relación.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué elección refleja mejor tus valores y tus necesidades reales?
+            `
+        },
+        {
+            nombre: "VII · El Carro",
+            imagen: "../images/thechariot.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Carro simboliza el avance, la determinación, la dirección y la capacidad de reunir fuerzas distintas para perseguir un objetivo.
+
+<strong>En una lectura</strong>
+Puede señalar movimiento, iniciativa y superación de obstáculos. Recuerda que avanzar no significa actuar impulsivamente: hace falta orientar la energía y sostener el compromiso.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué objetivo querés alcanzar y qué necesitás para mantener el rumbo?
+            `
+        },
+        {
+            nombre: "VIII · La Fuerza",
+            imagen: "../images/strength.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Fuerza representa el coraje, la paciencia, el autocontrol y la capacidad de relacionarse con los propios impulsos sin recurrir a la violencia.
+
+<strong>En una lectura</strong>
+Invita a responder con firmeza serena, sostener un proceso y reconocer las emociones sin dejar que gobiernen todas las decisiones. También puede señalar la necesidad de recuperar confianza.
+
+<strong>Pregunta para reflexionar</strong>
+¿Cómo podés afrontar esta situación sin reprimir lo que sentís ni reaccionar de manera automática?
+            `
+        },
+        {
+            nombre: "IX · El Ermitaño",
+            imagen: "../images/thehermit.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Ermitaño simboliza la introspección, la prudencia, la experiencia y la búsqueda de una comprensión más profunda.
+
+<strong>En una lectura</strong>
+Puede indicar una pausa necesaria, estudio o distancia para ordenar pensamientos. No siempre representa soledad permanente: a veces es el espacio temporal que permite escuchar la propia voz.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué podés comprender si te das tiempo para mirar la situación con calma?
+            `
+        },
+        {
+            nombre: "X · La Rueda de la Fortuna",
+            imagen: "../images/wheeloffortune.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Rueda de la Fortuna representa los ciclos, los cambios de circunstancias y la interacción entre lo que podemos elegir y lo que no controlamos.
+
+<strong>En una lectura</strong>
+Puede señalar una transición, un giro inesperado o la necesidad de adaptarse. No asegura buena ni mala suerte: invita a observar el momento y responder de manera flexible.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué está cambiando y cómo podés adaptarte sin perder tu centro?
+            `
+        },
+        {
+            nombre: "XI · La Justicia",
+            imagen: "../images/justice.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Justicia representa el equilibrio, la responsabilidad, la honestidad y la relación entre las decisiones y sus consecuencias.
+
+<strong>En una lectura</strong>
+Puede invitar a revisar hechos, acuerdos y límites. Es importante diferenciar lo que se desea que sea cierto de aquello que realmente puede comprobarse. En ocasiones sugiere tomar una decisión con objetividad.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué hechos necesitás considerar para actuar con claridad y responsabilidad?
+            `
+        },
+        {
+            nombre: "XII · El Colgado",
+            imagen: "../images/thehangedman.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Colgado simboliza la pausa, la entrega consciente y la posibilidad de mirar una situación desde otro ángulo.
+
+<strong>En una lectura</strong>
+Puede indicar que forzar una respuesta no ayuda y que hace falta cambiar de perspectiva. También invita a revisar los sacrificios que se hacen y preguntarse si tienen sentido.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué cambia cuando dejás de intentar resolverlo todo de la misma manera?
+            `
+        },
+        {
+            nombre: "XIII · La Muerte",
+            imagen: "../images/death.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Muerte representa el cierre de una etapa, la transformación y la posibilidad de dejar atrás algo que ya cumplió su ciclo.
+
+<strong>En una lectura</strong>
+Generalmente se interpreta de forma simbólica, no como un anuncio literal de muerte física. Puede señalar una despedida, una transición profunda o la necesidad de soltar hábitos que impiden avanzar.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué etapa necesita terminar para que algo diferente pueda comenzar?
+            `
+        },
+        {
+            nombre: "XIV · La Templanza",
+            imagen: "../images/temperance.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Templanza simboliza la moderación, la integración, la paciencia y la búsqueda de equilibrio entre elementos diferentes.
+
+<strong>En una lectura</strong>
+Puede sugerir diálogo, recuperación gradual y cooperación. Invita a evitar los extremos y a respetar el tiempo que necesita cada proceso. No significa quedarse inmóvil, sino encontrar una medida sostenible.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué aspectos de esta situación necesitan encontrar un punto de equilibrio?
+            `
+        },
+        {
+            nombre: "XV · El Diablo",
+            imagen: "../images/thedevil.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Diablo representa los apegos, las tentaciones, los deseos intensos y los patrones que pueden limitar la libertad personal.
+
+<strong>En una lectura</strong>
+Invita a reconocer dependencias, acuerdos desiguales, impulsos o miedos que influyen en las decisiones. No significa que una persona sea malvada ni confirma por sí sola engaños o intenciones ocultas.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué patrón se repite y qué elección podría devolverte más libertad?
+            `
+        },
+        {
+            nombre: "XVI · La Torre",
+            imagen: "../images/thetower.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Torre representa la ruptura de estructuras, las revelaciones y los cambios que obligan a revisar aquello que parecía estable.
+
+<strong>En una lectura</strong>
+Puede simbolizar una crisis, una verdad incómoda o el derrumbe de una expectativa. Aunque la experiencia resulte difícil, también puede abrir espacio para construir sobre bases más honestas.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué idea o estructura necesita ser revisada para que puedas avanzar de una manera más auténtica?
+            `
+        },
+        {
+            nombre: "XVII · La Estrella",
+            imagen: "../images/thestar.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Estrella simboliza la esperanza, la inspiración, la renovación y la confianza que se reconstruye después de una etapa difícil.
+
+<strong>En una lectura</strong>
+Puede invitar a recuperar la calma, conectar con un propósito o avanzar mediante pequeños pasos. No promete resultados automáticos: recuerda que la esperanza también necesita cuidado y acciones concretas.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué te ayuda a recuperar la confianza y qué paso pequeño podés dar hoy?
+            `
+        },
+        {
+            nombre: "XVIII · La Luna",
+            imagen: "../images/themoon.jpeg",
+            texto: `
+<strong>Significado central</strong>
+La Luna representa la imaginación, los temores, la sensibilidad y las situaciones en las que todavía no se distingue todo con claridad.
+
+<strong>En una lectura</strong>
+Invita a observar las emociones sin confundirlas con hechos comprobados. Puede señalar incertidumbre, sueños intensos o la necesidad de reunir más información antes de decidir.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué sabés con certeza, qué estás suponiendo y qué necesitás aclarar?
+            `
+        },
+        {
+            nombre: "XIX · El Sol",
+            imagen: "../images/thesun.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Sol simboliza la claridad, la vitalidad, la alegría, la autenticidad y la posibilidad de reconocer lo que está a la vista.
+
+<strong>En una lectura</strong>
+Puede hablar de comprensión, colaboración, confianza o un momento para expresar lo que se siente. También invita a disfrutar de los logros sin perder de vista los detalles importantes.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué se vuelve más claro cuando mirás la situación con honestidad?
+            `
+        },
+        {
+            nombre: "XX · El Juicio",
+            imagen: "../images/judgement.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Juicio representa la revisión del pasado, el despertar de la conciencia y la posibilidad de responder a una nueva comprensión de uno mismo.
+
+<strong>En una lectura</strong>
+Puede señalar una conversación pendiente, una decisión que ya no puede postergarse o la necesidad de aprender de una experiencia anterior. Invita a asumir responsabilidades sin quedar atrapado en la culpa.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué aprendiste de lo vivido y qué estás preparado para hacer de otra manera?
+            `
+        },
+        {
+            nombre: "XXI · El Mundo",
+            imagen: "../images/theworld.jpeg",
+            texto: `
+<strong>Significado central</strong>
+El Mundo simboliza la culminación, la integración, el aprendizaje y el reconocimiento de un ciclo que llega a una etapa de plenitud.
+
+<strong>En una lectura</strong>
+Puede indicar cierre, logro o la integración de experiencias que antes parecían separadas. También puede invitar a reconocer cuánto se ha avanzado antes de comenzar una nueva etapa.
+
+<strong>Pregunta para reflexionar</strong>
+¿Qué ciclo está llegando a su cierre y qué aprendizaje te llevás?
+            `
+        }
+    ];
+
+
+    const modal = document.getElementById("modalCarta");
+    const nombreCarta = document.getElementById("nombreCarta");
+    const imagenCarta = document.getElementById("imagenCarta");
+    const textoCarta = document.getElementById("textoCarta");
+
+    let elementoAnterior = null;
+
+
+    function abrirCarta(indice) {
+        const carta = cartas[indice];
+
+        if (!carta) {
+            return;
         }
 
-    });
+        elementoAnterior = document.activeElement;
 
+        nombreCarta.textContent = carta.nombre;
+        textoCarta.innerHTML = carta.texto;
 
-/* =========================================================
-   CERRAR CON ESC
-========================================================= */
+        imagenCarta.classList.remove("oculta");
+        imagenCarta.alt = carta.nombre;
+        imagenCarta.onerror = function () {
+            this.classList.add("oculta");
+        };
+        imagenCarta.src = carta.imagen;
 
-document.addEventListener("keydown", function(event) {
+        modal.classList.add("activo");
+        document.body.style.overflow = "hidden";
 
-    if (event.key === "Escape") {
-
-        cerrarCarta();
-
+        modal.querySelector(".cerrar-modal").focus();
     }
 
-});
 
+    function cerrarCarta() {
+        modal.classList.remove("activo");
+        document.body.style.overflow = "";
+
+        if (elementoAnterior && typeof elementoAnterior.focus === "function") {
+            elementoAnterior.focus();
+        }
+    }
+
+
+    function cerrarSiFondo(evento) {
+        if (evento.target === modal) {
+            cerrarCarta();
+        }
+    }
+
+
+    function activarCarta(evento, indice) {
+        if (evento.key === "Enter" || evento.key === " ") {
+            evento.preventDefault();
+            abrirCarta(indice);
+        }
+    }
+
+
+    document.addEventListener("keydown", function (evento) {
+        if (evento.key === "Escape" && modal.classList.contains("activo")) {
+            cerrarCarta();
+        }
+    });
 </script>
 
-
 </body>
-
 </html>
-
