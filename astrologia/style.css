@@ -1,22 +1,19 @@
 ```css
-/* ========================================
-   ASTRO ROJO — NUMEROLOGÍA
-   Diseño adaptable para escritorio y móvil
-======================================== */
+/* =========================
+   PALETA Y CONFIGURACIÓN
+========================= */
 
 :root {
-    --fondo: #080608;
-    --fondo-medio: #16090c;
-    --tarjeta: #190b10;
     --rojo: #e21b3c;
-    --rojo-claro: #f08a9a;
-    --texto: #f3eeee;
-    --texto-suave: #c5b9bc;
+    --rojo-oscuro: #8f1027;
+    --bordo: #3b080d;
+    --fondo: #090608;
+    --panel: #160b0e;
+    --panel-claro: #211014;
+    --texto: #f4eeee;
+    --texto-suave: #c2b2b6;
     --borde: rgba(226, 27, 60, 0.25);
-    --ancho: 1200px;
 }
-
-/* RESET */
 
 * {
     margin: 0;
@@ -26,530 +23,587 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 25px;
 }
 
 body {
     min-height: 100vh;
-    overflow-x: hidden;
-
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--texto);
     background:
         radial-gradient(
-            ellipse at 50% 0%,
-            #3a080d 0%,
-            #16090c 38%,
-            #08070b 72%,
-            #050406 100%
-        );
-
-    color: var(--texto);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1.75;
-}
-
-p {
-    color: var(--texto-suave);
-}
-
-strong {
-    color: var(--rojo-claro);
-    font-weight: 700;
+            ellipse at top,
+            rgba(110, 8, 27, 0.30),
+            transparent 55%
+        ),
+        linear-gradient(145deg, #10070a, var(--fondo) 70%);
+    line-height: 1.7;
 }
 
 a {
     color: inherit;
-    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
 }
 
-/* CONTENEDOR GENERAL */
+
+/* =========================
+   CONTENEDOR
+========================= */
 
 .container {
-    width: min(100% - 64px, var(--ancho));
+    width: min(1200px, calc(100% - 64px));
     margin: 0 auto;
-    padding: 65px 0 80px;
 }
 
-/* PORTADA */
+
+/* =========================
+   BIENVENIDA
+========================= */
 
 .welcome {
+    min-height: 590px;
+    padding: 100px 30px 85px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     position: relative;
-    isolation: isolate;
-    text-align: center;
-    padding: 35px 25px 65px;
-    margin-bottom: 55px;
 }
 
-.hero-glow {
-    position: absolute;
-    z-index: -1;
-    top: -70px;
-    left: 50%;
-    width: 300px;
-    height: 300px;
-    transform: translateX(-50%);
-
-    background: var(--rojo);
-    opacity: 0.14;
-    filter: blur(110px);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.moon {
-    font-size: 48px;
-    margin-bottom: 18px;
+.simbolo {
     color: var(--rojo);
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 24px;
+    text-shadow: 0 0 30px rgba(226, 27, 60, 0.5);
 }
 
-.welcome h1 {
-    color: var(--texto);
-    font-size: clamp(42px, 5vw, 64px);
+.etiqueta {
+    color: var(--rojo);
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: clamp(4px, 0.8vw, 10px);
-    line-height: 1.2;
-    margin-bottom: 20px;
-    text-shadow: 0 0 30px rgba(226, 27, 60, 0.25);
-}
-
-.welcome > p {
-    color: #e7a0aa;
-    font-size: 19px;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-}
-
-.welcome span {
-    display: block;
-    max-width: 680px;
-    margin: 0 auto;
-    color: #b9a9ae;
-    font-size: 15px;
-    line-height: 1.9;
-}
-
-/* SECCIONES */
-
-.contenido {
-    width: 100%;
-    min-width: 0;
-}
-
-.contenido > .seccion-titulo,
-.contenido > .introduccion,
-.contenido > .study-grid,
-.contenido > .principio,
-.contenido > .siguiente-leccion {
-    width: 100%;
-}
-
-.seccion-titulo {
-    text-align: center;
-    margin: 65px 0 30px;
-}
-
-.seccion-titulo:first-child {
-    margin-top: 0;
-}
-
-.seccion-titulo h2 {
-    color: var(--texto);
-    font-size: clamp(19px, 2vw, 25px);
-    line-height: 1.5;
-    font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     text-transform: uppercase;
 }
 
-.seccion-titulo h2::after {
-    content: "";
-    display: block;
-    width: 70px;
-    height: 3px;
-    margin: 18px auto 0;
-    background: var(--rojo);
-    border-radius: 3px;
-    box-shadow: 0 0 14px rgba(226, 27, 60, 0.4);
-}
-
-/* TEXTOS INTRODUCTORIOS */
-
-.introduccion {
-    max-width: 850px;
-    margin: 0 auto 45px;
-    padding: 0 12px;
-    text-align: center;
-}
-
-.introduccion p {
-    font-size: 16px;
-    line-height: 1.95;
-    margin-bottom: 20px;
-}
-
-.introduccion p:last-child {
-    margin-bottom: 0;
-}
-
-/* CUADRÍCULAS */
-
-.study-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
-    margin: 0 auto 55px;
-    align-items: stretch;
-}
-
-/* TARJETAS */
-
-.study-card {
-    position: relative;
-    min-width: 0;
-    min-height: 210px;
-    padding: 28px 25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(65, 10, 20, 0.64),
-            rgba(12, 8, 11, 0.96)
-        );
-
-    border: 1px solid var(--borde);
-    border-radius: 16px;
-
-    text-align: left;
-    overflow-wrap: anywhere;
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.study-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 20%;
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--rojo),
-        transparent
-    );
-    opacity: 0.8;
-}
-
-.study-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(226, 27, 60, 0.65);
-    box-shadow: 0 12px 35px rgba(100, 5, 25, 0.18);
-}
-
-.study-icon {
-    display: block;
-    color: var(--rojo);
-    font-size: 34px;
-    line-height: 1.3;
-    margin-bottom: 16px;
-    text-align: center;
-}
-
-.study-card h3 {
-    color: #f0dfe2;
-    font-size: 16px;
-    line-height: 1.5;
-    letter-spacing: 0.6px;
-    margin-bottom: 14px;
-    text-align: center;
-}
-
-.study-card p {
-    color: #c5b7bb;
-    font-size: 14px;
-    line-height: 1.85;
-    margin-bottom: 13px;
-}
-
-.study-card p:last-child {
-    margin-bottom: 0;
-}
-
-/* BLOQUES DESTACADOS */
-
-.principio {
+.welcome h1 {
     max-width: 900px;
-    margin: 50px auto 60px;
-    padding: 38px 45px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(54, 10, 19, 0.85),
-            rgba(14, 8, 11, 0.95)
-        );
-
-    border: 1px solid rgba(226, 27, 60, 0.35);
-    border-radius: 20px;
-    text-align: center;
+    margin: 20px 0;
+    font-size: clamp(38px, 6vw, 76px);
+    line-height: 1.12;
+    letter-spacing: -2px;
 }
 
-.principio-icon {
+.welcome h1 span {
+    display: block;
     color: var(--rojo);
-    font-size: 38px;
-    margin-bottom: 12px;
+    text-shadow: 0 0 35px rgba(226, 27, 60, 0.18);
 }
 
-.principio h2,
-.principio h3 {
-    color: #f0dfe2;
-    font-size: 20px;
-    line-height: 1.5;
-    letter-spacing: 1px;
-    margin-bottom: 18px;
+.subtitulo {
+    max-width: 650px;
+    color: var(--texto-suave);
+    font-size: 17px;
+    line-height: 1.9;
 }
 
-.principio p {
-    max-width: 760px;
-    margin: 0 auto 16px;
-    color: #c5b9bc;
-    font-size: 15px;
-    line-height: 1.95;
-}
-
-.principio p:last-child {
-    margin-bottom: 0;
-}
-
-/* SIGUIENTE LECCIÓN */
-
-.siguiente-leccion {
+.welcome-detalles {
     display: flex;
     justify-content: center;
-    margin: 35px auto 15px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 28px 0 32px;
 }
 
-.siguiente-leccion a {
+.welcome-detalles span {
+    padding: 8px 15px;
+    border: 1px solid var(--borde);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.025);
+    color: #e7dadd;
+    font-size: 12px;
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+.boton-principal {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 52px;
-    padding: 15px 32px;
-
-    color: #fff0f2;
-    background: linear-gradient(
-        135deg,
-        #a90e2c,
-        #6f091e
-    );
-
-    border: 1px solid #d31a3b;
-    border-radius: 50px;
-
-    text-align: center;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 700;
+    gap: 20px;
+    min-height: 54px;
+    padding: 15px 25px;
+    border: 1px solid var(--rojo);
+    border-radius: 6px;
+    background: linear-gradient(135deg, #b51230, #750c20);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
     letter-spacing: 1.5px;
-
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease,
         background 0.25s ease;
 }
 
-.siguiente-leccion a:hover {
+.boton-principal span {
+    font-size: 18px;
+}
+
+.boton-principal:hover {
     transform: translateY(-3px);
-    background: linear-gradient(
-        135deg,
-        #d31a3b,
-        #8d0b27
-    );
-    box-shadow: 0 8px 25px rgba(226, 27, 60, 0.25);
+    box-shadow: 0 10px 35px rgba(226, 27, 60, 0.25);
+    background: linear-gradient(135deg, #e21b3c, #a10d2b);
 }
 
-/* ACCESIBILIDAD */
 
-a:focus-visible {
-    outline: 2px solid #ff8194;
-    outline-offset: 4px;
+/* =========================
+   SECCIONES
+========================= */
+
+.contenido {
+    padding: 65px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-/* ESCRITORIOS GRANDES */
+.seccion-titulo {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 35px;
+}
 
-@media (min-width: 1450px) {
+.numero-seccion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 58px;
+    height: 58px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    color: var(--rojo);
+    font-size: 18px;
+    font-weight: 800;
+    background: rgba(226, 27, 60, 0.06);
+}
+
+.seccion-titulo h2 {
+    margin-top: 4px;
+    font-size: clamp(25px, 3vw, 36px);
+    line-height: 1.3;
+}
+
+.introduccion {
+    max-width: 850px;
+    margin-left: 80px;
+}
+
+.introduccion > p {
+    margin-bottom: 20px;
+    color: var(--texto-suave);
+    font-size: 16px;
+}
+
+
+/* =========================
+   AVISO
+========================= */
+
+.aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 30px;
+    padding: 22px;
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--rojo);
+    border-radius: 8px;
+    background: rgba(226, 27, 60, 0.045);
+}
+
+.aviso-icono {
+    color: var(--rojo);
+    font-size: 22px;
+}
+
+.aviso p {
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+
+/* =========================
+   TARJETAS DEL CURSO
+========================= */
+
+.study-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.study-card {
+    position: relative;
+    min-height: 245px;
+    padding: 30px 26px;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(75, 13, 27, 0.27),
+            rgba(17, 9, 12, 0.95)
+        );
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+.study-card::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: -45px;
+    bottom: -45px;
+    border-radius: 50%;
+    background: rgba(226, 27, 60, 0.07);
+    filter: blur(12px);
+    pointer-events: none;
+}
+
+.study-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(226, 27, 60, 0.7);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(90, 12, 30, 0.45),
+            rgba(17, 9, 12, 0.98)
+        );
+}
+
+.card-numero {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    color: rgba(255, 255, 255, 0.22);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.card-icono {
+    display: block;
+    margin-bottom: 18px;
+    color: var(--rojo);
+    font-size: 31px;
+    line-height: 1.2;
+}
+
+.study-card h3 {
+    margin-bottom: 12px;
+    font-size: 19px;
+    line-height: 1.4;
+}
+
+.study-card p {
+    color: var(--texto-suave);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   PRINCIPIO DE ESTUDIO
+========================= */
+
+.principio {
+    position: relative;
+    margin: 35px 0 70px;
+    padding: 55px 45px;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    text-align: center;
+    background:
+        radial-gradient(
+            ellipse at center top,
+            rgba(130, 13, 36, 0.3),
+            transparent 75%
+        ),
+        var(--panel);
+}
+
+.principio-simbolo {
+    display: block;
+    margin-bottom: 18px;
+    color: var(--rojo);
+    font-size: 36px;
+}
+
+.principio h2 {
+    max-width: 650px;
+    margin: 16px auto;
+    font-size: clamp(25px, 3.5vw, 37px);
+    line-height: 1.3;
+}
+
+.principio > p:last-child {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--texto-suave);
+    font-size: 15px;
+}
+
+
+/* =========================
+   SIGUIENTE LECCIÓN
+========================= */
+
+.siguiente-leccion {
+    padding: 65px 25px;
+    border-top: 1px solid var(--borde);
+    text-align: center;
+}
+
+.siguiente-leccion h2 {
+    margin: 14px 0;
+    font-size: clamp(26px, 4vw, 40px);
+    line-height: 1.3;
+}
+
+.siguiente-leccion > p:not(.etiqueta) {
+    max-width: 600px;
+    margin: 0 auto 28px;
+    color: var(--texto-suave);
+    font-size: 15px;
+}
+
+.siguiente-leccion .boton-principal {
+    margin-top: 5px;
+}
+
+
+/* =========================
+   PIE DE PÁGINA
+========================= */
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 35px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    text-align: center;
+}
+
+.footer-simbolo {
+    color: var(--rojo);
+    font-size: 27px;
+}
+
+.footer p {
+    color: var(--rojo);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.footer span:last-child {
+    color: #95858a;
+    font-size: 11px;
+}
+
+
+/* =========================
+   PANTALLAS GRANDES
+========================= */
+
+@media (min-width: 1500px) {
     .container {
-        max-width: 1280px;
-    }
-
-    .study-grid {
-        gap: 26px;
-    }
-
-    .study-card {
-        padding: 32px;
-    }
-}
-
-/* TABLETS Y NOTEBOOKS PEQUEÑAS */
-
-@media (max-width: 950px) {
-    .container {
-        width: min(100% - 44px, 850px);
-        padding-top: 45px;
+        width: min(1300px, calc(100% - 100px));
     }
 
     .welcome {
-        margin-bottom: 35px;
+        min-height: 680px;
     }
 
+    .study-grid {
+        gap: 28px;
+    }
+
+    .study-card {
+        min-height: 260px;
+        padding: 34px;
+    }
+}
+
+
+/* =========================
+   TABLETS Y NOTEBOOKS
+========================= */
+
+@media (max-width: 1000px) {
     .study-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-    }
-
-    .study-card {
-        padding: 25px 22px;
-    }
-
-    .principio {
-        padding: 32px;
-    }
-}
-
-/* CELULARES */
-
-@media (max-width: 600px) {
-    body {
-        font-size: 15px;
-        line-height: 1.7;
-    }
-
-    .container {
-        width: calc(100% - 30px);
-        padding: 32px 0 45px;
     }
 
     .welcome {
-        padding: 22px 5px 35px;
-        margin-bottom: 25px;
-    }
-
-    .hero-glow {
-        width: 210px;
-        height: 210px;
-        top: -35px;
-        filter: blur(80px);
-    }
-
-    .moon {
-        font-size: 36px;
-        margin-bottom: 12px;
-    }
-
-    .welcome h1 {
-        font-size: clamp(28px, 8vw, 38px);
-        letter-spacing: 3px;
-        overflow-wrap: anywhere;
-        margin-bottom: 15px;
-    }
-
-    .welcome > p {
-        font-size: 15px;
-        letter-spacing: 1px;
-    }
-
-    .welcome span {
-        font-size: 13px;
-        line-height: 1.8;
-    }
-
-    .seccion-titulo {
-        margin: 45px 0 24px;
-    }
-
-    .seccion-titulo h2 {
-        font-size: 17px;
-        letter-spacing: 1.5px;
+        min-height: 520px;
     }
 
     .introduccion {
-        padding: 0 3px;
-        margin-bottom: 35px;
-        text-align: left;
+        margin-left: 0;
+    }
+}
+
+
+/* =========================
+   CELULARES
+========================= */
+
+@media (max-width: 600px) {
+    .container {
+        width: calc(100% - 32px);
     }
 
-    .introduccion p {
+    .welcome {
+        min-height: auto;
+        padding: 75px 5px 65px;
+    }
+
+    .simbolo {
+        font-size: 39px;
+        margin-bottom: 20px;
+    }
+
+    .etiqueta {
+        font-size: 9px;
+        letter-spacing: 2.5px;
+    }
+
+    .welcome h1 {
+        margin: 17px 0;
+        font-size: clamp(35px, 10vw, 49px);
+        letter-spacing: -1px;
+    }
+
+    .subtitulo {
         font-size: 14px;
-        line-height: 1.9;
-        margin-bottom: 16px;
+        line-height: 1.8;
+    }
+
+    .welcome-detalles {
+        gap: 8px;
+        margin: 22px 0 28px;
+    }
+
+    .welcome-detalles span {
+        padding: 7px 10px;
+        font-size: 10px;
+    }
+
+    .boton-principal {
+        width: 100%;
+        max-width: 330px;
+        padding: 14px 15px;
+        font-size: 11px;
+    }
+
+    .contenido {
+        padding: 45px 0;
+    }
+
+    .seccion-titulo {
+        gap: 14px;
+        margin-bottom: 25px;
+    }
+
+    .numero-seccion {
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+        font-size: 15px;
+    }
+
+    .seccion-titulo h2 {
+        font-size: 25px;
+    }
+
+    .introduccion > p {
+        font-size: 14px;
+        line-height: 1.85;
+    }
+
+    .aviso {
+        gap: 11px;
+        padding: 16px;
+    }
+
+    .aviso p {
+        font-size: 12px;
     }
 
     .study-grid {
         grid-template-columns: 1fr;
-        gap: 14px;
-        margin-bottom: 40px;
+        gap: 15px;
     }
 
     .study-card {
-        min-height: 0;
-        padding: 23px 21px;
-        border-radius: 14px;
-    }
-
-    .study-icon {
-        font-size: 30px;
-        margin-bottom: 12px;
+        min-height: auto;
+        padding: 25px 22px;
     }
 
     .study-card h3 {
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .study-card p {
         font-size: 13px;
-        line-height: 1.85;
     }
 
     .principio {
-        padding: 25px 19px;
-        margin: 35px auto 40px;
-        border-radius: 15px;
+        margin: 20px 0 45px;
+        padding: 38px 22px;
     }
 
-    .principio-icon {
-        font-size: 32px;
+    .principio h2 {
+        font-size: 27px;
     }
 
-    .principio h2,
-    .principio h3 {
-        font-size: 16px;
-        letter-spacing: 0.5px;
-    }
-
-    .principio p {
+    .principio > p:last-child {
         font-size: 13px;
-        line-height: 1.9;
-        text-align: left;
     }
 
     .siguiente-leccion {
-        margin-top: 30px;
+        padding: 45px 5px;
     }
 
-    .siguiente-leccion a {
-        width: 100%;
-        padding: 14px 17px;
-        font-size: 11px;
-        letter-spacing: 0.7px;
+    .siguiente-leccion h2 {
+        font-size: 28px;
+    }
+
+    .siguiente-leccion > p:not(.etiqueta) {
+        font-size: 13px;
+    }
+
+    .footer {
+        padding: 30px 10px;
     }
 }
 
-/* CELULARES PEQUEÑOS */
+
+/* =========================
+   CELULARES PEQUEÑOS
+========================= */
 
 @media (max-width: 360px) {
     .container {
@@ -557,32 +611,32 @@ a:focus-visible {
     }
 
     .welcome h1 {
-        font-size: 27px;
-        letter-spacing: 2px;
+        font-size: 33px;
     }
 
     .seccion-titulo h2 {
-        font-size: 15px;
+        font-size: 22px;
     }
 
     .study-card {
-        padding: 20px 16px;
-    }
-
-    .principio {
-        padding: 22px 16px;
+        padding: 22px 18px;
     }
 }
 
-/* REDUCIR MOVIMIENTO SI EL DISPOSITIVO LO PREFIERE */
+
+/* =========================
+   ACCESIBILIDAD
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
+        transition: none !important;
     }
 }
 ```
