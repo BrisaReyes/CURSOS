@@ -12,6 +12,8 @@ process.env.BASE_URL || "https://cursos-5.onrender.com"
 const CURSO_URL = "${BASE_URL}/astrologia/index.html";
 const INICIO_URL = "${BASE_URL}/";
 const COOKIE_NAME = "astro_rojo_user";
+const INICIO_URL = "${BASE_URL}/";
+const COOKIE_NAME = "astro_rojo_user";
 
 const pool = new Pool({
 connectionString: process.env.DATABASE_URL,
