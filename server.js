@@ -22,7 +22,7 @@ ssl: { rejectUnauthorized: false }
 
 function obtenerUsuario(req) {
 const cookies = req.headers.cookie || "";
-const prefijo = "${COOKIE_NAME}=";
+const prefijo = `${COOKIE_NAME}=`;
 const cookie = cookies
 .split(";")
 .map(c => c.trim())
