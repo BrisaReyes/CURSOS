@@ -1,0 +1,1066 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Introducción al curso de astrología de Astro Rojo. Aprendé los fundamentos para comprender una carta natal.">
+
+    <title>Introducción a la Astrología — ASTRO ROJO</title>
+
+    <style>
+        :root {
+            --fondo: #09070a;
+            --panel: #16090c;
+            --panel2: #211014;
+            --rojo: #e21b3c;
+            --rojo-oscuro: #8e142b;
+            --rosa: #ffb7c5;
+            --texto: #f3eeee;
+            --suave: #c4b2b7;
+            --borde: #48202b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--texto);
+            background:
+                radial-gradient(
+                    circle at top,
+                    #3b080d 0,
+                    #16090c 35%,
+                    #09070a 75%
+                );
+            line-height: 1.75;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 24px 16px 55px;
+        }
+
+        .welcome {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 55px 22px 45px;
+            border: 1px solid var(--borde);
+            border-radius: 25px;
+            background: linear-gradient(
+                145deg,
+                #281016,
+                #12090c 75%
+            );
+            box-shadow: 0 18px 60px #00000035;
+            margin-bottom: 28px;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e21b3c;
+            opacity: 0.13;
+            filter: blur(75px);
+            pointer-events: none;
+        }
+
+        .moon {
+            position: relative;
+            font-size: 48px;
+            color: var(--rojo);
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px #e21b3c55;
+        }
+
+        .brand {
+            color: var(--rojo);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 17px;
+        }
+
+        h1 {
+            position: relative;
+            font-size: clamp(30px, 6vw, 48px);
+            line-height: 1.2;
+            margin-bottom: 17px;
+        }
+
+        h1 span {
+            color: var(--rojo);
+        }
+
+        .welcome > p {
+            position: relative;
+            max-width: 680px;
+            margin: auto;
+            color: var(--suave);
+            font-size: 15px;
+        }
+
+        .pill {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 8px 15px;
+            border: 1px solid #8e142b;
+            border-radius: 30px;
+            color: var(--rosa);
+            background: #8e142b20;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            margin: 36px 0 18px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(23px, 5vw, 30px);
+            margin-bottom: 7px;
+        }
+
+        .section-title h2 span {
+            color: var(--rojo);
+        }
+
+        .section-title p {
+            color: var(--suave);
+            font-size: 14px;
+        }
+
+        .card {
+            padding: 23px;
+            margin-bottom: 16px;
+            border: 1px solid var(--borde);
+            border-radius: 18px;
+            background: linear-gradient(
+                145deg,
+                #1d0d12,
+                #11090c
+            );
+        }
+
+        .card h3 {
+            color: var(--rosa);
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #d7c7cc;
+            font-size: 14px;
+            margin-bottom: 11px;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 15px;
+            border: 1px solid #8e142b;
+            border-radius: 14px;
+            background: #8e142b25;
+            color: var(--rosa);
+            font-size: 23px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        .mini-card {
+            padding: 20px;
+            border: 1px solid var(--borde);
+            border-radius: 17px;
+            background: #160b0f;
+        }
+
+        .mini-card h3 {
+            color: var(--rosa);
+            font-size: 17px;
+            margin-bottom: 9px;
+        }
+
+        .mini-card p {
+            color: var(--suave);
+            font-size: 13px;
+        }
+
+        .destacado {
+            padding: 22px;
+            margin: 20px 0;
+            border-left: 3px solid var(--rojo);
+            border-radius: 0 15px 15px 0;
+            background: #8e142b1b;
+        }
+
+        .destacado strong {
+            display: block;
+            color: var(--rosa);
+            margin-bottom: 8px;
+        }
+
+        .destacado p {
+            color: #dfcdd2;
+            font-size: 14px;
+        }
+
+        .lista {
+            list-style: none;
+        }
+
+        .lista li {
+            position: relative;
+            padding: 11px 10px 11px 30px;
+            border-bottom: 1px solid #48202b80;
+            color: #d7c7cc;
+            font-size: 14px;
+        }
+
+        .lista li::before {
+            content: "✦";
+            position: absolute;
+            left: 5px;
+            color: var(--rojo);
+        }
+
+        details {
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid var(--borde);
+            border-radius: 15px;
+            background: #160b0f;
+        }
+
+        summary {
+            padding: 17px;
+            cursor: pointer;
+            color: var(--rosa);
+            font-weight: bold;
+            font-size: 14px;
+            list-style: none;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            float: right;
+            color: var(--rojo);
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: "−";
+        }
+
+        .details-content {
+            padding: 0 17px 18px;
+            color: var(--suave);
+            font-size: 14px;
+        }
+
+        .details-content p {
+            margin-bottom: 10px;
+        }
+
+        .details-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .boton {
+            display: block;
+            width: 100%;
+            padding: 16px 20px;
+            margin-top: 25px;
+            border: 1px solid var(--rojo);
+            border-radius: 13px;
+            background: linear-gradient(
+                110deg,
+                #a8112d,
+                #e21b3c
+            );
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.25s ease;
+        }
+
+        .boton:hover {
+            filter: brightness(1.15);
+            transform: translateY(-2px);
+        }
+
+        .boton-secundario {
+            display: block;
+            width: 100%;
+            padding: 14px 18px;
+            margin-top: 12px;
+            border: 1px solid var(--borde);
+            border-radius: 13px;
+            background: #160b0f;
+            color: var(--rosa);
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .ejercicio {
+            padding: 23px;
+            border: 1px solid var(--borde);
+            border-radius: 19px;
+            background: linear-gradient(
+                145deg,
+                #211014,
+                #10080b
+            );
+        }
+
+        .ejercicio h3 {
+            color: var(--rosa);
+            margin-bottom: 12px;
+        }
+
+        .ejercicio p {
+            color: #d7c7cc;
+            font-size: 14px;
+            margin-bottom: 13px;
+        }
+
+        .ejercicio label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--suave);
+            font-size: 13px;
+        }
+
+        .ejercicio select {
+            width: 100%;
+            padding: 13px;
+            color: var(--texto);
+            background: #09070a;
+            border: 1px solid var(--borde);
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            background: #09070a;
+            color: var(--suave);
+            font-size: 13px;
+        }
+
+        .feedback.visible {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            color: #9c858d;
+            font-size: 12px;
+        }
+
+        @media (min-width: 650px) {
+            .container {
+                padding-top: 35px;
+            }
+
+            .welcome {
+                padding: 65px 45px 50px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .boton {
+                max-width: 420px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .boton-secundario {
+                max-width: 420px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <!-- =========================
+         PORTADA
+    ========================== -->
+
+    <section class="welcome">
+
+        <div class="hero-glow"></div>
+
+        <div class="moon">☾</div>
+
+        <div class="brand">ASTRO ROJO</div>
+
+        <h1>Curso de <span>Astrología</span></h1>
+
+        <p>
+            Una formación para descubrir el lenguaje de los astros,
+            comprender los signos zodiacales y aprender a interpretar
+            los componentes de una carta natal desde cero.
+        </p>
+
+        <div class="pill">
+            NIVEL INICIAL · CLASE 1
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BIENVENIDA AL CURSO
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>Bienvenido a la <span>Astrología</span></h2>
+
+            <p>
+                Empezamos por los fundamentos para que puedas avanzar
+                paso a paso, sin necesidad de conocimientos previos.
+            </p>
+        </div>
+
+        <article class="card">
+
+            <div class="icon">✦</div>
+
+            <h3>¿Qué vas a aprender?</h3>
+
+            <p>
+                La astrología es un sistema simbólico que relaciona
+                las posiciones de los cuerpos celestes con arquetipos,
+                ciclos y áreas de la experiencia humana.
+            </p>
+
+            <p>
+                En este curso vas a conocer los doce signos zodiacales,
+                los planetas, las casas astrológicas y los aspectos
+                que se estudian al interpretar una carta natal.
+            </p>
+
+            <p>
+                No necesitás saber astrología. Vamos a aprender los
+                conceptos básicos primero y después los vamos a
+                relacionar mediante ejemplos y ejercicios.
+            </p>
+
+        </article>
+
+    </section>
+
+
+    <!-- =========================
+         QUÉ ES LA ASTROLOGÍA
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>01. ¿Qué es la <span>astrología</span>?</h2>
+        </div>
+
+        <article class="card">
+
+            <p>
+                La astrología interpreta simbólicamente las posiciones
+                del Sol, la Luna y los planetas en relación con el
+                zodíaco y otros elementos de una carta.
+            </p>
+
+            <p>
+                En astrología natal, la carta se calcula a partir de
+                la fecha, la hora y el lugar de nacimiento. Dentro de
+                esta tradición, se utiliza como una herramienta para
+                reflexionar sobre la personalidad, los vínculos,
+                los intereses y diferentes experiencias de vida.
+            </p>
+
+            <p>
+                Es importante distinguir su lenguaje simbólico de
+                la ciencia: no existe evidencia científica sólida
+                de que las posiciones planetarias determinen la
+                personalidad o permitan predecir de forma fiable
+                los acontecimientos individuales.
+            </p>
+
+        </article>
+
+        <div class="destacado">
+
+            <strong>Concepto fundamental</strong>
+
+            <p>
+                Aprender astrología no consiste solamente en memorizar
+                significados. Consiste en aprender a relacionar los
+                símbolos, reconocer matices y construir una interpretación
+                coherente sin tomarla como un destino inevitable.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         EL LENGUAJE ASTROLÓGICO
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>02. Los cuatro elementos de una carta</h2>
+
+            <p>
+                Para empezar a interpretar, necesitás comprender
+                qué función cumple cada componente.
+            </p>
+        </div>
+
+        <div class="grid">
+
+            <article class="mini-card">
+
+                <div class="icon">☉</div>
+
+                <h3>Planetas</h3>
+
+                <p>
+                    Representan funciones o temas simbólicos.
+                    Por ejemplo, Mercurio se relaciona con la
+                    comunicación y Venus con los vínculos y valores.
+                </p>
+
+            </article>
+
+            <article class="mini-card">
+
+                <div class="icon">♈</div>
+
+                <h3>Signos</h3>
+
+                <p>
+                    Describen el estilo con el que se expresa
+                    una función planetaria dentro de la interpretación.
+                </p>
+
+            </article>
+
+            <article class="mini-card">
+
+                <div class="icon">⌂</div>
+
+                <h3>Casas</h3>
+
+                <p>
+                    Se relacionan con áreas de la vida: hogar,
+                    relaciones, trabajo, aprendizaje, amistades
+                    y otros ámbitos.
+                </p>
+
+            </article>
+
+            <article class="mini-card">
+
+                <div class="icon">✧</div>
+
+                <h3>Aspectos</h3>
+
+                <p>
+                    Son relaciones angulares entre planetas.
+                    Se interpretan como vínculos simbólicos
+                    de cooperación, tensión o concentración.
+                </p>
+
+            </article>
+
+        </div>
+
+        <div class="destacado">
+
+            <strong>La fórmula básica</strong>
+
+            <p>
+                Planeta + signo + casa + aspectos forman parte
+                de una misma interpretación. Por ejemplo, para
+                estudiar Venus no alcanza con conocer su signo:
+                también se observa la casa en la que se encuentra
+                y sus aspectos con otros planetas.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SIGNOS, ELEMENTOS Y MODALIDADES
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>03. El zodíaco</h2>
+
+            <p>
+                El zodíaco tropical se divide en doce signos,
+                cada uno asociado a un sector de 30 grados
+                de la eclíptica.
+            </p>
+
+        </div>
+
+        <article class="card">
+
+            <h3>Los doce signos</h3>
+
+            <ul class="lista">
+                <li>Aries — iniciativa y comienzo.</li>
+                <li>Tauro — estabilidad y valoración.</li>
+                <li>Géminis — curiosidad y comunicación.</li>
+                <li>Cáncer — pertenencia y cuidado.</li>
+                <li>Leo — creatividad y expresión.</li>
+                <li>Virgo — análisis y organización.</li>
+                <li>Libra — vínculos y equilibrio.</li>
+                <li>Escorpio — profundidad y transformación.</li>
+                <li>Sagitario — exploración y sentido.</li>
+                <li>Capricornio — estructura y responsabilidad.</li>
+                <li>Acuario — innovación y perspectiva colectiva.</li>
+                <li>Piscis — sensibilidad e imaginación.</li>
+            </ul>
+
+            <p>
+                Estas son asociaciones tradicionales resumidas.
+                En una carta natal, ningún signo debe interpretarse
+                de manera aislada ni como una descripción absoluta
+                de la persona.
+            </p>
+
+        </article>
+
+        <article class="card">
+
+            <h3>Los cuatro elementos</h3>
+
+            <p><strong>Fuego:</strong> Aries, Leo y Sagitario. Se asocia con energía, iniciativa y expresión.</p>
+
+            <p><strong>Tierra:</strong> Tauro, Virgo y Capricornio. Se asocia con lo práctico, la constancia y los recursos.</p>
+
+            <p><strong>Aire:</strong> Géminis, Libra y Acuario. Se asocia con ideas, intercambio y comunicación.</p>
+
+            <p><strong>Agua:</strong> Cáncer, Escorpio y Piscis. Se asocia con emociones, sensibilidad e intuición.</p>
+
+        </article>
+
+        <article class="card">
+
+            <h3>Las tres modalidades</h3>
+
+            <p>
+                <strong>Cardinal:</strong> Aries, Cáncer, Libra y Capricornio.
+                Se relaciona con iniciar y poner en movimiento.
+            </p>
+
+            <p>
+                <strong>Fija:</strong> Tauro, Leo, Escorpio y Acuario.
+                Se relaciona con sostener y consolidar.
+            </p>
+
+            <p>
+                <strong>Mutable:</strong> Géminis, Virgo, Sagitario y Piscis.
+                Se relaciona con adaptar y cambiar de enfoque.
+            </p>
+
+        </article>
+
+    </section>
+
+
+    <!-- =========================
+         SOL, LUNA Y ASCENDENTE
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>04. Sol, Luna y <span>Ascendente</span></h2>
+
+            <p>
+                Son tres de los componentes más conocidos
+                de la astrología natal.
+            </p>
+        </div>
+
+        <article class="card">
+
+            <h3>☉ El Sol</h3>
+
+            <p>
+                En la interpretación tradicional se relaciona
+                con la identidad, la vitalidad y la expresión
+                consciente. El signo solar es el que muchas
+                personas conocen por su fecha de nacimiento.
+            </p>
+
+        </article>
+
+        <article class="card">
+
+            <h3>☾ La Luna</h3>
+
+            <p>
+                Se asocia con las necesidades emocionales,
+                los hábitos, la seguridad y las respuestas
+                instintivas dentro del lenguaje astrológico.
+            </p>
+
+        </article>
+
+        <article class="card">
+
+            <h3>↗ El Ascendente</h3>
+
+            <p>
+                Es el signo que ascendía por el horizonte oriental
+                en el momento y lugar del nacimiento, según el
+                sistema de cálculo utilizado. Para calcularlo
+                correctamente se necesita una hora de nacimiento
+                suficientemente precisa.
+            </p>
+
+        </article>
+
+        <div class="destacado">
+
+            <strong>¿Por qué no somos solamente nuestro signo solar?</strong>
+
+            <p>
+                Porque una carta natal incluye muchos componentes.
+                En la astrología, el Sol, la Luna, el Ascendente,
+                los demás planetas y sus posiciones se integran
+                para construir una lectura más amplia.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CARTA NATAL
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>05. ¿Qué es una <span>carta natal</span>?</h2>
+        </div>
+
+        <article class="card">
+
+            <p>
+                La carta natal es una representación del cielo
+                calculada para un momento y un lugar específicos.
+                En astrología tropical, muestra las posiciones
+                de los planetas sobre el zodíaco y, cuando se
+                dispone de la hora adecuada, la distribución
+                de las casas.
+            </p>
+
+            <h3>Los tres datos principales</h3>
+
+            <ul class="lista">
+                <li><strong>Fecha:</strong> permite calcular las posiciones celestes para ese día.</li>
+                <li><strong>Hora:</strong> es especialmente importante para el Ascendente y las casas.</li>
+                <li><strong>Lugar:</strong> permite calcular el horizonte y ajustar la carta a la ubicación.</li>
+            </ul>
+
+            <p>
+                Si la hora es desconocida o aproximada, algunas
+                partes de la carta pueden ser inciertas. No
+                conviene presentar el Ascendente o las casas
+                como seguros si los datos no lo permiten.
+            </p>
+
+        </article>
+
+    </section>
+
+
+    <!-- =========================
+         TIPOS DE ASTROLOGÍA
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>06. Ramas de la astrología</h2>
+        </div>
+
+        <details>
+            <summary>Astrología natal</summary>
+
+            <div class="details-content">
+                <p>
+                    Estudia la carta calculada para el nacimiento.
+                    En la tradición astrológica se utiliza para
+                    reflexionar sobre características personales,
+                    necesidades, intereses y patrones simbólicos.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Astrología predictiva</summary>
+
+            <div class="details-content">
+                <p>
+                    Trabaja con técnicas como los tránsitos y
+                    las progresiones para interpretar ciclos
+                    simbólicos relacionados con distintos momentos
+                    de la vida. No garantiza acontecimientos futuros.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Astrología relacional</summary>
+
+            <div class="details-content">
+                <p>
+                    Compara dos cartas mediante técnicas como
+                    la sinastría para explorar simbólicamente
+                    dinámicas, afinidades y posibles diferencias
+                    en una relación.
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Revolución solar y revolución lunar</summary>
+
+            <div class="details-content">
+                <p>
+                    La revolución solar se calcula para el retorno
+                    del Sol a su posición natal. La revolución
+                    lunar se calcula para el retorno de la Luna
+                    a su posición natal. Ambas se utilizan en
+                    determinadas tradiciones para estudiar ciclos.
+                </p>
+            </div>
+        </details>
+
+    </section>
+
+
+    <!-- =========================
+         CÓMO ESTUDIAR
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>07. Cómo aprender a interpretar</h2>
+        </div>
+
+        <article class="card">
+
+            <h3>El orden recomendado</h3>
+
+            <ul class="lista">
+                <li>Aprender los doce signos, sus elementos y modalidades.</li>
+                <li>Comprender el significado simbólico de cada planeta.</li>
+                <li>Estudiar las doce casas y sus áreas de experiencia.</li>
+                <li>Reconocer los principales aspectos planetarios.</li>
+                <li>Practicar la integración de todos los componentes.</li>
+                <li>Revisar los datos de nacimiento antes de interpretar.</li>
+            </ul>
+
+        </article>
+
+    </section>
+
+
+    <!-- =========================
+         MINI PRÁCTICA
+    ========================== -->
+
+    <section>
+
+        <div class="section-title">
+            <h2>08. Tu primera <span>práctica</span></h2>
+
+            <p>
+                Comprobá si comprendiste los conceptos
+                fundamentales de esta introducción.
+            </p>
+        </div>
+
+        <div class="ejercicio">
+
+            <h3>Pregunta de repaso</h3>
+
+            <p>
+                ¿Qué combinación de datos se necesita principalmente
+                para calcular una carta natal completa, incluyendo
+                Ascendente y casas?
+            </p>
+
+            <label for="respuesta">
+                Elegí una respuesta:
+            </label>
+
+            <select id="respuesta">
+                <option value="">Seleccioná una opción</option>
+                <option value="a">Solamente el signo solar</option>
+                <option value="b">Fecha, hora y lugar de nacimiento</option>
+                <option value="c">Nombre y apellido</option>
+            </select>
+
+            <button
+                type="button"
+                class="boton"
+                onclick="corregirEjercicio()"
+            >
+                Comprobar respuesta
+            </button>
+
+            <div
+                class="feedback"
+                id="feedback"
+                aria-live="polite"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         NAVEGACIÓN
+    ========================== -->
+
+    <section>
+
+        <div class="destacado">
+
+            <strong>¡Terminaste la introducción!</strong>
+
+            <p>
+                Ya conocés las bases del lenguaje astrológico.
+                En la próxima parte vas a estudiar los doce signos
+                zodiacales con más detalle: sus elementos,
+                modalidades, características y regencias.
+            </p>
+
+        </div>
+
+        <a href="index2.html" class="boton">
+            COMENZAR CLASE 2 · LOS SIGNOS →
+        </a>
+
+        <a href="../index.html" class="boton-secundario">
+            ← VOLVER A ASTRO ROJO
+        </a>
+
+    </section>
+
+
+    <footer>
+        <p>☾ ASTRO ROJO</p>
+        <p>Curso de Astrología · Introducción y fundamentos</p>
+    </footer>
+
+</main>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+    function corregirEjercicio() {
+        const respuesta = document.getElementById("respuesta").value;
+        const feedback = document.getElementById("feedback");
+
+        feedback.classList.add("visible");
+
+        if (respuesta === "b") {
+            feedback.textContent =
+                "¡Correcto! La fecha, la hora y el lugar permiten calcular las posiciones de la carta y, con una hora fiable, el Ascendente y las casas.";
+            feedback.style.borderColor = "#55d6a0";
+            feedback.style.color = "#a7f0ce";
+        } else if (respuesta === "") {
+            feedback.textContent =
+                "Elegí una respuesta antes de comprobar el ejercicio.";
+            feedback.style.borderColor = "#48202b";
+            feedback.style.color = "#c4b2b7";
+        } else {
+            feedback.textContent =
+                "Todavía no. Repasá la sección sobre la carta natal: la hora y el lugar son especialmente importantes para calcular el Ascendente y las casas.";
+            feedback.style.borderColor = "#e21b3c";
+            feedback.style.color = "#ffb7c5";
+        }
+    }
+</script>
+
+</body>
+</html>
+```
