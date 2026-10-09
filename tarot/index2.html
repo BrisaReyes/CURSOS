@@ -4,20 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#10070b">
-<meta name="description" content="Curso de Tarot ASTRO ROJO: aprende los Arcanos Menores, los cuatro palos y sus significados.">
+<meta name="description" content="ASTRO ROJO — Curso de Tarot. Aprende los Arcanos Menores y su lenguaje simbólico.">
 
-<title>ASTRO ROJO — Arcanos Menores</title>
+<title>ASTRO ROJO — El arte del Tarot</title>
 
 <style>
 :root {
-    --fondo: #10070b;
-    --fondo-claro: #1b0b10;
-    --rojo-oscuro: #3a080d;
-    --rojo: #e21b3c;
-    --rojo-suave: #b3122f;
-    --texto: #f3eeee;
-    --texto-secundario: #b9aeb1;
-    --borde: rgba(226,27,60,.25);
+    --bg: #10070b;
+    --red: #e21b3c;
+    --red-dark: #3a080d;
+    --white: #f3eeee;
+    --muted: #aa9da1;
+    --line: rgba(243,238,238,.15);
 }
 
 * {
@@ -28,14 +26,12 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 30px;
 }
 
 body {
-    min-height: 100vh;
-    background:
-        radial-gradient(circle at 50% 0%, #3a080d 0%, transparent 34%),
-        linear-gradient(180deg, #10070b, #090609 75%);
-    color: var(--texto);
+    background: var(--bg);
+    color: var(--white);
     font-family: Georgia, "Times New Roman", serif;
     line-height: 1.7;
 }
@@ -49,432 +45,648 @@ button {
     font: inherit;
 }
 
-.container {
-    width: min(1100px, 90%);
-    margin: auto;
+.wrap {
+    width: min(1080px, 88%);
+    margin: 0 auto;
 }
 
-.welcome {
-    min-height: 390px;
-    padding: 80px 0 70px;
+/* PORTADA */
+
+header {
+    min-height: 84vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
     position: relative;
+    padding: 70px 0;
+    overflow: hidden;
 }
 
-.moon {
-    color: var(--rojo);
-    font-size: 36px;
-    margin-bottom: 20px;
+header::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    right: -220px;
+    top: -180px;
+    background: radial-gradient(circle, rgba(226,27,60,.18), transparent 70%);
+    pointer-events: none;
 }
 
-.eyebrow {
-    color: #d99aa4;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 5px;
+.topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    font: 10px Arial, sans-serif;
+    letter-spacing: 3px;
+    color: var(--muted);
     text-transform: uppercase;
-    margin-bottom: 18px;
+}
+
+.brand {
+    color: var(--red);
+}
+
+.hero {
+    padding: 95px 0 65px;
+}
+
+.kicker {
+    font: 10px Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--red);
+    margin-bottom: 28px;
 }
 
 h1 {
-    font-size: clamp(36px, 7vw, 76px);
-    line-height: 1.05;
+    font-size: clamp(54px, 10vw, 112px);
+    line-height: .96;
     font-weight: normal;
-    letter-spacing: 2px;
+    letter-spacing: -3px;
 }
 
 h1 span {
     display: block;
-    color: var(--rojo);
+    color: var(--red);
     font-style: italic;
 }
 
-.welcome > p:last-child {
-    color: var(--texto-secundario);
-    margin-top: 22px;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
+.hero-bottom {
+    margin-top: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 25px;
 }
 
-.hero-line {
-    width: 70px;
-    height: 1px;
-    background: var(--rojo);
-    margin-top: 28px;
+.hero-bottom p {
+    max-width: 460px;
+    color: var(--muted);
+    font: 14px/1.9 Arial, sans-serif;
 }
 
-.lesson {
-    padding: 58px 0;
-    border-top: 1px solid var(--borde);
+.hero-index {
+    color: var(--red);
+    font-size: 42px;
+    font-style: italic;
 }
 
-.section-label {
-    color: var(--rojo);
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 4px;
+.scroll-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: var(--white);
+    font: 10px Arial, sans-serif;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--red);
+    padding-bottom: 8px;
+}
+
+/* NAVEGACIÓN */
+
+.contents {
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 25px;
+}
+
+.contents a {
+    color: var(--muted);
+    font: 10px Arial, sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color .2s;
+}
+
+.contents a:hover {
+    color: var(--red);
+}
+
+/* SECCIONES */
+
+section {
+    padding: 90px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.section-top {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.section-number {
+    color: var(--red);
+    font: 11px Arial, sans-serif;
+    letter-spacing: 2px;
+    white-space: nowrap;
 }
 
 h2 {
-    font-size: clamp(27px, 4vw, 42px);
-    line-height: 1.2;
+    font-size: clamp(34px, 5vw, 56px);
     font-weight: normal;
-    margin-bottom: 20px;
+    line-height: 1.1;
+    letter-spacing: -1px;
 }
 
-h2 span {
-    color: var(--rojo);
-    font-style: italic;
+h2 em {
+    color: var(--red);
+    font-weight: normal;
 }
 
 h3 {
-    font-size: 22px;
+    font-size: 23px;
     font-weight: normal;
-    margin-bottom: 10px;
+    line-height: 1.3;
 }
 
-p {
-    color: var(--texto-secundario);
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+.body-copy {
+    max-width: 720px;
+    color: var(--muted);
+    font: 14px/2 Arial, sans-serif;
+}
+
+.body-copy p + p {
+    margin-top: 18px;
+}
+
+.lead {
+    font-size: 17px;
+    color: var(--white);
     line-height: 1.9;
 }
 
-.intro {
-    max-width: 780px;
-}
-
-.intro p + p {
-    margin-top: 14px;
-}
-
-.text-highlight {
-    color: var(--texto);
-}
-
-.suit-heading {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 15px;
-}
-
-.suit-symbol {
-    font-size: 30px;
-    color: var(--rojo);
-}
-
-.suit-heading p {
-    font-size: 12px;
-}
-
-.suit-intro {
-    margin-bottom: 22px;
-    max-width: 760px;
-}
-
-.study-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 28px;
-}
-
-.study-card {
-    padding: 25px;
-    border: 1px solid var(--borde);
-    background: linear-gradient(145deg, rgba(58,8,13,.4), rgba(12,7,10,.65));
-    transition: border-color .2s, transform .2s;
-}
-
-.study-card:hover {
-    border-color: var(--rojo);
-    transform: translateY(-3px);
-}
-
-.study-card .number {
-    color: var(--rojo);
-    font-family: Arial, sans-serif;
-    font-size: 10px;
+.small-label {
+    font: 10px Arial, sans-serif;
+    color: var(--red);
     letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+/* CUATRO PALOS */
+
+.suit {
+    padding: 35px 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 30px;
+}
+
+.suit:first-of-type {
+    margin-top: 45px;
+}
+
+.suit-side {
+    color: var(--red);
+    font-size: 42px;
+    line-height: 1;
+}
+
+.suit-side small {
+    display: block;
+    margin-top: 15px;
+    color: var(--muted);
+    font: 10px/1.6 Arial, sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.suit-main h3 {
     margin-bottom: 12px;
 }
 
-.study-card p {
-    font-size: 13px;
+.suit-main p {
+    color: var(--muted);
+    font: 13px/1.9 Arial, sans-serif;
+    max-width: 700px;
 }
 
-.arcana-list {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 25px;
-}
-
-.arcana-list span {
-    display: flex;
-    min-height: 100px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-    padding: 15px 8px;
-    border: 1px solid rgba(226,27,60,.2);
-    background: rgba(25,9,14,.65);
-    cursor: pointer;
-    transition: .2s;
-}
-
-.arcana-list span:hover {
-    border-color: var(--rojo);
-    background: rgba(80,8,20,.35);
-    transform: translateY(-3px);
-}
-
-.arcana-list span .card-number {
-    color: var(--rojo);
+.suit-main .suit-theme {
+    color: var(--red);
+    margin-bottom: 10px;
     font-size: 11px;
-}
-
-.arcana-list span .card-name {
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.arcana-list span::after {
-    content: "VER SIGNIFICADO ↗";
-    color: #d99aa4;
-    font-family: Arial, sans-serif;
-    font-size: 8px;
     letter-spacing: 1px;
 }
 
-.boton-mas-cartas,
-.button {
-    display: inline-block;
-    margin-top: 24px;
-    padding: 13px 23px;
-    border: 1px solid var(--rojo);
-    background: transparent;
-    color: var(--texto);
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: .2s;
+/* CARTAS */
+
+.cards-heading {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--line);
 }
 
-.boton-mas-cartas:hover,
-.button:hover {
-    background: var(--rojo);
+.cards-heading p {
+    color: var(--muted);
+    font: 11px Arial, sans-serif;
 }
 
-.concept-grid {
+.card-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 15px;
-    margin-top: 25px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.concept-card {
-    padding: 22px;
-    border-left: 2px solid var(--rojo);
-    background: rgba(40,9,15,.42);
+.tarot-card {
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    color: var(--white);
+    text-align: left;
+    display: grid;
+    grid-template-columns: 42px 1fr 22px;
+    gap: 12px;
+    align-items: center;
+    padding: 17px 12px 17px 0;
+    cursor: pointer;
+    transition: color .2s, padding .2s;
 }
 
-.concept-card p {
-    font-size: 13px;
+.tarot-card:nth-child(odd) {
+    margin-right: 24px;
 }
 
-.step-list {
-    list-style: none;
-    margin-top: 25px;
-    counter-reset: pasos;
+.tarot-card:nth-child(even) {
+    margin-left: 24px;
 }
 
-.step-list li {
-    counter-increment: pasos;
-    padding: 18px 0 18px 55px;
-    border-bottom: 1px solid var(--borde);
-    position: relative;
+.tarot-card:hover {
+    color: var(--red);
+    padding-left: 6px;
 }
 
-.step-list li::before {
-    content: counter(pasos, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 18px;
-    color: var(--rojo);
-    font-family: Arial, sans-serif;
-    font-size: 12px;
+.card-no {
+    font: 10px Arial, sans-serif;
+    color: var(--red);
 }
 
-.step-list strong {
-    display: block;
-    font-size: 17px;
-    font-weight: normal;
-    margin-bottom: 5px;
+.card-title {
+    font-size: 16px;
 }
 
-.step-list p {
-    font-size: 13px;
+.card-open {
+    font: 17px Arial, sans-serif;
+    color: var(--muted);
+    text-align: right;
 }
 
-.practice-box {
-    padding: 28px;
-    margin-top: 25px;
-    border: 1px solid var(--borde);
-    background: linear-gradient(135deg, rgba(58,8,13,.35), transparent);
-}
-
-.practice-box p + p {
-    margin-top: 12px;
-}
-
-.navegacion-curso {
+.more-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--borde);
-    padding: 30px 0 45px;
+    gap: 20px;
+    margin-top: 20px;
 }
 
-.btn-siguiente {
-    display: inline-block;
-    padding: 12px 18px;
-    border: 1px solid var(--rojo);
-    color: var(--texto);
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 1px;
+.more-row p {
+    color: var(--muted);
+    font: 11px Arial, sans-serif;
+}
+
+.outline-button {
+    border: 1px solid var(--red);
+    color: var(--white);
+    background: transparent;
+    padding: 13px 18px;
+    font: 10px Arial, sans-serif;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s;
 }
 
-.btn-siguiente:hover {
-    background: var(--rojo);
+.outline-button:hover {
+    background: var(--red-dark);
 }
+
+/* NÚMEROS Y FIGURAS */
+
+.number-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+}
+
+.number-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 22px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.number-row strong {
+    color: var(--red);
+    font-size: 23px;
+    font-weight: normal;
+}
+
+.number-row p {
+    color: var(--muted);
+    font: 13px/1.8 Arial, sans-serif;
+}
+
+.number-row p b {
+    color: var(--white);
+    font-weight: normal;
+}
+
+.figures {
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 45px;
+}
+
+.figure {
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+}
+
+.figure p {
+    color: var(--muted);
+    font: 13px/1.9 Arial, sans-serif;
+    margin-top: 9px;
+}
+
+/* INVERTIDAS Y PRÁCTICA */
+
+.text-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: 35px;
+}
+
+.text-columns h3 {
+    margin-bottom: 12px;
+}
+
+.text-columns p {
+    color: var(--muted);
+    font: 13px/1.9 Arial, sans-serif;
+}
+
+.practice-steps {
+    list-style: none;
+    margin-top: 35px;
+    counter-reset: practice;
+}
+
+.practice-steps li {
+    counter-increment: practice;
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 15px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+}
+
+.practice-steps li::before {
+    content: "0" counter(practice);
+    color: var(--red);
+    font: 11px Arial, sans-serif;
+    padding-top: 6px;
+}
+
+.practice-steps h3 {
+    font-size: 19px;
+}
+
+.practice-steps p {
+    color: var(--muted);
+    font: 13px/1.9 Arial, sans-serif;
+    margin-top: 6px;
+}
+
+.quote {
+    padding: 30px 0;
+    border-top: 1px solid var(--red);
+    margin-top: 35px;
+    max-width: 720px;
+    font-size: 25px;
+    line-height: 1.5;
+}
+
+.quote em {
+    color: var(--red);
+}
+
+/* FINAL */
+
+footer {
+    padding: 45px 0 55px;
+}
+
+.footer-brand {
+    color: var(--red);
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.footer-bottom {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-bottom p {
+    color: var(--muted);
+    font: 10px Arial, sans-serif;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--muted);
+    font: 10px Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-links a:hover {
+    color: var(--red);
+}
+
+/* MODAL */
 
 .modal {
-    display: none;
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(5,3,5,.94);
-    padding: 20px;
-    overflow-y: auto;
-    align-items: center;
+    display: none;
     justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(5,3,5,.94);
 }
 
 .modal.active {
     display: flex;
 }
 
-.modal-content {
-    width: min(700px, 100%);
+.modal-panel {
+    width: min(620px, 100%);
     max-height: 90vh;
     overflow-y: auto;
-    position: relative;
-    padding: 30px;
-    border: 1px solid var(--rojo);
     background: #12080c;
-    text-align: center;
+    border: 1px solid var(--line);
+    padding: 32px;
+    position: relative;
 }
 
-.cerrar-modal {
+.modal-close {
     position: absolute;
-    top: 8px;
-    right: 14px;
-    background: transparent;
-    color: var(--texto);
+    top: 12px;
+    right: 15px;
     border: 0;
-    font-size: 30px;
+    background: transparent;
+    color: var(--white);
+    font-size: 28px;
     cursor: pointer;
 }
 
-#imagen-carta {
-    display: block;
-    width: min(220px, 75%);
-    max-height: 300px;
-    object-fit: contain;
-    margin: 20px auto;
+.modal-kicker {
+    color: var(--red);
+    font: 10px Arial, sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding-right: 30px;
 }
 
-#imagen-carta.oculta {
-    display: none;
+.modal-panel h2 {
+    font-size: 36px;
+    margin: 20px 0;
 }
 
-#nombre-carta {
-    color: var(--rojo);
-    font-size: 28px;
-    margin: 15px 0;
+.modal-panel h3 {
+    font-size: 17px;
+    color: var(--red);
+    margin: 25px 0 8px;
 }
 
-#significado-carta {
-    text-align: left;
-    white-space: pre-line;
+.modal-panel p {
+    color: var(--muted);
+    font: 14px/1.9 Arial, sans-serif;
 }
 
-#simbolismo-carta {
-    text-align: left;
-    margin-top: 15px;
-    color: #d99aa4;
+.modal-panel .outline-button {
+    margin-top: 25px;
 }
 
-.modal-content .section-label {
-    margin-top: 20px;
-    text-align: left;
-}
+/* RESPONSIVE */
 
 @media (max-width: 700px) {
-    .welcome {
-        min-height: 330px;
+    .wrap {
+        width: 88%;
+    }
+
+    header {
+        min-height: 75vh;
+    }
+
+    .hero {
+        padding: 75px 0 40px;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero-bottom {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .hero-index {
+        font-size: 30px;
+    }
+
+    section {
         padding: 65px 0;
     }
 
-    .lesson {
-        padding: 42px 0;
+    .section-top {
+        gap: 12px;
+        align-items: start;
     }
 
-    .study-grid {
+    .suit {
+        grid-template-columns: 55px 1fr;
+        gap: 15px;
+    }
+
+    .suit-side {
+        font-size: 32px;
+    }
+
+    .suit-side small {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .card-list {
         grid-template-columns: 1fr;
     }
 
-    .arcana-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 9px;
+    .tarot-card:nth-child(odd),
+    .tarot-card:nth-child(even) {
+        margin-left: 0;
+        margin-right: 0;
     }
 
-    .arcana-list span {
-        min-height: 92px;
-    }
-
-    .concept-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .modal-content {
-        padding: 25px 18px;
-    }
-
-    .navegacion-curso {
+    .cards-heading {
+        align-items: start;
         flex-direction: column;
-        align-items: stretch;
     }
 
-    .btn-siguiente {
-        text-align: center;
+    .text-columns,
+    .figures {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .number-row {
+        grid-template-columns: 65px 1fr;
+        gap: 15px;
+    }
+
+    .more-row {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .footer-bottom {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .modal-panel {
+        padding: 28px 20px;
+    }
+
+    .modal-panel h2 {
+        font-size: 29px;
     }
 }
 </style>
@@ -482,614 +694,559 @@ p {
 
 <body>
 
-<main class="container">
+<div class="wrap">
 
-    <header class="welcome">
-        <div class="moon">☾</div>
-        <div class="eyebrow">ASTRO ROJO · CURSO DE TAROT</div>
-        <h1>EL ARTE <span>DE LOS ARCANOS MENORES.</span></h1>
-        <p>Los símbolos cotidianos que revelan nuestra historia</p>
-        <div class="hero-line"></div>
-    </header>
+<header>
+    <div class="topline">
+        <span class="brand">ASTRO ROJO</span>
+        <span>ESTUDIO · TAROT</span>
+    </div>
 
-    <section class="lesson">
-        <div class="section-label">01 · Fundamentos</div>
-        <h2>¿Qué son los <span>Arcanos Menores?</span></h2>
+    <div class="hero">
+        <div class="kicker">El lenguaje de los símbolos · II</div>
+        <h1>EL ARTE <span>DEL TAROT.</span></h1>
 
-        <div class="intro">
+        <div class="hero-bottom">
             <p>
-                Los Arcanos Menores son las 56 cartas del tarot que nos ayudan
-                a explorar situaciones concretas, emociones, pensamientos,
-                decisiones y experiencias de la vida cotidiana.
+                Arcanos Menores. Cuatro palos, cincuenta y seis cartas
+                y un lenguaje para explorar las experiencias de la vida cotidiana.
             </p>
-            <p>
-                Mientras los Arcanos Mayores suelen representar grandes procesos
-                y aprendizajes, los Menores permiten observar cómo esos procesos
-                se manifiestan en nuestras relaciones, actividades, preocupaciones
-                y elecciones diarias.
-            </p>
-            <p>
-                Se organizan en <span class="text-highlight">cuatro palos</span>:
-                Bastos, Copas, Espadas y Oros. Cada palo contiene diez cartas
-                numeradas, desde el As hasta el Diez, y cuatro figuras:
-                Sota, Caballero, Reina y Rey.
-            </p>
+            <div class="hero-index">II / 03</div>
         </div>
 
-        <div class="concept-grid">
-            <article class="concept-card">
-                <h3>Los números</h3>
-                <p>Describen etapas de un proceso: comienzos, desarrollo,
-                desafíos, culminaciones y nuevos ciclos.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Los cuatro palos</h3>
-                <p>Representan distintas dimensiones de la experiencia:
-                acción, emociones, pensamiento y mundo material.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Las figuras</h3>
-                <p>Pueden describir personas, actitudes, roles o maneras
-                de afrontar una situación.</p>
-            </article>
-        </div>
-    </section>
+        <a class="scroll-link" href="#introduccion">Explorar el módulo ↓</a>
+    </div>
+</header>
 
-    <section class="lesson" id="bastos">
-        <div class="section-label">02 · El elemento fuego</div>
-        <div class="suit-heading">
-            <div class="suit-symbol">♨</div>
+<nav class="contents" aria-label="Contenido del curso">
+    <a href="#introduccion">Introducción</a>
+    <a href="#bastos">Bastos</a>
+    <a href="#copas">Copas</a>
+    <a href="#espadas">Espadas</a>
+    <a href="#oros">Oros</a>
+    <a href="#numeros">Números</a>
+    <a href="#figuras">Figuras</a>
+    <a href="#invertidas">Invertidas</a>
+    <a href="#practica">Práctica</a>
+</nav>
+
+<section id="introduccion">
+    <div class="section-top">
+        <span class="section-number">01 /</span>
+        <h2>Más allá de los <em>Arcanos Mayores.</em></h2>
+    </div>
+
+    <div class="body-copy">
+        <p class="lead">
+            Si los Arcanos Mayores representan grandes temas y transformaciones,
+            los Menores nos acercan a la vida diaria: lo que pensamos, sentimos,
+            hacemos y construimos.
+        </p>
+        <p>
+            Son 56 cartas divididas en cuatro palos. Cada uno representa
+            una dimensión de la experiencia humana. Sus números describen
+            distintas etapas de un proceso, mientras que las figuras muestran
+            formas de actuar, aprender y relacionarse con el mundo.
+        </p>
+        <p>
+            Para interpretarlos, no hace falta memorizar cada palabra.
+            Aprendé a reconocer el palo, observá el número y relacioná
+            el significado con la pregunta de la consulta.
+        </p>
+    </div>
+</section>
+
+<section id="bastos">
+    <div class="section-top">
+        <span class="section-number">02 /</span>
+        <h2>El fuego de <em>Bastos.</em></h2>
+    </div>
+
+    <div class="suit">
+        <div class="suit-side">I<small>Fuego</small></div>
+        <div class="suit-main">
+            <div class="suit-theme">ACCIÓN · DESEO · CREATIVIDAD</div>
+            <h3>La fuerza de comenzar.</h3>
+            <p>
+                Bastos habla de iniciativa, proyectos, entusiasmo y voluntad.
+                Es la energía que nos mueve a probar algo nuevo, defender una idea
+                o perseguir un objetivo. En desequilibrio, puede expresar
+                impaciencia, impulsividad o agotamiento.
+            </p>
+        </div>
+    </div>
+
+    <div class="cards-heading">
+        <h3>Las catorce cartas</h3>
+        <p>Seleccioná una carta para conocer su significado.</p>
+    </div>
+    <div class="card-list" id="lista-bastos"></div>
+</section>
+
+<section id="copas">
+    <div class="section-top">
+        <span class="section-number">03 /</span>
+        <h2>El agua de <em>Copas.</em></h2>
+    </div>
+
+    <div class="suit">
+        <div class="suit-side">II<small>Agua</small></div>
+        <div class="suit-main">
+            <div class="suit-theme">EMOCIONES · AFECTO · INTUICIÓN</div>
+            <h3>Lo que se mueve por dentro.</h3>
+            <p>
+                Copas representa sentimientos, vínculos, empatía e imaginación.
+                Invita a reconocer nuestras necesidades emocionales y la manera
+                en que nos relacionamos con los demás. También puede advertir
+                sobre idealizaciones o expectativas que necesitan revisarse.
+            </p>
+        </div>
+    </div>
+
+    <div class="cards-heading">
+        <h3>Las catorce cartas</h3>
+        <p>Seleccioná una carta para conocer su significado.</p>
+    </div>
+    <div class="card-list" id="lista-copas"></div>
+</section>
+
+<section id="espadas">
+    <div class="section-top">
+        <span class="section-number">04 /</span>
+        <h2>El aire de <em>Espadas.</em></h2>
+    </div>
+
+    <div class="suit">
+        <div class="suit-side">III<small>Aire</small></div>
+        <div class="suit-main">
+            <div class="suit-theme">MENTE · VERDAD · DECISIONES</div>
+            <h3>El poder de distinguir.</h3>
+            <p>
+                Espadas se relaciona con pensamientos, conversaciones, límites
+                y decisiones. Puede señalar claridad y honestidad, pero también
+                conflictos, preocupación o palabras difíciles. Su enseñanza
+                es distinguir los hechos de aquello que tememos o suponemos.
+            </p>
+        </div>
+    </div>
+
+    <div class="cards-heading">
+        <h3>Las catorce cartas</h3>
+        <p>Seleccioná una carta para conocer su significado.</p>
+    </div>
+    <div class="card-list" id="lista-espadas"></div>
+</section>
+
+<section id="oros">
+    <div class="section-top">
+        <span class="section-number">05 /</span>
+        <h2>La tierra de <em>Oros.</em></h2>
+    </div>
+
+    <div class="suit">
+        <div class="suit-side">IV<small>Tierra</small></div>
+        <div class="suit-main">
+            <div class="suit-theme">TRABAJO · RECURSOS · ESTABILIDAD</div>
+            <h3>Lo que construimos.</h3>
+            <p>
+                Oros representa trabajo, dinero, recursos, cuerpo y seguridad.
+                Habla de lo que necesita tiempo, cuidado y constancia para crecer.
+                Nos recuerda que las ideas también requieren acciones concretas
+                y que la estabilidad se construye paso a paso.
+            </p>
+        </div>
+    </div>
+
+    <div class="cards-heading">
+        <h3>Las catorce cartas</h3>
+        <p>Seleccioná una carta para conocer su significado.</p>
+    </div>
+    <div class="card-list" id="lista-oros"></div>
+</section>
+
+<section id="numeros">
+    <div class="section-top">
+        <span class="section-number">06 /</span>
+        <h2>El significado de los <em>números.</em></h2>
+    </div>
+
+    <div class="body-copy">
+        <p>
+            El número aporta una etapa o dinámica al significado del palo.
+            Un cinco de Copas y un cinco de Oros comparten la idea de desafío,
+            pero uno lo expresa en el mundo emocional y el otro en el material.
+        </p>
+    </div>
+
+    <div class="number-list">
+        <div class="number-row"><strong>As</strong><p><b>El comienzo.</b> Una semilla, una oportunidad o una energía que empieza a manifestarse.</p></div>
+        <div class="number-row"><strong>Dos</strong><p><b>El encuentro.</b> Equilibrio, dualidad, intercambio o una elección.</p></div>
+        <div class="number-row"><strong>Tres</strong><p><b>El crecimiento.</b> Expansión, expresión y primeras formas de colaboración.</p></div>
+        <div class="number-row"><strong>Cuatro</strong><p><b>La estructura.</b> Estabilidad, orden, bases y pausas necesarias.</p></div>
+        <div class="number-row"><strong>Cinco</strong><p><b>El desafío.</b> Conflicto, cambio o una situación que exige adaptación.</p></div>
+        <div class="number-row"><strong>Seis</strong><p><b>La transición.</b> Recuperación del equilibrio, ayuda o movimiento hacia la armonía.</p></div>
+        <div class="number-row"><strong>Siete</strong><p><b>La evaluación.</b> Estrategia, reflexión y revisión de las propias convicciones.</p></div>
+        <div class="number-row"><strong>Ocho</strong><p><b>El desarrollo.</b> Práctica, movimiento y esfuerzo sostenido.</p></div>
+        <div class="number-row"><strong>Nueve</strong><p><b>La maduración.</b> Balance individual, experiencia y preparación para culminar.</p></div>
+        <div class="number-row"><strong>Diez</strong><p><b>La culminación.</b> Resultado, cierre de ciclo y posibilidad de un nuevo comienzo.</p></div>
+    </div>
+</section>
+
+<section id="figuras">
+    <div class="section-top">
+        <span class="section-number">07 /</span>
+        <h2>Las figuras de la <em>corte.</em></h2>
+    </div>
+
+    <div class="body-copy">
+        <p>
+            Las figuras pueden representar personas, actitudes o maneras de
+            actuar. No siempre anuncian la llegada de alguien: también pueden
+            describir cómo una persona está afrontando la situación.
+        </p>
+    </div>
+
+    <div class="figures">
+        <article class="figure">
+            <div class="small-label">La aprendiz</div>
+            <h3>Sota</h3>
+            <p>Curiosidad, apertura y aprendizaje. Es una energía que comienza
+            a explorar el mundo de su palo.</p>
+        </article>
+
+        <article class="figure">
+            <div class="small-label">El movimiento</div>
+            <h3>Caballero</h3>
+            <p>Búsqueda, acción y avance. Su estilo depende del palo:
+            puede ser apasionado, sensible, mental o constante.</p>
+        </article>
+
+        <article class="figure">
+            <div class="small-label">La comprensión</div>
+            <h3>Reina</h3>
+            <p>Madurez interior, percepción y dominio de la energía del palo
+            desde la comprensión y la experiencia.</p>
+        </article>
+
+        <article class="figure">
+            <div class="small-label">La dirección</div>
+            <h3>Rey</h3>
+            <p>Responsabilidad, liderazgo y capacidad para orientar esa energía
+            con criterio y madurez.</p>
+        </article>
+    </div>
+</section>
+
+<section id="invertidas">
+    <div class="section-top">
+        <span class="section-number">08 /</span>
+        <h2>Cuando una carta aparece <em>invertida.</em></h2>
+    </div>
+
+    <div class="body-copy">
+        <p class="lead">
+            Una carta invertida no significa automáticamente algo negativo.
+            Su posición abre otra perspectiva sobre el mismo símbolo.
+        </p>
+    </div>
+
+    <div class="text-columns">
+        <div>
+            <div class="small-label">Una energía bloqueada</div>
+            <h3>Lo que no logra expresarse.</h3>
+            <p>
+                La energía de la carta puede estar frenada, encontrar resistencia
+                o necesitar atención antes de manifestarse con claridad.
+            </p>
+        </div>
+        <div>
+            <div class="small-label">Una energía interior</div>
+            <h3>Lo que sucede en silencio.</h3>
+            <p>
+                El significado puede estar viviéndose de forma privada,
+                exagerada o insuficiente. La pregunta y las cartas cercanas
+                ayudan a decidir qué interpretación tiene más sentido.
+            </p>
+        </div>
+    </div>
+
+    <p class="quote">
+        No leas la inversión como una condena.
+        <em>Leela como una invitación a mirar de otra manera.</em>
+    </p>
+</section>
+
+<section id="combinaciones">
+    <div class="section-top">
+        <span class="section-number">09 /</span>
+        <h2>El arte de unir <em>las cartas.</em></h2>
+    </div>
+
+    <div class="body-copy">
+        <p>
+            Una lectura toma forma cuando las cartas dejan de ser significados
+            aislados y comienzan a construir una historia. Observá qué temas
+            se repiten, qué energías se complementan y cuáles parecen entrar
+            en tensión.
+        </p>
+    </div>
+
+    <ol class="practice-steps">
+        <li>
             <div>
-                <h2>El palo de <span>Bastos</span></h2>
-                <p>Acción · Energía · Creatividad · Iniciativa</p>
+                <h3>Comprendé la pregunta</h3>
+                <p>Definí qué aspecto de la situación querés explorar.</p>
             </div>
-        </div>
-        <p class="suit-intro">
-            Bastos se relaciona con la voluntad, los proyectos, la motivación,
-            el entusiasmo y el impulso de avanzar. Sus cartas pueden señalar
-            oportunidades para actuar, pero también impaciencia, agotamiento
-            o exceso de impulso.
-        </p>
-        <div class="study-grid">
-            <article class="study-card">
-                <div class="number">ENERGÍA DEL PALO</div>
-                <h3>La chispa inicial</h3>
-                <p>El As de Bastos simboliza inspiración y comienzos. Las cartas
-                siguientes muestran cómo esa energía crece, se prueba, se comparte
-                y busca una dirección.</p>
-            </article>
-            <article class="study-card">
-                <div class="number">EN UNA LECTURA</div>
-                <h3>Pasar a la acción</h3>
-                <p>Observá qué proyecto, deseo o decisión necesita movimiento.
-                La pregunta es cómo dirigir la energía de forma constructiva.</p>
-            </article>
-        </div>
-        <div class="arcana-list" id="lista-bastos"></div>
-    </section>
-
-    <section class="lesson" id="copas">
-        <div class="section-label">03 · El elemento agua</div>
-        <div class="suit-heading">
-            <div class="suit-symbol">♡</div>
+        </li>
+        <li>
             <div>
-                <h2>El palo de <span>Copas</span></h2>
-                <p>Emociones · Vínculos · Intuición · Sensibilidad</p>
+                <h3>Observá cada carta</h3>
+                <p>Identificá el palo, el número o figura y el significado central.</p>
             </div>
-        </div>
-        <p class="suit-intro">
-            Copas habla del mundo emocional, el afecto, la empatía, la
-            imaginación y las relaciones. También invita a observar las
-            expectativas, la idealización y la forma en que expresamos lo que sentimos.
-        </p>
-        <div class="study-grid">
-            <article class="study-card">
-                <div class="number">ENERGÍA DEL PALO</div>
-                <h3>Escuchar el corazón</h3>
-                <p>Las cartas de Copas describen el nacimiento de un sentimiento,
-                su crecimiento, sus desafíos y la búsqueda de equilibrio emocional.</p>
-            </article>
-            <article class="study-card">
-                <div class="number">EN UNA LECTURA</div>
-                <h3>Comprender lo que sentimos</h3>
-                <p>Preguntate qué emoción está presente, qué necesita cuidado
-                y cómo se expresa en el vínculo o situación consultada.</p>
-            </article>
-        </div>
-        <div class="arcana-list" id="lista-copas"></div>
-    </section>
-
-    <section class="lesson" id="espadas">
-        <div class="section-label">04 · El elemento aire</div>
-        <div class="suit-heading">
-            <div class="suit-symbol">✧</div>
+        </li>
+        <li>
             <div>
-                <h2>El palo de <span>Espadas</span></h2>
-                <p>Pensamiento · Comunicación · Decisiones · Verdad</p>
+                <h3>Buscá conexiones</h3>
+                <p>Prestá atención a los palos repetidos, los números y los contrastes.</p>
             </div>
-        </div>
-        <p class="suit-intro">
-            Espadas representa las ideas, las palabras, los conflictos,
-            los límites y las decisiones. Puede mostrar claridad mental,
-            conversaciones necesarias o pensamientos que generan tensión.
-        </p>
-        <div class="study-grid">
-            <article class="study-card">
-                <div class="number">ENERGÍA DEL PALO</div>
-                <h3>La fuerza de las ideas</h3>
-                <p>Las cartas muestran cómo una idea se convierte en decisión,
-                cómo aparecen los conflictos y cómo podemos recuperar claridad.</p>
-            </article>
-            <article class="study-card">
-                <div class="number">EN UNA LECTURA</div>
-                <h3>Mirar con objetividad</h3>
-                <p>Distinguir hechos, suposiciones y temores ayuda a interpretar
-                el mensaje sin confundir una preocupación con una certeza.</p>
-            </article>
-        </div>
-        <div class="arcana-list" id="lista-espadas"></div>
-    </section>
-
-    <section class="lesson" id="oros">
-        <div class="section-label">05 · El elemento tierra</div>
-        <div class="suit-heading">
-            <div class="suit-symbol">◇</div>
+        </li>
+        <li>
             <div>
-                <h2>El palo de <span>Oros</span></h2>
-                <p>Recursos · Trabajo · Estabilidad · Cuerpo</p>
+                <h3>Construí una interpretación</h3>
+                <p>Relacioná los símbolos con la consulta y expresá una idea coherente,
+                sin afirmar que el tarot garantiza un resultado.</p>
             </div>
-        </div>
-        <p class="suit-intro">
-            Oros se relaciona con el dinero, el trabajo, los recursos,
-            el aprendizaje práctico, el hogar y aquello que construimos
-            a lo largo del tiempo. Su energía invita a convertir las ideas
-            en acciones sostenibles.
+        </li>
+    </ol>
+</section>
+
+<section id="practica">
+    <div class="section-top">
+        <span class="section-number">10 /</span>
+        <h2>Práctica de <em>interpretación.</em></h2>
+    </div>
+
+    <div class="body-copy">
+        <p class="lead">
+            Tu objetivo no es memorizar todas las cartas en un día.
+            Es aprender a observarlas, relacionarlas y formular una lectura propia.
         </p>
-        <div class="study-grid">
-            <article class="study-card">
-                <div class="number">ENERGÍA DEL PALO</div>
-                <h3>Construir paso a paso</h3>
-                <p>Las cartas describen oportunidades, esfuerzo, administración
-                de recursos, resultados y la importancia de cuidar lo conseguido.</p>
-            </article>
-            <article class="study-card">
-                <div class="number">EN UNA LECTURA</div>
-                <h3>Observar lo concreto</h3>
-                <p>Preguntate qué recursos existen, qué necesita organización
-                y qué acción realista puede mejorar la situación.</p>
-            </article>
-        </div>
-        <div class="arcana-list" id="lista-oros"></div>
-    </section>
-
-    <section class="lesson" id="numeros">
-        <div class="section-label">06 · El lenguaje de los números</div>
-        <h2>Cómo interpretar los <span>números</span></h2>
-        <p class="intro">
-            El número ayuda a comprender en qué etapa se encuentra la energía
-            de cada palo. No se interpreta de manera aislada: se combina con
-            el significado del palo y la pregunta de la consulta.
+        <p>
+            Imaginá que consultás por un proyecto personal y sacás tres cartas.
+            Usá cada posición para construir una interpretación.
         </p>
+    </div>
 
-        <div class="concept-grid">
-            <article class="concept-card">
-                <h3>Ases</h3>
-                <p>Inicio, semilla, oportunidad y potencial todavía por desarrollar.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Doses</h3>
-                <p>Dualidad, intercambio, elección, equilibrio o cooperación.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Treses</h3>
-                <p>Crecimiento, expresión, expansión y primeras colaboraciones.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Cuatros</h3>
-                <p>Estructura, estabilidad, pausa y necesidad de establecer bases.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Cincos</h3>
-                <p>Tensión, cambio, dificultad o desafío que requiere adaptación.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Seises</h3>
-                <p>Reequilibrio, ayuda, transición o recuperación de armonía.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Sietes</h3>
-                <p>Evaluación, estrategia, reflexión y prueba de convicciones.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Ochos</h3>
-                <p>Movimiento, práctica, esfuerzo y desarrollo de habilidades.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Nueves</h3>
-                <p>Maduración, culminación individual y balance antes del cierre.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Dieces</h3>
-                <p>Resultado, culminación de un ciclo y preparación para otro.</p>
-            </article>
-        </div>
-    </section>
+    <ol class="practice-steps">
+        <li>
+            <div>
+                <h3>Situación actual</h3>
+                <p>¿Qué energía describe el momento presente?</p>
+            </div>
+        </li>
+        <li>
+            <div>
+                <h3>Desafío</h3>
+                <p>¿Qué dificultad, necesidad o aprendizaje aparece?</p>
+            </div>
+        </li>
+        <li>
+            <div>
+                <h3>Consejo</h3>
+                <p>¿Qué actitud concreta puede ayudarte a avanzar?</p>
+            </div>
+        </li>
+    </ol>
 
-    <section class="lesson" id="figuras">
-        <div class="section-label">07 · Las figuras de la corte</div>
-        <h2>Sota, Caballero, Reina <span>y Rey</span></h2>
-        <p class="intro">
-            Las figuras de la corte pueden representar personas, pero no
-            necesariamente. También pueden describir una actitud, una etapa
-            de madurez o una forma de relacionarse con la energía del palo.
+    <div class="body-copy" style="margin-top:30px">
+        <p>
+            Anotá el significado de cada carta y después resumí las tres en
+            un solo mensaje. Recordá que el tarot es una herramienta simbólica
+            de reflexión, no una certeza sobre el futuro.
         </p>
+    </div>
+</section>
 
-        <div class="study-grid">
-            <article class="study-card">
-                <div class="number">SOTA</div>
-                <h3>Aprendizaje y curiosidad</h3>
-                <p>Una energía inicial, receptiva y exploratoria. Puede señalar
-                una noticia, una idea o el deseo de aprender.</p>
-            </article>
-            <article class="study-card">
-                <div class="number">CABALLERO</div>
-                <h3>Movimiento y búsqueda</h3>
-                <p>Representa una energía que se pone en marcha. Según el palo,
-                puede ser rápida, emocional, mental o constante.</p>
-            </article>
-            <article class="study-card">
-                <div class="number">REINA</div>
-                <h3>Comprensión interior</h3>
-                <p>Simboliza una relación madura e integrada con la energía del palo:
-                sensibilidad, creatividad, claridad o capacidad práctica.</p>
-            </article>
-            <article class="study-card">
-                <div class="number">REY</div>
-                <h3>Dirección y dominio</h3>
-                <p>Representa responsabilidad, criterio y capacidad para dirigir
-                la energía del palo de manera consciente.</p>
-            </article>
+<footer>
+    <div class="footer-brand">ASTRO ROJO</div>
+    <div class="footer-bottom">
+        <p>EL ARTE DEL TAROT · MÓDULO II</p>
+        <div class="footer-links">
+            <a href="index.html">Arcanos Mayores</a>
+            <a href="index3.html">Siguiente módulo →</a>
         </div>
-    </section>
+    </div>
+</footer>
 
-    <section class="lesson" id="invertidas">
-        <div class="section-label">08 · Otra perspectiva</div>
-        <h2>Cómo leer las cartas <span>invertidas</span></h2>
-        <p class="intro">
-            Una carta invertida aparece al revés en la tirada. No significa
-            automáticamente algo malo ni debe interpretarse siempre como
-            lo contrario de su significado habitual.
-        </p>
+</div>
 
-        <div class="concept-grid">
-            <article class="concept-card">
-                <h3>Bloqueo</h3>
-                <p>La energía de la carta puede estar encontrando una dificultad
-                para expresarse.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Interiorización</h3>
-                <p>El tema puede estar viviéndose en privado o necesitar reflexión
-                antes de manifestarse.</p>
-            </article>
-            <article class="concept-card">
-                <h3>Exceso o falta</h3>
-                <p>La energía puede expresarse de manera exagerada o no estar
-                suficientemente desarrollada.</p>
-            </article>
-        </div>
-
-        <div class="practice-box">
-            <h3>Una regla importante</h3>
-            <p>
-                Primero comprendé el significado normal de la carta. Después
-                observá su posición, la pregunta y las cartas cercanas para
-                decidir si la inversión habla de bloqueo, exceso, interiorización
-                o una situación que necesita revisión.
-            </p>
-        </div>
-    </section>
-
-    <section class="lesson" id="combinaciones">
-        <div class="section-label">09 · Lectura integrada</div>
-        <h2>Cómo combinar <span>las cartas</span></h2>
-        <p class="intro">
-            Una lectura no es una lista de significados independientes.
-            Las cartas dialogan entre sí y forman una historia relacionada
-            con la pregunta de quien consulta.
-        </p>
-
-        <ol class="step-list">
-            <li>
-                <strong>Empezá por la pregunta</strong>
-                <p>Definí el tema central y qué necesitás comprender.</p>
-            </li>
-            <li>
-                <strong>Observá cada carta</strong>
-                <p>Reconocé su palo, número, figura y significado principal.</p>
-            </li>
-            <li>
-                <strong>Buscá elementos que se repiten</strong>
-                <p>Varios palos iguales, números repetidos o figuras pueden
-                destacar un tema importante.</p>
-            </li>
-            <li>
-                <strong>Compará las energías</strong>
-                <p>Preguntate si las cartas se apoyan, se contradicen o muestran
-                etapas distintas de un mismo proceso.</p>
-            </li>
-            <li>
-                <strong>Construí una síntesis</strong>
-                <p>Relacioná los significados con la pregunta sin convertir
-                la interpretación en una predicción infalible.</p>
-            </li>
-        </ol>
-    </section>
-
-    <section class="lesson" id="practica">
-        <div class="section-label">10 · Ejercicio de aprendizaje</div>
-        <h2>Tu primera <span>interpretación</span></h2>
-
-        <div class="practice-box">
-            <h3>Ejercicio: tres cartas</h3>
-            <p>
-                Imaginá una consulta sobre un proyecto personal. Sacá tres cartas
-                y asignales estas posiciones:
-            </p>
-            <ol class="step-list">
-                <li>
-                    <strong>Primera carta: situación actual</strong>
-                    <p>¿Qué energía está presente en este momento?</p>
-                </li>
-                <li>
-                    <strong>Segunda carta: desafío</strong>
-                    <p>¿Qué dificultad, necesidad o aprendizaje aparece?</p>
-                </li>
-                <li>
-                    <strong>Tercera carta: consejo</strong>
-                    <p>¿Qué actitud o acción podría ayudar a avanzar?</p>
-                </li>
-            </ol>
-            <p>
-                Escribí una frase por carta y luego uní las tres frases en una
-                interpretación coherente. El objetivo es practicar la relación
-                entre las cartas, no memorizar respuestas rígidas.
-            </p>
-        </div>
-    </section>
-
-    <section class="lesson">
-        <div class="section-label">11 · Cierre del módulo</div>
-        <h2>El tarot como <span>lenguaje simbólico</span></h2>
-        <p class="intro">
-            Aprender los Arcanos Menores lleva tiempo. Practicá un palo a la vez,
-            anotá tus interpretaciones y revisá cómo cambia una carta según
-            la pregunta y las posiciones de la tirada.
-        </p>
-        <p class="intro" style="margin-top:14px">
-            Las cartas pueden servir como herramienta de reflexión, pero no
-            reemplazan el criterio personal ni garantizan resultados futuros.
-        </p>
-    </section>
-
-    <nav class="navegacion-curso">
-        <a href="index.html" class="btn-siguiente">← Arcanos Mayores</a>
-        <a href="index3.html" class="btn-siguiente">Siguiente módulo →</a>
-    </nav>
-
-</main>
-
-<div class="modal" id="modal-carta" role="dialog" aria-modal="true" aria-labelledby="nombre-carta">
-    <div class="modal-content">
-        <button class="cerrar-modal" id="cerrar-modal" aria-label="Cerrar">×</button>
-        <div class="section-label">ASTRO ROJO · GUÍA DE CARTAS</div>
-        <img id="imagen-carta" src="" alt="">
-        <h2 id="nombre-carta"></h2>
-        <div class="section-label">SIGNIFICADO</div>
-        <p id="significado-carta"></p>
-        <div class="section-label">SIMBOLISMO</div>
-        <p id="simbolismo-carta"></p>
-        <button class="button" id="cerrar-boton" type="button">Volver al curso</button>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel">
+        <button class="modal-close" id="modal-close" aria-label="Cerrar ventana">×</button>
+        <div class="modal-kicker" id="modal-kicker">ASTRO ROJO · GUÍA DE CARTAS</div>
+        <h2 id="modal-title"></h2>
+        <h3>Significado</h3>
+        <p id="modal-meaning"></p>
+        <h3>Simbolismo del palo</h3>
+        <p id="modal-symbolism"></p>
+        <button class="outline-button" id="modal-back">Volver a las cartas</button>
     </div>
 </div>
 
 <script>
-const palos = {
+const datos = {
     bastos: {
         nombre: "Bastos",
-        simbolo: "♨",
-        tema: "acción, energía, creatividad e iniciativa",
-        significados: {
-            "As": "Un impulso nuevo, inspiración, iniciativa y una oportunidad para poner algo en marcha.",
-            "Dos": "Planificación, visión de futuro y la necesidad de decidir hacia dónde dirigir la energía.",
-            "Tres": "Expansión, progreso y primeras señales de que un proyecto puede crecer.",
-            "Cuatro": "Estabilidad, celebración, hogar y reconocimiento de una etapa conseguida.",
-            "Cinco": "Competencia, diferencias de criterio y energía dispersa que necesita dirección.",
-            "Seis": "Reconocimiento, confianza y avance después de un esfuerzo.",
-            "Siete": "Defender las propias ideas, mantener los límites y sostener una posición.",
-            "Ocho": "Movimiento rápido, noticias, actividad y acontecimientos que se aceleran.",
-            "Nueve": "Resistencia, experiencia y perseverancia ante el último tramo de un desafío.",
-            "Diez": "Sobrecarga, responsabilidades acumuladas y la necesidad de reorganizar esfuerzos.",
-            "Sota": "Curiosidad creativa, entusiasmo inicial y ganas de explorar una posibilidad.",
-            "Caballero": "Acción decidida, aventura e impulso; conviene evitar la precipitación.",
-            "Reina": "Carisma, autonomía, creatividad y capacidad de inspirar a otras personas.",
-            "Rey": "Liderazgo, visión, iniciativa y capacidad para orientar un proyecto."
-        },
-        simbolismo: "El basto representa la fuerza vital, el impulso creativo y la capacidad de transformar una idea en acción. El contexto muestra si esa energía está bien dirigida o necesita equilibrio."
+        elemento: "Fuego",
+        simbolismo: "Bastos representa la energía vital, la creatividad, la iniciativa y el impulso de transformar una idea en acción.",
+        cartas: [
+            ["As de Bastos", "Un comienzo lleno de energía, inspiración y potencial creativo."],
+            ["Dos de Bastos", "Planificación, visión de futuro y una decisión sobre el camino a seguir."],
+            ["Tres de Bastos", "Expansión, progreso y primeras señales de crecimiento."],
+            ["Cuatro de Bastos", "Celebración, estabilidad, pertenencia y una etapa que merece reconocerse."],
+            ["Cinco de Bastos", "Competencia, desacuerdos y energías que necesitan dirección."],
+            ["Seis de Bastos", "Reconocimiento, confianza y avance después de un esfuerzo."],
+            ["Siete de Bastos", "Defender las propias convicciones y sostener los límites."],
+            ["Ocho de Bastos", "Rapidez, movimiento, noticias y acontecimientos que se aceleran."],
+            ["Nueve de Bastos", "Resistencia, experiencia y perseverancia ante un desafío."],
+            ["Diez de Bastos", "Responsabilidades acumuladas, cansancio y necesidad de reorganizar esfuerzos."],
+            ["Sota de Bastos", "Curiosidad, entusiasmo inicial y deseo de explorar una idea."],
+            ["Caballero de Bastos", "Acción, aventura y pasión; conviene evitar la precipitación."],
+            ["Reina de Bastos", "Carisma, autonomía, creatividad y capacidad de inspirar."],
+            ["Rey de Bastos", "Liderazgo, visión e iniciativa para orientar un proyecto."]
+        ]
     },
     copas: {
         nombre: "Copas",
-        simbolo: "♡",
-        tema: "emociones, vínculos, intuición y sensibilidad",
-        significados: {
-            "As": "Apertura emocional, afecto naciente, sensibilidad e inspiración del corazón.",
-            "Dos": "Encuentro, reciprocidad, cooperación y posibilidad de construir un vínculo equilibrado.",
-            "Tres": "Amistad, celebración, apoyo mutuo y alegría compartida.",
-            "Cuatro": "Desinterés, pausa emocional o dificultad para reconocer una oportunidad.",
-            "Cinco": "Pérdida, decepción o tristeza; también invita a reconocer lo que permanece.",
-            "Seis": "Recuerdos, ternura, pasado y reconexión con experiencias significativas.",
-            "Siete": "Fantasías, múltiples opciones e idealización; hace falta distinguir deseo y realidad.",
-            "Ocho": "Alejarse de algo que ya no satisface y buscar un sentido más profundo.",
-            "Nueve": "Satisfacción emocional, disfrute y reconocimiento de los propios deseos.",
-            "Diez": "Armonía, pertenencia, bienestar compartido y vínculos que brindan apoyo.",
-            "Sota": "Sensibilidad, apertura afectiva, imaginación y disposición para expresar emociones.",
-            "Caballero": "Romanticismo, acercamiento, propuesta emocional e idealismo.",
-            "Reina": "Empatía, intuición, cuidado emocional y comprensión de los sentimientos.",
-            "Rey": "Madurez afectiva, equilibrio emocional y capacidad para escuchar sin reaccionar impulsivamente."
-        },
-        simbolismo: "La copa representa el mundo interior y la capacidad de recibir, contener y compartir emociones. Observá si el agua simbólica fluye, se desborda o permanece estancada."
+        elemento: "Agua",
+        simbolismo: "Copas representa el mundo emocional, la sensibilidad, los vínculos y la capacidad de dar y recibir afecto.",
+        cartas: [
+            ["As de Copas", "Apertura emocional, afecto naciente e inspiración del corazón."],
+            ["Dos de Copas", "Encuentro, reciprocidad, cooperación y conexión."],
+            ["Tres de Copas", "Amistad, celebración, apoyo mutuo y alegría compartida."],
+            ["Cuatro de Copas", "Desinterés, pausa emocional o dificultad para reconocer una oportunidad."],
+            ["Cinco de Copas", "Tristeza, decepción y necesidad de reconocer también lo que permanece."],
+            ["Seis de Copas", "Recuerdos, ternura, pasado y experiencias significativas."],
+            ["Siete de Copas", "Fantasías, múltiples opciones e idealización."],
+            ["Ocho de Copas", "Alejarse de algo que ya no satisface y buscar un sentido más profundo."],
+            ["Nueve de Copas", "Satisfacción emocional, disfrute y reconocimiento de los deseos."],
+            ["Diez de Copas", "Armonía, pertenencia y bienestar compartido."],
+            ["Sota de Copas", "Sensibilidad, imaginación y disposición para expresar emociones."],
+            ["Caballero de Copas", "Romanticismo, acercamiento e idealismo emocional."],
+            ["Reina de Copas", "Empatía, intuición y comprensión de los sentimientos."],
+            ["Rey de Copas", "Madurez afectiva y capacidad para escuchar con equilibrio."]
+        ]
     },
     espadas: {
         nombre: "Espadas",
-        simbolo: "✧",
-        tema: "pensamiento, comunicación, decisiones y verdad",
-        significados: {
-            "As": "Claridad mental, una idea reveladora, verdad o decisión que abre una nueva etapa.",
-            "Dos": "Indecisión, tensión entre alternativas o necesidad de detenerse para evaluar.",
-            "Tres": "Dolor emocional, decepción o una verdad difícil que necesita ser procesada.",
-            "Cuatro": "Descanso, recuperación, silencio y necesidad de tomar distancia mental.",
-            "Cinco": "Conflicto, rivalidad o victoria que puede tener un costo emocional.",
-            "Seis": "Transición, alejamiento de una dificultad y búsqueda de mayor tranquilidad.",
-            "Siete": "Estrategia, discreción y necesidad de revisar la honestidad de las acciones.",
-            "Ocho": "Sensación de limitación, pensamientos repetitivos o dificultad para ver alternativas.",
-            "Nueve": "Preocupación, culpa o ansiedad; invita a distinguir los temores de los hechos.",
-            "Diez": "Cierre doloroso, agotamiento o final de una etapa que ya no puede sostenerse igual.",
-            "Sota": "Curiosidad mental, observación, preguntas y búsqueda de información.",
-            "Caballero": "Rapidez, determinación y comunicación directa; cuidado con actuar sin pensar.",
-            "Reina": "Discernimiento, independencia, límites claros y comunicación sincera.",
-            "Rey": "Lógica, criterio, autoridad intelectual y capacidad para decidir con objetividad."
-        },
-        simbolismo: "La espada simboliza la mente y el poder de distinguir. Puede representar claridad y verdad, pero también palabras que hieren o ideas que se vuelven rígidas."
+        elemento: "Aire",
+        simbolismo: "Espadas representa el pensamiento, la comunicación, la claridad, los límites y los conflictos que requieren comprensión.",
+        cartas: [
+            ["As de Espadas", "Claridad mental, verdad y una decisión que abre una nueva etapa."],
+            ["Dos de Espadas", "Indecisión, tensión entre alternativas y necesidad de evaluar."],
+            ["Tres de Espadas", "Dolor, decepción o una verdad difícil de procesar."],
+            ["Cuatro de Espadas", "Descanso, recuperación y necesidad de tomar distancia mental."],
+            ["Cinco de Espadas", "Conflicto, rivalidad o una victoria que puede tener un costo."],
+            ["Seis de Espadas", "Transición y alejamiento gradual de una dificultad."],
+            ["Siete de Espadas", "Estrategia, discreción y revisión de las intenciones."],
+            ["Ocho de Espadas", "Sensación de limitación y dificultad para ver alternativas."],
+            ["Nueve de Espadas", "Preocupación y pensamientos repetitivos que necesitan atención."],
+            ["Diez de Espadas", "Agotamiento, cierre doloroso o final de una etapa."],
+            ["Sota de Espadas", "Curiosidad, observación y búsqueda de información."],
+            ["Caballero de Espadas", "Rapidez, determinación y comunicación directa."],
+            ["Reina de Espadas", "Discernimiento, independencia y límites claros."],
+            ["Rey de Espadas", "Lógica, criterio y capacidad de decidir con objetividad."]
+        ]
     },
     oros: {
         nombre: "Oros",
-        simbolo: "◇",
-        tema: "trabajo, recursos, estabilidad y mundo material",
-        significados: {
-            "As": "Oportunidad concreta, comienzo laboral, recurso nuevo o posibilidad de construir estabilidad.",
-            "Dos": "Administración, adaptación y equilibrio entre responsabilidades o recursos.",
-            "Tres": "Aprendizaje práctico, colaboración, oficio y reconocimiento de las habilidades.",
-            "Cuatro": "Seguridad, conservación de recursos y necesidad de revisar el apego al control.",
-            "Cinco": "Escasez, inseguridad material o sensación de exclusión; buscar apoyo puede ser importante.",
-            "Seis": "Generosidad, intercambio justo y equilibrio entre dar y recibir.",
-            "Siete": "Paciencia, evaluación de resultados y trabajo cuyos frutos requieren tiempo.",
-            "Ocho": "Práctica, dedicación, disciplina y perfeccionamiento de una habilidad.",
-            "Nueve": "Autonomía, disfrute de los logros y seguridad construida con esfuerzo.",
-            "Diez": "Legado, estabilidad a largo plazo, familia y recursos compartidos.",
-            "Sota": "Curiosidad práctica, estudio, oportunidad de aprender y nuevos objetivos materiales.",
-            "Caballero": "Constancia, responsabilidad y avance lento pero sostenido.",
-            "Reina": "Cuidado práctico, administración, generosidad y conexión con lo cotidiano.",
-            "Rey": "Gestión, estabilidad, experiencia y capacidad para sostener proyectos y recursos."
-        },
-        simbolismo: "El oro representa aquello que puede cuidarse, cultivarse y desarrollarse en el mundo concreto. Recuerda observar los recursos disponibles y la relación con la seguridad."
+        elemento: "Tierra",
+        simbolismo: "Oros representa los recursos, el trabajo, el cuerpo, la seguridad y aquello que crece mediante la constancia.",
+        cartas: [
+            ["As de Oros", "Oportunidad concreta, recurso nuevo y posibilidad de construir estabilidad."],
+            ["Dos de Oros", "Administración, adaptación y equilibrio entre responsabilidades."],
+            ["Tres de Oros", "Colaboración, aprendizaje práctico y desarrollo de habilidades."],
+            ["Cuatro de Oros", "Seguridad, conservación de recursos y apego al control."],
+            ["Cinco de Oros", "Inseguridad material o sensación de falta; buscar apoyo puede ayudar."],
+            ["Seis de Oros", "Generosidad, intercambio justo y equilibrio entre dar y recibir."],
+            ["Siete de Oros", "Paciencia, evaluación y resultados que requieren tiempo."],
+            ["Ocho de Oros", "Práctica, disciplina y perfeccionamiento de una habilidad."],
+            ["Nueve de Oros", "Autonomía, disfrute y seguridad construida con esfuerzo."],
+            ["Diez de Oros", "Legado, estabilidad a largo plazo y recursos compartidos."],
+            ["Sota de Oros", "Curiosidad práctica, estudio y nuevos objetivos materiales."],
+            ["Caballero de Oros", "Constancia, responsabilidad y progreso sostenido."],
+            ["Reina de Oros", "Cuidado práctico, administración y generosidad."],
+            ["Rey de Oros", "Gestión, estabilidad y capacidad para sostener proyectos."]
+        ]
     }
 };
 
-const ordenCartas = [
-    ["As", "ace"], ["Dos", "two"], ["Tres", "three"],
-    ["Cuatro", "four"], ["Cinco", "five"], ["Seis", "six"],
-    ["Siete", "seven"], ["Ocho", "eight"], ["Nueve", "nine"],
-    ["Diez", "ten"], ["Sota", "page"], ["Caballero", "knight"],
-    ["Reina", "queen"], ["Rey", "king"]
-];
-
-const nombresArchivos = {
-    bastos: "wands",
-    copas: "cups",
-    espadas: "swords",
-    oros: "pentacles"
+const ids = {
+    bastos: "lista-bastos",
+    copas: "lista-copas",
+    espadas: "lista-espadas",
+    oros: "lista-oros"
 };
 
-const listas = {
-    bastos: document.getElementById("lista-bastos"),
-    copas: document.getElementById("lista-copas"),
-    espadas: document.getElementById("lista-espadas"),
-    oros: document.getElementById("lista-oros")
-};
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modal-title");
+const modalMeaning = document.getElementById("modal-meaning");
+const modalSymbolism = document.getElementById("modal-symbolism");
+const modalKicker = document.getElementById("modal-kicker");
 
-const todasLasCartas = [];
+function abrirCarta(palo, indice) {
+    const grupo = datos[palo];
+    const carta = grupo.cartas[indice];
 
-Object.keys(palos).forEach(clavePalo => {
-    const palo = palos[clavePalo];
+    modalKicker.textContent =
+        "ASTRO ROJO · " + grupo.elemento.toUpperCase() + " · " + grupo.nombre.toUpperCase();
 
-    ordenCartas.forEach((orden, indice) => {
-        const rango = orden[0];
-        const archivoRango = orden[1];
-
-        const carta = {
-            nombre: rango + " de " + palo.nombre,
-            palo: clavePalo,
-            simbolo: palo.simbolo,
-            significado: palo.significados[rango],
-            simbolismo: palo.simbolismo,
-            imagen: "../images/" + archivoRango + "of" + nombresArchivos[clavePalo] + ".jpeg",
-            indice: todasLasCartas.length
-        };
-
-        todasLasCartas.push(carta);
-
-        const tarjeta = document.createElement("span");
-        tarjeta.innerHTML =
-            '<span class="card-number">' +
-            String(indice + 1).padStart(2, "0") +
-            ' · ' + palo.simbolo + '</span>' +
-            '<span class="card-name">' + carta.nombre + '</span>';
-
-        tarjeta.setAttribute("role", "button");
-        tarjeta.setAttribute("tabindex", "0");
-        tarjeta.setAttribute("aria-label", "Ver " + carta.nombre);
-        tarjeta.addEventListener("click", () => abrirCarta(carta.indice));
-        tarjeta.addEventListener("keydown", evento => {
-            if (evento.key === "Enter" || evento.key === " ") {
-                evento.preventDefault();
-                abrirCarta(carta.indice);
-            }
-        });
-
-        listas[clavePalo].appendChild(tarjeta);
-    });
-});
-
-const modal = document.getElementById("modal-carta");
-const imagenCarta = document.getElementById("imagen-carta");
-const nombreCarta = document.getElementById("nombre-carta");
-const significadoCarta = document.getElementById("significado-carta");
-const simbolismoCarta = document.getElementById("simbolismo-carta");
-
-function abrirCarta(indice) {
-    const carta = todasLasCartas[indice];
-    if (!carta) return;
-
-    nombreCarta.textContent = carta.simbolo + " " + carta.nombre;
-    significadoCarta.textContent = carta.significado;
-    simbolismoCarta.textContent = carta.simbolismo;
-
-    imagenCarta.classList.remove("oculta");
-    imagenCarta.src = carta.imagen;
-    imagenCarta.alt = carta.nombre;
-    imagenCarta.onerror = function() {
-        this.classList.add("oculta");
-    };
+    modalTitle.textContent = carta[0];
+    modalMeaning.textContent = carta[1];
+    modalSymbolism.textContent = grupo.simbolismo;
 
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
-    document.getElementById("cerrar-modal").focus();
+    document.getElementById("modal-close").focus();
 }
 
-function cerrarCarta() {
+function cerrarModal() {
     modal.classList.remove("active");
     document.body.style.overflow = "";
 }
 
-document.getElementById("cerrar-modal").addEventListener("click", cerrarCarta);
-document.getElementById("cerrar-boton").addEventListener("click", cerrarCarta);
+Object.keys(datos).forEach(palo => {
+    const contenedor = document.getElementById(ids[palo]);
+
+    datos[palo].cartas.forEach((carta, indice) => {
+        const boton = document.createElement("button");
+        boton.type = "button";
+        boton.className = "tarot-card";
+
+        const numero = String(indice + 1).padStart(2, "0");
+
+        boton.innerHTML =
+            '<span class="card-no">' + numero + '</span>' +
+            '<span class="card-title"></span>' +
+            '<span class="card-open" aria-hidden="true">↗</span>';
+
+        boton.querySelector(".card-title").textContent = carta[0];
+        boton.setAttribute("aria-label", "Ver significado de " + carta[0]);
+        boton.addEventListener("click", () => abrirCarta(palo, indice));
+
+        contenedor.appendChild(boton);
+    });
+});
+
+document.getElementById("modal-close").addEventListener("click", cerrarModal);
+document.getElementById("modal-back").addEventListener("click", cerrarModal);
 
 modal.addEventListener("click", evento => {
-    if (evento.target === modal) cerrarCarta();
+    if (evento.target === modal) cerrarModal();
 });
 
 document.addEventListener("keydown", evento => {
-    if (evento.key === "Escape") cerrarCarta();
+    if (evento.key === "Escape") cerrarModal();
 });
 </script>
 
