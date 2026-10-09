@@ -1,695 +1,1502 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10070b">
-<meta name="description" content="ASTRO ROJO — Aprende a interpretar la llama, el humo y la cera en el arte de la velomancia.">
-<title>Velomancia — ASTRO ROJO</title>
-
-<style>
-:root {
-    --bg: #10070b;
-    --bg-soft: #180a0f;
-    --panel: #1d0c12;
-    --panel-light: #260d15;
-    --red: #e21b3c;
-    --red-dark: #9e102a;
-    --wine: #3b080d;
-    --text: #f3eeee;
-    --muted: #bca9ad;
-    --line: rgba(226, 27, 60, .23);
-    --gold: #d8b58a;
-    --radius: 18px;
-    --shadow: 0 18px 50px rgba(0, 0, 0, .24);
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 90px;
-}
-
-body {
-    min-height: 100vh;
-    background:
-        radial-gradient(ellipse at 50% 0%, rgba(130, 12, 36, .2), transparent 38%),
-        var(--bg);
-    color: var(--text);
-    font-family: Georgia, "Times New Roman", serif;
-    line-height: 1.8;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: .15;
-    background-image:
-        radial-gradient(circle at 15% 20%, #e21b3c 1px, transparent 1.5px),
-        radial-gradient(circle at 80% 70%, #d8b58a 1px, transparent 1.5px);
-    background-size: 120px 120px, 180px 180px;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.container {
-    width: min(1180px, calc(100% - 40px));
-    margin: 0 auto;
-    padding: 28px 0 70px;
-}
-
-/* PORTADA */
-
-.welcome {
-    min-height: 390px;
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 70px 28px;
-    margin-bottom: 58px;
-    border: 1px solid rgba(226, 27, 60, .4);
-    border-radius: 25px;
-    background:
-        linear-gradient(110deg, rgba(16, 7, 11, .97), rgba(59, 8, 13, .8), rgba(16, 7, 11, .96)),
-        var(--wine);
-    box-shadow: var(--shadow);
-}
-
-.welcome::before,
-.welcome::after {
-    content: "✦";
-    position: absolute;
-    color: rgba(226, 27, 60, .35);
-    font-size: 110px;
-    line-height: 1;
-    pointer-events: none;
-}
-
-.welcome::before {
-    top: 16px;
-    left: 24px;
-}
-
-.welcome::after {
-    right: 24px;
-    bottom: 16px;
-}
-
-.hero-glow {
-    position: absolute;
-    width: 420px;
-    height: 260px;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(226, 27, 60, .16);
-    filter: blur(90px);
-    z-index: -1;
-}
-
-.moon {
-    width: 76px;
-    height: 76px;
-    display: grid;
-    place-items: center;
-    margin-bottom: 18px;
-    border: 1px solid rgba(226, 27, 60, .5);
-    border-radius: 50%;
-    background: rgba(226, 27, 60, .08);
-    box-shadow: 0 0 35px rgba(226, 27, 60, .13);
-    font-size: 36px;
-}
-
-.welcome h1 {
-    color: var(--text);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(42px, 8vw, 78px);
-    font-weight: 400;
-    letter-spacing: .12em;
-    line-height: 1.15;
-    text-shadow: 0 0 35px rgba(226, 27, 60, .18);
-}
-
-.welcome h1::first-letter {
-    color: var(--red);
-}
-
-.welcome > p {
-    margin-top: 15px;
-    color: var(--red);
-    font-size: 19px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-}
-
-.welcome > span {
-    max-width: 650px;
-    margin-top: 20px;
-    color: #d7c8cb;
-    font-size: 16px;
-    line-height: 1.9;
-}
-
-/* CONTENIDO */
-
-.contenido {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-.seccion-titulo {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 58px 0 23px;
-}
-
-.seccion-titulo::before {
-    content: "";
-    width: 4px;
-    min-width: 4px;
-    height: 37px;
-    border-radius: 5px;
-    background: var(--red);
-    box-shadow: 0 0 20px rgba(226, 27, 60, .35);
-}
-
-.seccion-titulo::after {
-    content: "";
-    height: 1px;
-    flex: 1;
-    background: linear-gradient(90deg, var(--line), transparent);
-}
-
-.seccion-titulo h2 {
-    color: var(--text);
-    font-size: clamp(17px, 2.5vw, 23px);
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: .07em;
-}
-
-.introduccion {
-    padding: 27px 30px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: linear-gradient(135deg, rgba(38, 13, 21, .92), rgba(24, 10, 15, .94));
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
-}
-
-.introduccion p {
-    color: #d5c5c9;
-    font-size: 16px;
-    line-height: 2;
-}
-
-.introduccion p + p {
-    margin-top: 18px;
-}
-
-/* TARJETAS */
-
-.study-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 8px;
-}
-
-.study-card {
-    position: relative;
-    overflow: hidden;
-    padding: 28px 25px;
-    border: 1px solid rgba(226, 27, 60, .19);
-    border-radius: var(--radius);
-    background:
-        linear-gradient(145deg, rgba(38, 13, 21, .96), rgba(20, 8, 13, .98));
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-}
-
-.study-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 55px;
-    height: 2px;
-    background: var(--red);
-    transition: width .25s ease;
-}
-
-.study-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(226, 27, 60, .6);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
-}
-
-.study-card:hover::after {
-    width: 100%;
-}
-
-.study-icon {
-    width: 54px;
-    height: 54px;
-    display: grid;
-    place-items: center;
-    margin-bottom: 19px;
-    border: 1px solid rgba(226, 27, 60, .35);
-    border-radius: 15px;
-    background: rgba(226, 27, 60, .09);
-    color: var(--red);
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-}
-
-.study-card h3 {
-    margin-bottom: 10px;
-    color: #fff5f6;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 1.4;
-}
-
-.study-card p {
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.9;
-}
-
-/* TEMAS ESPECIALES */
-
-.tema-curso {
-    margin-top: 25px;
-    padding: 12px 0 0;
-}
-
-.principio {
-    position: relative;
-    overflow: hidden;
-    margin: 35px 0;
-    padding: 38px 35px;
-    text-align: center;
-    border: 1px solid rgba(226, 27, 60, .38);
-    border-radius: 22px;
-    background:
-        radial-gradient(ellipse at top, rgba(226, 27, 60, .15), transparent 70%),
-        linear-gradient(135deg, #260a12, #14070b);
-}
-
-.principio-icon {
-    width: 66px;
-    height: 66px;
-    display: grid;
-    place-items: center;
-    margin: 0 auto 18px;
-    border: 1px solid rgba(226, 27, 60, .45);
-    border-radius: 50%;
-    background: rgba(226, 27, 60, .08);
-    font-size: 30px;
-}
-
-.principio h3 {
-    max-width: 700px;
-    margin: 0 auto 15px;
-    color: var(--red);
-    font-size: clamp(18px, 3vw, 25px);
-    font-weight: 400;
-    letter-spacing: .04em;
-    line-height: 1.5;
-}
-
-.principio p {
-    max-width: 760px;
-    margin: 0 auto;
-    color: #d2c1c5;
-    font-size: 16px;
-    line-height: 2;
-}
-
-/* SIGUIENTE TEMA */
-
-.siguiente-leccion {
-    display: flex;
-    justify-content: center;
-    margin-top: 75px;
-    padding-top: 35px;
-    border-top: 1px solid var(--line);
-}
-
-.siguiente-leccion a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    min-width: 240px;
-    padding: 17px 28px;
-    border: 1px solid var(--red);
-    border-radius: 5px;
-    background: var(--red);
-    color: #fff;
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-align: center;
-    transition: background .2s ease, color .2s ease, transform .2s ease;
-}
-
-.siguiente-leccion a:hover {
-    transform: translateY(-3px);
-    background: transparent;
-    color: #ff6b83;
-    box-shadow: 0 10px 30px rgba(226, 27, 60, .12);
-}
-
-/* TABLET */
-
-@media (max-width: 900px) {
-    .study-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .welcome {
-        min-height: 350px;
-    }
-
-    .seccion-titulo {
-        margin-top: 48px;
-    }
-}
-
-/* CELULAR */
-
-@media (max-width: 600px) {
-    .container {
-        width: calc(100% - 24px);
-        padding-top: 12px;
-        padding-bottom: 45px;
-    }
-
-    .welcome {
-        min-height: 350px;
-        padding: 48px 20px;
-        margin-bottom: 35px;
-        border-radius: 17px;
-    }
-
-    .welcome::before,
-    .welcome::after {
-        font-size: 58px;
-    }
-
-    .welcome::before {
-        top: 10px;
-        left: 12px;
-    }
-
-    .welcome::after {
-        right: 12px;
-        bottom: 10px;
-    }
-
-    .moon {
-        width: 62px;
-        height: 62px;
-        font-size: 29px;
-    }
-
-    .welcome h1 {
-        font-size: clamp(36px, 11vw, 55px);
-        letter-spacing: .07em;
-    }
-
-    .welcome > p {
-        font-size: 13px;
-        letter-spacing: .13em;
-    }
-
-    .welcome > span {
-        font-size: 14px;
-        line-height: 1.8;
-    }
-
-    .seccion-titulo {
-        gap: 10px;
-        margin: 42px 0 17px;
-    }
-
-    .seccion-titulo::before {
-        height: 29px;
-    }
-
-    .seccion-titulo h2 {
-        font-size: 16px;
-        letter-spacing: .025em;
-    }
-
-    .seccion-titulo::after {
-        min-width: 12px;
-    }
-
-    .introduccion {
-        padding: 21px 19px;
-        border-radius: 14px;
-    }
-
-    .introduccion p {
-        font-size: 14px;
-        line-height: 1.9;
-    }
-
-    .study-grid {
-        grid-template-columns: 1fr;
-        gap: 13px;
-    }
-
-    .study-card {
-        padding: 23px 21px;
-        border-radius: 14px;
-    }
-
-    .study-icon {
-        width: 46px;
-        height: 46px;
-        margin-bottom: 14px;
-        border-radius: 12px;
-        font-size: 22px;
-    }
-
-    .study-card h3 {
-        font-size: 19px;
-    }
-
-    .study-card p {
-        font-size: 14px;
-    }
-
-    .principio {
-        padding: 30px 21px;
-        border-radius: 16px;
-    }
-
-    .principio p {
-        font-size: 14px;
-        line-height: 1.9;
-    }
-
-    .siguiente-leccion {
-        margin-top: 52px;
-    }
-
-    .siguiente-leccion a {
-        width: 100%;
-        min-width: 0;
-        padding: 16px 18px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0709">
+    <meta name="description" content="ASTRO ROJO — Curso de Velomancia. Aprende a observar e interpretar simbólicamente la llama, la cera, el humo y el color de las velas.">
+
+    <title>Velomancia — ASTRO ROJO</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0b0709;
+            --bg-soft: #12090d;
+            --card: #180b10;
+            --red: #e21b3c;
+            --red-light: #ff4965;
+            --red-dark: #8e1029;
+            --text: #f7eff1;
+            --soft: #d2c1c6;
+            --muted: #a58e95;
+            --border: rgba(226,27,60,.25);
+            --serif: "Cormorant Garamond", Georgia, serif;
+            --sans: "Montserrat", Arial, sans-serif;
+            --max: 1180px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(104,10,32,.2), transparent 35rem),
+                var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        ::selection {
+            background: var(--red-dark);
+            color: white;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 14px max(5%, calc((100% - var(--max)) / 2));
+            min-height: 76px;
+            background: rgba(11,7,9,.94);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            white-space: nowrap;
+        }
+
+        .brand-symbol {
+            display: grid;
+            place-items: center;
+            width: 39px;
+            height: 39px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--red-light);
+            font-size: 23px;
+        }
+
+        .brand strong {
+            color: var(--red-light);
+        }
+
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 22px;
+        }
+
+        .navigation a {
+            color: var(--soft);
+            font-size: 10px;
+            letter-spacing: .7px;
+            transition: color .2s;
+        }
+
+        .navigation a:hover {
+            color: var(--red-light);
+        }
+
+        /* PORTADA */
+
+        .hero {
+            position: relative;
+            isolation: isolate;
+            display: flex;
+            align-items: center;
+            min-height: 680px;
+            padding: 90px max(7%, calc((100% - 1100px) / 2));
+            overflow: hidden;
+            background: #10070b;
+        }
+
+        .hero-image {
+            position: absolute;
+            inset: 0;
+            z-index: -3;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: .48;
+            filter: saturate(.7);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background:
+                linear-gradient(90deg, #0b0709 3%, rgba(11,7,9,.93) 38%, rgba(11,7,9,.52) 72%, rgba(11,7,9,.38)),
+                linear-gradient(0deg, #0b0709, transparent 35%, rgba(11,7,9,.2));
+        }
+
+        .hero-orbit {
+            position: absolute;
+            z-index: -1;
+            right: -100px;
+            top: 50%;
+            width: 570px;
+            aspect-ratio: 1;
+            transform: translateY(-50%);
+            border: 1px solid rgba(255,73,101,.24);
+            border-radius: 50%;
+            box-shadow: inset 0 0 90px rgba(226,27,60,.04);
+        }
+
+        .hero-orbit::before,
+        .hero-orbit::after {
+            content: "";
+            position: absolute;
+            inset: 12%;
+            border: 1px solid rgba(255,73,101,.16);
+            border-radius: 50%;
+        }
+
+        .hero-orbit::after {
+            inset: 25%;
+        }
+
+        .hero-content {
+            max-width: 710px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--red-light);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 35px;
+            height: 1px;
+            background: var(--red);
+        }
+
+        .hero h1 {
+            margin-top: 25px;
+            font-size: clamp(64px, 10vw, 116px);
+            font-weight: 800;
+            letter-spacing: -6px;
+            line-height: .84;
+        }
+
+        .hero h1 span {
+            display: block;
+            margin-top: 13px;
+            color: var(--red);
+        }
+
+        .hero-subtitle {
+            margin-top: 30px;
+            color: white;
+            font-family: var(--serif);
+            font-size: clamp(25px, 3vw, 36px);
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            max-width: 510px;
+            margin-top: 17px;
+            color: var(--soft);
+            font-size: 12px;
+            line-height: 2.1;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 47px;
+            padding: 12px 22px;
+            border: 1px solid var(--red);
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: .25s;
+        }
+
+        .button-primary {
+            background: var(--red-dark);
+        }
+
+        .button-primary:hover {
+            background: var(--red);
+            transform: translateY(-3px);
+        }
+
+        .button-outline {
+            border-color: rgba(255,255,255,.2);
+            background: rgba(10,5,7,.45);
+        }
+
+        .button-outline:hover {
+            border-color: var(--red-light);
+            color: var(--red-light);
+        }
+
+        .hero-note {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-top: 40px;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 1.3px;
+        }
+
+        .hero-note span:first-child {
+            color: var(--red-light);
+            font-size: 17px;
+        }
+
+        .hero-note i {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--red);
+        }
+
+        /* FRANJA */
+
+        .course-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 24px 15px;
+            border: 1px solid var(--border);
+            background: linear-gradient(120deg,#180a0f,#10090c);
+        }
+
+        .strip-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px;
+            border-right: 1px solid var(--border);
+        }
+
+        .strip-item:last-child {
+            border-right: none;
+        }
+
+        .strip-icon {
+            color: var(--red-light);
+            font-size: 25px;
+        }
+
+        .strip-item strong,
+        .strip-item small {
+            display: block;
+        }
+
+        .strip-item strong {
+            font-size: 10px;
+        }
+
+        .strip-item small {
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        /* ESTRUCTURA GENERAL */
+
+        .section {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 95px 28px;
+        }
+
+        .section-dark {
+            max-width: none;
+            padding-right: max(28px, calc((100% - var(--max)) / 2));
+            padding-left: max(28px, calc((100% - var(--max)) / 2));
+            border-top: 1px solid rgba(226,27,60,.1);
+            border-bottom: 1px solid rgba(226,27,60,.1);
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(80,8,25,.12), transparent 60%),
+                #0e080b;
+        }
+
+        .section-heading {
+            max-width: 720px;
+            margin: 0 auto 42px;
+            text-align: center;
+        }
+
+        .section-number {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--red-light);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .section-heading h2 {
+            font-family: var(--serif);
+            font-size: clamp(34px, 5vw, 51px);
+            font-weight: 600;
+            line-height: 1.08;
+        }
+
+        .section-heading h2 span {
+            color: var(--red-light);
+        }
+
+        .section-heading p {
+            max-width: 570px;
+            margin: 15px auto 0;
+            color: var(--soft);
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .intro-panel {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            align-items: stretch;
+            gap: 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--card);
+        }
+
+        .intro-image-wrap {
+            position: relative;
+            min-height: 340px;
+            overflow: hidden;
+        }
+
+        .intro-image-wrap img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(.7);
+        }
+
+        .intro-image-wrap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg,rgba(11,7,9,.6),transparent 70%);
+        }
+
+        .intro-image-label {
+            position: absolute;
+            bottom: 23px;
+            left: 23px;
+            z-index: 1;
+            color: white;
+            font-size: 9px;
+            letter-spacing: 2px;
+        }
+
+        .intro-copy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: clamp(25px,4vw,48px);
+        }
+
+        .mini-label {
+            color: var(--red-light);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .intro-copy h3 {
+            margin: 12px 0 17px;
+            font-family: var(--serif);
+            font-size: 34px;
+            line-height: 1.1;
+        }
+
+        .intro-copy p {
+            margin-top: 10px;
+            color: var(--soft);
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .quote-line {
+            margin-top: 23px;
+            padding: 14px 17px;
+            border-left: 2px solid var(--red);
+            background: rgba(226,27,60,.055);
+            color: var(--text);
+            font-family: var(--serif);
+            font-size: 21px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* TARJETAS */
+
+        .study-grid {
+            display: grid;
+            grid-template-columns: repeat(3,minmax(0,1fr));
+            gap: 17px;
+        }
+
+        .study-card {
+            position: relative;
+            min-width: 0;
+            padding: 27px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 12px;
+            background: linear-gradient(145deg,rgba(34,13,20,.96),rgba(19,9,13,.98));
+            transition: transform .25s,border-color .25s,background .25s;
+        }
+
+        .study-card::after {
+            content: "";
+            position: absolute;
+            right: -35px;
+            bottom: -45px;
+            width: 120px;
+            height: 120px;
+            border: 1px solid rgba(226,27,60,.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .study-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border);
+            background: #220d14;
+        }
+
+        .study-icon {
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 19px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(226,27,60,.07);
+            color: var(--red-light);
+            font-size: 22px;
+        }
+
+        .study-card h3 {
+            margin-bottom: 9px;
+            font-family: var(--serif);
+            font-size: 25px;
+            line-height: 1.15;
+        }
+
+        .study-card p {
+            color: var(--soft);
+            font-size: 11px;
+            line-height: 2;
+        }
+
+        .card-index {
+            position: absolute;
+            top: 23px;
+            right: 23px;
+            color: rgba(255,73,101,.55);
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* BLOQUES DE TEXTO */
+
+        .text-panel {
+            padding: 28px 32px;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--red);
+            border-radius: 10px;
+            background: rgba(226,27,60,.035);
+        }
+
+        .text-panel p {
+            color: var(--soft);
+            font-size: 12px;
+            line-height: 2.1;
+        }
+
+        .text-panel p + p {
+            margin-top: 15px;
+        }
+
+        .section-title-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 0 0 25px;
+        }
+
+        .section-title-row::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg,var(--border),transparent);
+        }
+
+        .section-title-row span {
+            color: var(--red-light);
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .section-title-row h2 {
+            font-family: var(--serif);
+            font-size: clamp(25px,3vw,34px);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .subsection {
+            margin-top: 60px;
+        }
+
+        /* IMAGEN DESTACADA */
+
+        .visual-banner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 320px;
+            margin: 30px 0;
+            padding: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #17090e;
+        }
+
+        .visual-banner img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .45;
+        }
+
+        .visual-banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,#10070b 0%,rgba(16,7,11,.88) 38%,rgba(16,7,11,.2));
+        }
+
+        .visual-banner-content {
+            position: relative;
+            z-index: 1;
+            max-width: 570px;
+        }
+
+        .visual-banner h3 {
+            margin: 10px 0;
+            font-family: var(--serif);
+            font-size: clamp(32px,4vw,46px);
+            line-height: 1.1;
+        }
+
+        .visual-banner p {
+            max-width: 490px;
+            color: var(--soft);
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        /* SECUENCIA */
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(3,minmax(0,1fr));
+            gap: 15px;
+            counter-reset: step;
+        }
+
+        .timeline-card {
+            position: relative;
+            padding: 27px;
+            border-top: 2px solid var(--red);
+            background: var(--card);
+            counter-increment: step;
+        }
+
+        .timeline-card::before {
+            content: "0" counter(step);
+            display: block;
+            margin-bottom: 17px;
+            color: var(--red-light);
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .timeline-card h3 {
+            margin-bottom: 8px;
+            font-family: var(--serif);
+            font-size: 25px;
+        }
+
+        .timeline-card p {
+            color: var(--soft);
+            font-size: 11px;
+            line-height: 2;
+        }
+
+        /* COLORES */
+
+        .color-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .color-swatch {
+            height: 95px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .swatch-pink {
+            background: linear-gradient(135deg,#f2b5ca,#9d4d68);
+        }
+
+        .swatch-red {
+            background: linear-gradient(135deg,#ff4965,#680a20);
+        }
+
+        .swatch-white {
+            background: linear-gradient(135deg,#fff8ef,#a99da0);
+        }
+
+        .color-copy {
+            padding: 22px;
+        }
+
+        .color-copy h3 {
+            margin-bottom: 7px;
+            font-family: var(--serif);
+            font-size: 26px;
+        }
+
+        .color-copy p {
+            color: var(--soft);
+            font-size: 11px;
+            line-height: 1.9;
+        }
+
+        /* PRINCIPIOS DESTACADOS */
+
+        .principle {
+            position: relative;
+            display: grid;
+            grid-template-columns: 75px 1fr;
+            align-items: center;
+            gap: 22px;
+            margin: 32px 0;
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background:
+                radial-gradient(ellipse at 0% 50%,rgba(226,27,60,.12),transparent 60%),
+                #15090e;
+        }
+
+        .principle-icon {
+            display: grid;
+            place-items: center;
+            width: 70px;
+            height: 70px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--red-light);
+            font-size: 32px;
+        }
+
+        .principle h3 {
+            margin-bottom: 7px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+        }
+
+        .principle p {
+            color: var(--soft);
+            font-size: 11px;
+            line-height: 2;
+        }
+
+        /* RECORDATORIO */
+
+        .reminder {
+            display: flex;
+            gap: 14px;
+            margin-top: 22px;
+            padding: 17px 19px;
+            border: 1px solid rgba(255,73,101,.18);
+            border-radius: 9px;
+            background: rgba(226,27,60,.035);
+        }
+
+        .reminder span {
+            color: var(--red-light);
+            font-size: 20px;
+        }
+
+        .reminder p {
+            color: var(--soft);
+            font-size: 10px;
+            line-height: 1.9;
+        }
+
+        /* NAVEGACIÓN FINAL */
+
+        .next-section {
+            padding: 85px 20px;
+            border-top: 1px solid var(--border);
+            background:
+                radial-gradient(ellipse at 50% 0%,rgba(226,27,60,.17),transparent 60%),
+                #10070b;
+            text-align: center;
+        }
+
+        .next-symbol {
+            color: var(--red-light);
+            font-size: 38px;
+        }
+
+        .next-section h2 {
+            margin-top: 12px;
+            font-family: var(--serif);
+            font-size: clamp(32px,5vw,46px);
+            line-height: 1.1;
+        }
+
+        .next-section p {
+            max-width: 520px;
+            margin: 15px auto 25px;
+            color: var(--soft);
+            font-size: 12px;
+        }
+
+        .next-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .next-links .button {
+            min-width: 190px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 25px max(5%, calc((100% - var(--max)) / 2));
+            background: #090608;
+        }
+
+        .footer p {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .footer-brand {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .footer-brand span {
+            color: var(--red-light);
+        }
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+            .topbar {
+                padding-right: 22px;
+                padding-left: 22px;
+            }
+
+            .navigation {
+                gap: 13px;
+            }
+
+            .hero {
+                min-height: 600px;
+                padding-right: 6%;
+                padding-left: 6%;
+            }
+
+            .hero-orbit {
+                right: -200px;
+                opacity: .7;
+            }
+
+            .course-strip {
+                margin: 0 15px;
+            }
+
+            .study-grid {
+                grid-template-columns: repeat(2,minmax(0,1fr));
+            }
+
+            .intro-panel {
+                grid-template-columns: .85fr 1.15fr;
+            }
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 600px) {
+            html {
+                scroll-padding-top: 15px;
+            }
+
+            .topbar {
+                position: relative;
+                flex-direction: column;
+                gap: 14px;
+                padding: 16px 12px;
+            }
+
+            .navigation {
+                justify-content: center;
+                gap: 9px 15px;
+            }
+
+            .navigation a {
+                font-size: 9px;
+            }
+
+            .hero {
+                min-height: 610px;
+                padding: 75px 22px 55px;
+            }
+
+            .hero h1 {
+                font-size: clamp(58px,15vw,85px);
+                letter-spacing: -3px;
+            }
+
+            .hero-subtitle {
+                font-size: 27px;
+            }
+
+            .hero-description {
+                font-size: 11px;
+            }
+
+            .hero-orbit {
+                top: 16%;
+                right: -300px;
+                width: 470px;
+                transform: none;
+                opacity: .45;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+                max-width: 320px;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .hero-note {
+                gap: 8px;
+                margin-top: 27px;
+                font-size: 8px;
+            }
+
+            .course-strip {
+                grid-template-columns: repeat(2,minmax(0,1fr));
+                margin: 0 10px;
+                padding: 10px;
+            }
+
+            .strip-item {
+                justify-content: flex-start;
+                gap: 8px;
+                padding: 13px 6px;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .strip-item:nth-child(2) {
+                border-bottom: 1px solid var(--border);
+            }
+
+            .strip-item:nth-child(odd) {
+                border-right: 1px solid var(--border);
+            }
+
+            .strip-item:nth-last-child(-n+2) {
+                border-bottom: none;
+            }
+
+            .strip-icon {
+                font-size: 20px;
+            }
+
+            .strip-item strong {
+                font-size: 9px;
+            }
+
+            .strip-item small {
+                font-size: 8px;
+            }
+
+            .section,
+            .section-dark {
+                padding: 68px 18px;
+            }
+
+            .section-heading {
+                margin-bottom: 30px;
+            }
+
+            .section-heading h2 {
+                font-size: 36px;
+            }
+
+            .intro-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-image-wrap {
+                min-height: 230px;
+            }
+
+            .intro-copy {
+                padding: 25px 22px;
+            }
+
+            .intro-copy h3 {
+                font-size: 30px;
+            }
+
+            .study-grid,
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .study-card {
+                padding: 23px;
+            }
+
+            .study-card h3 {
+                font-size: 24px;
+            }
+
+            .text-panel {
+                padding: 22px;
+            }
+
+            .section-title-row {
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .section-title-row h2 {
+                font-size: 27px;
+            }
+
+            .visual-banner {
+                min-height: 350px;
+                padding: 25px;
+            }
+
+            .visual-banner::after {
+                background: linear-gradient(90deg,rgba(16,7,11,.95),rgba(16,7,11,.55));
+            }
+
+            .visual-banner h3 {
+                font-size: 35px;
+            }
+
+            .principle {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 23px;
+            }
+
+            .principle-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 25px;
+            }
+
+            .next-section {
+                padding: 65px 20px;
+            }
+
+            .next-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .next-links .button {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<main class="container">
 
-    <section class="welcome">
-        <div class="hero-glow"></div>
-        <div class="moon">🔥</div>
-        <h1>VELOMANCIA</h1>
-        <p>Curso de Velomancia</p>
-        <span>
+<header class="topbar">
+    <a href="index.html" class="brand">
+        <span class="brand-symbol">☾</span>
+        <span>ASTRO <strong>ROJO</strong></span>
+    </a>
+
+    <nav class="navigation" aria-label="Navegación principal">
+        <a href="#introduccion">INTRODUCCIÓN</a>
+        <a href="#lectura">LECTURAS</a>
+        <a href="#amor">AMOR</a>
+        <a href="#endulzamiento">ENDULZAMIENTO</a>
+        <a href="#caminos">CAMINOS</a>
+    </nav>
+</header>
+
+
+<!-- PORTADA -->
+
+<section class="hero">
+
+    <img
+        class="hero-image"
+        src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1800&q=85"
+        alt="Vela encendida en un ambiente oscuro"
+    >
+
+    <div class="hero-orbit"></div>
+
+    <div class="hero-content">
+
+        <span class="eyebrow">ASTRO ROJO · ESTUDIO ESOTÉRICO</span>
+
+        <h1>
+            EL ARTE
+            <span>DE LA LLAMA.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Velomancia
+        </p>
+
+        <p class="hero-description">
             Aprendé a realizar una lectura completa observando
             la llama, la cera, el humo y el color de la vela.
-        </span>
-    </section>
+            Un recorrido por los símbolos, la observación y la
+            interpretación tradicional de las velas.
+        </p>
 
-    <section class="contenido">
+        <div class="hero-actions">
+            <a href="#introduccion" class="button button-primary">
+                EXPLORAR EL CURSO <span>↓</span>
+            </a>
 
-        <div class="seccion-titulo">
-            <h2>✦ LECTURAS DE VELOMANCIA</h2>
+            <a href="#lectura" class="button button-outline">
+                COMENZAR A LEER
+            </a>
         </div>
 
-        <div class="introduccion">
+        <div class="hero-note">
+            <span>✦</span>
+            <span>OBSERVAR</span>
+            <i></i>
+            <span>REGISTRAR</span>
+            <i></i>
+            <span>INTERPRETAR</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FRANJA INFORMATIVA -->
+
+<div class="course-strip">
+
+    <div class="strip-item">
+        <span class="strip-icon">🔥</span>
+        <div>
+            <strong>LA LLAMA</strong>
+            <small>Movimiento y estabilidad</small>
+        </div>
+    </div>
+
+    <div class="strip-item">
+        <span class="strip-icon">🌫️</span>
+        <div>
+            <strong>EL HUMO</strong>
+            <small>Dirección y cambios</small>
+        </div>
+    </div>
+
+    <div class="strip-item">
+        <span class="strip-icon">🕯️</span>
+        <div>
+            <strong>LA CERA</strong>
+            <small>Recorridos y formas</small>
+        </div>
+    </div>
+
+    <div class="strip-item">
+        <span class="strip-icon">✦</span>
+        <div>
+            <strong>EL CONTEXTO</strong>
+            <small>Intención y observación</small>
+        </div>
+    </div>
+
+</div>
+
+
+<main>
+
+
+<!-- INTRODUCCIÓN -->
+
+<section class="section" id="introduccion">
+
+    <div class="section-heading">
+        <span class="section-number">01 — FUNDAMENTOS</span>
+        <h2>El lenguaje <span>de las velas</span></h2>
+        <p>
+            Una práctica de observación que reúne diferentes señales
+            dentro de una misma lectura.
+        </p>
+    </div>
+
+    <div class="intro-panel">
+
+        <div class="intro-image-wrap">
+            <img
+                src="https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=900&q=85"
+                alt="Detalle de velas encendidas"
+                loading="lazy"
+            >
+            <span class="intro-image-label">EL FUEGO COMO SÍMBOLO</span>
+        </div>
+
+        <div class="intro-copy">
+            <span class="mini-label">UNA MIRADA INTEGRAL</span>
+
+            <h3>Más allá de una sola señal.</h3>
+
             <p>
-                Una lectura de velomancia consiste en observar de manera ordenada
-                lo que ocurre durante la combustión de una vela. No se trata de
-                mirar solamente la llama o buscar una figura en la cera, sino
-                de observar el conjunto de señales que aparecen durante el proceso.
-                La intención, el color de la vela, la llama, el humo y la cera
-                forman parte del contexto general de la lectura.
+                Una lectura de velomancia consiste en observar de manera
+                ordenada lo que ocurre durante la combustión de una vela.
+                No se trata de mirar solamente la llama o buscar una
+                figura en la cera, sino de observar el conjunto de señales
+                que aparecen durante el proceso.
+            </p>
+
+            <p>
+                La intención, el color de la vela, la llama, el humo y la
+                cera forman parte del contexto general de la lectura.
+                Primero se registra lo que sucede; después se relaciona
+                con la intención planteada.
+            </p>
+
+            <div class="quote-line">
+                “Observar sin apresurarse también es parte de interpretar.”
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CÓMO HACER UNA LECTURA -->
+
+<section class="section section-dark" id="lectura">
+
+    <div class="section-heading">
+        <span class="section-number">02 — MÉTODO</span>
+        <h2>¿Cómo se realiza <span>una lectura?</span></h2>
+        <p>
+            Seis etapas para ordenar la práctica desde la preparación
+            hasta la interpretación.
+        </p>
+    </div>
+
+    <div class="study-grid">
+
+        <article class="study-card">
+            <span class="card-index">PASO 01</span>
+            <div class="study-icon">01</div>
+            <h3>Preparar el espacio</h3>
+            <p>
+                Elegí un lugar tranquilo, estable y seguro donde puedas
+                observar la vela sin necesidad de moverla durante la lectura.
+            </p>
+        </article>
+
+        <article class="study-card">
+            <span class="card-index">PASO 02</span>
+            <div class="study-icon">02</div>
+            <h3>Definir la intención</h3>
+            <p>
+                Establecé con claridad qué situación querés observar.
+                La intención funciona como el contexto de toda la lectura.
+            </p>
+        </article>
+
+        <article class="study-card">
+            <span class="card-index">PASO 03</span>
+            <div class="study-icon">03</div>
+            <h3>Elegir la vela</h3>
+            <p>
+                Seleccioná una vela adecuada para la intención y observá
+                previamente su estado, color, tamaño y mecha.
+            </p>
+        </article>
+
+        <article class="study-card">
+            <span class="card-index">PASO 04</span>
+            <div class="study-icon">04</div>
+            <h3>Encender y observar</h3>
+            <p>
+                Encendé la vela y prestá atención a los primeros cambios
+                sin intentar provocar movimientos en la llama o el humo.
+            </p>
+        </article>
+
+        <article class="study-card">
+            <span class="card-index">PASO 05</span>
+            <div class="study-icon">05</div>
+            <h3>Registrar señales</h3>
+            <p>
+                Anotá los cambios importantes que aparezcan durante la
+                lectura. Registrar primero permite interpretar después
+                con mayor claridad.
+            </p>
+        </article>
+
+        <article class="study-card">
+            <span class="card-index">PASO 06</span>
+            <div class="study-icon">06</div>
+            <h3>Interpretar el conjunto</h3>
+            <p>
+                Finalmente, relacioná las diferentes señales con la
+                intención inicial y obtené una visión general de la lectura.
+            </p>
+        </article>
+
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>02.1</span>
+            <h2>Comienzo de la práctica</h2>
+        </div>
+
+        <div class="text-panel">
+            <p>
+                Antes de encender la vela es importante revisar las
+                condiciones del lugar. La superficie debe ser estable
+                y resistente al calor, y la vela debe encontrarse
+                colocada de manera segura.
+            </p>
+
+            <p>
+                También conviene evitar corrientes de aire, ventiladores
+                o ventanas abiertas que puedan modificar el comportamiento
+                de la llama y el humo.
             </p>
         </div>
 
-        <div class="seccion-titulo">
-            <h2>¿CÓMO SE REALIZA UNA LECTURA?</h2>
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>02.2</span>
+            <h2>Ejemplo de una lectura</h2>
         </div>
 
-        <div class="study-grid">
-            <article class="study-card">
-                <div class="study-icon">1</div>
-                <h3>Preparar el espacio</h3>
-                <p>
-                    Elegí un lugar tranquilo, estable y seguro donde puedas
-                    observar la vela sin necesidad de moverla durante la lectura.
-                </p>
-            </article>
+        <div class="visual-banner">
+            <img
+                src="https://images.unsplash.com/photo-1602523961358-f9f03dd557db?auto=format&fit=crop&w=1400&q=85"
+                alt="Vela iluminada en un espacio oscuro"
+                loading="lazy"
+            >
 
-            <article class="study-card">
-                <div class="study-icon">2</div>
-                <h3>Definir la intención</h3>
+            <div class="visual-banner-content">
+                <span class="mini-label">OBSERVAR EL PROCESO</span>
+                <h3>Una lectura, varias señales.</h3>
                 <p>
-                    Establecé con claridad qué situación querés observar.
-                    La intención funciona como el contexto de toda la lectura.
+                    Imaginemos una lectura en la que se utiliza una vela
+                    elegida para trabajar una intención relacionada con
+                    un vínculo. Al comenzar, la llama se mantiene estable.
+                    Después aparece un movimiento más intenso, mientras
+                    el humo cambia de dirección y la cera comienza a
+                    acumularse hacia un lado.
                 </p>
-            </article>
-
-            <article class="study-card">
-                <div class="study-icon">3</div>
-                <h3>Elegir la vela</h3>
-                <p>
-                    Seleccioná una vela adecuada para la intención y observá
-                    previamente su estado, color, tamaño y mecha.
-                </p>
-            </article>
-
-            <article class="study-card">
-                <div class="study-icon">4</div>
-                <h3>Encender y observar</h3>
-                <p>
-                    Encendé la vela y prestá atención a los primeros cambios
-                    sin intentar provocar movimientos en la llama o el humo.
-                </p>
-            </article>
-
-            <article class="study-card">
-                <div class="study-icon">5</div>
-                <h3>Registrar señales</h3>
-                <p>
-                    Anotá los cambios importantes que aparezcan durante la lectura.
-                    Registrar primero permite interpretar después con mayor claridad.
-                </p>
-            </article>
-
-            <article class="study-card">
-                <div class="study-icon">6</div>
-                <h3>Interpretar el conjunto</h3>
-                <p>
-                    Finalmente relacioná las diferentes señales con la intención
-                    inicial y obtené una visión general de la lectura.
-                </p>
-            </article>
+            </div>
         </div>
 
-        <div class="seccion-titulo">
-            <h2>🕯️ COMIENZO</h2>
-        </div>
-
-        <div class="introduccion">
-            <p>
-                Antes de encender la vela es importante revisar las condiciones
-                del lugar. La superficie debe ser estable y resistente al calor,
-                y la vela debe encontrarse colocada de manera segura. También
-                conviene evitar corrientes de aire, ventiladores o ventanas
-                abiertas que puedan modificar el comportamiento de la llama y el humo.
-            </p>
-        </div>
-
-        <div class="seccion-titulo">
-            <h2>🔮 EJEMPLO DE UNA LECTURA</h2>
-        </div>
-
-        <div class="introduccion">
-            <p>
-                Imaginemos una lectura en la que se utiliza una vela elegida para
-                trabajar una intención relacionada con un vínculo. Al comenzar,
-                la llama se mantiene estable. Después aparece un movimiento más
-                intenso, mientras el humo cambia de dirección y la cera comienza
-                a acumularse hacia un lado.
-            </p>
+        <div class="text-panel">
             <p>
                 En lugar de interpretar cada señal de manera independiente,
-                registramos el proceso completo. La estabilidad inicial, los
-                cambios posteriores y la acumulación de cera forman parte de
-                una misma secuencia que debe relacionarse con la intención planteada.
+                registramos el proceso completo. La estabilidad inicial,
+                los cambios posteriores y la acumulación de cera forman
+                parte de una misma secuencia que debe relacionarse con
+                la intención planteada.
             </p>
         </div>
 
-        <div class="seccion-titulo">
-            <h2>❤️ LECTURAS PARA EL AMOR</h2>
+    </div>
+
+</section>
+
+
+<!-- LECTURAS DE AMOR -->
+
+<section class="section" id="amor">
+
+    <div class="section-heading">
+        <span class="section-number">03 — VÍNCULOS</span>
+        <h2>Lecturas <span>para el amor</span></h2>
+        <p>
+            La intención sentimental como punto de partida para una
+            lectura simbólica y reflexiva.
+        </p>
+    </div>
+
+    <div class="intro-panel">
+
+        <div class="intro-image-wrap">
+            <img
+                src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=85"
+                alt="Velas y ambiente cálido"
+                loading="lazy"
+            >
+            <span class="intro-image-label">EL SIMBOLISMO DEL VÍNCULO</span>
         </div>
 
-        <div class="introduccion">
+        <div class="intro-copy">
+            <span class="mini-label">LECTURAS SENTIMENTALES</span>
+            <h3>Intención, vínculo y reflexión.</h3>
+
             <p>
-                Las lecturas de velomancia para el amor se enfocan en observar
-                simbólicamente la energía de un vínculo, una situación sentimental
-                o un proceso emocional. La intención debe estar claramente definida
-                antes de encender la vela para evitar mezclar diferentes cuestiones
-                dentro de una misma lectura. En este tipo de lectura podemos observar
-                el comportamiento de la llama, el humo, la cera y el color elegido.
-                Lo importante es analizar cómo se relacionan estas señales y cómo
-                evolucionan desde el comienzo hasta el final.
+                Las lecturas de velomancia para el amor se enfocan en
+                observar simbólicamente la energía de un vínculo, una
+                situación sentimental o un proceso emocional.
+                La intención debe estar claramente definida antes de
+                encender la vela para evitar mezclar diferentes cuestiones
+                dentro de una misma lectura.
             </p>
-        </div>
 
-        <div class="seccion-titulo">
-            <h2>💞 INTENCIONES</h2>
-        </div>
-
-        <div class="introduccion">
             <p>
-                Una lectura de amor puede comenzar con diferentes intenciones.
-                Lo importante es elegir una sola situación para observar y mantener
-                ese foco durante toda la práctica.
+                Podemos observar el comportamiento de la llama, el humo,
+                la cera y el color elegido. Lo importante es analizar cómo
+                se relacionan estas señales y cómo evolucionan desde el
+                comienzo hasta el final.
             </p>
         </div>
 
-        <div class="study-grid">
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>03.1</span>
+            <h2>Elegir la intención</h2>
+        </div>
+
+        <div class="text-panel">
+            <p>
+                Una lectura de amor puede comenzar con diferentes
+                intenciones. Lo importante es elegir una sola situación
+                para observar y mantener ese foco durante toda la práctica.
+            </p>
+        </div>
+
+        <div class="study-grid" style="margin-top:22px;">
+
             <article class="study-card">
                 <div class="study-icon">❤️</div>
                 <h3>Estado del vínculo</h3>
@@ -712,8 +1519,8 @@ a {
                 <div class="study-icon">💞</div>
                 <h3>Conexión</h3>
                 <p>
-                    Trabajar simbólicamente sobre la percepción de conexión,
-                    cercanía o distancia dentro de un vínculo.
+                    Trabajar simbólicamente sobre la percepción de
+                    conexión, cercanía o distancia dentro de un vínculo.
                 </p>
             </article>
 
@@ -722,45 +1529,65 @@ a {
                 <h3>Claridad emocional</h3>
                 <p>
                     Utilizar la lectura como una herramienta de reflexión
-                    sobre una situación sentimental que genera dudas o incertidumbre.
+                    sobre una situación sentimental que genera dudas
+                    o incertidumbre.
                 </p>
             </article>
+
         </div>
 
-        <div class="seccion-titulo">
-            <h2>🕯️ PREPARACIÓN</h2>
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>03.2</span>
+            <h2>Preparación</h2>
         </div>
 
-        <div class="introduccion">
+        <div class="text-panel">
             <p>
-                Antes de comenzar, definí exactamente qué situación querés observar.
-                Prepará la vela y el espacio de manera segura y tomá unos momentos
-                para concentrarte en la intención elegida. Una vez encendida la vela,
-                evitá intentar provocar determinados movimientos. La lectura consiste
-                en observar lo que sucede de manera natural y registrar los cambios
+                Antes de comenzar, definí exactamente qué situación querés
+                observar. Prepará la vela y el espacio de manera segura y
+                tomá unos momentos para concentrarte en la intención elegida.
+            </p>
+
+            <p>
+                Una vez encendida la vela, evitá intentar provocar
+                determinados movimientos. La lectura consiste en observar
+                lo que sucede de manera natural y registrar los cambios
                 que aparecen.
             </p>
         </div>
 
-        <div class="seccion-titulo">
-            <h2>🔥 ¿CÓMO INTERPRETAMOS UNA LECTURA DE AMOR?</h2>
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>03.3</span>
+            <h2>¿Cómo interpretamos una lectura de amor?</h2>
         </div>
 
-        <div class="introduccion">
+        <div class="text-panel">
             <p>
-                Comenzá observando la llama y su comportamiento. Después incorporá
-                el humo y la cera, teniendo en cuenta el color de la vela y la
-                intención inicial. Finalmente compará el inicio, el desarrollo
-                y el final de la lectura. Si varias señales presentan un
-                comportamiento coherente, registrá esa coincidencia. Si aparecen
-                señales diferentes o contradictorias, no elijas automáticamente
-                la que parezca más favorable: observá cómo evolucionó la lectura completa.
+                Comenzá observando la llama y su comportamiento. Después
+                incorporá el humo y la cera, teniendo en cuenta el color
+                de la vela y la intención inicial. Finalmente, compará
+                el inicio, el desarrollo y el final de la lectura.
+            </p>
+
+            <p>
+                Si varias señales presentan un comportamiento coherente,
+                registrá esa coincidencia. Si aparecen señales diferentes
+                o contradictorias, no elijas automáticamente la que parezca
+                más favorable: observá cómo evolucionó la lectura completa.
             </p>
         </div>
 
-        <div class="study-grid">
-            <article class="study-card">
-                <div class="study-icon">①</div>
+        <div class="timeline" style="margin-top:22px;">
+
+            <article class="timeline-card">
                 <h3>Inicio</h3>
                 <p>
                     ¿Cómo comenzó la vela? Registrá la llama, el humo
@@ -768,128 +1595,232 @@ a {
                 </p>
             </article>
 
-            <article class="study-card">
-                <div class="study-icon">②</div>
+            <article class="timeline-card">
                 <h3>Desarrollo</h3>
                 <p>
-                    ¿Qué cambios aparecieron? Observá la evolución
-                    de la llama, el humo y la cera.
+                    ¿Qué cambios aparecieron? Observá la evolución de
+                    la llama, el humo y la cera.
                 </p>
             </article>
 
-            <article class="study-card">
-                <div class="study-icon">③</div>
+            <article class="timeline-card">
                 <h3>Final</h3>
                 <p>
                     ¿Cómo terminó la lectura? Registrá el estado final
                     de la vela y la cera.
                 </p>
             </article>
+
         </div>
 
-        <div class="seccion-titulo">
-            <h2>🍯 ENDULZAMIENTO</h2>
+    </div>
+
+</section>
+
+
+<!-- ENDULZAMIENTO -->
+
+<section class="section section-dark" id="endulzamiento">
+
+    <div class="section-heading">
+        <span class="section-number">04 — ARMONÍA</span>
+        <h2>El arte del <span>endulzamiento</span></h2>
+        <p>
+            Una práctica tradicional orientada simbólicamente a la
+            armonía, el afecto y la comunicación.
+        </p>
+    </div>
+
+    <div class="intro-panel">
+
+        <div class="intro-image-wrap">
+            <img
+                src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=85"
+                alt="Vela encendida para una práctica simbólica"
+                loading="lazy"
+            >
+            <span class="intro-image-label">ARMONÍA Y APERTURA</span>
         </div>
 
-        <div class="introduccion">
+        <div class="intro-copy">
+            <span class="mini-label">INTENCIÓN CONSCIENTE</span>
+            <h3>Suavizar, comprender, armonizar.</h3>
+
             <p>
-                El endulzamiento es una práctica simbólica que tradicionalmente
-                se utiliza para trabajar intenciones relacionadas con la armonía,
-                el afecto, la comunicación y la suavización de situaciones emocionales.
-                Dentro de la velomancia, podemos utilizar la vela como elemento
-                central para observar el desarrollo de esta intención. El objetivo
-                de esta práctica no es obligar a una persona a sentir, pensar o actuar
-                de determinada manera. La intención se enfoca en favorecer
-                simbólicamente un clima de armonía y apertura, respetando siempre
-                la libertad de las personas involucradas.
+                El endulzamiento es una práctica simbólica que
+                tradicionalmente se utiliza para trabajar intenciones
+                relacionadas con la armonía, el afecto, la comunicación
+                y la suavización de situaciones emocionales.
+            </p>
+
+            <p>
+                Dentro de la velomancia, podemos utilizar la vela como
+                elemento central para observar el desarrollo de esta
+                intención.
+            </p>
+
+            <p>
+                El objetivo no es obligar a una persona a sentir, pensar
+                o actuar de determinada manera. La intención se enfoca
+                en favorecer simbólicamente un clima de armonía y apertura,
+                respetando siempre la libertad de las personas involucradas.
             </p>
         </div>
 
-        <div class="seccion-titulo">
-            <h2>🌹 EL COLOR DE LA VELA</h2>
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>04.1</span>
+            <h2>El color de la vela</h2>
         </div>
 
         <div class="study-grid">
-            <article class="study-card">
-                <div class="study-icon">🩷</div>
-                <h3>Rosa</h3>
-                <p>
-                    Tradicionalmente relacionado con afecto, ternura,
-                    sensibilidad y armonía emocional.
-                </p>
+
+            <article class="study-card color-card">
+                <div class="color-swatch swatch-pink"></div>
+                <div class="color-copy">
+                    <span class="mini-label">AFECTO</span>
+                    <h3>Rosa</h3>
+                    <p>
+                        Tradicionalmente relacionado con afecto, ternura,
+                        sensibilidad y armonía emocional.
+                    </p>
+                </div>
             </article>
 
-            <article class="study-card">
-                <div class="study-icon">❤️</div>
-                <h3>Rojo</h3>
-                <p>
-                    Asociado simbólicamente con pasión, deseo,
-                    intensidad y energía afectiva.
-                </p>
+            <article class="study-card color-card">
+                <div class="color-swatch swatch-red"></div>
+                <div class="color-copy">
+                    <span class="mini-label">INTENSIDAD</span>
+                    <h3>Rojo</h3>
+                    <p>
+                        Asociado simbólicamente con pasión, deseo,
+                        intensidad y energía afectiva.
+                    </p>
+                </div>
             </article>
 
-            <article class="study-card">
-                <div class="study-icon">🤍</div>
-                <h3>Blanco</h3>
-                <p>
-                    Puede utilizarse simbólicamente para trabajar
-                    claridad, tranquilidad y armonía.
-                </p>
+            <article class="study-card color-card">
+                <div class="color-swatch swatch-white"></div>
+                <div class="color-copy">
+                    <span class="mini-label">CLARIDAD</span>
+                    <h3>Blanco</h3>
+                    <p>
+                        Puede utilizarse simbólicamente para trabajar
+                        claridad, tranquilidad y armonía.
+                    </p>
+                </div>
             </article>
+
         </div>
 
-        <div class="seccion-titulo">
-            <h2>🔗 AMARRE</h2>
+    </div>
+
+</section>
+
+
+<!-- AMARRE SIMBÓLICO -->
+
+<section class="section" id="amarre">
+
+    <div class="section-heading">
+        <span class="section-number">05 — UNIÓN</span>
+        <h2>El simbolismo <span>del amarre</span></h2>
+        <p>
+            Unión, compromiso y permanencia desde una mirada simbólica
+            y responsable.
+        </p>
+    </div>
+
+    <div class="intro-panel">
+
+        <div class="intro-image-wrap">
+            <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=85"
+                alt="Ambiente cálido con luz tenue"
+                loading="lazy"
+            >
+            <span class="intro-image-label">INTENCIÓN Y SIGNIFICADO</span>
         </div>
 
-        <div class="introduccion">
+        <div class="intro-copy">
+            <span class="mini-label">UNA PRÁCTICA SIMBÓLICA</span>
+            <h3>Comprender aquello que queremos fortalecer.</h3>
+
             <p>
-                Dentro de la práctica simbólica, el amarre puede utilizarse como
-                una forma de representar intención, unión, compromiso o permanencia
-                dentro de una situación emocional. En velomancia, la vela permite
-                observar cómo se desarrolla esa intención a través de la llama,
-                la cera, el humo y el comportamiento general durante la lectura.
-                En este curso trabajamos el amarre desde una perspectiva simbólica
-                y responsable. No se busca controlar la voluntad, los sentimientos
-                o las decisiones de otra persona. La práctica puede enfocarse en
-                aquello que la persona desea fortalecer, comprender o transformar
-                dentro de su propia experiencia.
+                Dentro de la práctica simbólica, el amarre puede utilizarse
+                como una forma de representar intención, unión, compromiso
+                o permanencia dentro de una situación emocional.
+            </p>
+
+            <p>
+                En velomancia, la vela permite observar cómo se desarrolla
+                esa intención a través de la llama, la cera, el humo y el
+                comportamiento general durante la lectura.
+            </p>
+
+            <p>
+                En este curso trabajamos el amarre desde una perspectiva
+                simbólica y responsable. No se busca controlar la voluntad,
+                los sentimientos o las decisiones de otra persona.
+                La práctica puede enfocarse en aquello que queremos
+                fortalecer, comprender o transformar dentro de nuestra
+                propia experiencia.
             </p>
         </div>
 
-        <div class="seccion-titulo">
-            <h2>🕯️ PREPARACIÓN DEL AMARRE</h2>
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>05.1</span>
+            <h2>Preparación del amarre</h2>
         </div>
 
-        <div class="introduccion">
+        <div class="text-panel">
             <p>
-                Antes de comenzar una lectura simbólica de este tipo, es importante
-                definir exactamente qué representa el vínculo que queremos observar.
-                La intención debe ser clara, concreta y respetuosa. Prepará un espacio
-                tranquilo y seguro. Elegí la vela según el significado simbólico que
-                quieras trabajar y observá su estado antes de encenderla.
+                Antes de comenzar una lectura simbólica de este tipo,
+                es importante definir exactamente qué representa el vínculo
+                que queremos observar. La intención debe ser clara,
+                concreta y respetuosa.
+            </p>
+
+            <p>
+                Prepará un espacio tranquilo y seguro. Elegí la vela según
+                el significado simbólico que quieras trabajar y observá
+                su estado antes de encenderla.
             </p>
         </div>
 
-        <div class="seccion-titulo">
-            <h2>✦ SEÑALES DURANTE LA LECTURA</h2>
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>05.2</span>
+            <h2>Señales durante la lectura</h2>
         </div>
 
-        <div class="introduccion">
+        <div class="text-panel">
             <p>
-                Ninguna señal debe interpretarse automáticamente como confirmación
-                de un resultado. La lectura se construye relacionando diferentes
-                observaciones dentro del contexto de la intención.
+                Ninguna señal debe interpretarse automáticamente como
+                confirmación de un resultado. La lectura se construye
+                relacionando diferentes observaciones dentro del contexto
+                de la intención.
             </p>
         </div>
 
-        <div class="study-grid">
+        <div class="study-grid" style="margin-top:22px;">
+
             <article class="study-card">
                 <div class="study-icon">🔥</div>
                 <h3>Llama estable</h3>
                 <p>
-                    Puede registrarse como una señal de continuidad o estabilidad
-                    dentro de la observación simbólica.
+                    Puede registrarse como una señal de continuidad
+                    o estabilidad dentro de la observación simbólica.
                 </p>
             </article>
 
@@ -897,8 +1828,9 @@ a {
                 <div class="study-icon">🌪️</div>
                 <h3>Movimiento intenso</h3>
                 <p>
-                    Puede indicar que durante la lectura se produjo un cambio
-                    importante que merece ser observado junto con las demás señales.
+                    Puede indicar que durante la lectura se produjo
+                    un cambio importante que merece ser observado
+                    junto con las demás señales.
                 </p>
             </article>
 
@@ -906,8 +1838,8 @@ a {
                 <div class="study-icon">🕯️</div>
                 <h3>Cera acumulada</h3>
                 <p>
-                    Registrá dónde se concentra la cera y cómo evolucionó
-                    su recorrido durante la combustión.
+                    Registrá dónde se concentra la cera y cómo
+                    evolucionó su recorrido durante la combustión.
                 </p>
             </article>
 
@@ -915,181 +1847,305 @@ a {
                 <div class="study-icon">✦</div>
                 <h3>Cambios progresivos</h3>
                 <p>
-                    Cuando una señal cambia con el tiempo, observá la secuencia
-                    antes de darle una interpretación.
+                    Cuando una señal cambia con el tiempo, observá
+                    la secuencia antes de darle una interpretación.
                 </p>
             </article>
+
         </div>
 
-        <section class="tema-curso">
+    </div>
 
-            <div class="seccion-titulo">
-                <h2>🛤️ APERTURA DE CAMINOS</h2>
-            </div>
+    <div class="principle">
+        <div class="principle-icon">✦</div>
+        <div>
+            <h3>LA INTENCIÓN NO REEMPLAZA LA VOLUNTAD</h3>
+            <p>
+                Una lectura simbólica puede ayudar a reflexionar sobre
+                lo que sentimos y deseamos. Los vínculos saludables
+                también requieren comunicación, reciprocidad y respeto
+                por las decisiones de cada persona.
+            </p>
+        </div>
+    </div>
 
-            <div class="introduccion">
-                <p>
-                    La apertura de caminos puede trabajarse simbólicamente como
-                    una práctica de renovación, claridad y disposición hacia nuevas
-                    oportunidades. Dentro de la velomancia, la vela puede utilizarse
-                    como elemento de observación durante este proceso, registrando
-                    el comportamiento de la llama, el humo y la cera. La intención
-                    no es garantizar resultados futuros, sino utilizar la práctica
-                    como una herramienta de reflexión sobre aquello que queremos
-                    transformar o favorecer.
-                </p>
-            </div>
+</section>
 
-            <div class="seccion-titulo">
-                <h2>🕯️ PREPARAR LA LECTURA</h2>
-            </div>
 
-            <div class="study-grid">
-                <article class="study-card">
-                    <div class="study-icon">🎯</div>
-                    <h3>Definir qué querés abrir</h3>
-                    <p>
-                        Antes de comenzar, establecé con claridad qué área querés
-                        trabajar: oportunidades, proyectos, trabajo, dinero,
-                        relaciones o una nueva etapa personal.
-                    </p>
-                </article>
+<!-- APERTURA DE CAMINOS -->
 
-                <article class="study-card">
-                    <div class="study-icon">🛤️</div>
-                    <h3>Observar el camino</h3>
-                    <p>
-                        Durante la combustión, prestá atención al desarrollo general
-                        de la vela y registrá los cambios que aparezcan sin intentar
-                        interpretarlos inmediatamente.
-                    </p>
-                </article>
+<section class="section section-dark" id="caminos">
 
-                <article class="study-card">
-                    <div class="study-icon">📝</div>
-                    <h3>Registrar el proceso</h3>
-                    <p>
-                        Anotá cómo comenzó la vela, cómo evolucionó y cómo terminó.
-                        Esto permite comparar la observación con la interpretación
-                        realizada posteriormente.
-                    </p>
-                </article>
-            </div>
+    <div class="section-heading">
+        <span class="section-number">06 — RENOVACIÓN</span>
+        <h2>Apertura <span>de caminos</span></h2>
+        <p>
+            Renovación, claridad y disposición hacia nuevas oportunidades.
+        </p>
+    </div>
 
-            <div class="seccion-titulo">
-                <h2>✨ SEÑALES DE APERTURA</h2>
-            </div>
+    <div class="intro-panel">
 
-            <div class="study-grid">
-                <article class="study-card">
-                    <div class="study-icon">🔥</div>
-                    <h3>Mayor estabilidad</h3>
-                    <p>
-                        Una llama que se vuelve más estable puede registrarse
-                        simbólicamente como una señal de orden y mayor claridad
-                        dentro del proceso.
-                    </p>
-                </article>
-
-                <article class="study-card">
-                    <div class="study-icon">🌬️</div>
-                    <h3>Movimiento progresivo</h3>
-                    <p>
-                        Los cambios que aparecen gradualmente pueden observarse
-                        como parte del desarrollo de la lectura, siempre teniendo
-                        en cuenta las condiciones físicas del ambiente.
-                    </p>
-                </article>
-
-                <article class="study-card">
-                    <div class="study-icon">✨</div>
-                    <h3>Combustión uniforme</h3>
-                    <p>
-                        Una combustión relativamente uniforme puede utilizarse
-                        simbólicamente para representar continuidad y avance
-                        dentro del proceso.
-                    </p>
-                </article>
-            </div>
-
-            <div class="principio">
-                <div class="principio-icon">🛤️</div>
-                <h3>ABRIR CAMINOS TAMBIÉN ES TOMAR ACCIÓN</h3>
-                <p>
-                    Una apertura de caminos no consiste solamente en esperar
-                    señales. También implica reconocer oportunidades, tomar
-                    decisiones, cambiar aquello que ya no funciona y avanzar
-                    conscientemente hacia lo que queremos construir.
-                </p>
-            </div>
-
-            <div class="seccion-titulo">
-                <h2>🔍 QUÉ OBSERVAR</h2>
-            </div>
-
-            <div class="study-grid">
-                <article class="study-card">
-                    <div class="study-icon">🔥</div>
-                    <h3>La llama</h3>
-                    <p>
-                        Observá su estabilidad, altura, movimiento y cualquier
-                        cambio que aparezca durante la combustión.
-                    </p>
-                </article>
-
-                <article class="study-card">
-                    <div class="study-icon">🌫️</div>
-                    <h3>El humo</h3>
-                    <p>
-                        Registrá su dirección, cantidad y comportamiento,
-                        diferenciando siempre las condiciones ambientales
-                        de la interpretación simbólica.
-                    </p>
-                </article>
-
-                <article class="study-card">
-                    <div class="study-icon">🕯️</div>
-                    <h3>La cera</h3>
-                    <p>
-                        Observá sus recorridos, acumulaciones, formas y
-                        distribución al finalizar la combustión.
-                    </p>
-                </article>
-            </div>
-
-            <div class="seccion-titulo">
-                <h2>📝 REGISTRAR UNA APERTURA DE CAMINOS</h2>
-            </div>
-
-            <div class="introduccion">
-                <p>
-                    Para registrar una lectura de apertura de caminos, anotá
-                    primero cuál era la intención. Después describí objetivamente
-                    cómo se encontraba la vela al comenzar, qué ocurrió con la
-                    llama, cómo se comportó el humo, qué recorrido realizó la
-                    cera y cómo terminó la combustión. Finalmente, relacioná
-                    todas las observaciones con el contexto de la pregunta y
-                    evitá interpretar una única señal como una respuesta definitiva.
-                </p>
-            </div>
-
-            <div class="principio">
-                <div class="principio-icon">🚪</div>
-                <h3>ABRIR UNA PUERTA NO SIGNIFICA ATRAVESARLA SIN PENSAR</h3>
-                <p>
-                    La apertura de caminos puede representar nuevas posibilidades,
-                    pero también requiere discernimiento. Observar, decidir y actuar
-                    forman parte del proceso tanto como la intención inicial.
-                </p>
-            </div>
-
-        </section>
-
-        <div class="siguiente-leccion">
-            <a href="index3.html">SIGUIENTE TEMA <span>→</span></a>
+        <div class="intro-image-wrap">
+            <img
+                src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=85"
+                alt="Cielo nocturno y estrellas"
+                loading="lazy"
+            >
+            <span class="intro-image-label">NUEVAS POSIBILIDADES</span>
         </div>
 
-    </section>
+        <div class="intro-copy">
+            <span class="mini-label">RENOVAR LA INTENCIÓN</span>
+            <h3>Todo camino comienza con una decisión.</h3>
+
+            <p>
+                La apertura de caminos puede trabajarse simbólicamente
+                como una práctica de renovación, claridad y disposición
+                hacia nuevas oportunidades.
+            </p>
+
+            <p>
+                Dentro de la velomancia, la vela puede utilizarse como
+                elemento de observación durante este proceso, registrando
+                el comportamiento de la llama, el humo y la cera.
+            </p>
+
+            <p>
+                La intención no es garantizar resultados futuros, sino
+                utilizar la práctica como una herramienta de reflexión
+                sobre aquello que queremos transformar o favorecer.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>06.1</span>
+            <h2>Preparar la lectura</h2>
+        </div>
+
+        <div class="study-grid">
+
+            <article class="study-card">
+                <div class="study-icon">🎯</div>
+                <h3>Definir qué querés abrir</h3>
+                <p>
+                    Antes de comenzar, establecé con claridad qué área
+                    querés trabajar: oportunidades, proyectos, trabajo,
+                    dinero, relaciones o una nueva etapa personal.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🛤️</div>
+                <h3>Observar el camino</h3>
+                <p>
+                    Durante la combustión, prestá atención al desarrollo
+                    general de la vela y registrá los cambios que aparezcan
+                    sin intentar interpretarlos inmediatamente.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">📝</div>
+                <h3>Registrar el proceso</h3>
+                <p>
+                    Anotá cómo comenzó la vela, cómo evolucionó y cómo
+                    terminó. Esto permite comparar la observación con
+                    la interpretación realizada posteriormente.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>06.2</span>
+            <h2>Señales de apertura</h2>
+        </div>
+
+        <div class="study-grid">
+
+            <article class="study-card">
+                <div class="study-icon">🔥</div>
+                <h3>Mayor estabilidad</h3>
+                <p>
+                    Una llama que se vuelve más estable puede registrarse
+                    simbólicamente como una señal de orden y mayor claridad
+                    dentro del proceso.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🌬️</div>
+                <h3>Movimiento progresivo</h3>
+                <p>
+                    Los cambios que aparecen gradualmente pueden observarse
+                    como parte del desarrollo de la lectura, siempre
+                    teniendo en cuenta las condiciones físicas del ambiente.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">✨</div>
+                <h3>Combustión uniforme</h3>
+                <p>
+                    Una combustión relativamente uniforme puede utilizarse
+                    simbólicamente para representar continuidad y avance
+                    dentro del proceso.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+
+    <div class="principle">
+        <div class="principle-icon">🛤️</div>
+        <div>
+            <h3>ABRIR CAMINOS TAMBIÉN ES TOMAR ACCIÓN</h3>
+            <p>
+                Una apertura de caminos no consiste solamente en esperar
+                señales. También implica reconocer oportunidades, tomar
+                decisiones, cambiar aquello que ya no funciona y avanzar
+                conscientemente hacia lo que queremos construir.
+            </p>
+        </div>
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>06.3</span>
+            <h2>Qué observar</h2>
+        </div>
+
+        <div class="study-grid">
+
+            <article class="study-card">
+                <div class="study-icon">🔥</div>
+                <h3>La llama</h3>
+                <p>
+                    Observá su estabilidad, altura, movimiento y cualquier
+                    cambio que aparezca durante la combustión.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🌫️</div>
+                <h3>El humo</h3>
+                <p>
+                    Registrá su dirección, cantidad y comportamiento,
+                    diferenciando siempre las condiciones ambientales
+                    de la interpretación simbólica.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🕯️</div>
+                <h3>La cera</h3>
+                <p>
+                    Observá sus recorridos, acumulaciones, formas y
+                    distribución al finalizar la combustión.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+
+    <div class="subsection">
+
+        <div class="section-title-row">
+            <span>06.4</span>
+            <h2>Registrar una apertura de caminos</h2>
+        </div>
+
+        <div class="text-panel">
+            <p>
+                Para registrar una lectura de apertura de caminos,
+                anotá primero cuál era la intención.
+            </p>
+
+            <p>
+                Después describí objetivamente cómo se encontraba la vela
+                al comenzar, qué ocurrió con la llama, cómo se comportó
+                el humo, qué recorrido realizó la cera y cómo terminó
+                la combustión.
+            </p>
+
+            <p>
+                Finalmente, relacioná todas las observaciones con el
+                contexto de la pregunta y evitá interpretar una única
+                señal como una respuesta definitiva.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="principle">
+        <div class="principle-icon">🚪</div>
+        <div>
+            <h3>ABRIR UNA PUERTA NO SIGNIFICA ATRAVESARLA SIN PENSAR</h3>
+            <p>
+                La apertura de caminos puede representar nuevas
+                posibilidades, pero también requiere discernimiento.
+                Observar, decidir y actuar forman parte del proceso
+                tanto como la intención inicial.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- CIERRE -->
+
+<section class="next-section">
+
+    <div class="next-symbol">☾</div>
+
+    <span class="eyebrow">ASTRO ROJO · SIGUIENTE ETAPA</span>
+
+    <h2>La observación termina.<br><span style="color:var(--red-light)">La interpretación comienza.</span></h2>
+
+    <p>
+        Cada lectura es una oportunidad para observar con más atención,
+        registrar los detalles y construir una interpretación consciente
+        del simbolismo de las velas.
+    </p>
+
+    <div class="next-links">
+        <a href="index.html" class="button button-outline">
+            ← VOLVER AL CURSO
+        </a>
+
+        <a href="index3.html" class="button button-primary">
+            SIGUIENTE TEMA →
+        </a>
+    </div>
+
+</section>
+
 </main>
+
+
+<footer class="footer">
+    <a href="index.html" class="footer-brand">
+        ASTRO <span>ROJO</span>
+    </a>
+
+    <p>Velomancia · Estudio simbólico de las velas</p>
+
+    <p>© ASTRO ROJO</p>
+</footer>
+
 </body>
 </html>
+```
