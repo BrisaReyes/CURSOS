@@ -4,148 +4,504 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="theme-color" content="#10070b">
-    <meta name="description" content="Curso de Tarot de ASTRO ROJO. Aprende los Arcanos Mayores, los símbolos y el lenguaje del Tarot.">
+    <meta name="description" content="Curso de Tarot de ASTRO ROJO. Aprende los Arcanos Mayores, sus símbolos y el lenguaje del Tarot.">
 
     <title>ASTRO ROJO — Curso de Tarot</title>
 
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* IDENTIDAD VISUAL DEL CURSO */
+        /* =========================================
+           TAROT ROJO — IDENTIDAD VISUAL
+        ========================================= */
+
+        :root {
+            --rojo: #d92745;
+            --rojo-claro: #ee6478;
+            --bordo: #5c0d20;
+            --fondo: #10070b;
+            --panel: rgba(27, 10, 16, .88);
+            --texto: #f3eeee;
+            --suave: #b8a6ad;
+            --borde: rgba(217, 39, 69, .25);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 25px;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--texto);
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(111, 10, 31, .38), transparent 43%),
+                radial-gradient(ellipse at 0% 45%, rgba(91, 8, 26, .13), transparent 35%),
+                radial-gradient(ellipse at 100% 80%, rgba(91, 8, 26, .12), transparent 35%),
+                #10070b;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: .16;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, #fff 50%, transparent 100%),
+                radial-gradient(1px 1px at 80% 15%, #f5a8b4 50%, transparent 100%),
+                radial-gradient(1px 1px at 65% 70%, #fff 50%, transparent 100%),
+                radial-gradient(1px 1px at 25% 82%, #e36b7d 50%, transparent 100%),
+                radial-gradient(1px 1px at 90% 50%, #fff 50%, transparent 100%);
+            background-size: 260px 260px;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 35px 0 55px;
+        }
+
+        /* =========================================
+           PORTADA
+        ========================================= */
+
+        .welcome {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            min-height: 440px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 65px 30px;
+            text-align: center;
+            border: 1px solid rgba(217, 39, 69, .32);
+            border-radius: 26px;
+            background:
+                radial-gradient(ellipse at 50% 38%, rgba(126, 12, 39, .37), transparent 52%),
+                linear-gradient(145deg, rgba(38, 10, 19, .98), rgba(12, 6, 10, .98));
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, .34),
+                inset 0 0 60px rgba(113, 11, 35, .10);
+        }
+
+        .welcome::before,
+        .welcome::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(217, 39, 69, .13);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .welcome::before {
+            top: -195px;
+            left: -115px;
+            box-shadow:
+                0 0 0 22px rgba(217, 39, 69, .025),
+                0 0 0 45px rgba(217, 39, 69, .025);
+        }
+
+        .welcome::after {
+            right: -180px;
+            bottom: -210px;
+            width: 380px;
+            height: 380px;
+        }
+
+        .hero-glow {
+            position: absolute;
+            z-index: -1;
+            top: 20%;
+            left: 50%;
+            width: 240px;
+            height: 240px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: rgba(157, 14, 45, .13);
+            filter: blur(65px);
+        }
+
+        .moon {
+            margin-bottom: 18px;
+            color: #ed8292;
+            font-size: 55px;
+            line-height: 1;
+            text-shadow: 0 0 35px rgba(217, 39, 69, .48);
+        }
 
         .etiqueta {
             display: inline-block;
-            margin-bottom: 18px;
-            padding: 8px 16px;
-            border: 1px solid rgba(190, 55, 70, .4);
+            margin-bottom: 22px;
+            padding: 9px 17px;
+            border: 1px solid rgba(217, 39, 69, .38);
             border-radius: 30px;
-            color: #d6a0a7;
-            font-size: 11px;
+            color: #df9ca8;
+            background: rgba(65, 7, 23, .25);
+            font-family: Arial, sans-serif;
+            font-size: 10px;
             letter-spacing: 3px;
         }
 
         .welcome h1 {
-            color: #f3eeee;
+            margin: 0;
+            color: #f5eeee;
+            font-size: clamp(38px, 7vw, 76px);
+            font-weight: 400;
+            letter-spacing: 5px;
         }
 
         .welcome h1 strong {
-            color: #d94a60;
+            color: var(--rojo-claro);
             font-weight: 400;
+            text-shadow: 0 0 30px rgba(217, 39, 69, .20);
+        }
+
+        .welcome > p {
+            margin: 17px 0 0;
+            color: #d5a5ae;
+            font-size: 19px;
+            letter-spacing: 3px;
         }
 
         .separador {
-            width: 70px;
+            width: 100px;
             height: 1px;
-            margin: 25px auto;
-            background: linear-gradient(90deg, transparent, #c23b50, transparent);
+            margin: 28px auto;
+            background: linear-gradient(90deg, transparent, #dc435c, transparent);
+        }
+
+        .welcome > span:last-child {
+            max-width: 620px;
+            color: #bbaab0;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        /* =========================================
+           SECCIONES
+        ========================================= */
+
+        .lesson {
+            position: relative;
+            margin-top: 28px;
+            padding: 38px;
+            overflow: hidden;
+            border: 1px solid var(--borde);
+            border-radius: 22px;
+            background:
+                radial-gradient(ellipse at 100% 0%, rgba(110, 10, 32, .10), transparent 42%),
+                linear-gradient(145deg, rgba(27, 11, 17, .96), rgba(15, 8, 12, .96));
+            box-shadow: 0 18px 55px rgba(0, 0, 0, .15);
+        }
+
+        .lesson::before {
+            content: "✧";
+            position: absolute;
+            top: 16px;
+            right: 22px;
+            color: rgba(221, 72, 96, .23);
+            font-size: 23px;
+            pointer-events: none;
         }
 
         .numero-leccion {
             display: block;
-            margin-bottom: 12px;
-            color: #c9828c;
-            font-size: 11px;
-            letter-spacing: 3px;
+            margin-bottom: 14px;
+            color: #ce7585;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 4px;
             text-align: center;
         }
 
-        /* ARCANOS */
-
-        .arcana-list span {
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-height: 48px;
+        .lesson h2 {
+            margin: 0 0 23px;
+            color: #f3e8eb;
+            font-size: clamp(25px, 4vw, 35px);
+            font-weight: 400;
+            text-align: center;
         }
 
-        .arcana-list span .numero-arcano {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 30px;
-            height: 30px;
-            border: 1px solid rgba(190, 55, 70, .35);
-            border-radius: 50%;
-            color: #d6a0a7;
-            font-size: 11px;
+        .lesson h2::after {
+            content: "";
+            display: block;
+            width: 55px;
+            height: 1px;
+            margin: 16px auto 0;
+            background: linear-gradient(90deg, transparent, #cf344f, transparent);
         }
 
-        .arcana-list span:hover .numero-arcano {
-            background: rgba(150, 0, 25, .25);
-            border-color: #c23b50;
+        .lesson > p {
+            color: var(--suave);
+            font-size: 14px;
+            line-height: 1.95;
         }
 
-        .ayuda {
-            margin-top: 18px !important;
-            color: #c9828c !important;
-            font-size: 12px !important;
-        }
+        /* =========================================
+           TARJETAS DE INTRODUCCIÓN
+        ========================================= */
 
-        /* SIMBOLOGÍA */
-
-        .simbolos-grid,
-        .colores-grid {
-            position: relative;
-            z-index: 1;
+        .study-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 16px;
+            margin-top: 28px;
+        }
+
+        .study-card {
+            padding: 26px 20px;
+            border: 1px solid rgba(180, 40, 61, .22);
+            border-radius: 16px;
+            background: linear-gradient(150deg, rgba(65, 12, 27, .32), rgba(15, 7, 11, .55));
+            transition: transform .25s ease, border-color .25s ease, background .25s ease;
+        }
+
+        .study-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(226, 68, 93, .58);
+            background: linear-gradient(150deg, rgba(83, 12, 31, .42), rgba(15, 7, 11, .65));
+        }
+
+        .card-icon {
+            margin-bottom: 16px;
+            color: #df7184;
+            font-size: 29px;
+        }
+
+        .study-card h3 {
+            margin: 0 0 10px;
+            color: #eee2e5;
+            font-size: 19px;
+            font-weight: 400;
+        }
+
+        .study-card p {
+            margin: 0;
+            color: #a99aa0;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* =========================================
+           ARCANOS MAYORES
+        ========================================= */
+
+        .arcana-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
             margin-top: 25px;
+        }
+
+        .arcana-list span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-height: 58px;
+            padding: 10px 14px;
+            overflow: hidden;
+            border: 1px solid rgba(170, 37, 58, .21);
+            border-radius: 12px;
+            color: #d9cbd0;
+            background: rgba(22, 8, 14, .7);
+            font-size: 14px;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .arcana-list span::after {
+            content: "↗";
+            margin-left: auto;
+            color: rgba(224, 100, 122, .45);
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            transition: .25s ease;
+        }
+
+        .arcana-list span:hover {
+            transform: translateY(-2px);
+            border-color: rgba(223, 73, 98, .62);
+            color: #fff0f2;
+            background: rgba(91, 10, 31, .32);
+        }
+
+        .arcana-list span:hover::after {
+            color: #ed8193;
+            transform: translate(2px, -2px);
+        }
+
+        .arcana-list span:focus-visible {
+            outline: 2px solid var(--rojo-claro);
+            outline-offset: 3px;
+        }
+
+        .numero-arcano {
+            display: inline-flex;
+            flex: 0 0 34px;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border: 1px solid rgba(205, 73, 95, .37);
+            border-radius: 50%;
+            color: #df8c9b;
+            background: rgba(100, 10, 30, .15);
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+        }
+
+        .ayuda {
+            margin-top: 22px !important;
+            color: #ce8190 !important;
+            font-size: 12px !important;
+            text-align: center;
+        }
+
+        /* =========================================
+           SÍMBOLOS Y COLORES
+        ========================================= */
+
+        .simbolos-grid,
+        .colores-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 27px;
         }
 
         .simbolo-card,
         .color-tarot {
-            padding: 24px 17px;
-            background: rgba(20, 5, 9, .55);
-            border: 1px solid rgba(150, 35, 50, .25);
-            border-radius: 14px;
+            min-width: 0;
+            padding: 25px 18px;
+            border: 1px solid rgba(180, 40, 61, .23);
+            border-radius: 15px;
+            background:
+                radial-gradient(ellipse at top, rgba(95, 10, 29, .18), transparent 70%),
+                rgba(18, 7, 12, .72);
             text-align: center;
-            transition: .3s ease;
+            transition: .25s ease;
         }
 
         .simbolo-card:hover,
         .color-tarot:hover {
             transform: translateY(-4px);
-            border-color: rgba(190, 55, 70, .6);
+            border-color: rgba(220, 67, 91, .57);
         }
 
         .simbolo-icono {
             display: block;
-            margin-bottom: 12px;
-            color: #d6a0a7;
-            font-size: 30px;
+            margin-bottom: 15px;
+            color: #df8796;
+            font-size: 32px;
+            text-shadow: 0 0 22px rgba(217, 39, 69, .22);
         }
 
         .simbolo-card h3,
         .color-tarot h3 {
-            margin-bottom: 10px;
-            color: #eee9e4;
-            font-size: 16px;
+            margin: 0 0 11px;
+            color: #eee3e6;
+            font-size: 17px;
             font-weight: 400;
         }
 
         .simbolo-card p,
         .color-tarot p {
             margin: 0;
-            color: #928a8e;
-            font-size: 13px;
-            line-height: 1.7;
+            color: #a99aa0;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.85;
         }
 
         .color-muestra {
-            width: 44px;
-            height: 44px;
-            margin: 0 auto 15px;
-            border: 1px solid rgba(255, 255, 255, .2);
+            width: 45px;
+            height: 45px;
+            margin: 0 auto 17px;
+            border: 1px solid rgba(255, 255, 255, .22);
             border-radius: 50%;
-            box-shadow: 0 0 18px rgba(0, 0, 0, .3);
+            box-shadow: 0 0 25px rgba(0, 0, 0, .32);
         }
 
-        /* MODAL DE LOS ARCANOS */
+        /* =========================================
+           NAVEGACIÓN FINAL
+        ========================================= */
+
+        .navegacion-curso {
+            position: relative;
+            margin-top: 28px;
+            padding: 45px 30px;
+            overflow: hidden;
+            border: 1px solid rgba(217, 39, 69, .3);
+            border-radius: 22px;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(116, 9, 32, .28), transparent 68%),
+                #12080d;
+            text-align: center;
+        }
+
+        .simbolo-final {
+            display: block;
+            margin-bottom: 19px;
+            color: #dc7c8d;
+            font-size: 29px;
+            letter-spacing: 8px;
+        }
+
+        .navegacion-curso p {
+            max-width: 590px;
+            margin: 0 auto 25px;
+            color: #b7a6ac;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .btn-siguiente {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 13px 25px;
+            border: 1px solid rgba(239, 104, 126, .65);
+            border-radius: 30px;
+            color: #fff0f2;
+            background: linear-gradient(135deg, #8c1530, #4d0b1d);
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: .5px;
+            text-decoration: none;
+            transition: .25s ease;
+        }
+
+        .btn-siguiente:hover {
+            transform: translateY(-2px);
+            border-color: #f07d90;
+            background: linear-gradient(135deg, #ad1c3c, #651027);
+            box-shadow: 0 8px 28px rgba(156, 13, 45, .24);
+        }
+
+        /* =========================================
+           MODAL DE LAS CARTAS
+        ========================================= */
 
         .modal-carta {
             position: fixed;
@@ -154,10 +510,10 @@
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 18px;
             overflow-y: auto;
             background: rgba(3, 2, 4, .88);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(9px);
         }
 
         .modal-carta.activo {
@@ -168,47 +524,52 @@
             position: relative;
             width: 100%;
             max-width: 720px;
-            max-height: 90vh;
+            max-height: 92vh;
             overflow-y: auto;
-            padding: 35px;
+            padding: 38px;
+            border: 1px solid rgba(217, 39, 69, .46);
+            border-radius: 21px;
             background:
-                radial-gradient(circle at top, rgba(100, 0, 20, .22), transparent 55%),
-                #10090c;
-            border: 1px solid rgba(190, 55, 70, .5);
-            border-radius: 20px;
-            box-shadow: 0 20px 80px rgba(0, 0, 0, .6);
+                radial-gradient(ellipse at 50% 0%, rgba(111, 9, 33, .3), transparent 48%),
+                #10080d;
+            box-shadow: 0 25px 100px rgba(0, 0, 0, .65);
         }
 
         .cerrar-modal {
             position: absolute;
-            top: 12px;
-            right: 16px;
-            width: 38px;
-            height: 38px;
-            border: 1px solid rgba(190, 55, 70, .35);
+            top: 13px;
+            right: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 39px;
+            height: 39px;
+            border: 1px solid rgba(190, 55, 70, .4);
             border-radius: 50%;
-            background: rgba(30, 5, 10, .8);
-            color: #eee9e4;
-            font-size: 24px;
+            color: #f4e9ec;
+            background: rgba(35, 6, 15, .85);
+            font-size: 25px;
             cursor: pointer;
+            transition: .2s ease;
         }
 
         .cerrar-modal:hover {
-            background: #7e1025;
+            background: #79152b;
         }
 
         .modal-etiqueta {
-            margin-bottom: 12px;
-            color: #c9828c;
-            font-size: 11px;
+            margin: 3px 35px 14px;
+            color: #d17a8b;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
             letter-spacing: 3px;
             text-align: center;
         }
 
         .contenido-modal h2 {
-            margin: 0 30px 22px;
-            color: #f3eeee;
-            font-size: 27px;
+            margin: 0 20px 24px;
+            color: #f3e8eb;
+            font-size: 29px;
             font-weight: 400;
             text-align: center;
         }
@@ -216,10 +577,10 @@
         .contenido-modal h2::after {
             content: "";
             display: block;
-            width: 50px;
+            width: 55px;
             height: 1px;
-            margin: 13px auto 0;
-            background: #a93648;
+            margin: 15px auto 0;
+            background: linear-gradient(90deg, transparent, #d7435e, transparent);
         }
 
         .imagen-carta {
@@ -227,11 +588,12 @@
             width: 100%;
             max-width: 220px;
             max-height: 320px;
-            object-fit: contain;
-            margin: 0 auto 25px;
-            border: 1px solid rgba(190, 55, 70, .35);
+            margin: 0 auto 27px;
+            border: 1px solid rgba(217, 39, 69, .35);
             border-radius: 10px;
             background: #090609;
+            object-fit: contain;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .25);
         }
 
         .imagen-carta.oculta {
@@ -239,68 +601,150 @@
         }
 
         .texto-carta {
-            color: #b6aaae;
+            color: #c2b3b9;
+            font-family: Arial, sans-serif;
             font-size: 14px;
-            line-height: 1.9;
+            line-height: 1.95;
             white-space: pre-line;
         }
 
-        .texto-carta p {
-            margin-bottom: 15px;
+        .texto-carta strong {
+            display: block;
+            margin: 17px 0 5px;
+            color: #e6a0ad;
+            font-weight: 600;
         }
 
-        .texto-carta strong {
-            color: #e0a2ac;
-            font-weight: 400;
+        .texto-carta strong:first-child {
+            margin-top: 0;
         }
 
         .modal-pie {
-            margin-top: 25px;
+            margin-top: 26px;
             padding-top: 18px;
-            border-top: 1px solid rgba(150, 35, 50, .25);
-            color: #82777c;
-            font-size: 12px;
+            border-top: 1px solid rgba(150, 35, 50, .28);
+            color: #95838a;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            line-height: 1.8;
             text-align: center;
         }
 
-        /* NAVEGACIÓN */
-
-        .navegacion-curso {
-            margin-top: 15px;
-        }
-
-        .navegacion-curso .simbolo-final {
-            display: block;
-            margin-bottom: 15px;
-            color: #c9828c;
-            font-size: 27px;
-        }
-
-        .btn-siguiente {
-            cursor: pointer;
-        }
-
-        /* CELULAR */
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
 
         @media (max-width: 800px) {
             .simbolos-grid,
             .colores-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
-        }
 
-        @media (max-width: 500px) {
-            .simbolos-grid,
-            .colores-grid {
+            .study-grid {
                 grid-template-columns: 1fr;
             }
 
+            .study-card {
+                display: grid;
+                grid-template-columns: 42px 1fr;
+                column-gap: 12px;
+                padding: 21px;
+            }
+
+            .card-icon {
+                grid-row: span 2;
+                margin: 0;
+            }
+
+            .study-card h3 {
+                margin-bottom: 7px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .container {
+                width: calc(100% - 22px);
+                padding-top: 11px;
+                padding-bottom: 28px;
+            }
+
+            .welcome {
+                min-height: 390px;
+                padding: 48px 20px;
+                border-radius: 20px;
+            }
+
+            .welcome h1 {
+                font-size: 39px;
+                letter-spacing: 2px;
+            }
+
+            .welcome > p {
+                font-size: 16px;
+                letter-spacing: 2px;
+            }
+
+            .welcome > span:last-child {
+                font-size: 13px;
+            }
+
+            .etiqueta {
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+
+            .lesson {
+                margin-top: 16px;
+                padding: 27px 18px;
+                border-radius: 17px;
+            }
+
+            .lesson h2 {
+                font-size: 26px;
+            }
+
+            .lesson > p {
+                font-size: 13px;
+            }
+
+            .arcana-list {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .arcana-list span {
+                min-height: 53px;
+                font-size: 13px;
+            }
+
+            .simbolos-grid,
+            .colores-grid {
+                grid-template-columns: 1fr;
+                gap: 11px;
+            }
+
+            .simbolo-card,
+            .color-tarot {
+                padding: 22px 19px;
+            }
+
+            .navegacion-curso {
+                margin-top: 16px;
+                padding: 35px 20px;
+            }
+
             .contenido-modal {
-                padding: 28px 19px;
+                padding: 30px 20px 24px;
+                border-radius: 17px;
             }
 
             .contenido-modal h2 {
-                font-size: 23px;
+                font-size: 24px;
+            }
+
+            .modal-etiqueta {
+                font-size: 9px;
+                letter-spacing: 2px;
             }
 
             .imagen-carta {
@@ -328,19 +772,13 @@
 
 <main class="container">
 
-    <!-- BIENVENIDA -->
-
     <header class="welcome">
         <div class="hero-glow"></div>
-
         <div class="moon">☾</div>
-
         <span class="etiqueta">FORMACIÓN · ASTRO ROJO</span>
 
         <h1>TAROT <strong>ROJO</strong></h1>
-
         <p>Curso de Tarot</p>
-
         <div class="separador"></div>
 
         <span>
@@ -350,12 +788,8 @@
         </span>
     </header>
 
-
-    <!-- INTRODUCCIÓN -->
-
     <section class="lesson">
         <span class="numero-leccion">LECCIÓN 01</span>
-
         <h2>Introducción al Tarot</h2>
 
         <p>
@@ -374,43 +808,28 @@
         </p>
 
         <div class="study-grid">
-
             <article class="study-card">
                 <div class="card-icon">☾</div>
                 <h3>Intuición</h3>
-                <p>
-                    Observar las imágenes y reconocer las asociaciones
-                    personales sin perder de vista el contexto.
-                </p>
+                <p>Observar las imágenes y reconocer las asociaciones personales sin perder de vista el contexto.</p>
             </article>
 
             <article class="study-card">
                 <div class="card-icon">✧</div>
                 <h3>Simbología</h3>
-                <p>
-                    Comprender colores, personajes, objetos, números
-                    y elementos presentes en cada carta.
-                </p>
+                <p>Comprender colores, personajes, objetos, números y elementos presentes en cada carta.</p>
             </article>
 
             <article class="study-card">
                 <div class="card-icon">♧</div>
                 <h3>Interpretación</h3>
-                <p>
-                    Relacionar los significados para elaborar una lectura
-                    coherente, clara y reflexiva.
-                </p>
+                <p>Relacionar los significados para elaborar una lectura coherente, clara y reflexiva.</p>
             </article>
-
         </div>
     </section>
 
-
-    <!-- ARCANOS MAYORES -->
-
     <section class="lesson">
         <span class="numero-leccion">LECCIÓN 02</span>
-
         <h2>Los 22 Arcanos Mayores</h2>
 
         <p>
@@ -426,106 +845,35 @@
         </p>
 
         <div class="arcana-list">
-
-            <span onclick="abrirCarta(0)" role="button" tabindex="0" onkeydown="activarCarta(event,0)">
-                <b class="numero-arcano">0</b> El Loco
-            </span>
-
-            <span onclick="abrirCarta(1)" role="button" tabindex="0" onkeydown="activarCarta(event,1)">
-                <b class="numero-arcano">I</b> El Mago
-            </span>
-
-            <span onclick="abrirCarta(2)" role="button" tabindex="0" onkeydown="activarCarta(event,2)">
-                <b class="numero-arcano">II</b> La Sacerdotisa
-            </span>
-
-            <span onclick="abrirCarta(3)" role="button" tabindex="0" onkeydown="activarCarta(event,3)">
-                <b class="numero-arcano">III</b> La Emperatriz
-            </span>
-
-            <span onclick="abrirCarta(4)" role="button" tabindex="0" onkeydown="activarCarta(event,4)">
-                <b class="numero-arcano">IV</b> El Emperador
-            </span>
-
-            <span onclick="abrirCarta(5)" role="button" tabindex="0" onkeydown="activarCarta(event,5)">
-                <b class="numero-arcano">V</b> El Hierofante
-            </span>
-
-            <span onclick="abrirCarta(6)" role="button" tabindex="0" onkeydown="activarCarta(event,6)">
-                <b class="numero-arcano">VI</b> Los Enamorados
-            </span>
-
-            <span onclick="abrirCarta(7)" role="button" tabindex="0" onkeydown="activarCarta(event,7)">
-                <b class="numero-arcano">VII</b> El Carro
-            </span>
-
-            <span onclick="abrirCarta(8)" role="button" tabindex="0" onkeydown="activarCarta(event,8)">
-                <b class="numero-arcano">VIII</b> La Fuerza
-            </span>
-
-            <span onclick="abrirCarta(9)" role="button" tabindex="0" onkeydown="activarCarta(event,9)">
-                <b class="numero-arcano">IX</b> El Ermitaño
-            </span>
-
-            <span onclick="abrirCarta(10)" role="button" tabindex="0" onkeydown="activarCarta(event,10)">
-                <b class="numero-arcano">X</b> La Rueda de la Fortuna
-            </span>
-
-            <span onclick="abrirCarta(11)" role="button" tabindex="0" onkeydown="activarCarta(event,11)">
-                <b class="numero-arcano">XI</b> La Justicia
-            </span>
-
-            <span onclick="abrirCarta(12)" role="button" tabindex="0" onkeydown="activarCarta(event,12)">
-                <b class="numero-arcano">XII</b> El Colgado
-            </span>
-
-            <span onclick="abrirCarta(13)" role="button" tabindex="0" onkeydown="activarCarta(event,13)">
-                <b class="numero-arcano">XIII</b> La Muerte
-            </span>
-
-            <span onclick="abrirCarta(14)" role="button" tabindex="0" onkeydown="activarCarta(event,14)">
-                <b class="numero-arcano">XIV</b> La Templanza
-            </span>
-
-            <span onclick="abrirCarta(15)" role="button" tabindex="0" onkeydown="activarCarta(event,15)">
-                <b class="numero-arcano">XV</b> El Diablo
-            </span>
-
-            <span onclick="abrirCarta(16)" role="button" tabindex="0" onkeydown="activarCarta(event,16)">
-                <b class="numero-arcano">XVI</b> La Torre
-            </span>
-
-            <span onclick="abrirCarta(17)" role="button" tabindex="0" onkeydown="activarCarta(event,17)">
-                <b class="numero-arcano">XVII</b> La Estrella
-            </span>
-
-            <span onclick="abrirCarta(18)" role="button" tabindex="0" onkeydown="activarCarta(event,18)">
-                <b class="numero-arcano">XVIII</b> La Luna
-            </span>
-
-            <span onclick="abrirCarta(19)" role="button" tabindex="0" onkeydown="activarCarta(event,19)">
-                <b class="numero-arcano">XIX</b> El Sol
-            </span>
-
-            <span onclick="abrirCarta(20)" role="button" tabindex="0" onkeydown="activarCarta(event,20)">
-                <b class="numero-arcano">XX</b> El Juicio
-            </span>
-
-            <span onclick="abrirCarta(21)" role="button" tabindex="0" onkeydown="activarCarta(event,21)">
-                <b class="numero-arcano">XXI</b> El Mundo
-            </span>
-
+            <span onclick="abrirCarta(0)" role="button" tabindex="0" onkeydown="activarCarta(event,0)"><b class="numero-arcano">0</b> El Loco</span>
+            <span onclick="abrirCarta(1)" role="button" tabindex="0" onkeydown="activarCarta(event,1)"><b class="numero-arcano">I</b> El Mago</span>
+            <span onclick="abrirCarta(2)" role="button" tabindex="0" onkeydown="activarCarta(event,2)"><b class="numero-arcano">II</b> La Sacerdotisa</span>
+            <span onclick="abrirCarta(3)" role="button" tabindex="0" onkeydown="activarCarta(event,3)"><b class="numero-arcano">III</b> La Emperatriz</span>
+            <span onclick="abrirCarta(4)" role="button" tabindex="0" onkeydown="activarCarta(event,4)"><b class="numero-arcano">IV</b> El Emperador</span>
+            <span onclick="abrirCarta(5)" role="button" tabindex="0" onkeydown="activarCarta(event,5)"><b class="numero-arcano">V</b> El Hierofante</span>
+            <span onclick="abrirCarta(6)" role="button" tabindex="0" onkeydown="activarCarta(event,6)"><b class="numero-arcano">VI</b> Los Enamorados</span>
+            <span onclick="abrirCarta(7)" role="button" tabindex="0" onkeydown="activarCarta(event,7)"><b class="numero-arcano">VII</b> El Carro</span>
+            <span onclick="abrirCarta(8)" role="button" tabindex="0" onkeydown="activarCarta(event,8)"><b class="numero-arcano">VIII</b> La Fuerza</span>
+            <span onclick="abrirCarta(9)" role="button" tabindex="0" onkeydown="activarCarta(event,9)"><b class="numero-arcano">IX</b> El Ermitaño</span>
+            <span onclick="abrirCarta(10)" role="button" tabindex="0" onkeydown="activarCarta(event,10)"><b class="numero-arcano">X</b> La Rueda de la Fortuna</span>
+            <span onclick="abrirCarta(11)" role="button" tabindex="0" onkeydown="activarCarta(event,11)"><b class="numero-arcano">XI</b> La Justicia</span>
+            <span onclick="abrirCarta(12)" role="button" tabindex="0" onkeydown="activarCarta(event,12)"><b class="numero-arcano">XII</b> El Colgado</span>
+            <span onclick="abrirCarta(13)" role="button" tabindex="0" onkeydown="activarCarta(event,13)"><b class="numero-arcano">XIII</b> La Muerte</span>
+            <span onclick="abrirCarta(14)" role="button" tabindex="0" onkeydown="activarCarta(event,14)"><b class="numero-arcano">XIV</b> La Templanza</span>
+            <span onclick="abrirCarta(15)" role="button" tabindex="0" onkeydown="activarCarta(event,15)"><b class="numero-arcano">XV</b> El Diablo</span>
+            <span onclick="abrirCarta(16)" role="button" tabindex="0" onkeydown="activarCarta(event,16)"><b class="numero-arcano">XVI</b> La Torre</span>
+            <span onclick="abrirCarta(17)" role="button" tabindex="0" onkeydown="activarCarta(event,17)"><b class="numero-arcano">XVII</b> La Estrella</span>
+            <span onclick="abrirCarta(18)" role="button" tabindex="0" onkeydown="activarCarta(event,18)"><b class="numero-arcano">XVIII</b> La Luna</span>
+            <span onclick="abrirCarta(19)" role="button" tabindex="0" onkeydown="activarCarta(event,19)"><b class="numero-arcano">XIX</b> El Sol</span>
+            <span onclick="abrirCarta(20)" role="button" tabindex="0" onkeydown="activarCarta(event,20)"><b class="numero-arcano">XX</b> El Juicio</span>
+            <span onclick="abrirCarta(21)" role="button" tabindex="0" onkeydown="activarCarta(event,21)"><b class="numero-arcano">XXI</b> El Mundo</span>
         </div>
 
         <p class="ayuda">✧ Tocá una carta para descubrir su significado.</p>
     </section>
 
-
-    <!-- SÍMBOLOS -->
-
     <section class="lesson">
         <span class="numero-leccion">LECCIÓN 03</span>
-
         <h2>El lenguaje de los símbolos</h2>
 
         <p>
@@ -535,70 +883,46 @@
         </p>
 
         <div class="simbolos-grid">
-
             <article class="simbolo-card">
                 <span class="simbolo-icono">☀</span>
                 <h3>El Sol</h3>
-                <p>
-                    Claridad, vitalidad, conciencia, expresión y aquello
-                    que puede verse con mayor transparencia.
-                </p>
+                <p>Claridad, vitalidad, conciencia, expresión y aquello que puede verse con mayor transparencia.</p>
             </article>
 
             <article class="simbolo-card">
                 <span class="simbolo-icono">☾</span>
                 <h3>La Luna</h3>
-                <p>
-                    Mundo interior, intuición, imaginación, incertidumbre
-                    y aspectos que todavía necesitan comprensión.
-                </p>
+                <p>Mundo interior, intuición, imaginación, incertidumbre y aspectos que todavía necesitan comprensión.</p>
             </article>
 
             <article class="simbolo-card">
                 <span class="simbolo-icono">♛</span>
                 <h3>La corona</h3>
-                <p>
-                    Autoridad, responsabilidad, reconocimiento y la forma
-                    en que se ejerce el poder personal.
-                </p>
+                <p>Autoridad, responsabilidad, reconocimiento y la forma en que se ejerce el poder personal.</p>
             </article>
 
             <article class="simbolo-card">
                 <span class="simbolo-icono">⚔</span>
                 <h3>La espada</h3>
-                <p>
-                    Pensamiento, decisiones, conflictos, límites
-                    y la búsqueda de claridad.
-                </p>
+                <p>Pensamiento, decisiones, conflictos, límites y la búsqueda de claridad.</p>
             </article>
 
             <article class="simbolo-card">
                 <span class="simbolo-icono">♧</span>
                 <h3>La naturaleza</h3>
-                <p>
-                    Crecimiento, ciclos, fertilidad, renovación
-                    y relación con el entorno.
-                </p>
+                <p>Crecimiento, ciclos, fertilidad, renovación y relación con el entorno.</p>
             </article>
 
             <article class="simbolo-card">
                 <span class="simbolo-icono">∞</span>
                 <h3>El infinito</h3>
-                <p>
-                    Continuidad, potencial, ciclos y posibilidades
-                    que no se agotan en una única interpretación.
-                </p>
+                <p>Continuidad, potencial, ciclos y posibilidades que no se agotan en una única interpretación.</p>
             </article>
-
         </div>
     </section>
 
-
-    <!-- COLORES -->
-
     <section class="lesson">
         <span class="numero-leccion">LECCIÓN 04</span>
-
         <h2>Los colores en el Tarot</h2>
 
         <p>
@@ -608,85 +932,57 @@
         </p>
 
         <div class="colores-grid">
-
             <article class="color-tarot">
                 <div class="color-muestra" style="background:#a71930;"></div>
                 <h3>Rojo</h3>
-                <p>
-                    Pasión, impulso, deseo, energía, coraje y acción.
-                    En algunos contextos también puede sugerir tensión.
-                </p>
+                <p>Pasión, impulso, deseo, energía, coraje y acción. En algunos contextos también puede sugerir tensión.</p>
             </article>
 
             <article class="color-tarot">
                 <div class="color-muestra" style="background:#e5bd54;"></div>
                 <h3>Amarillo y dorado</h3>
-                <p>
-                    Conciencia, vitalidad, claridad, confianza,
-                    abundancia y reconocimiento.
-                </p>
+                <p>Conciencia, vitalidad, claridad, confianza, abundancia y reconocimiento.</p>
             </article>
 
             <article class="color-tarot">
                 <div class="color-muestra" style="background:#315b94;"></div>
                 <h3>Azul</h3>
-                <p>
-                    Serenidad, reflexión, profundidad emocional,
-                    comunicación y búsqueda interior.
-                </p>
+                <p>Serenidad, reflexión, profundidad emocional, comunicación y búsqueda interior.</p>
             </article>
 
             <article class="color-tarot">
                 <div class="color-muestra" style="background:#39805b;"></div>
                 <h3>Verde</h3>
-                <p>
-                    Crecimiento, renovación, equilibrio, naturaleza
-                    y desarrollo progresivo.
-                </p>
+                <p>Crecimiento, renovación, equilibrio, naturaleza y desarrollo progresivo.</p>
             </article>
 
             <article class="color-tarot">
                 <div class="color-muestra" style="background:#eee9e4;"></div>
                 <h3>Blanco</h3>
-                <p>
-                    Apertura, claridad, sinceridad, pureza simbólica
-                    y nuevas posibilidades.
-                </p>
+                <p>Apertura, claridad, sinceridad, pureza simbólica y nuevas posibilidades.</p>
             </article>
 
             <article class="color-tarot">
                 <div class="color-muestra" style="background:#211c2a;"></div>
                 <h3>Negro</h3>
-                <p>
-                    Misterio, límites, introspección, cierre de etapas
-                    y aquello que aún no se conoce.
-                </p>
+                <p>Misterio, límites, introspección, cierre de etapas y aquello que aún no se conoce.</p>
             </article>
-
         </div>
     </section>
 
-
-    <!-- CIERRE Y NAVEGACIÓN -->
-
     <footer class="navegacion-curso">
         <span class="simbolo-final">☾ ✧ ☽</span>
-
         <p>
             Cada carta forma parte de un lenguaje más amplio.
             En la siguiente lección vamos a explorar los Arcanos Menores
             y sus cuatro palos.
         </p>
-
         <a href="index2.html" class="btn-siguiente">
             Siguiente: Arcanos Menores →
         </a>
     </footer>
 
 </main>
-
-
-<!-- VENTANA DE INTERPRETACIÓN -->
 
 <div
     class="modal-carta"
@@ -697,16 +993,8 @@
     onclick="cerrarSiFondo(event)"
 >
     <div class="contenido-modal">
-
-        <button
-            class="cerrar-modal"
-            type="button"
-            aria-label="Cerrar"
-            onclick="cerrarCarta()"
-        >×</button>
-
+        <button class="cerrar-modal" type="button" aria-label="Cerrar" onclick="cerrarCarta()">×</button>
         <div class="modal-etiqueta">ASTRO ROJO · ARCANOS MAYORES</div>
-
         <h2 id="nombreCarta">El Loco</h2>
 
         <img
@@ -719,13 +1007,10 @@
         <div id="textoCarta" class="texto-carta"></div>
 
         <div class="modal-pie">
-            El significado se enriquece al considerar la pregunta y las
-            cartas que acompañan la lectura.
+            El significado se enriquece al considerar la pregunta y las cartas que acompañan la lectura.
         </div>
-
     </div>
 </div>
-
 
 <script>
     const cartas = [
@@ -740,8 +1025,7 @@ El Loco representa el comienzo de un viaje, la libertad, la espontaneidad y la a
 Puede señalar una oportunidad nueva, una decisión inesperada o la necesidad de recuperar la curiosidad. Invita a explorar, pero también a reconocer los riesgos de actuar sin considerar las consecuencias.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué comienzo te atrae y qué necesitás tener en cuenta antes de dar el primer paso?
-            `
+¿Qué comienzo te atrae y qué necesitás tener en cuenta antes de dar el primer paso?`
         },
         {
             nombre: "I · El Mago",
@@ -754,8 +1038,7 @@ El Mago simboliza la iniciativa, la habilidad, la comunicación y la capacidad d
 Puede indicar que existen recursos disponibles para avanzar. Habla de voluntad, creatividad y concentración. En su aspecto desafiante, invita a observar la manipulación, las promesas vacías o la dispersión de energía.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué recursos ya tenés y cómo podrías utilizarlos de manera consciente?
-            `
+¿Qué recursos ya tenés y cómo podrías utilizarlos de manera consciente?`
         },
         {
             nombre: "II · La Sacerdotisa",
@@ -768,8 +1051,7 @@ La Sacerdotisa representa la intuición, el silencio, el conocimiento interior y
 Invita a observar antes de actuar y a distinguir la intuición de los temores. Puede señalar una etapa de estudio, reserva o reflexión. No significa necesariamente que exista un secreto: también puede hablar de información que aún falta comprender.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué necesitás escuchar dentro de vos antes de tomar una decisión?
-            `
+¿Qué necesitás escuchar dentro de vos antes de tomar una decisión?`
         },
         {
             nombre: "III · La Emperatriz",
@@ -782,8 +1064,7 @@ La Emperatriz simboliza la creatividad, el cuidado, la abundancia, la sensualida
 Puede hablar de proyectos fértiles, vínculos que necesitan atención o una mayor conexión con el cuerpo y las emociones. En su aspecto desafiante, invita a revisar la sobreprotección, la dependencia o el descuido de las propias necesidades.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué aspecto de tu vida necesita cuidado para desarrollarse?
-            `
+¿Qué aspecto de tu vida necesita cuidado para desarrollarse?`
         },
         {
             nombre: "IV · El Emperador",
@@ -796,8 +1077,7 @@ El Emperador representa la estructura, los límites, la organización, la autori
 Puede señalar la necesidad de ordenar una situación, asumir responsabilidades o establecer límites claros. En su aspecto desafiante, advierte sobre la rigidez, el control excesivo o la dificultad para adaptarse.
 
 <strong>Pregunta para reflexionar</strong>
-¿Dónde necesitás más estructura y dónde sería conveniente flexibilizarte?
-            `
+¿Dónde necesitás más estructura y dónde sería conveniente flexibilizarte?`
         },
         {
             nombre: "V · El Hierofante",
@@ -810,8 +1090,7 @@ El Hierofante se relaciona con la tradición, la enseñanza, los valores compart
 Puede representar un aprendizaje, una institución, un mentor o la revisión de las creencias que guían una decisión. También invita a distinguir entre una tradición que aporta sentido y una regla que limita el crecimiento personal.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué creencias te orientan y cuáles necesitás revisar?
-            `
+¿Qué creencias te orientan y cuáles necesitás revisar?`
         },
         {
             nombre: "VI · Los Enamorados",
@@ -824,8 +1103,7 @@ Los Enamorados representan el vínculo, la atracción, los valores personales y 
 Puede hablar de una relación significativa, una elección importante o la necesidad de comunicación honesta. No garantiza que una persona esté enamorada ni determina por sí sola el futuro de una relación.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué elección refleja mejor tus valores y tus necesidades reales?
-            `
+¿Qué elección refleja mejor tus valores y tus necesidades reales?`
         },
         {
             nombre: "VII · El Carro",
@@ -838,8 +1116,7 @@ El Carro simboliza el avance, la determinación, la dirección y la capacidad de
 Puede señalar movimiento, iniciativa y superación de obstáculos. Recuerda que avanzar no significa actuar impulsivamente: hace falta orientar la energía y sostener el compromiso.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué objetivo querés alcanzar y qué necesitás para mantener el rumbo?
-            `
+¿Qué objetivo querés alcanzar y qué necesitás para mantener el rumbo?`
         },
         {
             nombre: "VIII · La Fuerza",
@@ -852,8 +1129,7 @@ La Fuerza representa el coraje, la paciencia, el autocontrol y la capacidad de r
 Invita a responder con firmeza serena, sostener un proceso y reconocer las emociones sin dejar que gobiernen todas las decisiones. También puede señalar la necesidad de recuperar confianza.
 
 <strong>Pregunta para reflexionar</strong>
-¿Cómo podés afrontar esta situación sin reprimir lo que sentís ni reaccionar de manera automática?
-            `
+¿Cómo podés afrontar esta situación sin reprimir lo que sentís ni reaccionar de manera automática?`
         },
         {
             nombre: "IX · El Ermitaño",
@@ -866,8 +1142,7 @@ El Ermitaño simboliza la introspección, la prudencia, la experiencia y la bús
 Puede indicar una pausa necesaria, estudio o distancia para ordenar pensamientos. No siempre representa soledad permanente: a veces es el espacio temporal que permite escuchar la propia voz.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué podés comprender si te das tiempo para mirar la situación con calma?
-            `
+¿Qué podés comprender si te das tiempo para mirar la situación con calma?`
         },
         {
             nombre: "X · La Rueda de la Fortuna",
@@ -880,8 +1155,7 @@ La Rueda de la Fortuna representa los ciclos, los cambios de circunstancias y la
 Puede señalar una transición, un giro inesperado o la necesidad de adaptarse. No asegura buena ni mala suerte: invita a observar el momento y responder de manera flexible.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué está cambiando y cómo podés adaptarte sin perder tu centro?
-            `
+¿Qué está cambiando y cómo podés adaptarte sin perder tu centro?`
         },
         {
             nombre: "XI · La Justicia",
@@ -894,8 +1168,7 @@ La Justicia representa el equilibrio, la responsabilidad, la honestidad y la rel
 Puede invitar a revisar hechos, acuerdos y límites. Es importante diferenciar lo que se desea que sea cierto de aquello que realmente puede comprobarse. En ocasiones sugiere tomar una decisión con objetividad.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué hechos necesitás considerar para actuar con claridad y responsabilidad?
-            `
+¿Qué hechos necesitás considerar para actuar con claridad y responsabilidad?`
         },
         {
             nombre: "XII · El Colgado",
@@ -908,8 +1181,7 @@ El Colgado simboliza la pausa, la entrega consciente y la posibilidad de mirar u
 Puede indicar que forzar una respuesta no ayuda y que hace falta cambiar de perspectiva. También invita a revisar los sacrificios que se hacen y preguntarse si tienen sentido.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué cambia cuando dejás de intentar resolverlo todo de la misma manera?
-            `
+¿Qué cambia cuando dejás de intentar resolverlo todo de la misma manera?`
         },
         {
             nombre: "XIII · La Muerte",
@@ -922,8 +1194,7 @@ La Muerte representa el cierre de una etapa, la transformación y la posibilidad
 Generalmente se interpreta de forma simbólica, no como un anuncio literal de muerte física. Puede señalar una despedida, una transición profunda o la necesidad de soltar hábitos que impiden avanzar.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué etapa necesita terminar para que algo diferente pueda comenzar?
-            `
+¿Qué etapa necesita terminar para que algo diferente pueda comenzar?`
         },
         {
             nombre: "XIV · La Templanza",
@@ -936,8 +1207,7 @@ La Templanza simboliza la moderación, la integración, la paciencia y la búsqu
 Puede sugerir diálogo, recuperación gradual y cooperación. Invita a evitar los extremos y a respetar el tiempo que necesita cada proceso. No significa quedarse inmóvil, sino encontrar una medida sostenible.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué aspectos de esta situación necesitan encontrar un punto de equilibrio?
-            `
+¿Qué aspectos de esta situación necesitan encontrar un punto de equilibrio?`
         },
         {
             nombre: "XV · El Diablo",
@@ -950,8 +1220,7 @@ El Diablo representa los apegos, las tentaciones, los deseos intensos y los patr
 Invita a reconocer dependencias, acuerdos desiguales, impulsos o miedos que influyen en las decisiones. No significa que una persona sea malvada ni confirma por sí sola engaños o intenciones ocultas.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué patrón se repite y qué elección podría devolverte más libertad?
-            `
+¿Qué patrón se repite y qué elección podría devolverte más libertad?`
         },
         {
             nombre: "XVI · La Torre",
@@ -964,8 +1233,7 @@ La Torre representa la ruptura de estructuras, las revelaciones y los cambios qu
 Puede simbolizar una crisis, una verdad incómoda o el derrumbe de una expectativa. Aunque la experiencia resulte difícil, también puede abrir espacio para construir sobre bases más honestas.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué idea o estructura necesita ser revisada para que puedas avanzar de una manera más auténtica?
-            `
+¿Qué idea o estructura necesita ser revisada para que puedas avanzar de una manera más auténtica?`
         },
         {
             nombre: "XVII · La Estrella",
@@ -978,8 +1246,7 @@ La Estrella simboliza la esperanza, la inspiración, la renovación y la confian
 Puede invitar a recuperar la calma, conectar con un propósito o avanzar mediante pequeños pasos. No promete resultados automáticos: recuerda que la esperanza también necesita cuidado y acciones concretas.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué te ayuda a recuperar la confianza y qué paso pequeño podés dar hoy?
-            `
+¿Qué te ayuda a recuperar la confianza y qué paso pequeño podés dar hoy?`
         },
         {
             nombre: "XVIII · La Luna",
@@ -992,8 +1259,7 @@ La Luna representa la imaginación, los temores, la sensibilidad y las situacion
 Invita a observar las emociones sin confundirlas con hechos comprobados. Puede señalar incertidumbre, sueños intensos o la necesidad de reunir más información antes de decidir.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué sabés con certeza, qué estás suponiendo y qué necesitás aclarar?
-            `
+¿Qué sabés con certeza, qué estás suponiendo y qué necesitás aclarar?`
         },
         {
             nombre: "XIX · El Sol",
@@ -1006,8 +1272,7 @@ El Sol simboliza la claridad, la vitalidad, la alegría, la autenticidad y la po
 Puede hablar de comprensión, colaboración, confianza o un momento para expresar lo que se siente. También invita a disfrutar de los logros sin perder de vista los detalles importantes.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué se vuelve más claro cuando mirás la situación con honestidad?
-            `
+¿Qué se vuelve más claro cuando mirás la situación con honestidad?`
         },
         {
             nombre: "XX · El Juicio",
@@ -1020,8 +1285,7 @@ El Juicio representa la revisión del pasado, el despertar de la conciencia y la
 Puede señalar una conversación pendiente, una decisión que ya no puede postergarse o la necesidad de aprender de una experiencia anterior. Invita a asumir responsabilidades sin quedar atrapado en la culpa.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué aprendiste de lo vivido y qué estás preparado para hacer de otra manera?
-            `
+¿Qué aprendiste de lo vivido y qué estás preparado para hacer de otra manera?`
         },
         {
             nombre: "XXI · El Mundo",
@@ -1034,11 +1298,9 @@ El Mundo simboliza la culminación, la integración, el aprendizaje y el reconoc
 Puede indicar cierre, logro o la integración de experiencias que antes parecían separadas. También puede invitar a reconocer cuánto se ha avanzado antes de comenzar una nueva etapa.
 
 <strong>Pregunta para reflexionar</strong>
-¿Qué ciclo está llegando a su cierre y qué aprendizaje te llevás?
-            `
+¿Qué ciclo está llegando a su cierre y qué aprendizaje te llevás?`
         }
     ];
-
 
     const modal = document.getElementById("modalCarta");
     const nombreCarta = document.getElementById("nombreCarta");
@@ -1047,13 +1309,10 @@ Puede indicar cierre, logro o la integración de experiencias que antes parecía
 
     let elementoAnterior = null;
 
-
     function abrirCarta(indice) {
         const carta = cartas[indice];
 
-        if (!carta) {
-            return;
-        }
+        if (!carta) return;
 
         elementoAnterior = document.activeElement;
 
@@ -1073,7 +1332,6 @@ Puede indicar cierre, logro o la integración de experiencias que antes parecía
         modal.querySelector(".cerrar-modal").focus();
     }
 
-
     function cerrarCarta() {
         modal.classList.remove("activo");
         document.body.style.overflow = "";
@@ -1083,13 +1341,11 @@ Puede indicar cierre, logro o la integración de experiencias que antes parecía
         }
     }
 
-
     function cerrarSiFondo(evento) {
         if (evento.target === modal) {
             cerrarCarta();
         }
     }
-
 
     function activarCarta(evento, indice) {
         if (evento.key === "Enter" || evento.key === " ") {
@@ -1097,7 +1353,6 @@ Puede indicar cierre, logro o la integración de experiencias que antes parecía
             abrirCarta(indice);
         }
     }
-
 
     document.addEventListener("keydown", function (evento) {
         if (evento.key === "Escape" && modal.classList.contains("activo")) {
