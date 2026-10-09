@@ -1,1029 +1,1248 @@
-HTML
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10070b">
-<meta name="description" content="ASTRO ROJO — Arquetipos y psicología del Tarot, trabajo y dinero, y numerología aplicada a los Arcanos.">
-<title>ASTRO ROJO — Psicología, Trabajo y Numerología</title>
+<meta name="theme-color" content="#0b080a">
+<meta name="description" content="ASTRO ROJO — Psicología del Tarot, trabajo, dinero y numerología aplicada a los arcanos.">
+<title>ASTRO ROJO — Psicología, Trabajo y Numerología del Tarot</title>
 
 <style>
 :root {
-    --fondo: #10070b;
-    --fondo-claro: #190b10;
-    --rojo: #e21b3c;
-    --rojo-oscuro: #7d1026;
-    --texto: #f3eeee;
-    --suave: #b9a9ad;
-    --borde: rgba(226, 27, 60, .25);
-    --dorado: #c9a66b;
+    --fondo: #0b080a;
+    --panel: #140b10;
+    --rojo: #e51b3e;
+    --rojo-claro: #ff526d;
+    --texto: #f5edef;
+    --suave: #b7a6ab;
+    --linea: rgba(255,255,255,.12);
 }
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 90px;
-}
+html { scroll-behavior: smooth; }
 
 body {
-    background: var(--fondo);
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 85% 5%, rgba(115,12,36,.24), transparent 32%),
+        radial-gradient(ellipse at 0% 55%, rgba(90,10,29,.13), transparent 35%),
+        var(--fondo);
     color: var(--texto);
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Arial, Helvetica, sans-serif;
     line-height: 1.75;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    font: inherit;
-}
+button, input, select { font: inherit; }
+a { color: inherit; text-decoration: none; }
 
 .contenedor {
-    width: min(1120px, 90%);
+    width: min(1160px, calc(100% - 36px));
     margin: auto;
 }
 
-/* NAVEGACIÓN */
-
-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: rgba(16, 7, 11, .96);
-    border-bottom: 1px solid var(--borde);
-    backdrop-filter: blur(12px);
-}
-
-.nav {
-    min-height: 76px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.logo {
-    color: var(--rojo);
-    font-family: Arial, sans-serif;
-    font-size: 1.1rem;
-    font-weight: 900;
-    letter-spacing: .17em;
-}
-
-.nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 22px;
-    font-family: Arial, sans-serif;
-    font-size: .76rem;
-    letter-spacing: .04em;
-    color: var(--suave);
-}
-
-.nav-links a:hover {
-    color: var(--rojo);
-}
-
-/* PORTADA */
-
-.portada {
-    padding: 105px 0 85px;
-    text-align: center;
-    background:
-        radial-gradient(ellipse at 50% 15%, rgba(125, 16, 38, .35), transparent 60%),
-        linear-gradient(180deg, #19090f 0%, var(--fondo) 100%);
-    border-bottom: 1px solid var(--borde);
-}
-
-.etiqueta {
-    color: var(--rojo);
-    font-family: Arial, sans-serif;
+.sobrelinea {
+    color: var(--rojo-claro);
     font-size: .72rem;
-    letter-spacing: .3em;
+    font-weight: bold;
+    letter-spacing: .2em;
     text-transform: uppercase;
 }
 
-.portada h1 {
-    max-width: 950px;
-    margin: 24px auto;
-    font-size: clamp(2.8rem, 8vw, 6.4rem);
-    font-weight: 400;
-    line-height: 1.03;
-    letter-spacing: -.045em;
+.portada {
+    position: relative;
+    overflow: hidden;
+    padding: 95px 0 85px;
+    border-bottom: 1px solid var(--linea);
 }
 
-.portada h1 span {
-    color: var(--rojo);
-    font: inherit;
+.portada::after {
+    content: "III";
+    position: absolute;
+    right: 0;
+    top: -35px;
+    color: rgba(229,27,62,.055);
+    font: bold clamp(18rem,40vw,35rem)/1 Georgia,serif;
+    pointer-events: none;
 }
+
+.portada-contenido {
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    max-width: 950px;
+    margin: 25px 0;
+    font-size: clamp(3.2rem,9.5vw,7.5rem);
+    font-weight: 800;
+    letter-spacing: -.075em;
+    line-height: .98;
+}
+
+h1 span, h2 span { color: var(--rojo); }
 
 .portada p {
     max-width: 670px;
-    margin: 24px auto 0;
-    color: var(--suave);
-    font-size: 1.05rem;
+    color: #c6b7bb;
+    line-height: 1.9;
 }
 
-.boton {
-    display: inline-block;
-    margin-top: 32px;
-    padding: 13px 24px;
-    background: var(--rojo);
-    color: white;
-    border: 1px solid var(--rojo);
-    font-family: Arial, sans-serif;
-    font-size: .75rem;
-    font-weight: bold;
-    letter-spacing: .12em;
-    transition: .25s;
-}
+.fr anja { display: none; }
 
-.boton:hover {
-    background: transparent;
-    color: var(--rojo);
-}
-
-/* INTRODUCCIÓN */
-
-.introduccion {
-    padding: 65px 0 30px;
-}
-
-.introduccion h2 {
-    margin-bottom: 14px;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 400;
-}
-
-.introduccion p {
-    max-width: 820px;
-    color: var(--suave);
-}
-
-/* MÓDULOS */
-
-.modulo {
-    padding: 75px 0;
-    border-bottom: 1px solid var(--borde);
-    scroll-margin-top: 90px;
-}
-
-.modulo-cabecera {
+.franja {
     display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 22px;
-    align-items: start;
-    margin-bottom: 38px;
+    grid-template-columns: repeat(3,1fr);
+    border-bottom: 1px solid var(--linea);
 }
 
-.numero-modulo {
-    color: var(--rojo);
-    font-size: 2.5rem;
-    line-height: 1;
-}
-
-.modulo h2 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 400;
-    line-height: 1.15;
-}
-
-.subtitulo {
-    margin-top: 12px;
-    color: var(--suave);
-    max-width: 720px;
-}
-
-.rejilla {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-}
-
-.tarjeta {
-    padding: 25px;
-    background: linear-gradient(145deg, #1b0b11, #12080c);
-    border: 1px solid var(--borde);
-    transition: border-color .25s, transform .25s;
-}
-
-.tarjeta:hover {
-    border-color: var(--rojo);
-    transform: translateY(-3px);
-}
-
-.tarjeta .simbolo {
-    display: block;
-    margin-bottom: 12px;
-    color: var(--rojo);
-    font-size: 1.65rem;
-}
-
-.tarjeta h3 {
-    margin-bottom: 10px;
-    font-size: 1.35rem;
-    font-weight: 400;
-}
-
-.tarjeta p {
-    color: var(--suave);
-    font-size: .96rem;
-}
-
-.detalle {
-    margin-top: 15px;
-    padding-top: 13px;
-    border-top: 1px solid var(--borde);
-    color: var(--dorado);
-    font-size: .84rem;
-}
-
-/* EJERCICIOS */
-
-.ejercicio {
-    margin-top: 35px;
-    padding: 28px;
-    background: rgba(226, 27, 60, .055);
-    border-left: 3px solid var(--rojo);
-}
-
-.ejercicio h3 {
-    margin-bottom: 10px;
-    color: var(--rojo);
-    font-size: 1.3rem;
-    font-weight: 400;
-}
-
-.ejercicio p,
-.ejercicio li {
-    color: var(--suave);
-}
-
-.ejercicio ol,
-.ejercicio ul {
-    padding-left: 22px;
-    margin-top: 12px;
-}
-
-.pregunta {
-    margin-top: 17px;
-    color: var(--texto) !important;
-    font-style: italic;
-}
-
-/* TIRADAS */
-
-.tirada {
-    margin-top: 22px;
-    padding: 25px;
-    border: 1px solid var(--borde);
-    background: #14080d;
-}
-
-.tirada h3 {
-    font-size: 1.3rem;
-    font-weight: 400;
-    margin-bottom: 15px;
-}
-
-.posiciones {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-}
-
-.posicion {
-    padding: 15px 10px;
+.franja-item {
+    padding: 22px 10px;
     text-align: center;
-    border: 1px solid var(--borde);
-    color: var(--suave);
-    font-size: .9rem;
+    border-right: 1px solid var(--linea);
 }
 
-.posicion strong {
+.franja-item:last-child { border-right: 0; }
+
+.franja-item strong {
     display: block;
-    margin-bottom: 5px;
-    color: var(--rojo);
-    font-size: 1.2rem;
+    color: var(--rojo-claro);
+    font-size: .76rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
 }
 
-/* NUMEROLOGÍA */
-
-.numero-grid {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.numero-card {
-    min-height: 160px;
-    padding: 18px 12px;
-    text-align: center;
-    background: #190b10;
-    border: 1px solid var(--borde);
-}
-
-.numero-card strong {
-    display: block;
-    color: var(--rojo);
-    font-size: 2.1rem;
-    font-weight: 400;
-}
-
-.numero-card h3 {
-    font-size: 1rem;
-    font-weight: 400;
-}
-
-.numero-card p {
-    margin-top: 8px;
+.franja-item span {
     color: var(--suave);
     font-size: .82rem;
 }
 
-/* TABLA */
-
-.tabla-contenedor {
-    margin-top: 25px;
-    overflow-x: auto;
-    border: 1px solid var(--borde);
+.indice {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--linea);
 }
 
-table {
+.indice a {
+    padding: 9px 13px;
+    border: 1px solid #48212c;
+    color: #dfcdd2;
+    font-size: .8rem;
+    transition: .2s;
+}
+
+.indice a:hover {
+    border-color: var(--rojo);
+    color: white;
+}
+
+.introduccion {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 55px;
+    padding-top: 80px;
+    padding-bottom: 75px;
+}
+
+h2 {
+    margin-top: 12px;
+    font-size: clamp(2rem,5vw,3.5rem);
+    letter-spacing: -.055em;
+    line-height: 1.12;
+}
+
+.intro-texto p {
+    margin-bottom: 17px;
+    color: #c7b7bc;
+}
+
+.destacado, .consejo {
+    margin-top: 24px;
+    padding: 18px 21px;
+    border-left: 2px solid var(--rojo);
+    background: rgba(229,27,62,.07);
+    color: #eadde0;
+}
+
+.seccion {
+    padding: 75px 0 85px;
+    border-top: 1px solid var(--linea);
+}
+
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.encabezado p {
+    max-width: 400px;
+    color: var(--suave);
+    font-size: .9rem;
+}
+
+.numero-seccion {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--rojo-claro);
+    font: 2.8rem/1 Georgia,serif;
+}
+
+.bloques {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 14px;
+}
+
+.bloque {
+    padding: 26px;
+    border: 1px solid var(--linea);
+    background: rgba(255,255,255,.018);
+}
+
+.bloque h3 {
+    margin: 12px 0;
+    font: 1.45rem Georgia,serif;
+}
+
+.bloque p {
+    color: #bbaab0;
+    font-size: .9rem;
+}
+
+.bloque .etiqueta {
+    color: var(--rojo-claro);
+    font-size: .7rem;
+    font-weight: bold;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.bloque-grande {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: .65fr 1.35fr;
+    gap: 25px;
+    align-items: start;
+}
+
+.cita {
+    margin-top: 16px;
+    padding-top: 13px;
+    border-top: 1px solid var(--linea);
+    color: #e7d5da;
+    font: italic 1.05rem/1.7 Georgia,serif;
+}
+
+.dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: start;
+}
+
+.texto-largo p {
+    margin-bottom: 16px;
+    color: #c7b7bc;
+}
+
+.lista-claves {
+    list-style: none;
+    border-top: 1px solid var(--linea);
+}
+
+.lista-claves li {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--linea);
+    color: #cbbbc0;
+}
+
+.lista-claves strong {
+    color: var(--rojo-claro);
+}
+
+.tabla-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--linea);
+}
+
+.tabla {
     width: 100%;
     border-collapse: collapse;
-    min-width: 560px;
+    min-width: 600px;
 }
 
-th, td {
-    padding: 14px 16px;
+.tabla th, .tabla td {
+    padding: 15px 17px;
+    border-bottom: 1px solid var(--linea);
     text-align: left;
-    border-bottom: 1px solid var(--borde);
+    vertical-align: top;
 }
 
-th {
-    color: var(--rojo);
-    font-weight: 400;
-    background: #1b0a10;
+.tabla th {
+    background: rgba(229,27,62,.09);
+    color: var(--rojo-claro);
+    font-size: .74rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
 }
 
-td {
+.tabla td {
+    color: #c7b7bc;
+    font-size: .88rem;
+}
+
+.tabla td:first-child {
+    color: var(--texto);
+    font-weight: bold;
+}
+
+.tabla tr:last-child td { border-bottom: 0; }
+
+.tarjetas-numeros {
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    gap: 1px;
+    background: var(--linea);
+    border: 1px solid var(--linea);
+}
+
+.numero-card {
+    min-height: 175px;
+    padding: 19px 15px;
+    background: var(--panel);
+}
+
+.numero-card .numero {
+    color: var(--rojo-claro);
+    font: 2.3rem Georgia,serif;
+}
+
+.numero-card h3 {
+    margin: 8px 0;
+    font: 1.1rem Georgia,serif;
+}
+
+.numero-card p {
     color: var(--suave);
+    font-size: .8rem;
+    line-height: 1.6;
 }
 
-tr:last-child td {
-    border-bottom: none;
+.ejemplo {
+    margin-top: 25px;
+    padding: 26px;
+    border: 1px solid rgba(229,27,62,.28);
+    background: rgba(94,10,32,.1);
 }
 
-/* CIERRE */
-
-.cierre {
-    padding: 85px 0;
-    text-align: center;
-    background: radial-gradient(ellipse at center, #280a13, var(--fondo) 70%);
+.ejemplo h3 {
+    margin-bottom: 12px;
+    font: 1.4rem Georgia,serif;
 }
 
-.cierre h2 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 400;
+.ejemplo p {
+    color: #c7b7bc;
+    margin-top: 9px;
+}
+
+.ejemplo strong { color: var(--rojo-claro); }
+
+.pasos {
+    counter-reset: paso;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 14px;
+}
+
+.paso {
+    counter-increment: paso;
+    padding: 23px;
+    border: 1px solid var(--linea);
+}
+
+.paso::before {
+    content: "0" counter(paso);
+    color: var(--rojo-claro);
+    font: 2rem Georgia,serif;
+}
+
+.paso h3 {
+    margin: 12px 0 8px;
+    font: 1.2rem Georgia,serif;
+}
+
+.paso p {
+    color: #bbaab0;
+    font-size: .88rem;
+}
+
+.preguntas {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+}
+
+.pregunta {
+    padding: 20px;
+    border-left: 2px solid var(--rojo);
+    background: rgba(255,255,255,.025);
+}
+
+.pregunta strong {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--rojo-claro);
+}
+
+.pregunta p {
+    color: #c7b7bc;
+    font-size: .88rem;
+}
+
+.cierre { padding: 70px 0; }
+
+.cierre-interior {
+    padding: 35px;
+    border: 1px solid rgba(229,27,62,.3);
+    background: rgba(94,10,32,.12);
 }
 
 .cierre p {
-    max-width: 640px;
-    margin: 18px auto;
+    max-width: 760px;
+    margin-top: 12px;
     color: var(--suave);
 }
+
+.navegacion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.navegacion a {
+    display: inline-block;
+    padding: 12px 17px;
+    border: 1px solid #48212c;
+    color: #dfcdd2;
+    font-size: .85rem;
+}
+
+.navegacion a:hover { border-color: var(--rojo); }
 
 footer {
-    padding: 30px 0;
-    border-top: 1px solid var(--borde);
+    padding: 28px 15px;
+    border-top: 1px solid var(--linea);
     text-align: center;
+}
+
+footer p {
     color: var(--suave);
-    font-family: Arial, sans-serif;
-    font-size: .75rem;
-    letter-spacing: .08em;
+    font-size: .8rem;
 }
 
-footer span {
-    color: var(--rojo);
-}
+@media(max-width:850px) {
+    .introduccion, .dos-columnas {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
 
-/* MÓVILES */
-
-@media (max-width: 700px) {
-    .nav {
-        padding: 15px 0;
-        align-items: flex-start;
+    .encabezado {
+        align-items: start;
         flex-direction: column;
     }
 
-    .nav-links {
-        gap: 12px 17px;
-    }
+    .bloque-grande { grid-template-columns: 1fr; }
 
-    .portada {
-        padding: 75px 0 65px;
-    }
+    .tarjetas-numeros { grid-template-columns: repeat(3,minmax(0,1fr)); }
 
-    .modulo {
-        padding: 55px 0;
-    }
+    .pasos { grid-template-columns: 1fr; }
+}
 
-    .modulo-cabecera {
-        grid-template-columns: 45px 1fr;
-        gap: 12px;
-    }
+@media(max-width:560px) {
+    .portada { padding: 72px 0 58px; }
 
-    .numero-modulo {
-        font-size: 1.8rem;
-    }
+    h1 { font-size: clamp(3rem,14vw,4.8rem); }
 
-    .rejilla {
-        grid-template-columns: 1fr;
-    }
+    .franja-item { padding: 16px 5px; }
 
-    .numero-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    .franja-item strong { font-size: .62rem; }
 
-    .numero-card:last-child {
-        grid-column: 1 / -1;
-    }
+    .franja-item span { font-size: .68rem; }
 
-    .posiciones {
-        grid-template-columns: 1fr;
-    }
+    .seccion { padding: 55px 0 60px; }
 
-    .tarjeta {
-        padding: 21px;
-    }
+    .bloques, .preguntas { grid-template-columns: 1fr; }
+
+    .bloque-grande { grid-column: auto; }
+
+    .tarjetas-numeros { grid-template-columns: repeat(2,minmax(0,1fr)); }
+
+    .cierre-interior { padding: 24px; }
 }
 </style>
 </head>
 
 <body>
-
-<header>
-    <div class="contenedor nav">
-        <a href="#" class="logo">ASTRO ROJO</a>
-
-        <nav class="nav-links">
-            <a href="#psicologia">PSICOLOGÍA</a>
-            <a href="#trabajo">TRABAJO Y DINERO</a>
-            <a href="#numerologia">NUMEROLOGÍA</a>
-        </nav>
-    </div>
-</header>
-
 <main>
 
+<!-- PORTADA -->
 <section class="portada">
+    <div class="contenedor portada-contenido">
+        <span class="sobrelinea">ASTRO ROJO · ESTUDIO II</span>
+        <h1>EL TAROT<br><span>POR DENTRO.</span></h1>
+        <p>
+            Psicología, decisiones y números: tres caminos para profundizar
+            en el lenguaje del Tarot y convertir sus símbolos en herramientas
+            de reflexión, análisis y autoconocimiento.
+        </p>
+    </div>
+</section>
+
+<section class="contenedor franja">
+    <div class="franja-item">
+        <strong>Autoconocimiento</strong>
+        <span>Arquetipos y procesos personales</span>
+    </div>
+    <div class="franja-item">
+        <strong>Vida profesional</strong>
+        <span>Trabajo, recursos y decisiones</span>
+    </div>
+    <div class="franja-item">
+        <strong>Numerología</strong>
+        <span>Números, ciclos y palos</span>
+    </div>
+</section>
+
+<nav class="contenedor indice" aria-label="Índice del curso">
+    <a href="#psicologia">01 · Psicología</a>
+    <a href="#arquetipos">02 · Arquetipos</a>
+    <a href="#reflexion">03 · Trabajo personal</a>
+    <a href="#trabajo">04 · Trabajo y dinero</a>
+    <a href="#tiradas">05 · Tiradas laborales</a>
+    <a href="#numerologia">06 · Numerología</a>
+    <a href="#palos">07 · Números y palos</a>
+</nav>
+
+<!-- INTRODUCCIÓN -->
+<section class="contenedor introduccion">
+    <div>
+        <span class="sobrelinea">Una lectura más profunda</span>
+        <h2>Del significado<br>a la <span>experiencia.</span></h2>
+    </div>
+    <div class="intro-texto">
+        <p>
+            Conocer el significado tradicional de una carta es solo una parte
+            del aprendizaje. También importa observar qué tema plantea,
+            qué preguntas despierta y cómo se relaciona con la situación
+            que estamos explorando.
+        </p>
+        <p>
+            En esta etapa vamos a estudiar tres enfoques: el Tarot como espejo
+            simbólico de la experiencia personal, como estructura para ordenar
+            preguntas sobre el trabajo y el dinero, y como sistema numérico
+            que aporta matices a los palos.
+        </p>
+        <div class="destacado">
+            El Tarot puede servir como recurso de reflexión. No determina
+            tu personalidad, no garantiza resultados y no sustituye el análisis
+            concreto de una decisión importante.
+        </div>
+    </div>
+</section>
+
+<!-- TEMA 1 -->
+<section class="seccion" id="psicologia">
     <div class="contenedor">
-        <span class="etiqueta">ASTRO ROJO · ESTUDIO DEL TAROT</span>
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">01 / Arquetipos y psicología</span>
+                <h2>El Tarot como <span>espejo interior.</span></h2>
+            </div>
+            <p>
+                Los arquetipos son figuras simbólicas que permiten explorar
+                experiencias humanas. No son diagnósticos ni etiquetas fijas:
+                son puntos de partida para hacerse preguntas.
+            </p>
+        </div>
 
-        <h1>EL ARTE<br><span>DE COMPRENDER</span></h1>
+        <div class="bloques">
+            <article class="bloque">
+                <span class="etiqueta">El viaje</span>
+                <h3>El héroe</h3>
+                <p>
+                    El héroe representa el impulso de salir de lo conocido,
+                    afrontar pruebas y aprender durante el camino. En una
+                    lectura puede ayudar a pensar qué desafío estamos
+                    preparados para enfrentar y qué recursos necesitamos
+                    desarrollar.
+                </p>
+                <div class="cita">¿Qué paso puedo dar, aunque todavía no tenga todas las respuestas?</div>
+            </article>
 
-        <p>
-            Explora el lenguaje psicológico de los arquetipos, utiliza
-            el Tarot para reflexionar sobre tu camino profesional y
-            descubre la relación simbólica entre los números y las cartas.
-        </p>
+            <article class="bloque">
+                <span class="etiqueta">Lo que evitamos</span>
+                <h3>La sombra</h3>
+                <p>
+                    La sombra puede entenderse como aquello que nos cuesta
+                    reconocer: inseguridades, impulsos, necesidades o aspectos
+                    propios que preferimos ocultar. Explorarla no significa
+                    juzgarse, sino observar los patrones que influyen en
+                    nuestras decisiones.
+                </p>
+                <div class="cita">¿Qué parte de esta situación me cuesta admitir?</div>
+            </article>
 
-        <a href="#psicologia" class="boton">COMENZAR EL RECORRIDO →</a>
+            <article class="bloque">
+                <span class="etiqueta">Cambio</span>
+                <h3>La transformación</h3>
+                <p>
+                    Las imágenes de cierre, ruptura y renovación permiten
+                    reflexionar sobre etapas que ya no funcionan. Transformarse
+                    no siempre significa abandonar todo: a veces consiste
+                    en cambiar una costumbre, una expectativa o una forma
+                    de relacionarse.
+                </p>
+                <div class="cita">¿Qué necesito dejar atrás y qué quiero conservar?</div>
+            </article>
+
+            <article class="bloque">
+                <span class="etiqueta">Protección</span>
+                <h3>El miedo</h3>
+                <p>
+                    El miedo puede advertir sobre un riesgo real, pero también
+                    puede crecer ante la incertidumbre. Una carta puede
+                    ayudar a distinguir entre hechos comprobables, escenarios
+                    imaginados y pasos concretos para sentirse mejor preparado.
+                </p>
+                <div class="cita">¿Qué sé con certeza y qué estoy suponiendo?</div>
+            </article>
+
+            <article class="bloque">
+                <span class="etiqueta">Motivación</span>
+                <h3>El deseo</h3>
+                <p>
+                    El deseo revela aquello que buscamos, valoramos o sentimos
+                    que nos falta. Puede orientar una decisión, pero conviene
+                    distinguir entre querer algo, necesitarlo y estar dispuesto
+                    a asumir las responsabilidades que implica.
+                </p>
+                <div class="cita">¿Qué quiero realmente y por qué es importante para mí?</div>
+            </article>
+
+            <article class="bloque">
+                <span class="etiqueta">Repetición y aprendizaje</span>
+                <h3>Los ciclos personales</h3>
+                <p>
+                    Las etapas de inicio, desarrollo, pausa y cierre aparecen
+                    en muchas experiencias. Reconocer un ciclo permite observar
+                    hábitos repetidos, identificar aprendizajes y decidir
+                    si conviene continuar, modificar el rumbo o comenzar
+                    de otra manera.
+                </p>
+                <div class="cita">¿Qué patrón se repite y qué puedo hacer diferente esta vez?</div>
+            </article>
+        </div>
     </div>
 </section>
 
-<section class="introduccion contenedor">
-    <span class="etiqueta">MÁS ALLÁ DEL SIGNIFICADO</span>
-    <h2>El Tarot como herramienta de reflexión</h2>
+<!-- TEMA 1B -->
+<section class="seccion" id="arquetipos">
+    <div class="contenedor">
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">02 / Interpretación psicológica</span>
+                <h2>Una carta, <span>varias preguntas.</span></h2>
+            </div>
+            <p>
+                La misma carta puede despertar reflexiones distintas según
+                la pregunta y la experiencia de quien consulta.
+            </p>
+        </div>
 
-    <p>
-        Una carta puede representar un conflicto, una oportunidad, un deseo
-        o una etapa de cambio. Aprender a interpretarla consiste en observar
-        sus símbolos, relacionarlos con una pregunta y construir una lectura
-        coherente. En este recorrido trabajaremos con el Tarot como lenguaje
-        simbólico, sin tomar sus interpretaciones como diagnósticos
-        psicológicos ni como predicciones infalibles.
-    </p>
+        <div class="dos-columnas">
+            <div class="texto-largo">
+                <p>
+                    Una lectura psicológica no busca afirmar qué piensa
+                    inconscientemente una persona ni definir quién es.
+                    Propone imágenes y preguntas para observar una experiencia
+                    desde otro ángulo.
+                </p>
+                <p>
+                    Por ejemplo, El Ermitaño puede abrir una conversación
+                    sobre la necesidad de espacio personal, pero no demuestra
+                    que alguien esté aislado. La Torre puede ayudar a pensar
+                    en una estructura que necesita revisión, pero no anuncia
+                    necesariamente una catástrofe.
+                </p>
+                <p>
+                    La diferencia está en usar el símbolo como una invitación
+                    a explorar, no como una sentencia.
+                </p>
+            </div>
+
+            <ul class="lista-claves">
+                <li><strong>Observá:</strong> ¿qué detalle de la carta llama tu atención?</li>
+                <li><strong>Relacioná:</strong> ¿qué situación concreta te recuerda?</li>
+                <li><strong>Cuestioná:</strong> ¿existe otra interpretación posible?</li>
+                <li><strong>Elegí:</strong> ¿qué acción útil podés tomar con lo aprendido?</li>
+                <li><strong>Contrastá:</strong> ¿qué hechos reales respaldan tu conclusión?</li>
+            </ul>
+        </div>
+
+        <div class="ejemplo">
+            <h3>Ejemplo de lectura reflexiva: La Fuerza</h3>
+            <p><strong>Pregunta:</strong> ¿Cómo puedo manejar mejor una situación que me frustra?</p>
+            <p><strong>Observación:</strong> la carta muestra una relación entre fuerza e instinto que no depende únicamente de imponerse.</p>
+            <p><strong>Reflexión:</strong> quizás la situación requiera paciencia, límites claros o una respuesta menos impulsiva.</p>
+            <p><strong>Acción posible:</strong> identificar qué desencadena la frustración, hacer una pausa y decidir cómo expresar la necesidad de forma concreta.</p>
+        </div>
+    </div>
 </section>
 
-<!-- MÓDULO 1 -->
-
-<section class="modulo contenedor" id="psicologia">
-
-    <div class="modulo-cabecera">
-        <span class="numero-modulo">01</span>
-        <div>
-            <span class="etiqueta">EL MUNDO INTERIOR</span>
-            <h2>Arquetipos y psicología del Tarot</h2>
-            <p class="subtitulo">
-                El héroe, la sombra, los deseos y los cambios personales:
-                una lectura simbólica de las experiencias humanas.
+<!-- TEMA 2 -->
+<section class="seccion" id="trabajo">
+    <div class="contenedor">
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">03 / Tarot del trabajo y el dinero</span>
+                <h2>Vocación, recursos <span>y decisiones.</span></h2>
+            </div>
+            <p>
+                Las cartas pueden organizar una reflexión sobre metas,
+                dificultades y alternativas. Las decisiones profesionales
+                y financieras también requieren datos y planificación.
             </p>
         </div>
+
+        <div class="bloques">
+            <article class="bloque">
+                <span class="etiqueta">Objetivos</span>
+                <h3>Dirección profesional</h3>
+                <p>
+                    Explorá qué querés conseguir, qué habilidades podés
+                    desarrollar y qué condiciones necesitás para acercarte
+                    a tu objetivo. Una meta clara permite convertir una
+                    intención general en pasos observables.
+                </p>
+            </article>
+
+            <article class="bloque">
+                <span class="etiqueta">Oportunidades</span>
+                <h3>Puertas que se abren</h3>
+                <p>
+                    Una lectura puede ayudarte a pensar dónde buscar,
+                    qué contactos fortalecer o qué propuesta merece
+                    investigación. Una carta favorable no garantiza
+                    una contratación ni confirma una oferta.
+                </p>
+            </article>
+
+            <article class="bloque">
+                <span class="etiqueta">Obstáculos</span>
+                <h3>Bloqueos y dificultades</h3>
+                <p>
+                    Los obstáculos pueden ser externos —tiempo, recursos,
+                    condiciones del mercado— o internos, como la inseguridad
+                    o la falta de organización. Separarlos ayuda a decidir
+                    qué puede cambiarse y qué requiere adaptación.
+                </p>
+            </article>
+
+            <article class="bloque">
+                <span class="etiqueta">Administración</span>
+                <h3>Dinero y recursos</h3>
+                <p>
+                    Reflexioná sobre ingresos, gastos, prioridades, ahorro
+                    y hábitos. El Tarot puede servir como disparador para
+                    revisar la relación con el dinero, pero no sustituye
+                    un presupuesto ni un análisis financiero.
+                </p>
+            </article>
+
+            <article class="bloque">
+                <span class="etiqueta">Elección</span>
+                <h3>Decisiones profesionales</h3>
+                <p>
+                    Si estás evaluando dos caminos, utilizá las cartas
+                    para formular preguntas sobre ventajas, riesgos,
+                    condiciones y valores personales. Compará después
+                    las opciones con información verificable.
+                </p>
+            </article>
+
+            <article class="bloque">
+                <span class="etiqueta">Desarrollo</span>
+                <h3>Talentos y habilidades</h3>
+                <p>
+                    Una lectura puede inspirar preguntas sobre lo que
+                    hacés bien, lo que disfrutás y aquello que necesitás
+                    aprender. Contrastá esas ideas con tu experiencia,
+                    tus resultados y las oportunidades reales disponibles.
+                </p>
+            </article>
+        </div>
     </div>
-
-    <div class="rejilla">
-
-        <article class="tarjeta">
-            <span class="simbolo">♙</span>
-            <h3>El viaje del héroe</h3>
-            <p>
-                El Loco representa el comienzo de una aventura: abandonar
-                lo conocido, aceptar la incertidumbre y avanzar hacia una
-                experiencia nueva. El viaje puede entenderse como una
-                metáfora del aprendizaje y del crecimiento personal.
-            </p>
-            <div class="detalle">
-                Para reflexionar: ¿qué paso nuevo estoy evitando dar?
-            </div>
-        </article>
-
-        <article class="tarjeta">
-            <span class="simbolo">☾</span>
-            <h3>La sombra</h3>
-            <p>
-                La Luna, El Diablo y otras cartas pueden ayudarnos a explorar
-                aquello que cuesta reconocer: inseguridades, hábitos,
-                contradicciones o emociones que preferimos evitar.
-                La sombra no significa que seamos personas malas.
-            </p>
-            <div class="detalle">
-                Para reflexionar: ¿qué parte de mí necesita ser escuchada?
-            </div>
-        </article>
-
-        <article class="tarjeta">
-            <span class="simbolo">✦</span>
-            <h3>La transformación</h3>
-            <p>
-                La Muerte simboliza el cierre de una etapa y la posibilidad
-                de renovación. La Torre puede representar la caída de una
-                estructura que ya no funciona. Ambas invitan a revisar
-                qué necesita cambiar.
-            </p>
-            <div class="detalle">
-                Para reflexionar: ¿qué necesito dejar atrás para avanzar?
-            </div>
-        </article>
-
-        <article class="tarjeta">
-            <span class="simbolo">◇</span>
-            <h3>El miedo</h3>
-            <p>
-                El Ocho de Espadas puede representar una sensación de
-                limitación; el Nueve de Espadas, la preocupación.
-                Estas imágenes permiten diferenciar los obstáculos
-                concretos de las interpretaciones que hacemos de ellos.
-            </p>
-            <div class="detalle">
-                Para reflexionar: ¿qué sé con certeza y qué estoy suponiendo?
-            </div>
-        </article>
-
-        <article class="tarjeta">
-            <span class="simbolo">♡</span>
-            <h3>El deseo</h3>
-            <p>
-                Los Enamorados, el As de Bastos y el Nueve de Copas pueden
-                abrir preguntas sobre la atracción, la motivación y la
-                satisfacción. El deseo no es solamente querer algo:
-                también implica descubrir por qué lo queremos.
-            </p>
-            <div class="detalle">
-                Para reflexionar: ¿esto responde a un deseo propio o a una expectativa ajena?
-            </div>
-        </article>
-
-        <article class="tarjeta">
-            <span class="simbolo">⟳</span>
-            <h3>Los ciclos personales</h3>
-            <p>
-                La Rueda de la Fortuna, El Ermitaño y El Mundo representan,
-                respectivamente, cambios de ciclo, introspección y cierre.
-                Sus símbolos pueden ayudarnos a reconocer cuándo actuar,
-                observar o concluir una etapa.
-            </p>
-            <div class="detalle">
-                Para reflexionar: ¿en qué etapa siento que estoy hoy?
-            </div>
-        </article>
-
-    </div>
-
-    <div class="ejercicio">
-        <h3>Ejercicio práctico · Un espejo simbólico</h3>
-        <p>
-            Elegí una carta de los Arcanos Mayores y observá la escena antes
-            de consultar su significado tradicional.
-        </p>
-        <ol>
-            <li>Describí lo primero que llama tu atención.</li>
-            <li>Identificá qué emoción te despierta la imagen.</li>
-            <li>Relacioná esa emoción con una situación actual.</li>
-            <li>Anotá una pregunta que te ayude a comprender mejor esa situación.</li>
-            <li>Escribí una acción concreta que dependa de vos.</li>
-        </ol>
-        <p class="pregunta">
-            Recordá: una carta propone preguntas; no define tu personalidad
-            ni determina tu futuro.
-        </p>
-    </div>
-
 </section>
 
-<!-- MÓDULO 2 -->
-
-<section class="modulo contenedor" id="trabajo">
-
-    <div class="modulo-cabecera">
-        <span class="numero-modulo">02</span>
-        <div>
-            <span class="etiqueta">RECURSOS Y PROPÓSITO</span>
-            <h2>Tarot del trabajo y el dinero</h2>
-            <p class="subtitulo">
-                Utilizá los símbolos de las cartas para ordenar ideas,
-                reconocer recursos y explorar decisiones profesionales
-                con una mirada práctica.
+<!-- TIRADAS -->
+<section class="seccion" id="tiradas">
+    <div class="contenedor">
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">04 / Métodos de lectura</span>
+                <h2>Tiradas para <span>la vida laboral.</span></h2>
+            </div>
+            <p>
+                Antes de sacar las cartas, formulá una pregunta concreta.
+                Elegí posiciones que ayuden a analizar el tema sin convertir
+                la lectura en una predicción rígida.
             </p>
         </div>
-    </div>
 
-    <div class="rejilla">
+        <div class="bloques">
+            <article class="bloque">
+                <span class="etiqueta">Tres cartas</span>
+                <h3>Objetivo y próximos pasos</h3>
+                <p><strong>1. Situación:</strong> ¿dónde estoy ahora respecto de mi objetivo?</p>
+                <p><strong>2. Recurso:</strong> ¿qué habilidad o apoyo puedo aprovechar?</p>
+                <p><strong>3. Acción:</strong> ¿cuál es un paso realista que puedo dar?</p>
+            </article>
 
-        <article class="tarjeta">
-            <span class="simbolo">♜</span>
-            <h3>Objetivos laborales</h3>
-            <p>
-                El Carro puede representar dirección y determinación;
-                el Ocho de Oros, aprendizaje y constancia. Estas cartas
-                permiten pensar qué objetivo perseguís y qué habilidades
-                necesitás desarrollar para acercarte a él.
-            </p>
-            <div class="detalle">
-                Pregunta guía: ¿cuál es mi siguiente paso profesional?
-            </div>
-        </article>
+            <article class="bloque">
+                <span class="etiqueta">Cuatro cartas</span>
+                <h3>Explorar un bloqueo</h3>
+                <p><strong>1. El problema:</strong> ¿qué dificultad quiero comprender?</p>
+                <p><strong>2. Lo controlable:</strong> ¿qué parte depende de mis decisiones?</p>
+                <p><strong>3. El apoyo:</strong> ¿qué recurso o ayuda puedo buscar?</p>
+                <p><strong>4. El siguiente paso:</strong> ¿qué puedo probar primero?</p>
+            </article>
 
-        <article class="tarjeta">
-            <span class="simbolo">✧</span>
-            <h3>Oportunidades</h3>
-            <p>
-                El As de Oros simboliza una posibilidad concreta; el Tres
-                de Bastos, expansión y planificación. La lectura puede
-                ayudarte a identificar alternativas que merecen
-                investigación, sin garantizar que vayan a materializarse.
-            </p>
-            <div class="detalle">
-                Pregunta guía: ¿qué opción vale la pena investigar?
-            </div>
-        </article>
+            <article class="bloque">
+                <span class="etiqueta">Cinco cartas</span>
+                <h3>Evaluar una oportunidad</h3>
+                <p><strong>1. Motivación:</strong> ¿qué me atrae de esta opción?</p>
+                <p><strong>2. Ventajas:</strong> ¿qué podría aportar a mi vida?</p>
+                <p><strong>3. Riesgos:</strong> ¿qué necesito verificar antes de aceptar?</p>
+                <p><strong>4. Condiciones:</strong> ¿qué información me falta?</p>
+                <p><strong>5. Decisión:</strong> ¿qué criterio será más importante para elegir?</p>
+            </article>
 
-        <article class="tarjeta">
-            <span class="simbolo">⚔</span>
-            <h3>Bloqueos y dificultades</h3>
-            <p>
-                El Ocho de Espadas puede invitar a revisar creencias
-                limitantes; el Cinco de Oros, preocupaciones relacionadas
-                con la escasez o la falta de apoyo. Contrastá siempre
-                la interpretación con los hechos de tu situación.
-            </p>
-            <div class="detalle">
-                Pregunta guía: ¿qué obstáculo puedo abordar primero?
-            </div>
-        </article>
+            <article class="bloque">
+                <span class="etiqueta">Cuatro cartas</span>
+                <h3>Ordenar las finanzas</h3>
+                <p><strong>1. Hábito actual:</strong> ¿qué patrón quiero revisar?</p>
+                <p><strong>2. Prioridad:</strong> ¿qué gasto o necesidad requiere atención?</p>
+                <p><strong>3. Recurso:</strong> ¿qué herramienta práctica puedo utilizar?</p>
+                <p><strong>4. Plan:</strong> ¿qué cambio pequeño puedo mantener?</p>
+            </article>
+        </div>
 
-        <article class="tarjeta">
-            <span class="simbolo">◎</span>
-            <h3>Administración de recursos</h3>
-            <p>
-                El Cuatro de Oros habla simbólicamente de conservación
-                y control; el Seis de Oros, de intercambio y equilibrio.
-                Son puntos de partida para revisar hábitos de gasto,
-                prioridades y distribución del tiempo y la energía.
-            </p>
-            <div class="detalle">
-                Pregunta guía: ¿cómo estoy utilizando lo que tengo?
-            </div>
-        </article>
-
-        <article class="tarjeta">
-            <span class="simbolo">♔</span>
-            <h3>Decisiones profesionales</h3>
-            <p>
-                La Justicia invita a comparar consecuencias y criterios;
-                El Emperador, a evaluar estructura y responsabilidades.
-                Una lectura puede organizar los factores de una decisión,
-                pero no reemplaza el análisis de contratos, ingresos o riesgos.
-            </p>
-            <div class="detalle">
-                Pregunta guía: ¿qué información me falta para decidir?
-            </div>
-        </article>
-
-        <article class="tarjeta">
-            <span class="simbolo">✦</span>
-            <h3>Talentos y fortalezas</h3>
-            <p>
-                El Mago simboliza iniciativa y capacidad de utilizar
-                herramientas; la Reina de Bastos, confianza y creatividad.
-                Explorá qué habilidades ya poseés y cómo podrías aplicarlas
-                en tu trabajo o en un proyecto propio.
-            </p>
-            <div class="detalle">
-                Pregunta guía: ¿qué sé hacer y cómo puedo aprovecharlo?
-            </div>
-        </article>
-
-    </div>
-
-    <div class="tirada">
-        <h3>Tirada de cinco cartas · Camino profesional</h3>
-        <p class="subtitulo">
-            Formulá una pregunta abierta, por ejemplo: «¿Qué puedo revisar
-            para avanzar en mi situación laboral?».
-        </p>
-
-        <div class="posiciones">
-            <div class="posicion"><strong>01</strong>Situación actual</div>
-            <div class="posicion"><strong>02</strong>Fortaleza disponible</div>
-            <div class="posicion"><strong>03</strong>Obstáculo a revisar</div>
-            <div class="posicion"><strong>04</strong>Opción por explorar</div>
-            <div class="posicion"><strong>05</strong>Próximo paso concreto</div>
+        <div class="consejo">
+            <strong>Importante:</strong> no tomes una carta como garantía
+            de empleo, ganancia o pérdida. Para decidir sobre contratos,
+            deudas, inversiones o cambios laborales, revisá también los
+            números, las condiciones y los riesgos reales.
         </div>
     </div>
-
-    <div class="tirada">
-        <h3>Tirada de cuatro cartas · Relación con el dinero</h3>
-        <div class="posiciones">
-            <div class="posicion"><strong>01</strong>Hábitos actuales</div>
-            <div class="posicion"><strong>02</strong>Recursos disponibles</div>
-            <div class="posicion"><strong>03</strong>Área que necesita atención</div>
-            <div class="posicion"><strong>04</strong>Acción para mejorar la organización</div>
-        </div>
-    </div>
-
-    <div class="ejercicio">
-        <h3>Del símbolo a la acción</h3>
-        <p>
-            Después de cada tirada, escribí una conclusión práctica.
-            Si una carta te sugiere organización, por ejemplo, podés revisar
-            tu presupuesto o armar una lista de prioridades.
-        </p>
-        <p class="pregunta">
-            Importante: no tomes decisiones financieras, inversiones o
-            renuncias laborales basándote únicamente en las cartas.
-            Utilizá información verificable y evaluá los riesgos reales.
-        </p>
-    </div>
-
 </section>
 
-<!-- MÓDULO 3 -->
+<!-- PREGUNTAS DE TRABAJO -->
+<section class="seccion" id="preguntas-trabajo">
+    <div class="contenedor">
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">05 / Formular mejores preguntas</span>
+                <h2>Preguntar para <span>comprender.</span></h2>
+            </div>
+            <p>
+                Las preguntas abiertas ayudan a identificar alternativas
+                y acciones. Evitá preguntas que entreguen toda tu decisión
+                a una respuesta de las cartas.
+            </p>
+        </div>
 
-<section class="modulo contenedor" id="numerologia">
+        <div class="preguntas">
+            <article class="pregunta">
+                <strong>En vez de...</strong>
+                <p>«¿Voy a conseguir trabajo este mes?»</p>
+                <p><strong>Probá:</strong> «¿Qué puedo mejorar en mi búsqueda laboral durante este mes?»</p>
+            </article>
 
-    <div class="modulo-cabecera">
-        <span class="numero-modulo">03</span>
-        <div>
-            <span class="etiqueta">EL LENGUAJE DE LOS NÚMEROS</span>
-            <h2>Numerología aplicada al Tarot</h2>
-            <p class="subtitulo">
-                Los números permiten reconocer patrones dentro de los
-                Arcanos Menores. Del comienzo del As a la culminación
-                del Diez, cada etapa ofrece una clave interpretativa.
+            <article class="pregunta">
+                <strong>En vez de...</strong>
+                <p>«¿Esta oportunidad me hará rico?»</p>
+                <p><strong>Probá:</strong> «¿Qué condiciones y riesgos debería evaluar antes de aceptar?»</p>
+            </article>
+
+            <article class="pregunta">
+                <strong>En vez de...</strong>
+                <p>«¿Debo renunciar ahora mismo?»</p>
+                <p><strong>Probá:</strong> «¿Qué factores necesito comparar antes de decidir si cambio de trabajo?»</p>
+            </article>
+
+            <article class="pregunta">
+                <strong>En vez de...</strong>
+                <p>«¿Mi negocio va a funcionar?»</p>
+                <p><strong>Probá:</strong> «¿Qué aspectos de mi proyecto necesitan planificación o comprobación?»</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- TEMA 3 -->
+<section class="seccion" id="numerologia">
+    <div class="contenedor">
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">06 / Numerología aplicada al Tarot</span>
+                <h2>El lenguaje <span>de los números.</span></h2>
+            </div>
+            <p>
+                En los Arcanos Menores, el número aporta una estructura
+                simbólica y el palo indica el ámbito de experiencia.
+                La interpretación surge de combinarlos.
+            </p>
+        </div>
+
+        <div class="texto-largo">
+            <p>
+                La numerología del Tarot es una herramienta interpretativa,
+                no una fórmula científica para predecir acontecimientos.
+                Los significados varían entre escuelas, autores y barajas.
+                La siguiente guía presenta asociaciones habituales que
+                podés utilizar como punto de partida.
+            </p>
+        </div>
+
+        <div class="tarjetas-numeros">
+            <article class="numero-card">
+                <div class="numero">1</div>
+                <h3>Inicio</h3>
+                <p>Semilla, potencial, impulso y una posibilidad que comienza.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">2</div>
+                <h3>Dualidad</h3>
+                <p>Elección, cooperación, contraste y búsqueda de equilibrio.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">3</div>
+                <h3>Expansión</h3>
+                <p>Desarrollo, expresión, colaboración y primeras manifestaciones.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">4</div>
+                <h3>Estructura</h3>
+                <p>Estabilidad, orden, límites y construcción de una base.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">5</div>
+                <h3>Tensión</h3>
+                <p>Desafío, cambio, conflicto o necesidad de adaptación.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">6</div>
+                <h3>Armonización</h3>
+                <p>Cooperación, ajuste, intercambio y recuperación del equilibrio.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">7</div>
+                <h3>Evaluación</h3>
+                <p>Prueba, estrategia, reflexión y revisión del progreso.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">8</div>
+                <h3>Dominio</h3>
+                <p>Práctica, movimiento, disciplina y desarrollo de capacidades.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">9</div>
+                <h3>Maduración</h3>
+                <p>Experiencia, culminación próxima e integración de aprendizajes.</p>
+            </article>
+            <article class="numero-card">
+                <div class="numero">10</div>
+                <h3>Culminación</h3>
+                <p>Resultado de un ciclo, plenitud o transición hacia otra etapa.</p>
+            </article>
+        </div>
+
+        <div class="ejemplo">
+            <h3>Cómo interpretar un número en contexto</h3>
+            <p>
+                El <strong>cinco</strong> suele introducir tensión o desafío,
+                pero no significa exactamente lo mismo en todos los palos.
+                En Bastos puede relacionarse con competencia; en Copas,
+                con decepción o atención puesta en lo perdido; en Espadas,
+                con conflicto; y en Oros, con inseguridad material.
+            </p>
+            <p>
+                El número propone una dinámica. El palo muestra el ámbito
+                donde esa dinámica puede expresarse. La pregunta y las cartas
+                cercanas completan la interpretación.
             </p>
         </div>
     </div>
+</section>
 
-    <h3 style="font-size:1.5rem;font-weight:400;margin-bottom:20px;">
-        El recorrido del 1 al 10
-    </h3>
+<!-- NÚMEROS Y PALOS -->
+<section class="seccion" id="palos">
+    <div class="contenedor">
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">07 / Integración</span>
+                <h2>Un número, <span>cuatro expresiones.</span></h2>
+            </div>
+            <p>
+                Los palos orientan la lectura hacia distintas áreas:
+                energía y acción, emociones y vínculos, pensamiento
+                y conflicto, o recursos y mundo material.
+            </p>
+        </div>
 
-    <div class="numero-grid">
+        <div class="tabla-wrap">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Bastos</th>
+                        <th>Copas</th>
+                        <th>Espadas</th>
+                        <th>Oros</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>As · Inicio</td>
+                        <td>Impulso creativo</td>
+                        <td>Apertura emocional</td>
+                        <td>Idea o claridad</td>
+                        <td>Oportunidad concreta</td>
+                    </tr>
+                    <tr>
+                        <td>Dos · Elección</td>
+                        <td>Planificar una acción</td>
+                        <td>Conexión o afinidad</td>
+                        <td>Indecisión o equilibrio mental</td>
+                        <td>Administrar prioridades</td>
+                    </tr>
+                    <tr>
+                        <td>Tres · Expansión</td>
+                        <td>Proyección y crecimiento</td>
+                        <td>Celebración o apoyo</td>
+                        <td>Dolor o verdad difícil</td>
+                        <td>Trabajo compartido</td>
+                    </tr>
+                    <tr>
+                        <td>Cuatro · Estructura</td>
+                        <td>Celebrar un logro</td>
+                        <td>Estabilidad afectiva</td>
+                        <td>Descanso mental</td>
+                        <td>Conservar recursos</td>
+                    </tr>
+                    <tr>
+                        <td>Cinco · Tensión</td>
+                        <td>Competencia</td>
+                        <td>Decepción o pérdida percibida</td>
+                        <td>Conflicto</td>
+                        <td>Preocupación material</td>
+                    </tr>
+                    <tr>
+                        <td>Seis · Ajuste</td>
+                        <td>Reconocimiento</td>
+                        <td>Recuerdo y afecto</td>
+                        <td>Transición mental</td>
+                        <td>Dar y recibir ayuda</td>
+                    </tr>
+                    <tr>
+                        <td>Siete · Evaluación</td>
+                        <td>Defender una posición</td>
+                        <td>Opciones y fantasías</td>
+                        <td>Estrategia o cautela</td>
+                        <td>Paciencia y evaluación</td>
+                    </tr>
+                    <tr>
+                        <td>Ocho · Desarrollo</td>
+                        <td>Movimiento y rapidez</td>
+                        <td>Retirada o búsqueda interior</td>
+                        <td>Restricción mental</td>
+                        <td>Práctica y oficio</td>
+                    </tr>
+                    <tr>
+                        <td>Nueve · Maduración</td>
+                        <td>Resistencia</td>
+                        <td>Satisfacción emocional</td>
+                        <td>Preocupación</td>
+                        <td>Independencia material</td>
+                    </tr>
+                    <tr>
+                        <td>Diez · Culminación</td>
+                        <td>Responsabilidades acumuladas</td>
+                        <td>Plenitud compartida</td>
+                        <td>Cierre difícil</td>
+                        <td>Legado y estabilidad</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <article class="numero-card">
-            <strong>1</strong>
-            <h3>Inicio</h3>
-            <p>Potencial, semilla, impulso y oportunidad.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>2</strong>
-            <h3>Dualidad</h3>
-            <p>Elección, equilibrio, vínculo y contraste.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>3</strong>
-            <h3>Expansión</h3>
-            <p>Desarrollo, expresión y primera manifestación.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>4</strong>
-            <h3>Estructura</h3>
-            <p>Estabilidad, orden, base y consolidación.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>5</strong>
-            <h3>Conflicto</h3>
-            <p>Cambio, tensión, desafío y adaptación.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>6</strong>
-            <h3>Armonía</h3>
-            <p>Intercambio, ajuste, cooperación y recuperación.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>7</strong>
-            <h3>Evaluación</h3>
-            <p>Prueba, estrategia, búsqueda y perseverancia.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>8</strong>
-            <h3>Movimiento</h3>
-            <p>Dominio, trabajo, ritmo y desarrollo.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>9</strong>
-            <h3>Maduración</h3>
-            <p>Experiencia, culminación individual y balance.</p>
-        </article>
-
-        <article class="numero-card">
-            <strong>10</strong>
-            <h3>Culminación</h3>
-            <p>Resultado, ciclo completo y transición hacia otra etapa.</p>
-        </article>
-
-    </div>
-
-    <div class="ejercicio">
-        <h3>Cómo usar esta secuencia</h3>
-        <p>
-            Cuando aparezcan varios números del mismo palo, observá
-            si describen una progresión: una idea que comienza, una
-            dificultad que surge, un esfuerzo que madura y un resultado
-            que cierra una etapa. El contexto de la pregunta y el
-            significado particular de cada carta siguen siendo esenciales.
+        <p class="nota">
+            Esta tabla resume asociaciones frecuentes en la tradición
+            Rider–Waite–Smith. No es una regla universal: los significados
+            pueden variar según la baraja, la escuela y el contexto.
         </p>
     </div>
+</section>
 
-    <h3 style="font-size:1.5rem;font-weight:400;margin:45px 0 15px;">
-        Los números maestros como referencia simbólica
-    </h3>
-
-    <div class="rejilla">
-
-        <article class="tarjeta">
-            <span class="simbolo">11</span>
-            <h3>El once</h3>
+<!-- NÚMEROS MAESTROS -->
+<section class="seccion" id="maestros">
+    <div class="contenedor">
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">08 / Referencias simbólicas</span>
+                <h2>Los números <span>maestros.</span></h2>
+            </div>
             <p>
-                En algunas corrientes numerológicas, el 11 se asocia
-                con intuición, inspiración y percepción. Podés usarlo
-                como invitación a observar tus ideas y contrastarlas
-                con la realidad.
+                En algunas corrientes numerológicas, el 11, el 22 y el 33
+                se consideran números maestros. Se pueden usar como
+                referencias complementarias, sin reemplazar el sistema
+                numérico propio de las cartas.
             </p>
-        </article>
+        </div>
 
-        <article class="tarjeta">
-            <span class="simbolo">22</span>
-            <h3>El veintidós</h3>
-            <p>
-                Suele relacionarse con construcción y materialización
-                de proyectos. Como símbolo, propone pensar cómo llevar
-                una visión a un plan organizado y sostenible.
-            </p>
-        </article>
+        <div class="bloques">
+            <article class="bloque">
+                <span class="numero-seccion">11</span>
+                <h3>Intuición y conciencia</h3>
+                <p>
+                    Suele asociarse con sensibilidad, inspiración y percepción.
+                    Como pregunta reflexiva: ¿qué estoy percibiendo y qué
+                    necesito comprobar antes de sacar una conclusión?
+                </p>
+            </article>
 
-        <article class="tarjeta">
-            <span class="simbolo">33</span>
-            <h3>El treinta y tres</h3>
-            <p>
-                Algunas tradiciones lo vinculan con servicio, enseñanza
-                y compasión. Puede inspirar preguntas sobre cómo compartir
-                conocimientos y contribuir al bienestar colectivo.
-            </p>
-        </article>
+            <article class="bloque">
+                <span class="numero-seccion">22</span>
+                <h3>Construcción y propósito</h3>
+                <p>
+                    Se vincula simbólicamente con convertir una visión
+                    en algo concreto. Puede invitar a revisar qué estructura,
+                    recursos y constancia necesita un proyecto.
+                </p>
+            </article>
 
-        <article class="tarjeta">
-            <span class="simbolo">∞</span>
-            <h3>Una aclaración importante</h3>
-            <p>
-                Los números maestros pertenecen a determinadas corrientes
-                de numerología; no son una categoría universal del Tarot.
-                En los Arcanos Menores, las cartas numeradas llegan del As
-                al Diez. La relación con 11, 22 y 33 es interpretativa.
-            </p>
-        </article>
-
+            <article class="bloque bloque-grande">
+                <div>
+                    <span class="numero-seccion">33</span>
+                    <h3>Servicio y responsabilidad</h3>
+                </div>
+                <div>
+                    <p>
+                        En ciertas escuelas representa cuidado, enseñanza
+                        y responsabilidad hacia otras personas. Como reflexión,
+                        puede abrir preguntas sobre cómo ayudar sin descuidar
+                        los propios límites.
+                    </p>
+                    <div class="cita">
+                        Los números maestros pertenecen a determinadas
+                        tradiciones numerológicas. No constituyen una
+                        categoría estándar de los Arcanos Menores ni deben
+                        confundirse con sus números del As al Diez.
+                    </div>
+                </div>
+            </article>
+        </div>
     </div>
+</section>
 
-    <h3 style="font-size:1.5rem;font-weight:400;margin:45px 0 15px;">
-        Los números y los cuatro palos
-    </h3>
+<!-- MÉTODO -->
+<section class="seccion" id="metodo">
+    <div class="contenedor">
+        <div class="encabezado">
+            <div>
+                <span class="sobrelinea">09 / Método de estudio</span>
+                <h2>Cómo integrar <span>los tres enfoques.</span></h2>
+            </div>
+            <p>
+                Una manera sencilla de practicar es combinar el símbolo,
+                la pregunta personal y la dinámica numérica de la carta.
+            </p>
+        </div>
 
-    <p class="subtitulo">
-        El número aporta una etapa simbólica; el palo indica el área
-        de experiencia en la que esa etapa se expresa.
-    </p>
+        <div class="pasos">
+            <article class="paso">
+                <h3>Definí el tema</h3>
+                <p>
+                    Elegí una situación concreta. Por ejemplo: «Quiero
+                    organizar mejor mi búsqueda laboral» o «Quiero comprender
+                    por qué repito una misma reacción».
+                </p>
+            </article>
 
-    <div class="tabla-contenedor">
-        <table>
-            <thead>
-                <tr>
-                    <th>Palo</th>
-                    <th>Elemento tradicional</th>
-                    <th>Área simbólica</th>
-                    <th>Ejemplo del número 5</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Bastos</td>
-                    <td>Fuego</td>
-                    <td>Acción, energía y creatividad</td>
-                    <td>Competencia o tensión en la acción</td>
-                </tr>
-                <tr>
-                    <td>Copas</td>
-                    <td>Agua</td>
-                    <td>Emociones y vínculos</td>
-                    <td>Conflicto emocional o decepción</td>
-                </tr>
-                <tr>
-                    <td>Espadas</td>
-                    <td>Aire</td>
-                    <td>Pensamiento y comunicación</td>
-                    <td>Desacuerdo o enfrentamiento</td>
-                </tr>
-                <tr>
-                    <td>Oros</td>
-                    <td>Tierra</td>
-                    <td>Recursos y mundo material</td>
-                    <td>Inseguridad o dificultades materiales</td>
-                </tr>
-            </tbody>
-        </table>
+            <article class="paso">
+                <h3>Observá la carta</h3>
+                <p>
+                    Describí la escena sin interpretarla de inmediato.
+                    Después identificá el arquetipo, el número y el palo
+                    que aparecen.
+                </p>
+            </article>
+
+            <article class="paso">
+                <h3>Convertí la idea en acción</h3>
+                <p>
+                    Escribí una reflexión y elegí un paso verificable:
+                    revisar un presupuesto, pedir información, practicar
+                    una habilidad o cambiar un hábito.
+                </p>
+            </article>
+        </div>
+
+        <div class="ejemplo">
+            <h3>Ejemplo integrador: Ocho de Oros</h3>
+            <p><strong>Número:</strong> el ocho puede sugerir práctica, disciplina y desarrollo de capacidades.</p>
+            <p><strong>Palo:</strong> Oros orienta la lectura hacia el trabajo, los recursos y los resultados concretos.</p>
+            <p><strong>Arquetipo:</strong> la persona que aprende mediante la constancia y mejora su oficio.</p>
+            <p><strong>Pregunta personal:</strong> «¿Qué habilidad me conviene practicar regularmente para avanzar hacia mi objetivo?»</p>
+            <p><strong>Acción:</strong> establecer un horario de aprendizaje y evaluar el progreso al final de la semana.</p>
+        </div>
     </div>
-
-    <div class="ejercicio">
-        <h3>Ejercicio práctico · Número + palo</h3>
-        <p>
-            Compará el Cinco de Bastos, el Cinco de Copas, el Cinco de
-            Espadas y el Cinco de Oros. Todos comparten el número cinco,
-            asociado aquí con tensión o desafío, pero cada palo expresa
-            esa tensión de una manera diferente.
-        </p>
-        <ol>
-            <li>Identificá el significado tradicional de cada carta.</li>
-            <li>Buscá qué tienen en común.</li>
-            <li>Explicá qué cambia al pasar de un palo a otro.</li>
-            <li>Construí una interpretación breve para una pregunta concreta.</li>
-        </ol>
-    </div>
-
 </section>
 
 <!-- CIERRE -->
-
 <section class="cierre">
-    <div class="contenedor">
-        <span class="etiqueta">ASTRO ROJO · PRÁCTICA Y REFLEXIÓN</span>
-        <h2>El conocimiento comienza con una pregunta.</h2>
+    <div class="contenedor cierre-interior">
+        <span class="sobrelinea">Fin del estudio II</span>
+        <h2>Comprender el símbolo.<br><span>Elegir con conciencia.</span></h2>
         <p>
-            Estudiar el Tarot es aprender a observar símbolos, reconocer
-            matices y construir interpretaciones responsables. La práctica
-            constante transforma los significados aislados en un lenguaje
-            que podés explorar con criterio propio.
+            El Tarot ofrece un lenguaje para observar preguntas, posibilidades
+            y patrones. Su práctica gana profundidad cuando se combina con
+            reflexión honesta, información concreta y responsabilidad personal.
         </p>
 
-        <a href="index4.html" class="boton">IR A EJERCICIOS →</a>
+        <nav class="navegacion">
+            <a href="../index.html">Volver al inicio</a>
+            <a href="index.html">Estudio I · Fundamentos</a>
+            <a href="index3.html">Continuar con el curso →</a>
+        </nav>
     </div>
 </section>
 
 </main>
 
 <footer>
-    <div class="contenedor">
-        <span>ASTRO ROJO</span> · ESTUDIO DEL TAROT
-    </div>
+    <p>ASTRO ROJO · Estudio del Tarot, sus símbolos y sus posibilidades de interpretación.</p>
 </footer>
 
 </body>
