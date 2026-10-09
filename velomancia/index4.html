@@ -2,14 +2,290 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#10070b">
-    <meta name="description" content="ASTRO ROJO — Curso de Velomancia. Aprende correspondencias, colores, lecturas con velas, fases lunares e interpretaciones simbólicas.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10070b">
+<meta name="description" content="ASTRO ROJO — Curso de Velomancia. Correspondencias, colores, lecturas con velas y fases lunares.">
 
-    <title>ASTRO ROJO — Curso de Velomancia</title>
+<title>ASTRO ROJO — Curso de Velomancia</title>
 
-    <link rel="stylesheet" href="style.css">
+<style>
+:root {
+    --fondo: #10070b;
+    --fondo-secundario: #190a10;
+    --rojo: #e21b3c;
+    --rojo-oscuro: #7c1028;
+    --blanco: #f5edef;
+    --gris: #b9a8ae;
+    --borde: rgba(226, 27, 60, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at top, #35101c 0%, transparent 48%),
+        var(--fondo);
+    color: var(--blanco);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+}
+
+.container {
+    width: min(1100px, 90%);
+    margin: 0 auto;
+}
+
+/* ENCABEZADO */
+
+.encabezado {
+    min-height: 470px;
+    padding: 100px 20px 85px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid var(--borde);
+}
+
+.encabezado::before {
+    content: "☾";
+    position: absolute;
+    top: 30px;
+    right: 8%;
+    color: rgba(226, 27, 60, 0.18);
+    font-size: 110px;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.etiqueta,
+.numero-seccion {
+    color: var(--rojo);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.encabezado h1 {
+    margin: 25px 0;
+    font-size: clamp(38px, 7vw, 76px);
+    line-height: 1.08;
+    letter-spacing: 3px;
+    font-weight: 900;
+}
+
+.encabezado h1 span {
+    display: block;
+    color: var(--rojo);
+}
+
+.subtitulo {
+    max-width: 650px;
+    color: var(--gris);
+    font-size: 16px;
+}
+
+/* INTRODUCCIÓN */
+
+.introduccion {
+    margin: 55px 0 65px;
+    padding: 35px;
+    border-left: 3px solid var(--rojo);
+    background: linear-gradient(110deg, rgba(124, 16, 40, 0.20), transparent);
+}
+
+.introduccion h2 {
+    margin: 12px 0;
+    font-size: clamp(24px, 4vw, 34px);
+}
+
+.introduccion p {
+    color: var(--gris);
+    max-width: 850px;
+}
+
+/* MÓDULOS */
+
+.modulos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.modulo {
+    padding: 30px;
+    background: linear-gradient(145deg, #1d0b12, #13090d);
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.modulo::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 65px;
+    background: var(--rojo);
+}
+
+.modulo:hover {
+    transform: translateY(-4px);
+    border-color: rgba(226, 27, 60, 0.65);
+}
+
+.modulo h2 {
+    margin: 14px 0 20px;
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+.modulo ul {
+    list-style: none;
+}
+
+.modulo li {
+    position: relative;
+    padding: 10px 0 10px 20px;
+    color: var(--gris);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    font-size: 14px;
+}
+
+.modulo li:last-child {
+    border-bottom: none;
+}
+
+.modulo li::before {
+    content: "◆";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    color: var(--rojo);
+    font-size: 8px;
+}
+
+/* TRABAJO FINAL */
+
+.cierre {
+    margin: 65px 0;
+    padding: 45px 35px;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at center, rgba(124, 16, 40, 0.3), transparent 75%),
+        #16090e;
+    border: 1px solid var(--borde);
+}
+
+.cierre h2 {
+    margin: 15px 0;
+    font-size: clamp(25px, 4vw, 36px);
+}
+
+.cierre p {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--gris);
+}
+
+/* PIE DE PÁGINA */
+
+.pie {
+    padding: 30px 15px;
+    text-align: center;
+    border-top: 1px solid var(--borde);
+}
+
+.pie p {
+    color: var(--rojo);
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+.pie span {
+    display: block;
+    margin-top: 8px;
+    color: var(--gris);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+/* MÓVILES */
+
+@media (max-width: 760px) {
+    .container {
+        width: 92%;
+    }
+
+    .encabezado {
+        min-height: 390px;
+        padding: 85px 12px 60px;
+    }
+
+    .encabezado::before {
+        font-size: 75px;
+        right: 3%;
+        top: 20px;
+    }
+
+    .encabezado h1 {
+        letter-spacing: 1px;
+    }
+
+    .subtitulo {
+        font-size: 14px;
+    }
+
+    .introduccion {
+        margin: 35px 0 40px;
+        padding: 24px 20px;
+    }
+
+    .modulos {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .modulo {
+        padding: 25px 22px;
+    }
+
+    .modulo h2 {
+        font-size: 22px;
+    }
+
+    .cierre {
+        margin: 40px 0;
+        padding: 35px 22px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .modulo {
+        transition: none;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -25,23 +301,22 @@
         </h1>
 
         <p class="subtitulo">
-            El lenguaje simbólico de las velas, sus colores y sus formas.
-            Aprende a observar, interpretar y registrar cada lectura.
+            Descubrí el lenguaje simbólico de las velas, sus colores,
+            las lecturas tradicionales y su relación con los ciclos lunares.
         </p>
     </header>
 
     <section class="introduccion">
         <span class="numero-seccion">01 — FUNDAMENTOS</span>
 
-        <h2>Comprender el arte de las velas</h2>
+        <h2>El lenguaje simbólico de las velas</h2>
 
         <p>
-            La velomancia es una práctica de interpretación simbólica
-            que observa elementos como la llama, la cera, el pabilo
-            y el humo. En este curso aprenderás sus asociaciones
-            tradicionales y diferentes formas de realizar lecturas,
-            sin confundir los símbolos con hechos comprobados
-            ni con predicciones infalibles.
+            Conocé las principales tradiciones de la velomancia y aprendé
+            a observar los colores, las llamas, la cera y las combinaciones
+            de velas. El objetivo es comprender sus interpretaciones
+            simbólicas sin confundirlas con hechos demostrados o predicciones
+            infalibles.
         </p>
     </section>
 
@@ -50,177 +325,170 @@
         <article class="modulo">
             <span class="numero-seccion">02 — CORRESPONDENCIAS</span>
             <h2>Correspondencias de las velas</h2>
-
             <ul>
-                <li>Qué son las correspondencias en la velomancia.</li>
-                <li>Colores y significados tradicionales.</li>
-                <li>Cómo elegir una vela según la intención.</li>
-                <li>Diferencias entre simbolismo, creencias y afirmaciones no comprobadas.</li>
-                <li>Velas rituales, decorativas y aromáticas: diferencias de uso.</li>
-                <li>Cómo combinar intención, color y contexto.</li>
-                <li>Errores frecuentes al asignar significados a una vela.</li>
+                <li>Qué son las correspondencias tradicionales.</li>
+                <li>Relación entre el color, la intención y el simbolismo.</li>
+                <li>Cómo elegir una vela según el propósito personal.</li>
+                <li>Diferencias entre tradición simbólica y afirmaciones no comprobadas.</li>
+                <li>Cómo combinar distintos significados sin caer en contradicciones.</li>
+                <li>Errores frecuentes al interpretar las correspondencias.</li>
             </ul>
         </article>
 
         <article class="modulo">
-            <span class="numero-seccion">03 — EL SIGNIFICADO DE LOS COLORES</span>
-            <h2>El lenguaje cromático</h2>
-
+            <span class="numero-seccion">03 — COLORES</span>
+            <h2>El significado de cada color</h2>
             <ul>
-                <li>Vela blanca: claridad, paz y renovación.</li>
-                <li>Vela roja: pasión, fuerza y determinación.</li>
-                <li>Vela rosa: afecto, ternura y amor propio.</li>
-                <li>Vela verde: crecimiento, equilibrio y prosperidad.</li>
-                <li>Vela amarilla: creatividad, aprendizaje y confianza.</li>
-                <li>Vela azul: serenidad, comunicación y reflexión.</li>
-                <li>Vela violeta: introspección, transformación y espiritualidad.</li>
-                <li>Vela negra: límites, cierre de ciclos y protección simbólica.</li>
-                <li>Velas de otros colores y sus asociaciones tradicionales.</li>
-                <li>Cómo seleccionar un color cuando existen varias intenciones.</li>
-                <li>Combinación de dos o más colores.</li>
+                <li>Velas blancas: paz, claridad y renovación.</li>
+                <li>Velas rojas: pasión, energía y determinación.</li>
+                <li>Velas rosas: afecto, ternura y amor propio.</li>
+                <li>Velas verdes: crecimiento, equilibrio y prosperidad.</li>
+                <li>Velas amarillas: creatividad, estudio y confianza.</li>
+                <li>Velas azules: serenidad, reflexión y comunicación.</li>
+                <li>Velas violetas: transformación e introspección.</li>
+                <li>Velas negras: límites, cierre de ciclos y protección simbólica.</li>
+                <li>Cómo seleccionar un color cuando hay varias intenciones.</li>
+                <li>Combinación de colores y sus asociaciones tradicionales.</li>
             </ul>
         </article>
 
         <article class="modulo">
             <span class="numero-seccion">04 — OBSERVACIÓN</span>
-            <h2>Los elementos de una vela</h2>
-
+            <h2>La llama, la cera y el pabilo</h2>
             <ul>
-                <li>La llama: forma, altura, estabilidad y movimiento.</li>
-                <li>La cera: derretimiento, acumulaciones y recorrido.</li>
-                <li>El pabilo: posición, curvatura y residuos.</li>
-                <li>El humo: aparición, cantidad y dirección aparente.</li>
-                <li>La duración de la combustión.</li>
-                <li>Velas que se apagan o presentan dificultades al arder.</li>
-                <li>Cómo distinguir una señal simbólica de una causa física.</li>
-                <li>Cómo observar sin interpretar cada detalle de manera aislada.</li>
+                <li>La llama alta, baja, estable o inquieta.</li>
+                <li>Movimientos de la llama y posibles causas físicas.</li>
+                <li>Formas, recorridos y acumulaciones de cera.</li>
+                <li>Curvaturas, divisiones y residuos del pabilo.</li>
+                <li>Humo, hollín y cambios durante la combustión.</li>
+                <li>Velas que se apagan o se consumen de forma irregular.</li>
+                <li>Cómo distinguir una observación de una interpretación simbólica.</li>
             </ul>
         </article>
 
         <article class="modulo">
-            <span class="numero-seccion">05 — LECTURAS BÁSICAS</span>
-            <h2>Cómo interpretar una, dos y tres velas</h2>
-
+            <span class="numero-seccion">05 — LECTURAS</span>
+            <h2>Lectura de una sola vela</h2>
             <ul>
-                <li>Preparación del espacio y definición de la intención.</li>
-                <li>Lectura de una sola vela: una intención y sus símbolos.</li>
-                <li>Lectura de dos velas: comparación y relación simbólica.</li>
-                <li>Lectura de tres velas: situación, proceso y posible evolución.</li>
-                <li>Cómo distribuir las velas antes de comenzar.</li>
-                <li>Qué observar durante cada etapa de la combustión.</li>
-                <li>Cómo interpretar diferencias entre varias velas.</li>
-                <li>Cómo formular conclusiones sin asegurar resultados futuros.</li>
+                <li>Cómo establecer una intención clara.</li>
+                <li>Elección de una vela según el tema de consulta.</li>
+                <li>Qué observar antes, durante y después de encenderla.</li>
+                <li>Interpretación simbólica de la llama y la cera.</li>
+                <li>Cómo evitar sacar conclusiones por un solo detalle.</li>
+                <li>Ejercicios prácticos para principiantes.</li>
             </ul>
         </article>
 
         <article class="modulo">
-            <span class="numero-seccion">06 — COMBINACIONES</span>
+            <span class="numero-seccion">06 — DOS VELAS</span>
+            <h2>Lecturas de dos velas</h2>
+            <ul>
+                <li>Cómo asignar una función simbólica a cada vela.</li>
+                <li>Lecturas comparativas entre dos intenciones.</li>
+                <li>Velas del mismo color y de colores diferentes.</li>
+                <li>Interpretación de diferencias en la combustión.</li>
+                <li>Cómo observar la relación entre ambas velas.</li>
+                <li>Ejercicios de lectura con casos ilustrativos.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">07 — TRES VELAS</span>
+            <h2>Lecturas de tres velas</h2>
+            <ul>
+                <li>Cómo distribuir tres velas con un propósito definido.</li>
+                <li>Lecturas simbólicas de situación, proceso y resultado posible.</li>
+                <li>Combinaciones de tres colores.</li>
+                <li>Cómo comparar las tres combustiones.</li>
+                <li>Interpretación conjunta de los símbolos observados.</li>
+                <li>Cómo formular conclusiones prudentes y coherentes.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">08 — COMBINACIONES</span>
             <h2>Lecturas con velas de distintos colores</h2>
-
             <ul>
-                <li>Lecturas con dos colores y una intención común.</li>
-                <li>Lecturas con tres colores y funciones simbólicas diferentes.</li>
-                <li>Vela blanca combinada con otros colores.</li>
-                <li>Combinaciones tradicionales para armonía y equilibrio.</li>
-                <li>Cómo asignar un significado a cada vela antes de encenderla.</li>
-                <li>Cómo evitar interpretaciones contradictorias.</li>
-                <li>Ejercicios prácticos de observación y comparación.</li>
+                <li>Cómo combinar dos colores según una intención.</li>
+                <li>Combinaciones de tres colores y sus significados tradicionales.</li>
+                <li>El papel de la vela blanca en diferentes combinaciones.</li>
+                <li>Cómo evitar significados contradictorios.</li>
+                <li>Lecturas para representar equilibrio y cambio.</li>
+                <li>Ejemplos prácticos de combinaciones cromáticas.</li>
             </ul>
         </article>
 
         <article class="modulo">
-            <span class="numero-seccion">07 — AMOR PROPIO</span>
-            <h2>Lecturas para autoestima y bienestar personal</h2>
-
+            <span class="numero-seccion">09 — AMOR PROPIO</span>
+            <h2>Lecturas para autoestima y bienestar</h2>
             <ul>
-                <li>Velas asociadas tradicionalmente al amor propio.</li>
-                <li>Lecturas simbólicas sobre autoestima y seguridad personal.</li>
-                <li>Identificación de necesidades emocionales mediante preguntas reflexivas.</li>
-                <li>Velas para representar nuevos comienzos.</li>
-                <li>Ejercicios simbólicos de aceptación y autocuidado.</li>
-                <li>Lecturas para reconocer límites personales.</li>
-                <li>Cómo convertir una lectura en una práctica de reflexión.</li>
+                <li>Colores asociados tradicionalmente al amor propio.</li>
+                <li>Lecturas simbólicas para fortalecer la confianza personal.</li>
+                <li>Velas para representar aceptación y nuevos comienzos.</li>
+                <li>Reflexión sobre necesidades y límites personales.</li>
+                <li>Prácticas simbólicas de autocuidado.</li>
+                <li>Cómo relacionar una lectura con acciones concretas.</li>
             </ul>
         </article>
 
         <article class="modulo">
-            <span class="numero-seccion">08 — CICLOS LUNARES</span>
+            <span class="numero-seccion">10 — CICLOS LUNARES</span>
             <h2>Las fases lunares y las velas</h2>
-
             <ul>
                 <li>Luna nueva: comienzos e intenciones.</li>
                 <li>Luna creciente: desarrollo y constancia.</li>
-                <li>Cuarto creciente: esfuerzo y toma de decisiones.</li>
+                <li>Cuarto creciente: esfuerzo y decisiones.</li>
                 <li>Luna llena: culminación y evaluación simbólica.</li>
-                <li>Luna menguante: revisión, desprendimiento y cierre.</li>
-                <li>Cómo relacionar la fase lunar con una intención.</li>
-                <li>Calendario lunar para organizar prácticas personales.</li>
-                <li>Qué diferencias existen entre tradición esotérica y evidencia científica.</li>
+                <li>Luna menguante: revisión y cierre de ciclos.</li>
+                <li>Cómo elegir una fase según la tradición que se siga.</li>
+                <li>Organización de un calendario personal de prácticas.</li>
             </ul>
         </article>
 
         <article class="modulo">
-            <span class="numero-seccion">09 — ESTUDIO Y PROYECTOS</span>
-            <h2>Lecturas para metas, trabajo y aprendizaje</h2>
-
+            <span class="numero-seccion">11 — ESTUDIO Y PROYECTOS</span>
+            <h2>Lecturas para metas y aprendizaje</h2>
             <ul>
-                <li>Lecturas simbólicas para proyectos nuevos.</li>
-                <li>Velas asociadas al estudio, la concentración y la disciplina.</li>
-                <li>Ejercicios para organizar objetivos académicos.</li>
-                <li>Lecturas para representar obstáculos y alternativas.</li>
+                <li>Velas asociadas al estudio y la concentración.</li>
+                <li>Lecturas simbólicas para exámenes y aprendizaje.</li>
+                <li>Proyectos personales y nuevas iniciativas.</li>
                 <li>Trabajo, vocación y desarrollo profesional.</li>
-                <li>Proyectos personales y emprendimientos.</li>
-                <li>Prosperidad y administración responsable del dinero.</li>
-                <li>Lecturas para evaluar decisiones y prioridades.</li>
-                <li>Cómo transformar una intención en pasos concretos.</li>
+                <li>Prosperidad y objetivos económicos.</li>
+                <li>Lecturas para identificar obstáculos y alternativas.</li>
+                <li>Cómo convertir una intención en un plan realista.</li>
             </ul>
         </article>
 
         <article class="modulo">
-            <span class="numero-seccion">10 — MÉTODO DE INTERPRETACIÓN</span>
-            <h2>Cómo construir una lectura completa</h2>
-
-            <ul>
-                <li>Cómo formular una pregunta clara y abierta.</li>
-                <li>Elección de la cantidad y el color de las velas.</li>
-                <li>Observación ordenada de cada elemento.</li>
-                <li>Relación entre los símbolos y la pregunta inicial.</li>
-                <li>Cómo diferenciar observación, interpretación e hipótesis.</li>
-                <li>Registro de resultados en un diario de velomancia.</li>
-                <li>Ejemplos prácticos con distintas situaciones.</li>
-                <li>Cómo revisar interpretaciones anteriores sin sesgos.</li>
-            </ul>
-        </article>
-
-        <article class="modulo">
-            <span class="numero-seccion">11 — PRÁCTICA Y RESPONSABILIDAD</span>
+            <span class="numero-seccion">12 — PRÁCTICA RESPONSABLE</span>
             <h2>Ejercicios, límites y seguridad</h2>
-
             <ul>
-                <li>Prácticas iniciales con una vela.</li>
-                <li>Ejercicios comparativos con dos y tres velas.</li>
-                <li>Cómo documentar una sesión paso a paso.</li>
-                <li>Errores comunes de principiantes.</li>
+                <li>Prácticas iniciales con una, dos y tres velas.</li>
+                <li>Cómo registrar observaciones en un cuaderno.</li>
+                <li>Errores frecuentes al interpretar símbolos.</li>
                 <li>Respeto por las decisiones y la autonomía de otras personas.</li>
-                <li>Por qué una lectura no demuestra sentimientos ni predice hechos.</li>
+                <li>Por qué una lectura no demuestra sentimientos ni garantiza resultados.</li>
                 <li>Uso de portavelas y superficies resistentes al calor.</li>
-                <li>Ventilación, distancia de materiales inflamables y supervisión permanente.</li>
-                <li>Cómo apagar las velas de forma segura.</li>
+                <li>Mantener las velas lejos de telas y materiales inflamables.</li>
+                <li>No dejar una vela encendida sin supervisión.</li>
             </ul>
         </article>
-
+<a href="index5.html" class="boton-ejercicios">
+    IR A LOS EJERCICIOS
+    <span>↗</span>
+</a>
     </section>
 
     <section class="cierre">
-        <span class="numero-seccion">12 — TRABAJO FINAL</span>
+        <span class="numero-seccion">TRABAJO FINAL</span>
 
-        <h2>Tu primera lectura completa</h2>
+        <h2>Tu primera práctica de velomancia</h2>
 
         <p>
-            Diseña una práctica con una intención concreta, selecciona
-            las velas, registra lo que observas y desarrolla una
-            interpretación simbólica coherente. Finaliza con una
-            reflexión personal y un plan de acción realista.
+            Elegí una intención personal, seleccioná una vela o una
+            combinación de colores y registrá tus observaciones.
+            Elaborá una interpretación simbólica y finalizá con una
+            reflexión que puedas aplicar a tu vida cotidiana.
         </p>
     </section>
 
