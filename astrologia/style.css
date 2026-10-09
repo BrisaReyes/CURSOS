@@ -1799,3 +1799,155 @@ p {
     }
 
 }
+
+
+
+/* =========================================================
+   ASTRO ROJO — BOTONES UNIFICADOS EN TODAS LAS PÁGINAS
+========================================================= */
+
+:root {
+    --boton-fondo: rgba(130, 0, 25, 0.65);
+    --boton-fondo-hover: rgba(165, 0, 30, 0.9);
+    --boton-borde: rgba(190, 70, 85, 0.55);
+    --boton-texto: #f3eeee;
+}
+
+/* Botones y enlaces con apariencia de botón */
+
+button,
+.boton,
+.btn,
+a.boton,
+a.btn,
+.siguiente-leccion,
+.boton-siguiente,
+.boton-volver,
+.boton-inicio,
+.boton-siguiente-ejercicio,
+.reiniciar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 44px;
+    padding: 12px 26px;
+
+    box-sizing: border-box;
+
+    color: var(--boton-texto);
+    background: var(--boton-fondo);
+
+    border: 1px solid var(--boton-borde);
+    border-radius: 30px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Efecto al pasar el cursor */
+
+button:hover,
+.boton:hover,
+.btn:hover,
+a.boton:hover,
+a.btn:hover,
+.siguiente-leccion:hover,
+.boton-siguiente:hover,
+.boton-volver:hover,
+.boton-inicio:hover,
+.boton-siguiente-ejercicio:hover,
+.reiniciar:hover {
+    color: #ffffff;
+    background: var(--boton-fondo-hover);
+    border-color: rgba(220, 90, 105, 0.8);
+    box-shadow: 0 6px 22px rgba(130, 0, 25, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Al hacer clic */
+
+button:active,
+.boton:active,
+.btn:active,
+a.boton:active,
+a.btn:active,
+.siguiente-leccion:active,
+.boton-siguiente:active,
+.boton-volver:active,
+.boton-inicio:active,
+.boton-siguiente-ejercicio:active,
+.reiniciar:active {
+    transform: translateY(0);
+}
+
+/* Accesibilidad con teclado */
+
+button:focus-visible,
+a.boton:focus-visible,
+a.btn:focus-visible,
+.siguiente-leccion:focus-visible,
+.boton-siguiente:focus-visible,
+.boton-volver:focus-visible,
+.boton-inicio:focus-visible,
+.boton-siguiente-ejercicio:focus-visible,
+.reiniciar:focus-visible {
+    outline: 2px solid #c9828c;
+    outline-offset: 4px;
+}
+
+/* Botones desactivados */
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Botones de navegación centrados */
+
+.siguiente-leccion,
+.boton-siguiente,
+.boton-volver,
+.boton-inicio,
+.boton-siguiente-ejercicio,
+.reiniciar {
+    margin: 20px auto;
+}
+
+/* Móviles */
+
+@media (max-width: 500px) {
+    button,
+    .boton,
+    .btn,
+    a.boton,
+    a.btn,
+    .siguiente-leccion,
+    .boton-siguiente,
+    .boton-volver,
+    .boton-inicio,
+    .boton-siguiente-ejercicio,
+    .reiniciar {
+        max-width: 100%;
+        padding: 11px 20px;
+        font-size: 12px;
+    }
+}
+
+
