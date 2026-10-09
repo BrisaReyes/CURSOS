@@ -84,7 +84,7 @@ a {
 .hero {
     position: relative;
     text-align: center;
-    padding: 45px 18px 90px;
+    padding: 100px 18px 90px;
     overflow: hidden;
 }
 
@@ -93,7 +93,7 @@ a {
     position: absolute;
     width: 280px;
     height: 280px;
-    top: 100px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--rojo);
@@ -107,41 +107,18 @@ a {
     z-index: 1;
 }
 
-/* ÚNICA IMAGEN DE LA PÁGINA */
-
-.hero-image {
-    position: relative;
-    width: 100%;
-    max-width: 850px;
-    height: 360px;
-    margin: 0 auto 42px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 82, 107, 0.4);
-    border-radius: 7px;
-    background:
-        radial-gradient(ellipse at 50% 70%, rgba(226, 27, 60, 0.4), transparent 48%),
-        linear-gradient(180deg, #1a080e, #080608);
-    box-shadow:
-        0 0 45px rgba(226, 27, 60, 0.12),
-        0 20px 60px rgba(0, 0, 0, 0.35);
-}
-
-.hero-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 55%;
-}
-
-.hero-image::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(180deg, transparent 50%, rgba(10, 4, 7, 0.55)),
-        linear-gradient(90deg, rgba(20, 3, 8, 0.2), transparent 50%, rgba(20, 3, 8, 0.2));
-    pointer-events: none;
+.hero-symbol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 94px;
+    height: 94px;
+    margin: 0 auto 28px;
+    border: 1px solid rgba(255, 82, 107, 0.5);
+    border-radius: 50%;
+    background: radial-gradient(circle, #49121e, #13090d 70%);
+    box-shadow: 0 0 45px rgba(226, 27, 60, 0.17);
+    font-size: 2.8rem;
 }
 
 .eyebrow {
@@ -621,12 +598,7 @@ footer span {
     }
 
     .hero {
-        padding: 35px 12px 65px;
-    }
-
-    .hero-image {
-        height: 300px;
-        margin-bottom: 34px;
+        padding: 75px 12px 65px;
     }
 
     .section {
@@ -659,12 +631,13 @@ footer span {
     }
 
     .hero {
-        padding: 28px 5px 55px;
+        padding: 65px 5px 55px;
     }
 
-    .hero-image {
-        height: 230px;
-        margin-bottom: 30px;
+    .hero-symbol {
+        width: 76px;
+        height: 76px;
+        font-size: 2.3rem;
     }
 
     .hero h1 {
@@ -763,14 +736,7 @@ footer span {
     <header class="hero">
         <div class="hero-content">
 
-            <!-- ÚNICA IMAGEN DE PORTADA -->
-            <div class="hero-image">
-                <img
-                    src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1600&q=85"
-                    alt="Vela encendida en un ambiente oscuro de luz cálida"
-                    fetchpriority="high"
-                >
-            </div>
+            
 
             <p class="eyebrow">Estudio I · El lenguaje de la llama</p>
 
