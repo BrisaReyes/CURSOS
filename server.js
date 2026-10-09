@@ -5,10 +5,10 @@ app.use(express.json());
 app.use(express.static("."));
 
 const CURSO_URL =
-"https://cursos-def.onrender.com/astrologia/index2.html";
+"https://cursos-5.onrender.com/astrologia/index.html";
 
 const INICIO_URL =
-"https://cursos-def.onrender.com/astrologia/index.html";
+"https://cursos-5.onrender.com";
 
 const ERROR_URL =
 "https://cursos-5.onrender.com";
