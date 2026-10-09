@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Práctica de Numerología — Tarot Rojo</title>
+
+    <style>
+        :root {
+            --fondo: #09070a;
+            --panel: #16090c;
+            --panel-claro: #211014;
+            --rojo: #e21b3c;
+            --rojo-oscuro: #8e142b;
+            --rosa: #ffb7c5;
+            --texto: #f3eeee;
+            --suave: #c4b2b7;
+            --borde: #48202b;
+            --verde: #55d6a0;
+            --amarillo: #f2c66d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 22px 15px 45px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--texto);
+            background:
+                radial-gradient(
+                    circle at top,
+                    #3b080d 0,
+                    #16090c 35%,
+                    #09070a 75%
+                );
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .encabezado {
+            text-align: center;
+            padding: 22px 10px 30px;
+        }
+
+        .luna {
+            color: var(--rojo);
+            font-size: 43px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 25px #e21b3c55;
+        }
+
+        .marca {
+            color: var(--rojo);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: clamp(29px, 6vw, 45px);
+            line-height: 1.15;
+            margin-bottom: 14px;
+        }
+
+        h1 span {
+            color: var(--rojo);
+        }
+
+        .subtitulo {
+            max-width: 580px;
+            margin: auto;
+            color: var(--suave);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .progreso-panel {
+            background: #13090cdd;
+            border: 1px solid var(--borde);
+            border-radius: 17px;
+            padding: 19px;
+            margin-bottom: 22px;
+        }
+
+        .progreso-texto {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: var(--suave);
+        }
+
+        #contador {
+            color: var(--rosa);
+            font-weight: bold;
+        }
+
+        .barra-fondo {
+            height: 8px;
+            border-radius: 20px;
+            background: #352027;
+            overflow: hidden;
+        }
+
+        #barra {
+            height: 100%;
+            width: 4%;
+            background: linear-gradient(
+                90deg,
+                var(--rojo-oscuro),
+                var(--rojo),
+                #ff6680
+            );
+            border-radius: 20px;
+            transition: width 0.35s ease;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            color: var(--rosa);
+            background: #8e142b25;
+            border: 1px solid #8e142b80;
+            border-radius: 30px;
+            padding: 7px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .ejercicio {
+            display: none;
+            animation: aparecer 0.35s ease;
+        }
+
+        .ejercicio.activo {
+            display: block;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tarjeta {
+            text-align: center;
+            padding: 28px 22px;
+            border-radius: 22px;
+            background: linear-gradient(
+                145deg,
+                #241015,
+                #12090c
+            );
+            border: 1px solid var(--borde);
+            box-shadow: 0 15px 45px #00000035;
+            margin-bottom: 20px;
+        }
+
+        .simbolo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            color: var(--rosa);
+            font-size: 35px;
+            font-weight: bold;
+            border: 1px solid #e21b3c80;
+            background: radial-gradient(
+                circle,
+                #8e142b50,
+                #16090c
+            );
+            box-shadow: 0 0 30px #e21b3c12;
+        }
+
+        .tarjeta h2 {
+            font-size: clamp(21px, 5vw, 28px);
+            margin-bottom: 14px;
+        }
+
+        .pregunta {
+            color: #eadde0;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 640px;
+            margin: 0 auto;
+            white-space: pre-line;
+        }
+
+        .opciones-titulo {
+            color: var(--suave);
+            text-align: center;
+            font-size: 13px;
+            margin: 24px 0 13px;
+        }
+
+        .opciones {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .opcion {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            padding: 17px;
+            text-align: left;
+            color: var(--texto);
+            background: #160c10;
+            border: 1px solid var(--borde);
+            border-radius: 15px;
+            cursor: pointer;
+            transition:
+                border-color 0.2s,
+                background 0.2s,
+                transform 0.2s;
+        }
+
+        .opcion:hover:not(:disabled) {
+            border-color: var(--rojo);
+            background: #281016;
+            transform: translateY(-2px);
+        }
+
+        .letra {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: #35131c;
+            color: var(--rosa);
+            font-weight: bold;
+        }
+
+        .texto-opcion {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .opcion:disabled {
+            cursor: default;
+        }
+
+        .opcion.correcta {
+            border-color: var(--verde);
+            background: #123024;
+        }
+
+        .opcion.correcta .letra {
+            color: #07170f;
+            background: var(--verde);
+        }
+
+        .opcion.incorrecta {
+            border-color: var(--rojo);
+            background: #351016;
+        }
+
+        .opcion.incorrecta .letra {
+            background: var(--rojo);
+            color: white;
+        }
+
+        .resultado {
+            display: none;
+            margin-top: 20px;
+            padding: 21px;
+            border: 1px solid var(--borde);
+            border-radius: 16px;
+            background: #12090c;
+            animation: aparecer 0.3s ease;
+        }
+
+        .resultado.visible {
+            display: block;
+        }
+
+        .resultado h3 {
+            font-size: 17px;
+            margin-bottom: 11px;
+        }
+
+        .resultado p {
+            color: #d7c7cc;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .resultado.exito h3 {
+            color: var(--verde);
+        }
+
+        .resultado.error h3 {
+            color: #ff8297;
+        }
+
+        .boton {
+            display: block;
+            width: 100%;
+            padding: 16px 20px;
+            margin-top: 20px;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 13px;
+            background: linear-gradient(
+                110deg,
+                #a8112d,
+                #e21b3c
+            );
+            cursor: pointer;
+            transition: filter 0.2s, transform 0.2s;
+        }
+
+        .boton:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+
+        .boton:focus-visible,
+        .opcion:focus-visible {
+            outline: 2px solid var(--rosa);
+            outline-offset: 3px;
+        }
+
+        .nota {
+            text-align: center;
+            color: #a9979c;
+            font-size: 12px;
+            line-height: 1.7;
+            margin-top: 25px;
+        }
+
+        .final {
+            display: none;
+            text-align: center;
+            padding: 35px 23px;
+            border-radius: 22px;
+            background: linear-gradient(
+                145deg,
+                #241015,
+                #12090c
+            );
+            border: 1px solid var(--borde);
+            animation: aparecer 0.4s ease;
+        }
+
+        .final.visible {
+            display: block;
+        }
+
+        .final .simbolo {
+            margin-bottom: 20px;
+        }
+
+        .final h2 {
+            font-size: 28px;
+            margin-bottom: 13px;
+        }
+
+        .final p {
+            color: var(--suave);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .puntaje {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--rojo);
+            margin: 20px 0 8px;
+        }
+
+        .final .detalle {
+            color: var(--rosa);
+            font-size: 14px;
+        }
+
+        @media (min-width: 600px) {
+            body {
+                padding-top: 35px;
+            }
+
+            .opciones {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .opcion {
+                align-items: flex-start;
+                min-height: 112px;
+                padding: 15px;
+                flex-direction: column;
+            }
+
+            .texto-opcion {
+                font-size: 13px;
+            }
+
+            .tarjeta {
+                padding: 35px 30px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            body {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .tarjeta {
+                padding: 23px 15px;
+            }
+
+            .progreso-panel {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="contenedor">
+
+        <header class="encabezado">
+            <div class="luna">☾</div>
+            <div class="marca">TAROT ROJO</div>
+
+            <h1>Práctica de <span>Numerología</span></h1>
+
+            <p class="subtitulo">
+                Poné a prueba tus conocimientos, practicá los cálculos
+                y aprendé a integrar los números en una lectura completa.
+            </p>
+        </header>
+
+        <section class="progreso-panel" id="panelProgreso">
+            <div class="progreso-texto">
+                <span id="contador">Ejercicio 1 de 25</span>
+                <span id="porcentaje">4% completado</span>
+            </div>
+
+            <div
+                class="barra-fondo"
+                role="progressbar"
+                aria-label="Progreso de ejercicios"
+                aria-valuemin="0"
+                aria-valuemax="25"
+                aria-valuenow="1"
+                id="barraAccesible"
+            >
+                <div id="barra"></div>
+            </div>
+        </section>
+
+        <section id="zonaEjercicios"></section>
+
+        <section class="final" id="pantallaFinal">
+            <div class="simbolo">✦</div>
+            <div class="etiqueta">Práctica completada</div>
+
+            <h2>¡Terminaste los ejercicios!</h2>
+
+            <p>
+                Cada práctica te ayuda a comprender mejor los números
+                y a desarrollar tu propia manera de interpretar una lectura.
+            </p>
+
+            <div class="puntaje" id="puntajeFinal">0/25</div>
+            <p class="detalle" id="mensajeFinal"></p>
+
+            <button class="boton" onclick="reiniciar()">
+                Volver a practicar
+            </button>
+
+            <p class="nota">
+                Recordá: la numerología es una herramienta simbólica
+                de autoconocimiento, no una predicción científica.
+            </p>
+        </section>
+
+        <footer class="nota">
+            TAROT ROJO · Numerología y autoconocimiento
+        </footer>
+
+    </main>
+
+    <script>
+        const ejercicios = [
+            {
+                tema: "Camino de vida",
+                simbolo: "3",
+                pregunta: "Una persona nació el 14/08/1997. ¿Cuál es su camino de vida si sumamos todos los dígitos y reducimos el resultado?",
+                opciones: ["3", "5", "7"],
+                correcta: 0,
+                explicacion: "Sumamos 1 + 4 + 0 + 8 + 1 + 9 + 9 + 7 = 39. Después, 3 + 9 = 12 y 1 + 2 = 3. Su camino de vida es 3."
+            },
+            {
+                tema: "Número de nacimiento",
+                simbolo: "23",
+                pregunta: "Una persona nació un día 23. En una reducción numerológica básica, ¿a qué número se reduce el día?",
+                opciones: ["2", "5", "7"],
+                correcta: 1,
+                explicacion: "Sumamos los dígitos del día: 2 + 3 = 5. El número de nacimiento se interpreta considerando tanto el número compuesto 23 como su reducción 5."
+            },
+            {
+                tema: "Número del alma",
+                simbolo: "♡",
+                pregunta: "Usando la tabla pitagórica, calculá el número del alma del nombre LUCIA MARTINEZ. Para este ejercicio se suman únicamente las vocales y se reduce el total.",
+                opciones: ["1", "5", "7"],
+                correcta: 0,
+                explicacion: "Las vocales son U=3, I=9, A=1, A=1, I=9 y E=5. La suma es 28; 2 + 8 = 10; 1 + 0 = 1. En esta práctica, el alma se reduce a 1."
+            },
+            {
+                tema: "Número de personalidad",
+                simbolo: "◈",
+                pregunta: "Para LUCIA MARTINEZ, sumá únicamente las consonantes con la tabla pitagórica. ¿Cuál es el número de personalidad reducido?",
+                opciones: ["4", "7", "9"],
+                correcta: 1,
+                explicacion: "Las consonantes L, C, M, R, T, N y Z valen 3, 3, 4, 9, 2, 5 y 8. La suma es 34; 3 + 4 = 7."
+            },
+            {
+                tema: "Número de expresión",
+                simbolo: "✧",
+                pregunta: "El nombre completo LUCIA MARTINEZ suma 65 con la tabla pitagórica. Si conservamos los números maestros, ¿cómo se interpreta su reducción?",
+                opciones: ["Solo como 2", "Como 11/2", "Como 8"],
+                correcta: 1,
+                explicacion: "65 se reduce a 6 + 5 = 11. En las escuelas que conservan los números maestros, se anota 11/2: se reconoce el 11 y también su base reducida 2. Otras escuelas reducen directamente a 2."
+            },
+            {
+                tema: "Primera vocal",
+                simbolo: "A",
+                pregunta: "En el nombre MARIANO, la primera vocal es A. ¿Qué valor tiene según la tabla pitagórica?",
+                opciones: ["1", "3", "9"],
+                correcta: 0,
+                explicacion: "En la tabla pitagórica, A, J y S corresponden al número 1. Por eso, la primera vocal de MARIANO tiene valor 1."
+            },
+            {
+                tema: "Valor de una inicial",
+                simbolo: "S",
+                pregunta: "¿Qué valor numérico tiene la letra S en la tabla pitagórica?",
+                opciones: ["4", "7", "1"],
+                correcta: 2,
+                explicacion: "La secuencia pitagórica se repite del 1 al 9. La letra S corresponde al valor 1."
+            },
+            {
+                tema: "Números ausentes",
+                simbolo: "1–9",
+                pregunta: "En el nombre ANA LUZ aparecen los valores 1, 3, 5 y 8. ¿Qué grupo contiene solamente números ausentes entre el 1 y el 9?",
+                opciones: [
+                    "2, 4, 6, 7 y 9",
+                    "1, 3, 5 y 8",
+                    "2, 3, 6 y 8"
+                ],
+                correcta: 0,
+                explicacion: "A=1, N=5, A=1, L=3, U=3 y Z=8. Los valores presentes son 1, 3, 5 y 8. Por lo tanto, faltan 2, 4, 6, 7 y 9 en este nombre."
+            },
+            {
+                tema: "Número repetido",
+                simbolo: "3",
+                pregunta: "En una carta numerológica, el número 3 aparece repetido varias veces. ¿Cuál es la forma más equilibrada de interpretarlo?",
+                opciones: [
+                    "Garantiza fama y éxito",
+                    "Refuerza simbólicamente temas asociados al 3, según el contexto",
+                    "Significa que los demás números no importan"
+                ],
+                correcta: 1,
+                explicacion: "En numerología, la repetición suele interpretarse como un énfasis simbólico. El 3 se asocia con expresión, creatividad y comunicación, pero la lectura debe considerar el conjunto y no prometer resultados."
+            },
+            {
+                tema: "Número maestro 11",
+                simbolo: "11",
+                pregunta: "Al reducir una suma obtenés 11. ¿Qué opción describe mejor el tratamiento de este número?",
+                opciones: [
+                    "Siempre debe convertirse en 1",
+                    "No tiene ninguna interpretación",
+                    "Puede conservarse como maestro 11 o reducirse a 2, según el método"
+                ],
+                correcta: 2,
+                explicacion: "Algunas escuelas conservan el 11 como número maestro y también consideran su base 2, porque 1 + 1 = 2. Conviene indicar qué método estás usando."
+            },
+            {
+                tema: "Año personal",
+                simbolo: "2026",
+                pregunta: "Una persona nació el 14 de agosto. Para calcular su año personal de 2026, sumá los dígitos del día, mes y año: 1+4+0+8+2+0+2+6. ¿Cuál es el resultado reducido?",
+                opciones: ["3", "5", "8"],
+                correcta: 1,
+                explicacion: "La suma da 23. Después, 2 + 3 = 5. Según este método numerológico, el año personal es 5. Es una interpretación simbólica, no una garantía de acontecimientos."
+            },
+            {
+                tema: "Mes personal",
+                simbolo: "10",
+                pregunta: "Si el año personal es 6, ¿qué mes personal obtenemos para octubre usando el método que suma el año personal al mes calendario reducido?",
+                opciones: ["7", "6", "1"],
+                correcta: 0,
+                explicacion: "Octubre es el mes 10, que se reduce a 1. Sumamos 6 + 1 = 7. Por este método, el mes personal es 7."
+            },
+            {
+                tema: "Día personal",
+                simbolo: "17",
+                pregunta: "Si el mes personal es 4 y el día del calendario es 17, sumá el mes personal con el día reducido. ¿Cuál es el día personal?",
+                opciones: ["3", "4", "8"],
+                correcta: 0,
+                explicacion: "El día 17 se reduce a 1 + 7 = 8. Después sumamos 4 + 8 = 12 y reducimos 1 + 2 = 3."
+            },
+            {
+                tema: "Ciclos de vida",
+                simbolo: "◷",
+                pregunta: "¿Cuál es la mejor forma de trabajar los ciclos de vida en una lectura numerológica?",
+                opciones: [
+                    "Usar una fórmula inventada y presentarla como universal",
+                    "Aplicar el método de la escuela elegida y explicar cómo se calculó",
+                    "Afirmar que todas las personas atraviesan los mismos acontecimientos"
+                ],
+                correcta: 1,
+                explicacion: "Existen diferentes métodos para calcular los ciclos. Lo importante es conocer la fórmula de la escuela utilizada, explicar el procedimiento y evitar presentar una interpretación simbólica como destino inevitable."
+            },
+            {
+                tema: "Cambios de etapa",
+                simbolo: "↗",
+                pregunta: "Una persona está estudiando el paso de una etapa numerológica a otra. ¿Qué enfoque es más útil?",
+                opciones: [
+                    "Afirmar que debe cambiar de trabajo ese año",
+                    "Usar el ciclo como una invitación a reflexionar sobre cambios, aprendizajes y objetivos",
+                    "Ignorar siempre las circunstancias personales"
+                ],
+                correcta: 1,
+                explicacion: "Los ciclos pueden servir como marco simbólico para reflexionar sobre objetivos y experiencias. No determinan por sí solos una mudanza, separación, empleo o acontecimiento concreto."
+            },
+            {
+                tema: "Compatibilidad",
+                simbolo: "♡",
+                pregunta: "Dos personas nacieron el 14/08/1997 y el 03/12/1995. Ambas fechas suman un camino de vida 3. ¿Qué lectura simbólica inicial podría explorarse?",
+                opciones: [
+                    "Que necesariamente se casarán",
+                    "Que no pueden tener conflictos",
+                    "Afinidad en temas de comunicación y expresión, sin asegurar compatibilidad total"
+                ],
+                correcta: 2,
+                explicacion: "La primera fecha suma 39 y se reduce a 3. La segunda suma 30 y también se reduce a 3. Se puede explorar la expresión y la comunicación compartidas, sin asumir que dos números iguales garantizan una relación."
+            },
+            {
+                tema: "Orientación vocacional",
+                simbolo: "✦",
+                pregunta: "Una persona tiene camino de vida 5 y expresión 4. ¿Cuál sería una síntesis simbólica razonable?",
+                opciones: [
+                    "Necesidad de combinar variedad y libertad con organización y estructura",
+                    "Imposibilidad de trabajar en equipo",
+                    "Una única profesión obligatoria"
+                ],
+                correcta: 0,
+                explicacion: "El 5 suele asociarse con cambio, exploración y libertad; el 4, con estructura, constancia y organización. La lectura puede explorar cómo combinar ambos estilos, junto con intereses y habilidades reales."
+            },
+            {
+                tema: "Dinero y organización",
+                simbolo: "8",
+                pregunta: "Una carta presenta varios 8 y un camino de vida 2. ¿Qué interpretación evita promesas financieras infundadas?",
+                opciones: [
+                    "La persona será rica con seguridad",
+                    "Puede explorarse el equilibrio entre organización, liderazgo, cooperación y acuerdos",
+                    "La persona no necesita planificar sus gastos"
+                ],
+                correcta: 1,
+                explicacion: "El 8 suele relacionarse simbólicamente con gestión y responsabilidad; el 2, con cooperación y vínculos. Estos símbolos pueden inspirar una reflexión, pero no predicen ingresos ni reemplazan la planificación financiera."
+            },
+            {
+                tema: "Números espejo",
+                simbolo: "11:11",
+                pregunta: "Una persona ve con frecuencia las horas 11:11 y 22:22. ¿Cuál es una forma responsable de abordar los números espejo?",
+                opciones: [
+                    "Asegurar que el universo le está dando una orden específica",
+                    "Decir que todas las personas deben interpretarlos igual",
+                    "Explorar qué significado personal les atribuye sin presentarlo como hecho comprobado"
+                ],
+                correcta: 2,
+                explicacion: "Los números espejo tienen interpretaciones espirituales diversas, pero no existe un mensaje universal demostrado. Podés usarlos como disparador para reflexionar sobre emociones, intenciones y circunstancias personales."
+            },
+            {
+                tema: "Números angelicales",
+                simbolo: "111",
+                pregunta: "En algunas tradiciones espirituales, ¿qué interpretación simbólica se asocia con frecuencia a la secuencia 999?",
+                opciones: [
+                    "Cierre de una etapa y reflexión sobre lo que se deja atrás",
+                    "Una garantía de ganar dinero",
+                    "Una fecha exacta en la que ocurrirá un evento"
+                ],
+                correcta: 0,
+                explicacion: "En ciertas interpretaciones contemporáneas, el 999 se relaciona con cierres, culminaciones y liberación. Es una asociación espiritual, no una predicción verificable. Otras tradiciones pueden darle un significado diferente."
+            },
+            {
+                tema: "Integración de números",
+                simbolo: "1 · 2 · 8",
+                pregunta: "Una persona tiene camino de vida 1, número del alma 2 y personalidad 8. ¿Cuál sería una síntesis inicial posible?",
+                opciones: [
+                    "Solo importa el número 1",
+                    "Iniciativa, sensibilidad en los vínculos y una imagen de fortaleza o autoridad",
+                    "La persona no puede colaborar con otros"
+                ],
+                correcta: 1,
+                explicacion: "El 1 se asocia con iniciativa; el 2, con sensibilidad y cooperación; el 8, con gestión y autoridad. Una lectura completa explora cómo conviven esos símbolos en la experiencia de la persona, sin convertirlos en etiquetas rígidas."
+            },
+            {
+                tema: "Lectura emocional",
+                simbolo: "♡",
+                pregunta: "Al preparar una lectura numerológica enfocada en las emociones, ¿qué enfoque es más adecuado?",
+                opciones: [
+                    "Afirmar exactamente lo que otra persona siente sin conocerla",
+                    "Usar los números para explorar patrones, necesidades y preguntas de autoconocimiento",
+                    "Prometer que una relación tendrá un resultado específico"
+                ],
+                correcta: 1,
+                explicacion: "Una lectura emocional puede proponer preguntas sobre necesidades afectivas, comunicación y patrones personales. No permite conocer con certeza los pensamientos privados de otra persona ni garantizar el futuro de una relación."
+            },
+            {
+                tema: "Lectura vocacional completa",
+                simbolo: "✧",
+                pregunta: "Al elaborar una lectura vocacional con camino de vida, expresión y alma, ¿qué conviene hacer?",
+                opciones: [
+                    "Integrar los números con intereses, habilidades, experiencias y objetivos personales",
+                    "Indicar una profesión única e inamovible",
+                    "Ignorar las capacidades y preferencias de la persona"
+                ],
+                correcta: 0,
+                explicacion: "Una lectura vocacional útil integra los símbolos numerológicos con intereses, capacidades, experiencias, valores y condiciones reales. Puede sugerir áreas para explorar, pero no sustituye la orientación vocacional profesional."
+            },
+            {
+                tema: "Informe numerológico",
+                simbolo: "▤",
+                pregunta: "¿Qué estructura ayuda a que un informe numerológico sea claro, profundo y no repetitivo?",
+                opciones: [
+                    "Repetir la definición de cada número varias veces",
+                    "Incluir únicamente una lista de números sin explicar nada",
+                    "Presentar cálculos, significados, relaciones entre números y una síntesis personalizada"
+                ],
+                correcta: 2,
+                explicacion: "Un buen informe explica cómo se calcularon los números, qué representa cada uno dentro del método utilizado, cómo se relacionan y qué síntesis puede extraerse. Conviene diferenciar el simbolismo de los hechos comprobables."
+            },
+            {
+                tema: "Lectura integral",
+                simbolo: "☾",
+                pregunta: "Vas a realizar una lectura completa de una persona. ¿Cuál es el mejor paso final después de calcular e interpretar los números principales?",
+                opciones: [
+                    "Dar predicciones absolutas para que la persona no dude",
+                    "Integrar los temas, reconocer posibles tensiones y cerrar con preguntas prácticas de reflexión",
+                    "Elegir el número que más te guste e ignorar los demás"
+                ],
+                correcta: 1,
+                explicacion: "La integración busca una visión coherente: conecta camino de vida, alma, personalidad, ciclos y otros números que se hayan calculado. Una buena síntesis reconoce matices, evita afirmaciones absolutas y propone preguntas que ayuden al autoconocimiento."
+            }
+        ];
+
+        let actual = 0;
+        let puntaje = 0;
+        let respondidos = new Set();
+
+        const zona = document.getElementById("zonaEjercicios");
+        const contador = document.getElementById("contador");
+        const porcentaje = document.getElementById("porcentaje");
+        const barra = document.getElementById("barra");
+        const barraAccesible = document.getElementById("barraAccesible");
+        const panelProgreso = document.getElementById("panelProgreso");
+        const pantallaFinal = document.getElementById("pantallaFinal");
+
+        function crearEjercicios() {
+            zona.innerHTML = ejercicios.map((ejercicio, indice) => `
+                <article class="ejercicio ${indice === 0 ? "activo" : ""}"
+                         id="ejercicio-${indice}">
+
+                    <div class="tarjeta">
+                        <div class="etiqueta">
+                            Ejercicio ${indice + 1} · ${ejercicio.tema}
+                        </div>
+
+                        <div class="simbolo">
+                            ${ejercicio.simbolo}
+                        </div>
+
+                        <h2>${ejercicio.tema}</h2>
+
+                        <p class="pregunta">${ejercicio.pregunta}</p>
+                    </div>
+
+                    <p class="opciones-titulo">
+                        Elegí la respuesta que consideres correcta
+                    </p>
+
+                    <div class="opciones">
+                        ${ejercicio.opciones.map((opcion, numero) => `
+                            <button
+                                type="button"
+                                class="opcion"
+                                data-ejercicio="${indice}"
+                                data-opcion="${numero}"
+                                onclick="responder(this)"
+                            >
+                                <span class="letra">
+                                    ${String.fromCharCode(65 + numero)}
+                                </span>
+
+                                <span class="texto-opcion">
+                                    ${opcion}
+                                </span>
+                            </button>
+                        `).join("")}
+                    </div>
+
+                    <div class="resultado" id="resultado-${indice}"
+                         aria-live="polite">
+                    </div>
+
+                    <button
+                        type="button"
+                        class="boton"
+                        id="siguiente-${indice}"
+                        style="display:none"
+                        onclick="siguiente()"
+                    >
+                        ${indice === ejercicios.length - 1
+                            ? "Ver resultado final"
+                            : "Siguiente ejercicio →"}
+                    </button>
+                </article>
+            `).join("");
+
+            actualizarProgreso();
+        }
+
+        function responder(boton) {
+            const indice = Number(boton.dataset.ejercicio);
+            const opcionElegida = Number(boton.dataset.opcion);
+
+            if (respondidos.has(indice) || indice !== actual) {
+                return;
+            }
+
+            respondidos.add(indice);
+
+            const ejercicio = ejercicios[indice];
+            const botones = document.querySelectorAll(
+                `button[data-ejercicio="${indice}"]`
+            );
+
+            const esCorrecta = opcionElegida === ejercicio.correcta;
+
+            if (esCorrecta) {
+                puntaje++;
+            }
+
+            botones.forEach((opcion) => {
+                opcion.disabled = true;
+
+                if (Number(opcion.dataset.opcion) === ejercicio.correcta) {
+                    opcion.classList.add("correcta");
+                }
+            });
+
+            if (!esCorrecta) {
+                boton.classList.add("incorrecta");
+            }
+
+            const resultado = document.getElementById(
+                `resultado-${indice}`
+            );
+
+            resultado.className =
+                `resultado visible ${esCorrecta ? "exito" : "error"}`;
+
+            resultado.innerHTML = `
+                <h3>
+                    ${esCorrecta
+                        ? "✓ ¡Correcto!"
+                        : "✦ Repasemos la respuesta"}
+                </h3>
+
+                <p>${ejercicio.explicacion}</p>
+            `;
+
+            document.getElementById(
+                `siguiente-${indice}`
+            ).style.display = "block";
+        }
+
+        function siguiente() {
+            if (!respondidos.has(actual)) {
+                return;
+            }
+
+            if (actual < ejercicios.length - 1) {
+                document.getElementById(
+                    `ejercicio-${actual}`
+                ).classList.remove("activo");
+
+                actual++;
+
+                document.getElementById(
+                    `ejercicio-${actual}`
+                ).classList.add("activo");
+
+                actualizarProgreso();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            } else {
+                mostrarFinal();
+            }
+        }
+
+        function actualizarProgreso() {
+            const numero = actual + 1;
+            const porcentajeActual = Math.round(
+                (numero / ejercicios.length) * 100
+            );
+
+            contador.textContent =
+                `Ejercicio ${numero} de ${ejercicios.length}`;
+
+            porcentaje.textContent =
+                `${porcentajeActual}% completado`;
+
+            barra.style.width = `${porcentajeActual}%`;
+
+            barraAccesible.setAttribute(
+                "aria-valuenow",
+                String(numero)
+            );
+        }
+
+        function mostrarFinal() {
+            zona.style.display = "none";
+            panelProgreso.style.display = "none";
+            pantallaFinal.classList.add("visible");
+
+            document.getElementById("puntajeFinal").textContent =
+                `${puntaje}/${ejercicios.length}`;
+
+            let mensaje;
+
+            if (puntaje === ejercicios.length) {
+                mensaje = "¡Excelente! Dominaste esta práctica.";
+            } else if (puntaje >= 20) {
+                mensaje = "¡Muy bien! Tenés una base sólida.";
+            } else if (puntaje >= 14) {
+                mensaje = "¡Buen trabajo! Seguí practicando los cálculos.";
+            } else {
+                mensaje = "Cada error es una oportunidad para aprender. ¡Volvé a intentarlo!";
+            }
+
+            document.getElementById("mensajeFinal").textContent = mensaje;
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        function reiniciar() {
+            actual = 0;
+            puntaje = 0;
+            respondidos = new Set();
+
+            pantallaFinal.classList.remove("visible");
+            zona.style.display = "block";
+            panelProgreso.style.display = "block";
+
+            crearEjercicios();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        crearEjercicios();
+    </script>
+</body>
+</html>
