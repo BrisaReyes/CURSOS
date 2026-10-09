@@ -1732,3 +1732,70 @@ p {
     }
 
 }
+
+/* ================================
+   CORRECCIÓN DE CAJAS — INDEX6
+================================ */
+
+/* Evita que las columnas fuercen
+   a las cajas a tener demasiado ancho */
+
+.content-grid,
+.comparison,
+.interpretation-steps {
+    min-width: 0;
+}
+
+.content-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.comparison {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Permite que las cajas se adapten
+   al espacio disponible */
+
+.content-card,
+.comparison-item,
+.step-card,
+.highlight-box {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Evita que el texto sobresalga */
+
+.content-card p,
+.comparison-item p,
+.step-card p,
+.highlight-box p,
+.content-card h3,
+.comparison-item h3,
+.step-card h3,
+.highlight-box h3 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+}
+
+/* Ajuste para pantallas pequeñas */
+
+@media (max-width: 700px) {
+
+    .content-grid,
+    .comparison {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .content-card,
+    .comparison-item,
+    .step-card,
+    .highlight-box {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
