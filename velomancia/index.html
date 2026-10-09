@@ -1,905 +1,1970 @@
 
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10070b">
+<meta name="description" content="ASTRO ROJO — Curso de Velomancia. Aprende a observar e interpretar simbólicamente las velas, la llama, la cera y el humo.">
 
-    <meta charset="UTF-8">
+<title>ASTRO ROJO — Curso de Velomancia</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<style>
+:root {
+    --fondo: #0b080a;
+    --fondo-secundario: #13090d;
+    --rojo: #e21b3c;
+    --rojo-oscuro: #760d22;
+    --rojo-claro: #ff526b;
+    --blanco: #f4eeee;
+    --gris: #b7a9ad;
+    --borde: rgba(226, 27, 60, 0.25);
+    --brillo: rgba(226, 27, 60, 0.12);
+}
 
-    <title>Curso de Velomancia — Tarot Rojo</title>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <link rel="stylesheet" href="style.css">
+html {
+    scroll-behavior: smooth;
+}
 
+body {
+    background:
+        radial-gradient(ellipse at 50% 0%, #351018 0%, transparent 38%),
+        linear-gradient(180deg, #10070b 0%, #090709 55%, #10070b 100%);
+    color: var(--blanco);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.75;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: auto;
+}
+
+/* NAVEGACIÓN */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--borde);
+}
+
+.logo {
+    color: var(--rojo-claro);
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.nav-label {
+    color: var(--gris);
+    font-family: Arial, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* PORTADA */
+
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 100px 18px 90px;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--rojo);
+    filter: blur(130px);
+    opacity: 0.18;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-symbol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 94px;
+    height: 94px;
+    margin: 0 auto 28px;
+    border: 1px solid rgba(255, 82, 107, 0.5);
+    border-radius: 50%;
+    background: radial-gradient(circle, #49121e, #13090d 70%);
+    box-shadow: 0 0 45px rgba(226, 27, 60, 0.17);
+    font-size: 2.8rem;
+}
+
+.eyebrow {
+    color: var(--rojo-claro);
+    font-family: Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 17px;
+}
+
+.hero h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(2.7rem, 8vw, 5.6rem);
+    line-height: 1.04;
+    letter-spacing: -2px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--rojo);
+    margin-top: 10px;
+}
+
+.hero-description {
+    max-width: 640px;
+    margin: 28px auto 0;
+    color: #c8b9bd;
+    font-size: 1.05rem;
+}
+
+.hero-note {
+    margin-top: 28px;
+    color: var(--rojo-claro);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+/* BOTONES */
+
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 14px 24px;
+    border: 1px solid var(--rojo);
+    border-radius: 4px;
+    background: linear-gradient(135deg, #d7193a, #8f1028);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-align: center;
+    transition: 0.25s ease;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(226, 27, 60, 0.24);
+}
+
+.button-secondary {
+    background: transparent;
+    color: var(--rojo-claro);
+}
+
+/* CONTENIDO */
+
+main {
+    padding-bottom: 70px;
+}
+
+.section {
+    padding: 62px 0;
+}
+
+.section-heading {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.section-number {
+    color: var(--rojo);
+    font-family: Arial, sans-serif;
+    font-size: 0.72rem;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.section-heading h2 {
+    margin-top: 9px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(1.65rem, 5vw, 2.6rem);
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.section-heading h2 span {
+    color: var(--rojo);
+}
+
+.section-heading p {
+    max-width: 670px;
+    margin: 15px auto 0;
+    color: var(--gris);
+    font-size: 0.98rem;
+}
+
+.intro-panel {
+    padding: 30px;
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--rojo);
+    border-radius: 5px;
+    background: linear-gradient(130deg, rgba(100, 12, 31, 0.18), rgba(18, 10, 13, 0.75));
+}
+
+.intro-panel p + p {
+    margin-top: 15px;
+}
+
+.text-muted {
+    color: var(--gris);
+}
+
+/* TARJETAS */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    padding: 25px;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background: linear-gradient(150deg, rgba(44, 15, 23, 0.78), rgba(15, 10, 12, 0.96));
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: -70px;
+    right: -55px;
+    background: var(--rojo);
+    filter: blur(60px);
+    opacity: 0.17;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 82, 107, 0.65);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.card-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 17px;
+    border: 1px solid var(--borde);
+    border-radius: 50%;
+    background: rgba(226, 27, 60, 0.08);
+    font-size: 1.65rem;
+}
+
+.card h3 {
+    position: relative;
+    margin-bottom: 10px;
+    color: #fff1f3;
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+
+.card p {
+    position: relative;
+    color: var(--gris);
+    font-size: 0.94rem;
+}
+
+.card p + p {
+    margin-top: 10px;
+}
+
+.card-tag {
+    display: inline-block;
+    margin-top: 17px;
+    color: var(--rojo-claro);
+    font-family: Arial, sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* TEMAS */
+
+.topic {
+    padding: 35px;
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+    background: rgba(17, 10, 13, 0.85);
+}
+
+.topic + .topic {
+    margin-top: 22px;
+}
+
+.topic-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 23px;
+}
+
+.topic-icon {
+    display: flex;
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid var(--borde);
+    background: #210b12;
+    font-size: 1.9rem;
+}
+
+.topic h3 {
+    margin-bottom: 6px;
+    font-family: Arial, sans-serif;
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+.topic h3 span {
+    color: var(--rojo);
+}
+
+.topic-header p {
+    color: var(--gris);
+    font-size: 0.92rem;
+}
+
+.topic > p {
+    color: #c9bdc0;
+    margin-bottom: 15px;
+}
+
+.topic-subtitle {
+    margin: 28px 0 15px;
+    color: var(--rojo-claro);
+    font-family: Arial, sans-serif;
+    font-size: 0.76rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.small-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.small-card {
+    padding: 18px;
+    border: 1px solid rgba(226, 27, 60, 0.17);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.018);
+}
+
+.small-card h4 {
+    margin-bottom: 7px;
+    color: #fff0f2;
+    font-size: 1rem;
+}
+
+.small-card p {
+    color: var(--gris);
+    font-size: 0.91rem;
+}
+
+/* LISTAS */
+
+.observation-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.observation {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+    border-bottom: 1px solid rgba(226, 27, 60, 0.17);
+}
+
+.observation-mark {
+    color: var(--rojo-claro);
+    font-size: 1.1rem;
+}
+
+.observation strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #fff0f2;
+}
+
+.observation p {
+    color: var(--gris);
+    font-size: 0.92rem;
+}
+
+/* BLOQUES DESTACADOS */
+
+.principle {
+    margin: 28px 0;
+    padding: 28px;
+    border: 1px solid rgba(226, 27, 60, 0.38);
+    border-radius: 5px;
+    background:
+        radial-gradient(ellipse at 0% 50%, rgba(226, 27, 60, 0.11), transparent 70%),
+        #12090d;
+    text-align: center;
+}
+
+.principle-symbol {
+    color: var(--rojo-claro);
+    font-size: 1.6rem;
+    margin-bottom: 9px;
+}
+
+.principle h3 {
+    color: var(--rojo-claro);
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.principle p {
+    max-width: 700px;
+    margin: 12px auto 0;
+    color: #d4c5c9;
+}
+
+.example {
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background: #0c080a;
+    border: 1px dashed rgba(226, 27, 60, 0.38);
+}
+
+.example h4 {
+    margin-bottom: 12px;
+    color: var(--rojo-claro);
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.example p {
+    color: var(--gris);
+    font-size: 0.94rem;
+}
+
+.example p + p {
+    margin-top: 12px;
+}
+
+/* VELA Y SEGURIDAD */
+
+.safety-note {
+    margin-top: 24px;
+    padding: 20px;
+    border-left: 3px solid #b78c45;
+    background: rgba(183, 140, 69, 0.07);
+    color: #d6c9b7;
+    font-size: 0.91rem;
+}
+
+.safety-note strong {
+    color: #e6c38a;
+}
+
+/* NAVEGACIÓN DEL CURSO */
+
+.course-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 20px;
+    color: var(--gris);
+    font-family: Arial, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.progress-line {
+    flex: 1;
+    height: 3px;
+    background: #32121b;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 25%;
+    height: 100%;
+    background: var(--rojo);
+}
+
+.next-section {
+    padding: 40px 25px;
+    margin-top: 30px;
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(226, 27, 60, 0.16), transparent 55%),
+        #12090d;
+    text-align: center;
+}
+
+.next-section h2 {
+    margin-bottom: 12px;
+    font-family: Arial, sans-serif;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    text-transform: uppercase;
+}
+
+.next-section h2 span {
+    color: var(--rojo);
+}
+
+.next-section p {
+    max-width: 600px;
+    margin: auto;
+    color: var(--gris);
+}
+
+footer {
+    padding: 30px 15px;
+    border-top: 1px solid var(--borde);
+    color: #8e7e83;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+footer span {
+    color: var(--rojo);
+}
+
+/* CELULARES Y TABLETS */
+
+@media (max-width: 800px) {
+    .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero {
+        padding: 75px 12px 65px;
+    }
+
+    .section {
+        padding: 45px 0;
+    }
+
+    .topic {
+        padding: 23px;
+    }
+}
+
+@media (max-width: 520px) {
+    .container {
+        width: 91%;
+    }
+
+    .navbar {
+        padding: 18px 0;
+    }
+
+    .logo {
+        font-size: 0.77rem;
+        letter-spacing: 2.5px;
+    }
+
+    .nav-label {
+        font-size: 0.59rem;
+        letter-spacing: 1px;
+        text-align: right;
+    }
+
+    .hero {
+        padding: 65px 5px 55px;
+    }
+
+    .hero-symbol {
+        width: 76px;
+        height: 76px;
+        font-size: 2.3rem;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+    }
+
+    .section {
+        padding: 38px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 24px;
+    }
+
+    .card-grid,
+    .small-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+    .intro-panel {
+        padding: 22px;
+    }
+
+    .topic {
+        padding: 19px;
+    }
+
+    .topic-header {
+        gap: 12px;
+    }
+
+    .topic-icon {
+        flex-basis: 46px;
+        width: 46px;
+        height: 46px;
+        font-size: 1.5rem;
+    }
+
+    .topic h3 {
+        font-size: 1.2rem;
+    }
+
+    .small-card {
+        padding: 16px;
+    }
+
+    .principle {
+        padding: 22px 17px;
+    }
+
+    .course-progress {
+        font-size: 0.62rem;
+    }
+
+    .button {
+        width: 100%;
+        padding: 14px 12px;
+    }
+
+    .next-section {
+        padding: 30px 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-<main class="container">
+<div class="container">
 
+    <nav class="navbar">
+        <a href="index.html" class="logo">ASTRO ROJO</a>
+        <span class="nav-label">Escuela de saberes simbólicos</span>
+    </nav>
 
-    <!-- =========================
-         ENCABEZADO
-    ========================== -->
+    <header class="hero">
+        <div class="hero-content">
 
-    <section class="welcome">
+            <div class="hero-symbol">🕯️</div>
 
-        <div class="hero-glow"></div>
+            <p class="eyebrow">Estudio I · El lenguaje de la llama</p>
 
-        <div class="moon">🔥</div>
+            <h1>
+                EL ARTE
+                <span>DE LA VELOMANCIA</span>
+            </h1>
 
-        <h1>VELOMANCIA</h1>
-
-        <p>
-            Curso de Velomancia
-        </p>
-
-        <span>
-            Aprendé a observar e interpretar las señales
-            de la llama, la cera y el comportamiento de
-            una vela durante una lectura.
-        </span>
-
-    </section>
-
-
-    <!-- =========================
-         CONTENIDO
-    ========================== -->
-
-    <section class="contenido">
-
-
-        <!-- =========================
-             INTRODUCCIÓN
-        ========================== -->
-
-        <div class="seccion-titulo">
-
-            <h2>INTRODUCCIÓN A LA VELOMANCIA</h2>
-
-        </div>
-
-
-        <div class="introduccion">
-
-            <p>
-                La velomancia es una práctica tradicional de
-                interpretación basada en la observación de
-                una vela durante su combustión.
-                La llama, el movimiento, el humo, la cera y
-                otros detalles pueden utilizarse como elementos
-                simbólicos dentro de una lectura.
-                En este curso vas a aprender a observar estos
-                elementos de manera ordenada, comprendiendo
-                sus significados tradicionales y aprendiendo
-                a relacionarlos entre sí.
+            <p class="hero-description">
+                Descubrí el lenguaje simbólico de las velas.
+                Aprende a observar la llama, la cera, el humo y los colores
+                para construir tus propias interpretaciones con intención,
+                atención y criterio.
             </p>
 
-        </div>
+            <p class="hero-note">
+                OBSERVAR · INTERPRETAR · REFLEXIONAR
+            </p>
 
-
-        <!-- =========================
-             QUÉ VAMOS A APRENDER
-        ========================== -->
-
-        <div class="seccion-titulo">
-
-            <h2>¿QUÉ VAMOS A APRENDER?</h2>
+            <a href="#introduccion" class="button">
+                COMENZAR EL ESTUDIO <span>↓</span>
+            </a>
 
         </div>
+    </header>
 
+    <main>
 
-        <div class="study-grid">
+        <!-- INTRODUCCIÓN -->
 
+        <section class="section" id="introduccion">
 
-            <article class="study-card">
-
-                <div class="study-icon">🕯️</div>
-
-                <h3>
-                    La vela
-                </h3>
-
+            <div class="section-heading">
+                <p class="section-number">01 — LOS FUNDAMENTOS</p>
+                <h2>ENTRAR EN EL <span>ARTE</span></h2>
                 <p>
-                    Conocer los diferentes tipos de velas,
-                    sus características y su utilización
-                    dentro de una lectura.
+                    Antes de interpretar una vela, es importante aprender
+                    a observar sin apresurarse a sacar conclusiones.
                 </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">🔥</div>
-
-                <h3>
-                    La llama
-                </h3>
-
-                <p>
-                    Aprender a observar su altura,
-                    movimiento, estabilidad y cambios
-                    durante la combustión.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">〰</div>
-
-                <h3>
-                    La cera
-                </h3>
-
-                <p>
-                    Reconocer formas, acumulaciones,
-                    caminos y diferentes maneras en
-                    que puede caer la cera.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">☁</div>
-
-                <h3>
-                    El humo
-                </h3>
-
-                <p>
-                    Observar su dirección, cantidad y
-                    comportamiento como parte de la
-                    interpretación.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">🎨</div>
-
-                <h3>
-                    Los colores
-                </h3>
-
-                <p>
-                    Conocer los significados tradicionales
-                    asociados a los distintos colores
-                    de las velas.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">✦</div>
-
-                <h3>
-                    Las lecturas
-                </h3>
-
-                <p>
-                    Aprender diferentes formas de realizar
-                    una lectura y combinar las señales
-                    observadas.
-                </p>
-
-            </article>
-
-
-        </div>
-
-
-        <!-- =========================
-             LA VELA
-        ========================== -->
-
-        <section class="tema-curso">
-
-
-            <div class="seccion-titulo">
-
-                <h2>🕯️ LA VELA</h2>
-
             </div>
 
-
-            <div class="introduccion">
-
+            <div class="intro-panel">
                 <p>
-                    La vela es el elemento central de la
-                    velomancia. Antes de observar la llama,
-                    el humo o la cera, es importante conocer
-                    aquello que estamos utilizando y comprender
-                    que cada vela puede presentar un
-                    comportamiento diferente durante su
-                    combustión.
-                    En una lectura, la vela puede ser utilizada
-                    como un elemento simbólico sobre el cual
-                    se observa lo que ocurre durante un
-                    determinado período. La forma en que arde,
-                    su estabilidad, la velocidad con la que se
-                    consume y los cambios que aparecen forman
-                    parte de la observación.
+                    La velomancia es una práctica esotérica tradicional que
+                    utiliza la observación de las velas como punto de partida
+                    para una interpretación simbólica. La llama, la cera,
+                    la mecha y el humo forman parte de su lenguaje tradicional.
                 </p>
 
-            </div>
-
-
-            <!-- =========================
-                 QUÉ OBSERVAMOS
-            ========================== -->
-
-            <div class="seccion-titulo">
-
-                <h2>¿QUÉ OBSERVAMOS EN UNA VELA?</h2>
-
-            </div>
-
-
-            <div class="study-grid">
-
-
-                <article class="study-card">
-
-                    <div class="study-icon">📏</div>
-
-                    <h3>
-                        Tamaño
-                    </h3>
-
-                    <p>
-                        Observamos el tamaño y la forma de la
-                        vela antes de comenzar. Esto permite
-                        tener una referencia para comparar su
-                        comportamiento durante la combustión.
-                    </p>
-
-                </article>
-
-
-                <article class="study-card">
-
-                    <div class="study-icon">🕯️</div>
-
-                    <h3>
-                        Estado
-                    </h3>
-
-                    <p>
-                        Una vela dañada, rota, húmeda o
-                        deformada puede comportarse de manera
-                        diferente. Primero debemos observar
-                        su estado físico.
-                    </p>
-
-                </article>
-
-
-                <article class="study-card">
-
-                    <div class="study-icon">🎨</div>
-
-                    <h3>
-                        Color
-                    </h3>
-
-                    <p>
-                        El color puede tener un significado
-                        simbólico dentro de determinadas
-                        tradiciones. Su interpretación será
-                        estudiada más adelante.
-                    </p>
-
-                </article>
-
-
-                <article class="study-card">
-
-                    <div class="study-icon">🧵</div>
-
-                    <h3>
-                        Mecha
-                    </h3>
-
-                    <p>
-                        La mecha también forma parte de la
-                        observación. Su posición y estado
-                        pueden influir en la forma en que se
-                        desarrolla la combustión.
-                    </p>
-
-                </article>
-
-
-            </div>
-
-
-
-
-
-
-        <!-- =========================
-             LA LLAMA
-        ========================== -->
-
-        <section class="tema-curso">
-
-
-            <div class="seccion-titulo">
-
-                <h2>🔥 LA LLAMA</h2>
-
-            </div>
-
-
-            <div class="introduccion">
-
                 <p>
-                    La llama es uno de los elementos más
-                    importantes que se observan durante una
-                    lectura de velomancia. Su forma, altura,
-                    movimiento y estabilidad pueden aportar
-                    información simbólica dentro de la lectura.
-                    Para interpretar la llama correctamente
-                    es importante observar primero su
-                    comportamiento durante un tiempo.
-                    No debemos sacar conclusiones por un
-                    movimiento aislado, sino prestar atención
-                    a los cambios que se mantienen o se repiten.
+                    Cada practicante puede desarrollar su propio método
+                    de registro e interpretación. No se trata de memorizar
+                    una respuesta para cada movimiento, sino de relacionar
+                    lo observado con la intención de la práctica y el
+                    contexto personal.
                 </p>
 
-            </div>
-
-
-            
-
-        <!-- =========================
-             LA CERA
-        ========================== -->
-
-        <section class="tema-curso">
-
-
-            <div class="seccion-titulo">
-
-                <h2>〰 LA CERA</h2>
-
-            </div>
-
-
-            <div class="introduccion">
-
                 <p>
-                    La cera es otro de los elementos fundamentales
-                    de la velomancia. A medida que la vela se consume,
-                    puede formar gotas, caminos, acumulaciones y
-                    diferentes figuras sobre la superficie.
-                    La observación de la cera permite registrar cómo
-                    se desarrolla la combustión y qué formas aparecen
-                    durante el proceso. En la interpretación tradicional,
-                    estas formas pueden utilizarse como elementos
-                    simbólicos dentro de una lectura.
-                    Para realizar una buena observación es importante
-                    mirar primero el conjunto y no buscar inmediatamente
-                    una figura conocida. La interpretación debe surgir
-                    de lo que realmente aparece.
+                    En ASTRO ROJO vamos a estudiar estas asociaciones desde
+                    una mirada reflexiva, sin convertir una señal aislada
+                    en una predicción definitiva.
                 </p>
-
             </div>
-        <!-- =========================
-             EL HUMO
-        ========================== -->
-
-        <section class="tema-curso">
-
-
-            <div class="seccion-titulo">
-
-                <h2>☁ EL HUMO</h2>
-
-            </div>
-
-
-            <div class="introduccion">
-
-                <p>
-                    El humo es otro de los elementos que podemos observar
-                    durante una lectura de velomancia. Su dirección,
-                    movimiento, cantidad y comportamiento pueden aportar
-                    información simbólica dentro de la lectura.
-                    Para interpretar el humo correctamente es importante
-                    observarlo durante un tiempo y registrar sus cambios.
-                    No debemos interpretar un movimiento aislado sin
-                    considerar el resto de las señales.
-                    El humo debe observarse junto con la llama, la cera,
-                    la mecha, el color de la vela y la intención con la
-                    que comenzó la lectura.
-                </p>
-
-            </div>
-
-    
 
         </section>
 
+        <!-- TEMAS DEL CURSO -->
 
-        <!-- =========================
-             CÓMO FORMULAR LA INTENCIÓN
-        ========================== -->
+        <section class="section">
 
-        <section class="tema-curso">
-
-
-            <div class="seccion-titulo">
-
-                <h2>✦ CÓMO FORMULAR LA INTENCIÓN</h2>
-
-            </div>
-
-
-            <div class="introduccion">
-
+            <div class="section-heading">
+                <p class="section-number">02 — MAPA DE ESTUDIO</p>
+                <h2>¿QUÉ VAMOS A <span>APRENDER?</span></h2>
                 <p>
-                    Antes de encender una vela es importante definir
-                    qué queremos observar durante la lectura.
-                    La intención funciona como el punto de partida
-                    que orienta todo el trabajo.
-                    Una intención clara permite observar las señales
-                    dentro de un contexto determinado y evita mezclar
-                    diferentes temas en una misma lectura.
+                    Seis elementos fundamentales para comenzar a comprender
+                    las lecturas con velas.
                 </p>
-
             </div>
 
+            <div class="card-grid">
 
-            <div class="seccion-titulo">
+                <article class="card">
+                    <div class="card-icon">🕯️</div>
+                    <h3>La vela</h3>
+                    <p>
+                        Sus características, su estado inicial, los materiales
+                        y la importancia de preparar un espacio adecuado.
+                    </p>
+                    <span class="card-tag">Fundamentos</span>
+                </article>
 
-                <h2>
-                    ¿QUÉ DEBE TENER UNA BUENA INTENCIÓN?
-                </h2>
+                <article class="card">
+                    <div class="card-icon">🔥</div>
+                    <h3>La llama</h3>
+                    <p>
+                        Cómo observar su altura, estabilidad y movimiento
+                        sin confundir fenómenos físicos con significados
+                        simbólicos.
+                    </p>
+                    <span class="card-tag">Observación</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">💧</div>
+                    <h3>La cera</h3>
+                    <p>
+                        Formas, acumulaciones, gotas y recorridos que pueden
+                        utilizarse como estímulos para una lectura reflexiva.
+                    </p>
+                    <span class="card-tag">Interpretación</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🌫️</div>
+                    <h3>El humo y la mecha</h3>
+                    <p>
+                        Qué observar al encender y apagar una vela y cuáles
+                        son los factores físicos que pueden influir.
+                    </p>
+                    <span class="card-tag">Detalles</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🎨</div>
+                    <h3>Los colores</h3>
+                    <p>
+                        Asociaciones tradicionales del rojo, blanco, negro,
+                        verde, azul y otros colores utilizados en rituales.
+                    </p>
+                    <span class="card-tag">Simbolismo</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🌙</div>
+                    <h3>Las lecturas</h3>
+                    <p>
+                        Cómo formular intenciones, registrar observaciones
+                        y construir interpretaciones coherentes.
+                    </p>
+                    <span class="card-tag">Práctica</span>
+                </article>
 
             </div>
-
-
-            <div class="study-grid">
-
-
-                <article class="study-card">
-
-                    <div class="study-icon">🎯</div>
-
-                    <h3>
-                        Claridad
-                    </h3>
-
-                    <p>
-                        La intención debe expresar con claridad
-                        qué aspecto de la situación queremos
-                        observar.
-                    </p>
-
-                </article>
-
-
-                <article class="study-card">
-
-                    <div class="study-icon">🔎</div>
-
-                    <h3>
-                        Concreción
-                    </h3>
-
-                    <p>
-                        Evitá abarcar demasiados temas al mismo
-                        tiempo. Una lectura funciona mejor cuando
-                        tiene un foco definido.
-                    </p>
-
-                </article>
-
-
-                <article class="study-card">
-
-                    <div class="study-icon">🕯️</div>
-
-                    <h3>
-                        Enfoque
-                    </h3>
-
-                    <p>
-                        La intención debe estar relacionada con
-                        un único objetivo o situación para facilitar
-                        la observación posterior.
-                    </p>
-
-                </article>
-
-
-                <article class="study-card">
-
-                    <div class="study-icon">✦</div>
-
-                    <h3>
-                        Coherencia
-                    </h3>
-
-                    <p>
-                        El color y el tipo de vela elegidos deberían
-                        guardar relación con la intención que se
-                        quiere trabajar.
-                    </p>
-
-                </article>
-
-
-            </div>
-
 
         </section>
 
-<!-- ========================= ERRORES FRECUENTES EN VELOMANCIA ========================== 
- --> <section class="tema-curso"> <div class="seccion-titulo"> <h2>⚠ ERRORES FRECUENTES EN VELOMANCIA</h2> </div> <div class="introduccion"> <p> Aprender Velomancia no consiste solamente en conocer significados. También es importante aprender a observar correctamente y evitar interpretaciones apresuradas. Muchos errores aparecen cuando intentamos encontrar una respuesta inmediata en una sola señal. Una buena lectura requiere paciencia, observación y relación entre los diferentes elementos de la vela. </p> </div>
-        
+        <!-- LA VELA -->
 
+        <section class="section" id="la-vela">
 
+            <div class="section-heading">
+                <p class="section-number">03 — PRIMER ELEMENTO</p>
+                <h2>EL MISTERIO DE <span>LA VELA</span></h2>
+                <p>
+                    Toda lectura comienza antes de encender la llama.
+                </p>
+            </div>
 
+            <div class="topic">
 
-<!-- =========================
-     LECTURAS DE PROTECCIÓN
-========================= -->
+                <div class="topic-header">
+                    <div class="topic-icon">🕯️</div>
+                    <div>
+                        <h3>La vela como <span>símbolo</span></h3>
+                        <p>
+                            Intención, transformación y atención consciente.
+                        </p>
+                    </div>
+                </div>
 
-<section class="seccion">
+                <p>
+                    En distintas tradiciones, la vela representa la luz,
+                    la concentración, la renovación y el paso de un estado
+                    a otro. Encenderla puede convertirse en un gesto simbólico
+                    para marcar el comienzo de una práctica personal.
+                </p>
 
-    <h2 class="seccion-titulo">🛡️ LECTURAS DE PROTECCIÓN</h2>
+                <p>
+                    Antes de empezar, observa la vela tal como está.
+                    Su tamaño, su color, el estado de la mecha y cualquier
+                    característica visible constituyen el punto de partida
+                    de tu registro.
+                </p>
 
-    <div class="introduccion">
+                <h4 class="topic-subtitle">¿Qué debemos observar?</h4>
 
-        <p>
-            Las lecturas de protección se utilizan para observar el estado
-            energético de una persona, un espacio o una situación cuando
-            existe una intención relacionada con resguardo, límites,
-            estabilidad o prevención.
-            En este tipo de lectura no buscamos solamente una respuesta
-            de "sí" o "no". El objetivo es observar cómo se desarrolla la
-            vela y qué comportamiento presenta durante todo el proceso.
-        </p>
+                <div class="small-grid">
 
-    </div>
+                    <article class="small-card">
+                        <h4>01. Tamaño y forma</h4>
+                        <p>
+                            Anota si es larga, corta, gruesa, fina o tiene
+                            una forma particular. El tamaño también determina
+                            cuánto puede durar la combustión.
+                        </p>
+                    </article>
 
+                    <article class="small-card">
+                        <h4>02. Estado inicial</h4>
+                        <p>
+                            Comprueba si la superficie está uniforme,
+                            si hay grietas, deformaciones o restos de cera.
+                        </p>
+                    </article>
 
+                    <article class="small-card">
+                        <h4>03. Material</h4>
+                        <p>
+                            La composición de la cera y los aditivos pueden
+                            influir en la forma en que arde la vela.
+                        </p>
+                    </article>
 
+                    <article class="small-card">
+                        <h4>04. La mecha</h4>
+                        <p>
+                            Observa su longitud, posición y estado antes
+                            de encenderla. Una mecha demasiado larga puede
+                            generar una llama mayor o humo.
+                        </p>
+                    </article>
 
-    <!-- =========================
-         PREPARACIÓN
-    ========================== -->
+                </div>
 
-    <h3 class="seccion-titulo">🕯️ PREPARACIÓN </h3>
+                <div class="principle">
+                    <div class="principle-symbol">✧</div>
+                    <h3>La observación precede a la interpretación</h3>
+                    <p>
+                        Primero registra lo que ves. Después explora qué
+                        significado simbólico podría tener para tu práctica.
+                        No necesitas decidir de inmediato qué significa todo.
+                    </p>
+                </div>
 
-    <div class="introduccion">
+            </div>
 
-        <p>
-            Una lectura de protección comienza antes de encender la vela.
-            La preparación permite que la observación sea ordenada y que
-            podamos distinguir una señal de un simple efecto físico.
-        </p>
+        </section>
 
-    </div>
+        <!-- LA LLAMA -->
 
-    <div class="study-grid">
+        <section class="section" id="la-llama">
 
-        <div class="study-card">
-            <div class="study-icon">1</div>
-            <h3>Definí qué querés observar</h3>
-            <p>
-                Protección personal, protección de un espacio, estabilidad
-                de una situación o fortalecimiento de límites.
-            </p>
+            <div class="section-heading">
+                <p class="section-number">04 — SEGUNDO ELEMENTO</p>
+                <h2>EL LENGUAJE DE <span>LA LLAMA</span></h2>
+                <p>
+                    La llama es uno de los elementos más observados
+                    en las tradiciones de velomancia.
+                </p>
+            </div>
+
+            <div class="topic">
+
+                <div class="topic-header">
+                    <div class="topic-icon">🔥</div>
+                    <div>
+                        <h3>Una llama en <span>movimiento</span></h3>
+                        <p>
+                            Altura, estabilidad, dirección y duración.
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    En la interpretación tradicional, la llama suele asociarse
+                    con la intensidad de una intención, la concentración
+                    y el desarrollo simbólico de una lectura.
+                </p>
+
+                <p>
+                    Sin embargo, el movimiento también puede deberse a
+                    corrientes de aire, a la longitud de la mecha, a la
+                    composición de la cera o a una combustión irregular.
+                    Es importante tener en cuenta estas posibilidades.
+                </p>
+
+                <div class="small-grid">
+
+                    <article class="small-card">
+                        <h4>Una llama estable</h4>
+                        <p>
+                            Simbólicamente puede relacionarse con la calma,
+                            la constancia o el enfoque en una intención.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Una llama que se mueve</h4>
+                        <p>
+                            Puede invitar a reflexionar sobre los cambios,
+                            la adaptación o las distracciones presentes.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Una llama alta</h4>
+                        <p>
+                            Algunas tradiciones la relacionan con intensidad
+                            o impulso. También puede depender de una mecha
+                            demasiado larga.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Una llama pequeña</h4>
+                        <p>
+                            Puede utilizarse como símbolo de paciencia,
+                            recogimiento o perseverancia, sin asumir
+                            que anuncia un resultado.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Una llama que chisporrotea</h4>
+                        <p>
+                            Antes de interpretarla, revisa la mecha,
+                            las impurezas de la cera y las condiciones
+                            de combustión.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Una llama que se apaga</h4>
+                        <p>
+                            No demuestra un bloqueo espiritual ni un
+                            resultado negativo. Comprueba la mecha,
+                            la ventilación y el estado de la vela.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="principle">
+                    <div class="principle-symbol">✧</div>
+                    <h3>No toda variación es una señal</h3>
+                    <p>
+                        Una lectura cuidadosa contempla primero las causas
+                        físicas y utiliza las asociaciones tradicionales
+                        como herramientas simbólicas de reflexión.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- LA CERA -->
+
+        <section class="section" id="la-cera">
+
+            <div class="section-heading">
+                <p class="section-number">05 — TERCER ELEMENTO</p>
+                <h2>LAS FORMAS DE <span>LA CERA</span></h2>
+                <p>
+                    El material que se transforma durante la combustión
+                    también forma parte de la observación.
+                </p>
+            </div>
+
+            <div class="topic">
+
+                <div class="topic-header">
+                    <div class="topic-icon">💧</div>
+                    <div>
+                        <h3>El recorrido de <span>la cera</span></h3>
+                        <p>
+                            Gotas, acumulaciones, caminos y figuras.
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    Cuando una vela arde, la cera se derrite y se desplaza
+                    de acuerdo con la temperatura, la inclinación de la vela,
+                    el material y las condiciones del entorno.
+                </p>
+
+                <p>
+                    En la velomancia tradicional, algunas personas observan
+                    sus formas como símbolos. La clave está en no forzar
+                    una interpretación: una figura puede recordar algo
+                    distinto a cada persona.
+                </p>
+
+                <div class="small-grid">
+
+                    <article class="small-card">
+                        <h4>Gotas de cera</h4>
+                        <p>
+                            Pueden tomarse como un punto de reflexión sobre
+                            aquello que se expresa, se libera o necesita
+                            atención.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Acumulaciones</h4>
+                        <p>
+                            Algunas lecturas las relacionan simbólicamente
+                            con asuntos pendientes o temas que merecen
+                            ser revisados.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Caminos de cera</h4>
+                        <p>
+                            Pueden inspirar preguntas sobre procesos,
+                            decisiones y los pasos que una persona
+                            está considerando.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Figuras reconocibles</h4>
+                        <p>
+                            Si una forma te recuerda un objeto o símbolo,
+                            anótalo sin asumir que tiene un significado
+                            universal o definitivo.
+                        </p>
+                    </article>
+
+                </div>
+
+                <h4 class="topic-subtitle">Cómo realizar la observación</h4>
+
+                <div class="observation-list">
+
+                    <div class="observation">
+                        <span class="observation-mark">✦</span>
+                        <div>
+                            <strong>Describe la forma</strong>
+                            <p>
+                                Anota lo que ves de manera sencilla:
+                                una gota, un círculo, una acumulación
+                                o un recorrido.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="observation">
+                        <span class="observation-mark">✦</span>
+                        <div>
+                            <strong>Relaciona con tu intención</strong>
+                            <p>
+                                Pregúntate qué aspecto de tu situación
+                                personal te invita a revisar esa forma.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="observation">
+                        <span class="observation-mark">✦</span>
+                        <div>
+                            <strong>Evita las conclusiones apresuradas</strong>
+                            <p>
+                                No conviertas una figura en una certeza
+                                sobre el futuro o sobre los pensamientos
+                                de otra persona.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- HUMO Y MECHA -->
+
+        <section class="section" id="humo">
+
+            <div class="section-heading">
+                <p class="section-number">06 — CUARTO ELEMENTO</p>
+                <h2>EL HUMO Y <span>LA MECHA</span></h2>
+                <p>
+                    Pequeños detalles que requieren observación
+                    y una interpretación cuidadosa.
+                </p>
+            </div>
+
+            <div class="topic">
+
+                <div class="topic-header">
+                    <div class="topic-icon">🌫️</div>
+                    <div>
+                        <h3>Observar antes de <span>interpretar</span></h3>
+                        <p>
+                            La combustión también tiene su propio lenguaje físico.
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    El humo puede aparecer al encender o apagar una vela,
+                    y también durante una combustión irregular. La cantidad
+                    de humo depende de la mecha, la cera, las impurezas
+                    y la ventilación.
+                </p>
+
+                <div class="small-grid">
+
+                    <article class="small-card">
+                        <h4>Humo al encender</h4>
+                        <p>
+                            Observa si desaparece rápidamente y si la mecha
+                            necesita un ajuste. No es por sí mismo una señal
+                            de rechazo o dificultad.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Humo al apagar</h4>
+                        <p>
+                            Es habitual que aparezca durante unos instantes.
+                            Ventila el ambiente y evita inhalarlo directamente.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Mecha doblada</h4>
+                        <p>
+                            Puede deberse al diseño de la mecha y a la
+                            combustión. No hace falta asignarle un significado
+                            espiritual inmediato.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Residuos en la mecha</h4>
+                        <p>
+                            Anota su presencia y comprueba si afectan
+                            a la combustión antes de explorar asociaciones
+                            simbólicas.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="safety-note">
+                    <strong>Importante:</strong>
+                    evita las velas que producen humo excesivo. No dejes
+                    una vela encendida sin supervisión, mantenla lejos
+                    de cortinas y materiales inflamables y colócala sobre
+                    una superficie resistente al calor.
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- COLORES -->
+
+        <section class="section" id="colores">
+
+            <div class="section-heading">
+                <p class="section-number">07 — QUINTO ELEMENTO</p>
+                <h2>EL SIMBOLISMO DE <span>LOS COLORES</span></h2>
+                <p>
+                    Cada color posee asociaciones diferentes según
+                    la tradición y el contexto cultural.
+                </p>
+            </div>
+
+            <div class="card-grid">
+
+                <article class="card">
+                    <div class="card-icon">🔴</div>
+                    <h3>Rojo</h3>
+                    <p>
+                        Pasión, vitalidad, impulso, coraje y fuerza personal.
+                    </p>
+                    <span class="card-tag">Energía y acción</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">⚪</div>
+                    <h3>Blanco</h3>
+                    <p>
+                        Claridad, paz, renovación, serenidad e intención.
+                    </p>
+                    <span class="card-tag">Claridad y calma</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">⚫</div>
+                    <h3>Negro</h3>
+                    <p>
+                        Límites, introspección, cierre de etapas y protección
+                        simbólica en determinadas tradiciones.
+                    </p>
+                    <span class="card-tag">Límites y reflexión</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🟢</div>
+                    <h3>Verde</h3>
+                    <p>
+                        Crecimiento, naturaleza, estabilidad material
+                        y renovación.
+                    </p>
+                    <span class="card-tag">Crecimiento</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🔵</div>
+                    <h3>Azul</h3>
+                    <p>
+                        Tranquilidad, comunicación, equilibrio y reflexión.
+                    </p>
+                    <span class="card-tag">Serenidad</span>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🟣</div>
+                    <h3>Violeta</h3>
+                    <p>
+                        Introspección, sabiduría, transformación y búsqueda
+                        espiritual.
+                    </p>
+                    <span class="card-tag">Transformación</span>
+                </article>
+
+            </div>
+
+            <div class="principle">
+                <div class="principle-symbol">✧</div>
+                <h3>El color no determina el resultado</h3>
+                <p>
+                    Estas asociaciones son referencias simbólicas,
+                    no reglas universales. El significado también depende
+                    de la intención, la tradición y la interpretación personal.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- INTENCIÓN -->
+
+        <section class="section" id="intencion">
+
+            <div class="section-heading">
+                <p class="section-number">08 — SEXTO ELEMENTO</p>
+                <h2>EL ARTE DE <span>FORMULAR LA INTENCIÓN</span></h2>
+                <p>
+                    Una práctica reflexiva comienza con una intención clara,
+                    realista y centrada en aquello que puedes trabajar.
+                </p>
+            </div>
+
+            <div class="card-grid">
+
+                <article class="card">
+                    <div class="card-icon">✍️</div>
+                    <h3>Claridad</h3>
+                    <p>
+                        Expresa qué quieres explorar sin mezclar demasiados
+                        temas en una misma práctica.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Concreción</h3>
+                    <p>
+                        En lugar de buscar respuestas absolutas, formula
+                        una pregunta que te ayude a reflexionar sobre
+                        una situación específica.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🌙</div>
+                    <h3>Enfoque personal</h3>
+                    <p>
+                        Prioriza tus decisiones, necesidades, límites
+                        y posibilidades de acción.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="topic" style="margin-top: 24px;">
+
+                <h3>Ejemplos de intenciones</h3>
+
+                <div class="observation-list">
+
+                    <div class="observation">
+                        <span class="observation-mark">✦</span>
+                        <div>
+                            <strong>Para obtener claridad</strong>
+                            <p>
+                                «Quiero comprender qué necesito atender
+                                en esta etapa de mi vida».
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="observation">
+                        <span class="observation-mark">✦</span>
+                        <div>
+                            <strong>Para trabajar los vínculos</strong>
+                            <p>
+                                «Quiero reflexionar sobre mis necesidades
+                                afectivas y los límites que necesito».
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="observation">
+                        <span class="observation-mark">✦</span>
+                        <div>
+                            <strong>Para iniciar una etapa</strong>
+                            <p>
+                                «Quiero reconocer qué puedo dejar atrás
+                                y qué pasos quiero dar a continuación».
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ERRORES FRECUENTES -->
+
+        <section class="section" id="errores">
+
+            <div class="section-heading">
+                <p class="section-number">09 — APRENDER A INTERPRETAR</p>
+                <h2>ERRORES FRECUENTES <span>EN VELOMANCIA</span></h2>
+                <p>
+                    Una interpretación equilibrada requiere paciencia,
+                    contexto y capacidad para revisar nuestras propias ideas.
+                </p>
+            </div>
+
+            <div class="card-grid">
+
+                <article class="card">
+                    <div class="card-icon">⚠️</div>
+                    <h3>Interpretar todo como una señal</h3>
+                    <p>
+                        No todos los cambios de la llama o la cera
+                        tienen un significado especial. Primero observa
+                        las causas físicas.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Buscar solamente confirmaciones</h3>
+                    <p>
+                        Es fácil encontrar aquello que esperamos ver.
+                        Anota lo ocurrido antes de decidir qué significa.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🌑</div>
+                    <h3>Interpretar desde el miedo</h3>
+                    <p>
+                        Una llama irregular o una figura extraña no demuestra
+                        que alguien te esté haciendo daño ni que vaya a ocurrir
+                        algo negativo.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🔮</div>
+                    <h3>Tomar decisiones solo por una lectura</h3>
+                    <p>
+                        Las interpretaciones simbólicas pueden acompañar
+                        una reflexión, pero no sustituyen los hechos,
+                        el diálogo ni la evaluación de alternativas.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">📝</div>
+                    <h3>No llevar un registro</h3>
+                    <p>
+                        Anotar lo observado te permite comparar experiencias
+                        y reconocer cómo cambia tu propia interpretación.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">🧭</div>
+                    <h3>Olvidar el contexto</h3>
+                    <p>
+                        Una misma forma puede evocar cosas distintas.
+                        No existe una interpretación única que sirva
+                        para todas las personas.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- PROTECCIÓN -->
+
+        <section class="section" id="proteccion">
+
+            <div class="section-heading">
+                <p class="section-number">10 — PRÁCTICA SIMBÓLICA</p>
+                <h2>LECTURAS DE <span>PROTECCIÓN</span></h2>
+                <p>
+                    Una aproximación centrada en el cuidado personal,
+                    los límites y la tranquilidad.
+                </p>
+            </div>
+
+            <div class="topic">
+
+                <div class="topic-header">
+                    <div class="topic-icon">🛡️</div>
+                    <div>
+                        <h3>La protección como <span>intención</span></h3>
+                        <p>
+                            Crear un espacio de calma y recordar nuestros límites.
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    En diferentes tradiciones, las velas se utilizan
+                    como símbolos de resguardo, serenidad y fortaleza.
+                    Una lectura de protección puede servir como ritual
+                    personal para detenerse, ordenar pensamientos
+                    y recuperar la sensación de autonomía.
+                </p>
+
+                <p>
+                    La práctica no permite comprobar la existencia
+                    de ataques invisibles ni identificar responsables
+                    de un supuesto daño. Su valor puede estar en la
+                    intención, la reflexión y las acciones concretas
+                    que decidimos tomar.
+                </p>
+
+                <h4 class="topic-subtitle">Preparación de la lectura</h4>
+
+                <div class="small-grid">
+
+                    <article class="small-card">
+                        <h4>01. Define tu propósito</h4>
+                        <p>
+                            Escribe una intención relacionada con tu bienestar,
+                            tus límites o la tranquilidad que buscas.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>02. Prepara el espacio</h4>
+                        <p>
+                            Busca un lugar tranquilo y seguro, lejos
+                            de materiales inflamables y corrientes de aire.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>03. Registra lo observado</h4>
+                        <p>
+                            Anota el color, el estado de la mecha,
+                            la duración y los cambios visibles.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>04. Cierra la práctica</h4>
+                        <p>
+                            Dedica unos minutos a identificar qué acciones
+                            reales podrían ayudarte a sentirte más seguro.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="principle">
+                    <div class="principle-symbol">✧</div>
+                    <h3>Proteger también es poner límites</h3>
+                    <p>
+                        La tranquilidad no depende únicamente de un ritual.
+                        También puede construirse con decisiones conscientes,
+                        relaciones respetuosas, descanso y espacios seguros.
+                    </p>
+                </div>
+
+                <div class="example">
+                    <h4>Ejemplo de lectura simbólica</h4>
+
+                    <p>
+                        <strong>Intención:</strong> «Quiero fortalecer
+                        mis límites y recuperar mi tranquilidad».
+                    </p>
+
+                    <p>
+                        <strong>Observación:</strong> la llama se mantiene
+                        estable durante buena parte de la práctica y la cera
+                        forma una pequeña acumulación a un lado.
+                    </p>
+
+                    <p>
+                        <strong>Interpretación reflexiva:</strong> puedes
+                        tomar la estabilidad como una imagen de constancia
+                        y la acumulación como una invitación a revisar un
+                        asunto pendiente. Son asociaciones personales,
+                        no pruebas de una fuerza externa.
+                    </p>
+
+                    <p>
+                        <strong>Acción concreta:</strong> identifica un límite
+                        que necesites comunicar y una medida sencilla para
+                        cuidar tu bienestar.
+                    </p>
+                </div>
+
+                <div class="safety-note">
+                    <strong>Seguridad:</strong>
+                    utiliza una base resistente al calor, no dejes la vela
+                    sola y apágala si produce humo excesivo o presenta
+                    una combustión anormal. Nunca es necesario mantener
+                    una vela encendida para completar una lectura.
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CORTE Y LIBERACIÓN -->
+
+        <section class="section" id="liberacion">
+
+            <div class="section-heading">
+                <p class="section-number">11 — CIERRES SIMBÓLICOS</p>
+                <h2>CORTE Y <span>LIBERACIÓN</span></h2>
+                <p>
+                    Un ritual simbólico para marcar el cierre de una etapa
+                    y reconocer aquello que quieres cambiar.
+                </p>
+            </div>
+
+            <div class="topic">
+
+                <div class="topic-header">
+                    <div class="topic-icon">🦋</div>
+                    <div>
+                        <h3>El arte de <span>soltar</span></h3>
+                        <p>
+                            Reconocer, agradecer y avanzar.
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    Las prácticas de corte y liberación aparecen en distintas
+                    corrientes esotéricas. Pueden entenderse como ceremonias
+                    simbólicas que ayudan a representar una decisión:
+                    cerrar una etapa, revisar un vínculo o dejar de sostener
+                    una situación que ya no nos hace bien.
+                </p>
+
+                <p>
+                    No es necesario interpretar el ritual como una forma
+                    de modificar a otra persona o de romper literalmente
+                    un vínculo invisible. El foco puede ponerse en tus
+                    propias decisiones, emociones y límites.
+                </p>
+
+                <div class="small-grid">
+
+                    <article class="small-card">
+                        <h4>Vínculos</h4>
+                        <p>
+                            Reflexionar sobre relaciones que generan malestar
+                            y reconocer qué límites necesitas establecer.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Etapas</h4>
+                        <p>
+                            Dar un cierre simbólico a un período de tu vida
+                            y definir qué quieres llevar contigo.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Cargas emocionales</h4>
+                        <p>
+                            Identificar preocupaciones, expectativas
+                            o hábitos que deseas empezar a trabajar.
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Liberación personal</h4>
+                        <p>
+                            Elegir acciones concretas que te ayuden
+                            a recuperar tiempo, energía y autonomía.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="principle">
+                    <div class="principle-symbol">✧</div>
+                    <h3>No se trata de destruir, sino de soltar</h3>
+                    <p>
+                        Un cierre significativo no necesita dañar a nadie.
+                        Puede representar una decisión consciente de cuidarte,
+                        respetar tus límites y dejar de insistir en aquello
+                        que no puedes controlar.
+                    </p>
+                </div>
+
+                <div class="example">
+                    <h4>Ejemplo de intención para un cierre</h4>
+
+                    <p>
+                        «Reconozco lo que esta etapa significó para mí.
+                        Acepto aquello que no puedo cambiar y decido
+                        cuidar mi bienestar en el presente.
+                    </p>
+
+                    <p>
+                        Dejo de sostener expectativas que me hacen daño,
+                        recupero mi atención y elijo avanzar con claridad,
+                        respeto y responsabilidad hacia mí y hacia los demás».
+                    </p>
+                </div>
+
+                <h4 class="topic-subtitle">Cuatro pasos para cerrar la práctica</h4>
+
+                <div class="observation-list">
+
+                    <div class="observation">
+                        <span class="observation-mark">01</span>
+                        <div>
+                            <strong>Reconocer</strong>
+                            <p>
+                                Nombra aquello que quieres dejar atrás
+                                y por qué es importante para ti.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="observation">
+                        <span class="observation-mark">02</span>
+                        <div>
+                            <strong>Aceptar</strong>
+                            <p>
+                                Distingue lo que depende de ti de aquello
+                                que corresponde decidir a otras personas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="observation">
+                        <span class="observation-mark">03</span>
+                        <div>
+                            <strong>Elegir</strong>
+                            <p>
+                                Define un límite o una acción concreta
+                                que puedas poner en práctica.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="observation">
+                        <span class="observation-mark">04</span>
+                        <div>
+                            <strong>Avanzar</strong>
+                            <p>
+                                Termina el ejercicio y vuelve a tus
+                                actividades cotidianas. No necesitas
+                                repetir el ritual por temor.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="principle">
+                    <div class="principle-symbol">☾</div>
+                    <h3>Cerrar también es avanzar</h3>
+                    <p>
+                        El sentido de una práctica está en lo que te ayuda
+                        a comprender y en las decisiones que eliges tomar
+                        después de ella.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- REGISTRO PERSONAL -->
+
+        <section class="section" id="registro">
+
+            <div class="section-heading">
+                <p class="section-number">12 — EJERCICIO PRÁCTICO</p>
+                <h2>TU PRIMER <span>REGISTRO</span></h2>
+                <p>
+                    Aprende a documentar una práctica sin depender
+                    de interpretaciones automáticas.
+                </p>
+            </div>
+
+            <div class="topic">
+
+                <p>
+                    Después de una observación, registra los datos
+                    de manera ordenada. Este pequeño hábito te ayudará
+                    a diferenciar lo que viste de lo que interpretaste.
+                </p>
+
+                <div class="small-grid">
+
+                    <article class="small-card">
+                        <h4>La intención</h4>
+                        <p>
+                            ¿Qué tema quería explorar y por qué lo elegí?
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Las condiciones</h4>
+                        <p>
+                            ¿Qué tipo de vela utilicé? ¿Había corrientes
+                            de aire? ¿Cómo estaba la mecha?
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>La observación</h4>
+                        <p>
+                            ¿Qué ocurrió realmente con la llama, la cera
+                            y el humo?
+                        </p>
+                    </article>
+
+                    <article class="small-card">
+                        <h4>Mi interpretación</h4>
+                        <p>
+                            ¿Qué asociación simbólica me surgió y qué otras
+                            explicaciones podrían existir?
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="example">
+                    <h4>Modelo de registro</h4>
+                    <p>
+                        <strong>Fecha:</strong> día de la práctica.
+                    </p>
+                    <p>
+                        <strong>Intención:</strong> tema que deseo explorar.
+                    </p>
+                    <p>
+                        <strong>Observación:</strong> descripción concreta
+                        de lo ocurrido.
+                    </p>
+                    <p>
+                        <strong>Interpretación:</strong> asociaciones
+                        simbólicas que considero posibles.
+                    </p>
+                    <p>
+                        <strong>Reflexión final:</strong> qué aprendí
+                        y qué acción útil puedo tomar.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SIGUIENTE PARTE -->
+
+        <div class="course-progress">
+            <span>Estudio I</span>
+            <div class="progress-line">
+                <div class="progress-fill"></div>
+            </div>
+            <span>Introducción</span>
         </div>
 
-        <div class="study-card">
-            <div class="study-icon">2</div>
-            <h3>Prepará el lugar</h3>
+        <section class="next-section">
+
+            <p class="eyebrow">ASTRO ROJO · CONTINUAR EL CURSO</p>
+
+            <h2>EL CAMINO <span>CONTINÚA</span></h2>
+
             <p>
-                Utilizá una superficie firme y despejada. Evitá ventanas,
-                ventiladores y cualquier corriente de aire.
+                Ya conoces los fundamentos de la velomancia. En la siguiente
+                parte podrás profundizar en las técnicas de observación,
+                las combinaciones simbólicas y los métodos de lectura.
             </p>
-        </div>
 
-        <div class="study-card">
-            <div class="study-icon">3</div>
-            <h3>Prepará el registro</h3>
-            <p>
-                Tené a mano papel o un dispositivo para anotar horarios,
-                cambios de llama, humo, cera y observaciones.
-            </p>
-        </div>
+            <a href="index2.html" class="button">
+                SIGUIENTE TEMA <span>→</span>
+            </a>
 
-    </div>
+            <br>
 
+            <a href="index.html" class="button button-secondary">
+                VOLVER AL INICIO ↑
+            </a>
 
-   
+        </section>
 
-
-
-
-
-    
-
-    <div class="principio">
-
-        <div class="principio-icon">🛡️</div>
-
-        <h3>PROTEGER TAMBIÉN ES PONER LÍMITES</h3>
-
-        <p>
-            Una lectura de protección no tiene que centrarse únicamente
-            en detectar algo externo. También puede servir para observar
-            qué necesitamos preservar y qué límites necesitamos fortalecer.
-        </p>
-
-    </div>
-
-
-
-
-    <!-- =========================
-         LECTURA COMPLETA
-    ========================== -->
-
-    <h3 class="seccion-titulo">📖 EJEMPLO DE LECTURA</h3>
-
-    <div class="introduccion">
-
-        <p>
-            Supongamos que realizamos una lectura con intención de
-            protección personal.
-            Durante el comienzo, la llama permanece estable. A mitad de
-            la combustión aumenta ligeramente su intensidad y después
-            vuelve a estabilizarse. El humo aparece durante unos segundos
-            y desaparece. La cera se consume de manera relativamente
-            uniforme.
-            En este caso no sería necesario buscar una señal negativa.
-            El conjunto puede registrarse simbólicamente como una lectura
-            de estabilidad, con un momento puntual de mayor intensidad.
-          La interpretación final debe construirse a partir del conjunto
-            y no de un único comportamiento.
-        </p>
-
-    </div>
-
-
-
-
-    <!-- =========================
-         PRINCIPIO FINAL
-    ========================== -->
-
-    <div class="principio">
-
-        <div class="principio-icon">🔎</div>
-
-        <h3>NO BUSQUES MIEDO: BUSCÁ PATRONES</h3>
-
-        <p>
-            El objetivo de una lectura de protección es aprender a
-            observar, registrar y relacionar señales. Una lectura seria
-            no necesita convertir cada comportamiento de una vela en
-            una advertencia.
-        </p>
-
-    </div>
-
-
-  
-
-</section>
-
-<!-- =========================
-     FRASE DE CORTE
-========================== -->
-
-<div class="principio">
-    <div class="principio-icon">✂️</div>
-
-    <h3></h3>
-
-    <p>
-        “Corto todo lazo energético que nos una.
-        Rompo todo acuerdo álmico que tengamos.
-        Libero toda deuda kármica entre nosotros,
-        en el pasado, presente y futuro.
-        Te devuelvo tu energía, que no me pertenece,
-        y reclamo la mía, que no te pertenece.
-        Te libero y me libero.
-        Hecho está. Hecho está.”
-    </p>
-</div>
-
-
-
-<!-- =========================
-     CORTE Y LIBERACIÓN
-========================== -->
-
-<div class="seccion-titulo">
-
-    <h2>✂️ CORTE Y LIBERACIÓN</h2>
+    </main>
 
 </div>
 
-
-<div class="introduccion">
-
-    <p>
-        El corte y la liberación pueden trabajarse
-        simbólicamente como una forma de cerrar etapas,
-        soltar situaciones que generan desgaste y
-        establecer límites frente a aquello que ya no
-        queremos continuar sosteniendo.
-        Dentro de una lectura de velomancia, la vela
-        funciona como un elemento de observación.
-        No buscamos provocar daño ni controlar a otras
-        personas, sino representar una intención personal
-        de cierre, separación y renovación.
-    </p>
-
-</div>
-
-
-<!-- =========================
-     ¿QUÉ PODEMOS TRABAJAR?
-========================== -->
-
-<div class="seccion-titulo">
-
-    <h2>✂️ ¿QUÉ PODEMOS TRABAJAR?</h2>
-
-</div>
-
-
-<div class="study-grid">
-
-
-    <article class="study-card">
-
-        <div class="study-icon">🔗</div>
-
-        <h3>
-            Vínculos
-        </h3>
-
-        <p>
-            Trabajar simbólicamente la necesidad de tomar
-            distancia de un vínculo que genera desgaste
-            o que ya no queremos sostener.
-        </p>
-
-    </article>
-
-
-    <article class="study-card">
-
-        <div class="study-icon">🌑</div>
-
-        <h3>
-            Etapas
-        </h3>
-
-        <p>
-            Representar el cierre de una etapa y reconocer
-            que un proceso puede llegar naturalmente
-            a su final.
-        </p>
-
-    </article>
-
-
-    <article class="study-card">
-
-        <div class="study-icon">🧠</div>
-
-        <h3>
-            Cargas emocionales
-        </h3>
-
-        <p>
-            Utilizar la práctica como una herramienta
-            simbólica para reflexionar sobre aquello
-            que queremos dejar atrás.
-        </p>
-
-    </article>
-
-
-    <article class="study-card">
-
-        <div class="study-icon">🕊️</div>
-
-        <h3>
-            Liberación
-        </h3>
-
-        <p>
-            Representar el deseo de recuperar tranquilidad,
-            cerrar un ciclo y abrir espacio para una nueva
-            etapa.
-        </p>
-
-    </article>
-
-
-</div>
-
-
-<!-- =========================
-     PRINCIPIO
-========================== -->
-
-<div class="principio">
-
-    <div class="principio-icon">✂️</div>
-
-    <h3>
-        NO SE TRATA DE DESTRUIR, SINO DE SOLTAR
-    </h3>
-
-    <p>
-        El corte y la liberación pueden utilizarse
-        simbólicamente para representar un cierre
-        consciente. La intención está puesta en aquello
-        que cada persona decide dejar atrás y no en
-        controlar las decisiones de otra persona.
-    </p>
-
-</div>
-
-
-
-<div class="principio">
-
-    <div class="principio-icon">🕊️</div>
-
-    <h3>
-        CERRAR TAMBIÉN ES AVANZAR
-    </h3>
-
-    <p>
-        Una práctica de liberación puede representar
-        simbólicamente el final de una etapa y la decisión
-        personal de avanzar hacia una nueva situación.
-    </p>
-
-</div>
-</section>
-<div class="siguiente-leccion">
-    <a href="index2.html">
-        SIGUIENTE TEMA →
-    </a>
-</div>
-
-
-    
-    </section>
-
-
-</main>
+<footer>
+    <p><span>ASTRO ROJO</span> · EL ARTE DE LA VELOMANCIA</p>
+    <p>Estudio simbólico, observación y reflexión personal.</p>
+</footer>
 
 </body>
-
 </html>
-
