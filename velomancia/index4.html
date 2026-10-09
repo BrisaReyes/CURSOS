@@ -180,6 +180,43 @@ body {
     font-size: 8px;
 }
 
+/* BOTÓN DE EJERCICIOS */
+
+.boton-ejercicios-contenedor {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: 25px 0 15px;
+}
+
+.boton-ejercicios {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 17px 30px;
+    background: var(--rojo);
+    color: #ffffff;
+    border: 1px solid var(--rojo);
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.boton-ejercicios:hover {
+    background: transparent;
+    color: var(--rojo);
+    transform: translateY(-3px);
+}
+
+.boton-ejercicios span {
+    font-size: 20px;
+    line-height: 1;
+}
+
 /* TRABAJO FINAL */
 
 .cierre {
@@ -270,6 +307,12 @@ body {
         font-size: 22px;
     }
 
+    .boton-ejercicios {
+        width: 100%;
+        max-width: 340px;
+        padding: 16px 20px;
+    }
+
     .cierre {
         margin: 40px 0;
         padding: 35px 22px;
@@ -281,7 +324,8 @@ body {
         scroll-behavior: auto;
     }
 
-    .modulo {
+    .modulo,
+    .boton-ejercicios {
         transition: none;
     }
 }
@@ -473,10 +517,14 @@ body {
                 <li>No dejar una vela encendida sin supervisión.</li>
             </ul>
         </article>
-<a href="index5.html" class="boton-ejercicios">
-    IR A LOS EJERCICIOS
-    <span>↗</span>
-</a>
+
+        <div class="boton-ejercicios-contenedor">
+            <a href="index5.html" class="boton-ejercicios">
+                IR A LOS EJERCICIOS
+                <span>↗</span>
+            </a>
+        </div>
+
     </section>
 
     <section class="cierre">
