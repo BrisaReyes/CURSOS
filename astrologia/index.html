@@ -1,939 +1,1387 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Curso de astrología ASTRO ROJO: aprende a interpretar los planetas, Quirón y los nodos lunares según el signo y la casa astrológica.">
+<title>Planetas y puntos principales | ASTRO ROJO</title>
 
-    <meta name="theme-color" content="#10070b">
-    <meta name="description" content="Curso de astrología de ASTRO ROJO. Aprende los signos zodiacales, los elementos, las modalidades y los fundamentos de la carta natal.">
+<style>
+:root {
+    --fondo: #090709;
+    --panel: #150d11;
+    --panel-claro: #211117;
+    --rojo: #e32646;
+    --rojo-claro: #ff8395;
+    --texto: #f7eff1;
+    --suave: #c9b9bf;
+    --borde: #49212c;
+    --ancho: 1380px;
+}
 
-    <title>ASTRO ROJO — Curso de Astrología</title>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <link rel="stylesheet" href="style.css">
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 30px;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 75% 0%, #3b101b 0%, transparent 35%),
+        radial-gradient(ellipse at 0% 40%, #210b13 0%, transparent 35%),
+        var(--fondo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.8;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: min(100% - 48px, var(--ancho));
+    margin: auto;
+}
+
+/* PORTADA */
+
+.portada {
+    position: relative;
+    overflow: hidden;
+    padding: 34px 0 78px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.portada::before {
+    content: "☾";
+    position: absolute;
+    right: 8%;
+    top: 10px;
+    color: rgba(227, 38, 70, .12);
+    font-size: clamp(180px, 28vw, 370px);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 17px;
+    border: 1px solid var(--borde);
+    border-radius: 30px;
+    color: var(--suave);
+    font-size: 13px;
+    transition: .25s;
+}
+
+.volver:hover {
+    border-color: var(--rojo);
+    color: white;
+    transform: translateX(-3px);
+}
+
+.portada-contenido {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin-top: 75px;
+}
+
+.etiqueta {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: var(--rojo-claro);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+}
+
+.portada h1 {
+    max-width: 850px;
+    margin-bottom: 24px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(43px, 6vw, 82px);
+    font-weight: normal;
+    letter-spacing: -2px;
+}
+
+.portada h1 span {
+    color: var(--rojo-claro);
+}
+
+.portada p {
+    max-width: 700px;
+    color: var(--suave);
+    font-size: 17px;
+}
+
+.portada-datos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.portada-datos span {
+    padding: 8px 14px;
+    border: 1px solid var(--borde);
+    border-radius: 30px;
+    background: rgba(15, 8, 11, .65);
+    color: #e8d6dc;
+    font-size: 12px;
+}
+
+/* ESTRUCTURA */
+
+.contenido {
+    display: grid;
+    grid-template-columns: 265px minmax(0, 1fr);
+    align-items: start;
+    gap: 38px;
+    padding-top: 48px;
+    padding-bottom: 80px;
+}
+
+.indice {
+    position: sticky;
+    top: 24px;
+    padding: 25px 19px;
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+    background: rgba(21, 13, 17, .92);
+}
+
+.indice h2 {
+    margin-bottom: 18px;
+    color: var(--rojo-claro);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.indice a {
+    display: block;
+    padding: 9px 10px;
+    border-radius: 8px;
+    color: var(--suave);
+    font-size: 13px;
+    transition: .2s;
+}
+
+.indice a:hover {
+    background: #32121c;
+    color: white;
+}
+
+.lecciones {
+    min-width: 0;
+}
+
+.seccion {
+    margin-bottom: 42px;
+    scroll-margin-top: 25px;
+}
+
+.encabezado-seccion {
+    margin-bottom: 24px;
+}
+
+.encabezado-seccion .numero {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--rojo-claro);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.encabezado-seccion h2 {
+    margin-bottom: 12px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(29px, 3vw, 43px);
+    font-weight: normal;
+}
+
+.encabezado-seccion p {
+    max-width: 800px;
+    color: var(--suave);
+}
+
+/* INTRODUCCIÓN */
+
+.panel {
+    margin-bottom: 22px;
+    padding: 28px;
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+    background: linear-gradient(145deg, #1d1016, #100a0d);
+}
+
+.panel h3 {
+    margin-bottom: 12px;
+    color: var(--rojo-claro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.panel p {
+    margin-bottom: 12px;
+    color: var(--suave);
+}
+
+.panel p:last-child {
+    margin-bottom: 0;
+}
+
+.destacado {
+    border-left: 3px solid var(--rojo);
+}
+
+/* TARJETAS PLANETARIAS */
+
+.planetas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.planeta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 24px 21px;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    background:
+        linear-gradient(150deg, rgba(50, 17, 28, .7), rgba(17, 10, 13, .97));
+    transition: border-color .25s, transform .25s, background .25s;
+    scroll-margin-top: 25px;
+}
+
+.planeta:hover {
+    border-color: var(--rojo);
+    transform: translateY(-4px);
+    background: linear-gradient(150deg, #30121d, #130b0f);
+}
+
+.planeta-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 16px;
+}
+
+.simbolo {
+    display: grid;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid #76293a;
+    border-radius: 50%;
+    background: #2a1019;
+    color: var(--rojo-claro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+}
+
+.planeta h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23px;
+    font-weight: normal;
+}
+
+.categoria {
+    display: block;
+    margin-top: 4px;
+    color: var(--rojo-claro);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.planeta > p {
+    margin-bottom: 17px;
+    color: var(--suave);
+    font-size: 14px;
+}
+
+.planeta h4 {
+    margin: 13px 0 5px;
+    color: #f1dce2;
+    font-size: 13px;
+}
+
+.planeta .interpretacion {
+    margin-bottom: 0;
+    color: #d1c0c6;
+    font-size: 13px;
+}
+
+.formula {
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+.formula span {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #291019;
+    color: #ffd6df;
+    font-size: 12px;
+}
+
+.formula strong {
+    color: var(--rojo-claro);
+}
+
+/* CONTENIDOS COMPLEMENTARIOS */
+
+.complementarios {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.complementario {
+    padding: 25px;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    background: var(--panel);
+    scroll-margin-top: 25px;
+}
+
+.complementario h3 {
+    margin-bottom: 12px;
+    color: var(--rojo-claro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.complementario p {
+    margin-bottom: 12px;
+    color: var(--suave);
+    font-size: 14px;
+}
+
+.complementario p:last-child {
+    margin-bottom: 0;
+}
+
+/* MÉTODO DE INTERPRETACIÓN */
+
+.pasos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.paso {
+    padding: 21px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background: #140c10;
+}
+
+.paso .paso-numero {
+    display: block;
+    margin-bottom: 13px;
+    color: var(--rojo-claro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 31px;
+}
+
+.paso h3 {
+    margin-bottom: 9px;
+    font-size: 16px;
+}
+
+.paso p {
+    color: var(--suave);
+    font-size: 13px;
+}
+
+/* EJERCICIO */
+
+.ejercicio {
+    padding: 30px;
+    border: 1px solid #722638;
+    border-radius: 17px;
+    background:
+        radial-gradient(ellipse at top right, #3a1220, transparent 60%),
+        #160b10;
+}
+
+.ejercicio h3 {
+    margin-bottom: 13px;
+    color: var(--rojo-claro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    font-weight: normal;
+}
+
+.ejercicio p,
+.ejercicio li {
+    color: var(--suave);
+    font-size: 14px;
+}
+
+.ejercicio ul {
+    padding-left: 22px;
+    margin: 15px 0 20px;
+}
+
+.ejercicio li {
+    margin-bottom: 8px;
+}
+
+.pregunta {
+    margin-top: 20px;
+    padding: 16px;
+    border-left: 3px solid var(--rojo);
+    background: rgba(7, 5, 6, .55);
+    color: var(--texto);
+}
+
+/* PIE */
+
+.pie {
+    padding: 35px 24px;
+    border-top: 1px solid var(--borde);
+    text-align: center;
+}
+
+.pie strong {
+    color: var(--rojo-claro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+}
+
+.pie p {
+    margin-top: 8px;
+    color: var(--suave);
+    font-size: 12px;
+}
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+    .contenido {
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .planetas-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pasos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* CELULAR */
+
+@media (max-width: 720px) {
+    .container {
+        width: min(100% - 30px, var(--ancho));
+    }
+
+    .portada {
+        padding-top: 22px;
+        padding-bottom: 45px;
+    }
+
+    .portada-contenido {
+        margin-top: 50px;
+    }
+
+    .portada h1 {
+        font-size: clamp(39px, 11vw, 60px);
+        letter-spacing: -1px;
+    }
+
+    .portada p {
+        font-size: 15px;
+    }
+
+    .contenido {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        padding-top: 30px;
+    }
+
+    .indice {
+        position: static;
+        width: 100%;
+    }
+
+    .indice-lista {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3px;
+    }
+
+    .indice a {
+        font-size: 12px;
+    }
+
+    .planetas-grid,
+    .complementarios {
+        grid-template-columns: 1fr;
+    }
+
+    .panel,
+    .planeta,
+    .complementario,
+    .ejercicio {
+        padding: 21px;
+    }
+
+    .encabezado-seccion h2 {
+        font-size: 32px;
+    }
+
+    .portada::before {
+        right: -40px;
+        top: 70px;
+    }
+}
+
+/* CELULARES PEQUEÑOS */
+
+@media (max-width: 380px) {
+    .container {
+        width: calc(100% - 22px);
+    }
+
+    .indice-lista {
+        grid-template-columns: 1fr;
+    }
+
+    .portada h1 {
+        font-size: 37px;
+    }
+
+    .planeta-cabecera {
+        align-items: flex-start;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <main>
+<header class="portada">
+    <div class="container">
+        <a class="volver" href="index.html">← Volver al curso</a>
 
-        <!-- PORTADA -->
+        <div class="portada-contenido">
+            <span class="etiqueta">ASTRO ROJO · MÓDULO 02</span>
 
-        <section class="hero" id="inicio">
+            <h1>Planetas y <span>puntos principales</span></h1>
 
-            <div class="hero-orbit orbit-one"></div>
-            <div class="hero-orbit orbit-two"></div>
+            <p>
+                Aprende qué representa cada planeta en la carta natal,
+                cómo se expresa a través de los signos y en qué ámbitos
+                de la vida se manifiesta según la casa astrológica.
+            </p>
 
-            <div class="hero-content">
-
-                <span class="eyebrow">
-                    ✦ UN VIAJE POR EL UNIVERSO SIMBÓLICO ✦
-                </span>
-
-                <h1>
-                    ASTRO<br>
-                    <span>ROJO</span>
-                </h1>
-
-                <p class="hero-subtitle">Curso de Astrología</p>
-
-                <p class="hero-description">
-                    Aprende a interpretar el lenguaje de los astros,
-                    descubrir los doce signos zodiacales y comprender
-                    los símbolos que dan forma a una carta natal.
-                </p>
-
-                <div class="hero-note">
-                    <span>☉</span>
-                    <span>CONOCIMIENTO</span>
-                    <i></i>
-                    <span>SIMBOLISMO</span>
-                    <i></i>
-                    <span>AUTOCONOCIMIENTO</span>
-                </div>
-
+            <div class="portada-datos">
+                <span>☉ Planetas personales</span>
+                <span>♃ Planetas sociales</span>
+                <span>♇ Planetas transpersonales</span>
+                <span>☊ Puntos complementarios</span>
             </div>
+        </div>
+    </div>
+</header>
 
-            <div class="hero-moon" aria-hidden="true">
-                <span>☾</span>
-                <div class="moon-ring"></div>
-                <div class="moon-star star-one">✦</div>
-                <div class="moon-star star-two">✧</div>
-                <div class="moon-star star-three">✦</div>
-            </div>
+<main class="container contenido">
 
-        </section>
+    <aside class="indice">
+        <h2>Contenido del módulo</h2>
 
+        <nav class="indice-lista">
+            <a href="#introduccion">Introducción</a>
+            <a href="#interpretacion">Cómo interpretar</a>
+            <a href="#personales">Planetas personales</a>
+            <a href="#sociales">Planetas sociales</a>
+            <a href="#transpersonales">Planetas transpersonales</a>
+            <a href="#quiron">Quirón</a>
+            <a href="#nodos">Nodos lunares</a>
+            <a href="#integracion">Integrar la carta</a>
+            <a href="#ejercicio">Ejercicio práctico</a>
+        </nav>
+    </aside>
 
-        <!-- PRESENTACIÓN DEL CURSO -->
-
-        <section class="course-strip">
-
-            <div class="course-strip-item">
-                <span class="strip-icon">✧</span>
-                <div>
-                    <strong>12 signos</strong>
-                    <small>El zodíaco completo</small>
-                </div>
-            </div>
-
-            <div class="course-strip-item">
-                <span class="strip-icon">☉</span>
-                <div>
-                    <strong>4 elementos</strong>
-                    <small>Fuego, tierra, aire y agua</small>
-                </div>
-            </div>
-
-            <div class="course-strip-item">
-                <span class="strip-icon">☽</span>
-                <div>
-                    <strong>Carta natal</strong>
-                    <small>Una mirada integral</small>
-                </div>
-            </div>
-
-            <div class="course-strip-item">
-                <span class="strip-icon">♄</span>
-                <div>
-                    <strong>Fundamentos</strong>
-                    <small>De lo básico a la interpretación</small>
-                </div>
-            </div>
-
-        </section>
-
+    <div class="lecciones">
 
         <!-- INTRODUCCIÓN -->
 
-        <section class="section" id="introduccion">
-
-            <div class="section-heading">
-                <span class="section-number">01 / INTRODUCCIÓN</span>
-                <h2>Una puerta al <span>universo astrológico</span></h2>
+        <section class="seccion" id="introduccion">
+            <div class="encabezado-seccion">
+                <span class="numero">01 · Fundamentos</span>
+                <h2>¿Qué representan los planetas?</h2>
                 <p>
-                    Antes de interpretar una carta natal, necesitamos
-                    comprender el lenguaje con el que está construida.
+                    En astrología, cada planeta simboliza una función
+                    psicológica, una necesidad o una dimensión de la
+                    experiencia humana.
                 </p>
             </div>
 
-            <div class="intro-layout">
+            <div class="panel destacado">
+                <h3>El planeta, el signo y la casa</h3>
 
-                <div class="intro-visual">
-                    <div class="intro-circle">
-                        <span class="intro-sun">☉</span>
-                        <span class="intro-moon">☾</span>
-                        <span class="intro-star">✦</span>
-                        <span class="intro-zodiac">♈ ♉ ♊ ♋</span>
-                        <span class="intro-zodiac second">♌ ♍ ♎ ♏</span>
-                        <span class="intro-zodiac third">♐ ♑ ♒ ♓</span>
-                    </div>
-                    <p>El cielo como lenguaje simbólico</p>
-                </div>
+                <p>
+                    Para interpretar un planeta no basta con conocer su
+                    posición por signo. También es necesario observar
+                    la casa en la que se encuentra y, en una lectura más
+                    completa, sus aspectos con otros planetas.
+                </p>
 
-                <div class="intro-text">
-
-                    <span class="mini-label">PRIMEROS PASOS</span>
-
-                    <h3>¿Qué vamos a aprender?</h3>
-
-                    <p>
-                        La astrología es un sistema simbólico que relaciona
-                        las posiciones aparentes de los cuerpos celestes
-                        con arquetipos, ciclos y formas de interpretar
-                        la experiencia humana.
-                    </p>
-
-                    <p>
-                        En este curso estudiaremos sus conceptos esenciales,
-                        los doce signos zodiacales, los elementos, las
-                        modalidades, las polaridades y las regencias.
-                        También veremos cómo se integran estos componentes
-                        al interpretar una carta natal.
-                    </p>
-
-                    <div class="highlight-box">
-                        <span>✦</span>
-                        <p>
-                            Una interpretación astrológica no se construye
-                            a partir de un único signo, sino de la relación
-                            entre distintos símbolos y factores.
-                        </p>
-                    </div>
-
-                </div>
-
+                <p>
+                    <strong>El planeta</strong> describe qué función está
+                    en juego; <strong>el signo</strong> indica el estilo
+                    con el que se expresa; y <strong>la casa</strong>
+                    señala el área de la vida donde esa función adquiere
+                    protagonismo.
+                </p>
             </div>
 
+            <div class="panel">
+                <h3>Un ejemplo sencillo</h3>
+
+                <p>
+                    Marte se relaciona simbólicamente con la acción,
+                    la iniciativa y la forma de enfrentar desafíos.
+                    Marte en Aries podría expresar esa energía de manera
+                    directa, rápida e impulsiva. Si está en la casa 10,
+                    esa dinámica podría adquirir importancia en la
+                    profesión, las metas o la vida pública.
+                </p>
+
+                <p>
+                    Esta lectura es simbólica: no determina de manera
+                    inevitable la personalidad ni el destino de una persona.
+                </p>
+            </div>
         </section>
 
+        <!-- MÉTODO -->
 
-        <!-- FUNDAMENTOS -->
-
-        <section class="section section-dark" id="fundamentos">
-
-            <div class="section-heading">
-                <span class="section-number">02 / FUNDAMENTOS</span>
-                <h2>Las bases de la <span>astrología</span></h2>
+        <section class="seccion" id="interpretacion">
+            <div class="encabezado-seccion">
+                <span class="numero">02 · Método de lectura</span>
+                <h2>Cómo interpretar un planeta</h2>
                 <p>
-                    Comprende sus conceptos esenciales antes de profundizar
-                    en los signos y las cartas natales.
+                    Utiliza estas tres preguntas como punto de partida
+                    para analizar cualquier posición de la carta natal.
                 </p>
             </div>
 
-            <div class="content-grid">
-
-                <article class="content-card">
-                    <span class="card-icon">☉</span>
-                    <span class="card-index">01</span>
-                    <h3>¿Qué es la astrología?</h3>
-                    <p>
-                        Es una tradición interpretativa que utiliza las
-                        posiciones de los astros como símbolos para explorar
-                        arquetipos, ciclos y experiencias humanas.
-                    </p>
-                    <p class="card-detail">
-                        <strong>Conceptos clave:</strong> símbolos,
-                        arquetipos, ciclos e interpretación.
-                    </p>
-                </article>
-
-                <article class="content-card">
-                    <span class="card-icon">⌛</span>
-                    <span class="card-index">02</span>
-                    <h3>Sus orígenes</h3>
-                    <p>
-                        Las prácticas de observación del cielo tienen
-                        raíces antiguas en Mesopotamia. Posteriormente,
-                        la astrología se desarrolló en el mundo helenístico
-                        y adoptó diferentes formas en otras culturas.
-                    </p>
-                    <p class="card-detail">
-                        <strong>Conceptos clave:</strong> historia,
-                        observación celeste y tradiciones.
-                    </p>
-                </article>
-
-                <article class="content-card">
-                    <span class="card-icon">✧</span>
-                    <span class="card-index">03</span>
-                    <h3>El lenguaje simbólico</h3>
-                    <p>
-                        Los planetas representan funciones o principios;
-                        los signos describen estilos de expresión y
-                        las casas señalan áreas de experiencia.
-                    </p>
-                    <p class="card-detail">
-                        <strong>Conceptos clave:</strong> planetas,
-                        signos, casas y aspectos.
-                    </p>
-                </article>
-
-                <article class="content-card">
-                    <span class="card-icon">◉</span>
-                    <span class="card-index">04</span>
-                    <h3>Astrología y astronomía</h3>
-                    <p>
-                        La astronomía estudia científicamente los cuerpos
-                        celestes y el universo. La astrología interpreta
-                        posiciones celestes dentro de un marco simbólico.
-                    </p>
-                    <p class="card-detail">
-                        <strong>Importante:</strong> son disciplinas
-                        diferentes; la astrología no está validada como
-                        método científico de predicción de la personalidad.
-                    </p>
-                </article>
-
-            </div>
-
-            <div class="comparison">
-
-                <div class="comparison-side">
-                    <span class="comparison-symbol">✦</span>
-                    <h3>Astrología</h3>
-                    <p>
-                        Interpreta símbolos, correspondencias y ciclos
-                        dentro de una tradición cultural.
-                    </p>
-                    <span class="comparison-tag">Lenguaje simbólico</span>
-                </div>
-
-                <div class="comparison-divider">
-                    <span>VS</span>
-                </div>
-
-                <div class="comparison-side">
-                    <span class="comparison-symbol">◌</span>
-                    <h3>Astronomía</h3>
-                    <p>
-                        Investiga los cuerpos celestes mediante
-                        observaciones, mediciones y modelos científicos.
-                    </p>
-                    <span class="comparison-tag">Ciencia del universo</span>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- CÓMO SE INTERPRETA -->
-
-        <section class="section" id="interpretacion">
-
-            <div class="section-heading">
-                <span class="section-number">03 / MÉTODO</span>
-                <h2>¿Cómo se construye una <span>interpretación?</span></h2>
-                <p>
-                    Aprender astrología implica relacionar los símbolos,
-                    no estudiarlos como piezas aisladas.
-                </p>
-            </div>
-
-            <div class="interpretation-steps">
-
-                <article class="step-card">
-                    <span class="step-number">01</span>
-                    <span class="step-symbol">☉</span>
-                    <h3>Identificar</h3>
-                    <p>
-                        Reconocer los planetas, signos, casas y aspectos
-                        presentes en la carta.
-                    </p>
-                </article>
-
-                <article class="step-card">
-                    <span class="step-number">02</span>
-                    <span class="step-symbol">♈</span>
-                    <h3>Comprender</h3>
-                    <p>
-                        Estudiar el significado tradicional de cada
-                        símbolo y sus diferentes posibilidades.
-                    </p>
-                </article>
-
-                <article class="step-card">
-                    <span class="step-number">03</span>
-                    <span class="step-symbol">⌘</span>
-                    <h3>Relacionar</h3>
-                    <p>
-                        Observar cómo se complementan o contrastan
-                        los diferentes componentes.
-                    </p>
-                </article>
-
-                <article class="step-card">
-                    <span class="step-number">04</span>
-                    <span class="step-symbol">✧</span>
-                    <h3>Sintetizar</h3>
-                    <p>
-                        Construir una lectura coherente, matizada y
-                        abierta a la reflexión personal.
-                    </p>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- CARTA NATAL -->
-
-        <section class="section natal-section" id="carta-natal">
-
-            <div class="section-heading">
-                <span class="section-number">04 / CARTA NATAL</span>
-                <h2>El mapa simbólico del <span>nacimiento</span></h2>
-                <p>
-                    Una introducción a los principales componentes
-                    de una carta natal.
-                </p>
-            </div>
-
-            <div class="natal-layout">
-
-                <div class="natal-wheel" aria-label="Ilustración simbólica de una carta natal">
-                    <div class="wheel-ring wheel-ring-outer"></div>
-                    <div class="wheel-ring wheel-ring-inner"></div>
-                    <div class="wheel-center">
-                        <span>☉</span>
-                        <small>CARTA<br>NATAL</small>
-                    </div>
-                    <span class="wheel-sign w1">♈</span>
-                    <span class="wheel-sign w2">♉</span>
-                    <span class="wheel-sign w3">♊</span>
-                    <span class="wheel-sign w4">♋</span>
-                    <span class="wheel-sign w5">♌</span>
-                    <span class="wheel-sign w6">♍</span>
-                    <span class="wheel-sign w7">♎</span>
-                    <span class="wheel-sign w8">♏</span>
-                    <span class="wheel-sign w9">♐</span>
-                    <span class="wheel-sign w10">♑</span>
-                    <span class="wheel-sign w11">♒</span>
-                    <span class="wheel-sign w12">♓</span>
-                </div>
-
-                <div class="natal-content">
-
+            <div class="pasos">
+                <article class="paso">
+                    <span class="paso-numero">01</span>
                     <h3>¿Qué representa?</h3>
+                    <p>
+                        Identifica la función del planeta: identidad,
+                        emociones, comunicación, vínculos, acción,
+                        expansión, límites, transformación o sanación.
+                    </p>
+                </article>
+
+                <article class="paso">
+                    <span class="paso-numero">02</span>
+                    <h3>¿Cómo se expresa?</h3>
+                    <p>
+                        Observa el signo. Sus elementos, modalidad y
+                        características simbólicas ayudan a describir
+                        el estilo con el que funciona ese planeta.
+                    </p>
+                </article>
+
+                <article class="paso">
+                    <span class="paso-numero">03</span>
+                    <h3>¿Dónde se manifiesta?</h3>
+                    <p>
+                        Examina la casa astrológica para explorar el
+                        ámbito vital relacionado con esa función:
+                        hogar, vínculos, estudios, trabajo u otros temas.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- PLANETAS PERSONALES -->
+
+        <section class="seccion" id="personales">
+            <div class="encabezado-seccion">
+                <span class="numero">03 · Identidad y expresión</span>
+                <h2>Planetas personales</h2>
+                <p>
+                    Sol, Luna, Mercurio, Venus y Marte describen funciones
+                    vinculadas con la identidad, las necesidades emocionales,
+                    la comunicación, los vínculos y la acción.
+                </p>
+            </div>
+
+            <div class="planetas-grid">
+
+                <article class="planeta" id="sol">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">☉</span>
+                        <div>
+                            <h3>Sol</h3>
+                            <span class="categoria">Identidad y vitalidad</span>
+                        </div>
+                    </div>
 
                     <p>
-                        En astrología, la carta natal es una representación
-                        del cielo para una fecha, hora y lugar determinados.
-                        Su interpretación combina diversos factores
-                        en una lectura global.
+                        Representa el sentido de identidad, la voluntad,
+                        la vitalidad y la construcción de una expresión
+                        personal propia.
                     </p>
 
-                    <div class="natal-factor">
-                        <span class="factor-symbol">☉</span>
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Describe el estilo con el que una persona busca
+                        afirmarse, desarrollar sus capacidades y expresar
+                        lo que considera esencial de sí misma.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Indica el ámbito en el que puede cobrar especial
+                        importancia la autoexpresión y el deseo de construir
+                        una identidad reconocible.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Dónde necesito expresar quién soy?</span>
+                    </div>
+                </article>
+
+                <article class="planeta" id="luna">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">☽</span>
                         <div>
-                            <h4>Planetas</h4>
-                            <p>Funciones y principios simbólicos.</p>
+                            <h3>Luna</h3>
+                            <span class="categoria">Emociones y necesidades</span>
                         </div>
                     </div>
 
-                    <div class="natal-factor">
-                        <span class="factor-symbol">♈</span>
+                    <p>
+                        Simboliza las necesidades emocionales, los hábitos,
+                        la sensibilidad, la búsqueda de seguridad y las
+                        respuestas instintivas.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Muestra un estilo simbólico de procesar emociones,
+                        buscar contención y responder a las experiencias
+                        afectivas.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Señala dónde pueden concentrarse las necesidades
+                        de pertenencia, protección y estabilidad emocional.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Qué necesito para sentir seguridad?</span>
+                    </div>
+                </article>
+
+                <article class="planeta" id="mercurio">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">☿</span>
                         <div>
-                            <h4>Signos zodiacales</h4>
-                            <p>Estilos de expresión asociados a cada planeta.</p>
+                            <h3>Mercurio</h3>
+                            <span class="categoria">Mente y comunicación</span>
                         </div>
                     </div>
 
-                    <div class="natal-factor">
-                        <span class="factor-symbol">⌂</span>
+                    <p>
+                        Representa el pensamiento, el aprendizaje,
+                        la curiosidad, el intercambio de información
+                        y la manera de comunicar ideas.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Describe el estilo mental y comunicativo:
+                        más analítico, intuitivo, práctico, rápido
+                        o reflexivo, según la combinación simbólica.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Indica dónde pueden concentrarse el aprendizaje,
+                        las conversaciones, la investigación y el
+                        intercambio de conocimientos.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Cómo pienso y comunico lo que sé?</span>
+                    </div>
+                </article>
+
+                <article class="planeta" id="venus">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">♀</span>
                         <div>
-                            <h4>Casas astrológicas</h4>
-                            <p>Áreas de experiencia en la interpretación tradicional.</p>
+                            <h3>Venus</h3>
+                            <span class="categoria">Afecto y valores</span>
                         </div>
                     </div>
 
-                    <div class="natal-factor">
-                        <span class="factor-symbol">△</span>
+                    <p>
+                        Simboliza el afecto, la atracción, el placer,
+                        los valores personales, la armonía y las formas
+                        de disfrutar de la vida.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Sugiere cómo se expresa el cariño, qué cualidades
+                        se valoran en los vínculos y qué experiencias
+                        resultan agradables o significativas.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Señala áreas en las que pueden adquirir relevancia
+                        las relaciones, el disfrute, la cooperación y
+                        la valoración personal.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Qué valoro y cómo expreso afecto?</span>
+                    </div>
+                </article>
+
+                <article class="planeta" id="marte">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">♂</span>
                         <div>
-                            <h4>Aspectos</h4>
-                            <p>Relaciones angulares entre planetas.</p>
+                            <h3>Marte</h3>
+                            <span class="categoria">Acción y deseo</span>
                         </div>
                     </div>
 
-                    <div class="highlight-box">
-                        <span>✦</span>
-                        <p>
-                            Para calcular una carta natal se utilizan
-                            la fecha, la hora y el lugar de nacimiento.
-                            La hora es especialmente importante para
-                            determinar el Ascendente y las casas.
-                        </p>
+                    <p>
+                        Representa la iniciativa, la energía dirigida
+                        a objetivos, el deseo, la afirmación personal
+                        y la forma de afrontar conflictos.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Describe cómo se pone algo en marcha, cómo se
+                        defienden los límites y qué estilo de acción
+                        puede predominar.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Muestra el área donde se puede invertir energía,
+                        tomar iniciativas, competir o aprender a manejar
+                        las diferencias.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Cómo actúo para conseguir lo que deseo?</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- PLANETAS SOCIALES -->
+
+        <section class="seccion" id="sociales">
+            <div class="encabezado-seccion">
+                <span class="numero">04 · Crecimiento y estructura</span>
+                <h2>Planetas sociales</h2>
+                <p>
+                    Júpiter y Saturno se asocian simbólicamente con
+                    la expansión, el sentido de posibilidad, la
+                    responsabilidad y la construcción de estructuras.
+                </p>
+            </div>
+
+            <div class="planetas-grid">
+
+                <article class="planeta" id="jupiter">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">♃</span>
+                        <div>
+                            <h3>Júpiter</h3>
+                            <span class="categoria">Expansión y sentido</span>
+                        </div>
                     </div>
 
+                    <p>
+                        Simboliza el crecimiento, la confianza, la
+                        exploración de ideas, los horizontes amplios
+                        y la búsqueda de significado.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Describe un estilo de aprender, explorar
+                        posibilidades, desarrollar creencias y buscar
+                        oportunidades de crecimiento.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Señala ámbitos donde la persona puede buscar
+                        expansión, conocimiento, experiencias nuevas
+                        o una perspectiva más amplia.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Dónde busco crecer y ampliar mi mundo?</span>
+                    </div>
+                </article>
+
+                <article class="planeta" id="saturno">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">♄</span>
+                        <div>
+                            <h3>Saturno</h3>
+                            <span class="categoria">Límites y responsabilidad</span>
+                        </div>
+                    </div>
+
+                    <p>
+                        Representa la disciplina, el tiempo, los límites,
+                        la responsabilidad, la perseverancia y la
+                        construcción de resultados duraderos.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Sugiere cómo se afrontan las responsabilidades,
+                        dónde se busca control y qué cualidades requieren
+                        práctica, paciencia o maduración.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Identifica áreas que pueden vivirse como un
+                        compromiso importante y en las que la constancia
+                        puede ayudar a desarrollar seguridad.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Qué necesito construir con paciencia?</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- PLANETAS TRANSPERSONALES -->
+
+        <section class="seccion" id="transpersonales">
+            <div class="encabezado-seccion">
+                <span class="numero">05 · Cambio y transformación</span>
+                <h2>Planetas transpersonales</h2>
+                <p>
+                    Urano, Neptuno y Plutón se interpretan en relación
+                    con procesos colectivos y transformaciones profundas.
+                    En una carta individual, su casa y sus aspectos ayudan
+                    a precisar su significado.
+                </p>
+            </div>
+
+            <div class="planetas-grid">
+
+                <article class="planeta" id="urano">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">♅</span>
+                        <div>
+                            <h3>Urano</h3>
+                            <span class="categoria">Innovación y libertad</span>
+                        </div>
+                    </div>
+
+                    <p>
+                        Simboliza la innovación, la independencia,
+                        la originalidad, los cambios inesperados y
+                        el cuestionamiento de estructuras establecidas.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Su posición por signo suele tener una dimensión
+                        generacional. Describe estilos colectivos de
+                        innovación y ruptura con lo establecido.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Permite explorar en qué área vital pueden cobrar
+                        relevancia la autonomía, los cambios y la
+                        necesidad de experimentar otras posibilidades.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Dónde necesito mayor libertad para cambiar?</span>
+                    </div>
+                </article>
+
+                <article class="planeta" id="neptuno">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">♆</span>
+                        <div>
+                            <h3>Neptuno</h3>
+                            <span class="categoria">Imaginación y sensibilidad</span>
+                        </div>
+                    </div>
+
+                    <p>
+                        Se asocia con la imaginación, la inspiración,
+                        la sensibilidad, los ideales, la espiritualidad
+                        y la disolución de fronteras.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Su signo refleja tendencias generacionales
+                        relacionadas con ideales, imaginación y
+                        sensibilidad cultural.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Sugiere dónde pueden manifestarse la creatividad,
+                        los ideales y la empatía, así como la necesidad
+                        de distinguir entre aspiraciones y realidad.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Dónde necesito equilibrar idealismo y realidad?</span>
+                    </div>
+                </article>
+
+                <article class="planeta" id="pluton">
+                    <div class="planeta-cabecera">
+                        <span class="simbolo">♇</span>
+                        <div>
+                            <h3>Plutón</h3>
+                            <span class="categoria">Poder y transformación</span>
+                        </div>
+                    </div>
+
+                    <p>
+                        Representa simbólicamente los procesos de
+                        transformación, la intensidad, el poder,
+                        las crisis y la renovación profunda.
+                    </p>
+
+                    <h4>Según el signo</h4>
+                    <p class="interpretacion">
+                        Su signo suele señalar transformaciones
+                        generacionales y cambios profundos en los
+                        valores o estructuras colectivas.
+                    </p>
+
+                    <h4>Según la casa</h4>
+                    <p class="interpretacion">
+                        Indica un área que puede invitar a revisar
+                        patrones arraigados, enfrentar cambios y
+                        desarrollar una relación más consciente
+                        con el poder personal.
+                    </p>
+
+                    <div class="formula">
+                        <span><strong>Pregunta clave:</strong> ¿Qué patrones necesito transformar?</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- QUIRÓN -->
+
+        <section class="seccion" id="quiron">
+            <div class="encabezado-seccion">
+                <span class="numero">06 · Punto complementario</span>
+                <h2>Quirón: la herida y el aprendizaje</h2>
+                <p>
+                    Quirón es un cuerpo menor del sistema solar que,
+                    en astrología, se utiliza como símbolo de experiencias
+                    sensibles, aprendizaje e integración personal.
+                </p>
+            </div>
+
+            <div class="complementarios">
+                <article class="complementario">
+                    <h3>¿Qué representa?</h3>
+                    <p>
+                        En la interpretación astrológica, Quirón se
+                        relaciona con una zona de vulnerabilidad que
+                        puede impulsar la comprensión, el desarrollo
+                        de recursos y una mayor empatía.
+                    </p>
+                    <p>
+                        No significa que una persona esté condenada
+                        a sufrir ni sustituye una evaluación o un
+                        tratamiento profesional cuando son necesarios.
+                    </p>
+                </article>
+
+                <article class="complementario">
+                    <h3>Quirón según el signo</h3>
+                    <p>
+                        El signo aporta un lenguaje simbólico para
+                        explorar cómo se expresa la sensibilidad
+                        asociada con Quirón y qué recursos pueden
+                        ayudar a integrarla.
+                    </p>
+                    <p>
+                        Conviene interpretarlo junto con el resto
+                        de la carta, evitando reducir a la persona
+                        a una sola posición.
+                    </p>
+                </article>
+
+                <article class="complementario">
+                    <h3>Quirón según la casa</h3>
+                    <p>
+                        La casa señala el ámbito de vida en el que
+                        esa temática podría sentirse especialmente
+                        significativa: identidad, vínculos, familia,
+                        estudios, trabajo u otras áreas.
+                    </p>
+                </article>
+
+                <article class="complementario">
+                    <h3>Pregunta de reflexión</h3>
+                    <p>
+                        ¿Qué experiencia sensible puedo comprender
+                        de otra manera? ¿Qué recursos he desarrollado
+                        a partir de ella y cómo puedo acompañarme
+                        con mayor compasión?
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- NODOS LUNARES -->
+
+        <section class="seccion" id="nodos">
+            <div class="encabezado-seccion">
+                <span class="numero">07 · Eje nodal</span>
+                <h2>Los nodos lunares</h2>
+                <p>
+                    Los nodos lunares son puntos matemáticos relacionados
+                    con la intersección de la órbita lunar y la eclíptica.
+                    En astrología se interpretan como un eje simbólico
+                    de desarrollo y familiaridad.
+                </p>
+            </div>
+
+            <div class="complementarios">
+                <article class="complementario">
+                    <h3>☋ Nodo Sur</h3>
+                    <p>
+                        Se asocia simbólicamente con hábitos conocidos,
+                        respuestas automáticas, experiencias familiares
+                        y formas de actuar que resultan cómodas.
+                    </p>
+                    <p>
+                        No representa necesariamente algo negativo:
+                        sus cualidades también pueden funcionar como
+                        recursos que conviene reconocer y utilizar
+                        de forma consciente.
+                    </p>
+                    <p>
+                        <strong>Según el signo:</strong> sugiere el estilo
+                        habitual de responder a determinadas experiencias.
+                    </p>
+                    <p>
+                        <strong>Según la casa:</strong> señala los ámbitos
+                        en los que esas tendencias pueden hacerse visibles.
+                    </p>
+                </article>
+
+                <article class="complementario">
+                    <h3>☊ Nodo Norte</h3>
+                    <p>
+                        Se interpreta como una dirección simbólica
+                        de aprendizaje, exploración y desarrollo de
+                        cualidades menos familiares.
+                    </p>
+                    <p>
+                        No predice un destino obligatorio. Puede servir
+                        como herramienta de reflexión sobre nuevas
+                        formas de actuar y experiencias por desarrollar.
+                    </p>
+                    <p>
+                        <strong>Según el signo:</strong> describe las
+                        cualidades que se propone explorar la lectura.
+                    </p>
+                    <p>
+                        <strong>Según la casa:</strong> señala los ámbitos
+                        donde esa exploración puede adquirir importancia.
+                    </p>
+                </article>
+            </div>
+
+            <div class="panel destacado" style="margin-top:20px;">
+                <h3>Interpretar el eje completo</h3>
+                <p>
+                    Los nodos siempre forman un eje: el Nodo Norte y
+                    el Nodo Sur se encuentran en signos y casas opuestos.
+                    Por eso se interpretan en conjunto, no como dos
+                    posiciones independientes.
+                </p>
+                <p>
+                    La lectura busca equilibrar recursos conocidos con
+                    nuevas posibilidades, sin considerar que una parte
+                    deba eliminarse para que la otra se desarrolle.
+                </p>
+            </div>
+        </section>
+
+        <!-- INTEGRACIÓN -->
+
+        <section class="seccion" id="integracion">
+            <div class="encabezado-seccion">
+                <span class="numero">08 · Lectura integrada</span>
+                <h2>Cómo unir planeta, signo y casa</h2>
+                <p>
+                    Una interpretación coherente conecta los símbolos
+                    entre sí y considera el conjunto de la carta.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h3>Ejemplo: Venus en Leo en casa 5</h3>
+
+                <p>
+                    <strong>Venus:</strong> afecto, atracción, valores,
+                    placer y vínculos.
+                </p>
+
+                <p>
+                    <strong>Leo:</strong> expresión creativa, calidez,
+                    generosidad y deseo de mostrarse de forma auténtica.
+                </p>
+
+                <p>
+                    <strong>Casa 5:</strong> creatividad, romance,
+                    juego, expresión personal y proyectos propios.
+                </p>
+
+                <p>
+                    <strong>Interpretación integrada:</strong> esta
+                    combinación podría simbolizar una manera cálida
+                    y expresiva de vivir el afecto, con interés por
+                    compartir experiencias creativas y disfrutar de
+                    los vínculos. La expresión concreta dependerá
+                    de la persona y de los demás factores de su carta.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h3>Un segundo ejemplo: Saturno en Géminis en casa 3</h3>
+
+                <p>
+                    Saturno aporta el tema de la estructura y la
+                    responsabilidad; Géminis, el intercambio de ideas
+                    y la curiosidad; la casa 3, la comunicación,
+                    el aprendizaje cotidiano y el entorno cercano.
+                </p>
+
+                <p>
+                    La combinación puede invitar a explorar una
+                    comunicación cuidadosa y metódica, o la importancia
+                    de construir confianza en el aprendizaje.
+                    No implica por sí misma dificultades intelectuales
+                    ni determina una experiencia concreta.
+                </p>
+            </div>
+        </section>
+
+        <!-- EJERCICIO -->
+
+        <section class="seccion" id="ejercicio">
+            <div class="encabezado-seccion">
+                <span class="numero">09 · Práctica</span>
+                <h2>Ejercicio de interpretación</h2>
+                <p>
+                    Practica la lectura de una posición natal mediante
+                    observación, asociación simbólica y reflexión.
+                </p>
+            </div>
+
+            <div class="ejercicio">
+                <h3>Construye una interpretación</h3>
+
+                <p>
+                    Elige un planeta de tu carta natal o trabaja con
+                    un ejemplo imaginario. Completa estos pasos:
+                </p>
+
+                <ul>
+                    <li>Identifica el planeta y escribe tres palabras que describan su función.</li>
+                    <li>Anota el signo y sus cualidades simbólicas principales.</li>
+                    <li>Identifica la casa y el área de vida que representa.</li>
+                    <li>Une las tres partes en una interpretación breve y coherente.</li>
+                    <li>Considera qué otros elementos de la carta podrían matizar esa lectura.</li>
+                </ul>
+
+                <div class="pregunta">
+                    <strong>Reflexión final:</strong>
+                    ¿Qué aporta cada símbolo a la interpretación?
+                    ¿Qué cambiaría si el mismo planeta estuviera en otro
+                    signo o en otra casa?
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- ELEMENTOS -->
-
-        <section class="section section-dark" id="elementos">
-
-            <div class="section-heading">
-                <span class="section-number">05 / LOS ELEMENTOS</span>
-                <h2>Cuatro formas de <span>expresión</span></h2>
-                <p>
-                    Los elementos son una de las principales maneras
-                    de agrupar simbólicamente los signos.
-                </p>
-            </div>
-
-            <div class="element-grid">
-
-                <article class="element-card fire">
-                    <span class="element-symbol">♨</span>
-                    <h3>Fuego</h3>
-                    <p class="element-signs">Aries · Leo · Sagitario</p>
-                    <p>
-                        Se asocia con la iniciativa, el entusiasmo,
-                        la creatividad y la acción.
-                    </p>
-                    <span class="element-keyword">Inspiración</span>
-                </article>
-
-                <article class="element-card earth">
-                    <span class="element-symbol">♧</span>
-                    <h3>Tierra</h3>
-                    <p class="element-signs">Tauro · Virgo · Capricornio</p>
-                    <p>
-                        Se relaciona con lo concreto, la estabilidad,
-                        la construcción y la practicidad.
-                    </p>
-                    <span class="element-keyword">Materialización</span>
-                </article>
-
-                <article class="element-card air">
-                    <span class="element-symbol">༄</span>
-                    <h3>Aire</h3>
-                    <p class="element-signs">Géminis · Libra · Acuario</p>
-                    <p>
-                        Se vincula con las ideas, la comunicación,
-                        el intercambio y la perspectiva intelectual.
-                    </p>
-                    <span class="element-keyword">Pensamiento</span>
-                </article>
-
-                <article class="element-card water">
-                    <span class="element-symbol">≈</span>
-                    <h3>Agua</h3>
-                    <p class="element-signs">Cáncer · Escorpio · Piscis</p>
-                    <p>
-                        Se asocia con la sensibilidad, la intuición,
-                        los vínculos emocionales y la profundidad.
-                    </p>
-                    <span class="element-keyword">Emoción</span>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- MODALIDADES -->
-
-        <section class="section" id="modalidades">
-
-            <div class="section-heading">
-                <span class="section-number">06 / LAS MODALIDADES</span>
-                <h2>Tres maneras de <span>actuar</span></h2>
-                <p>
-                    Las modalidades describen cómo se expresa la energía
-                    simbólica de cada grupo de signos.
-                </p>
-            </div>
-
-            <div class="modality-grid">
-
-                <article class="modality-card">
-                    <span class="modality-icon">↗</span>
-                    <span class="mini-label">INICIO</span>
-                    <h3>Cardinal</h3>
-                    <p>Aries · Cáncer · Libra · Capricornio</p>
-                    <p>
-                        Representa la iniciativa, el impulso de comenzar
-                        y la apertura de nuevas etapas.
-                    </p>
-                </article>
-
-                <article class="modality-card">
-                    <span class="modality-icon">◈</span>
-                    <span class="mini-label">CONTINUIDAD</span>
-                    <h3>Fija</h3>
-                    <p>Tauro · Leo · Escorpio · Acuario</p>
-                    <p>
-                        Se relaciona con la persistencia, la estabilidad
-                        y la consolidación de lo iniciado.
-                    </p>
-                </article>
-
-                <article class="modality-card">
-                    <span class="modality-icon">∞</span>
-                    <span class="mini-label">TRANSICIÓN</span>
-                    <h3>Mutable</h3>
-                    <p>Géminis · Virgo · Sagitario · Piscis</p>
-                    <p>
-                        Se asocia con la adaptación, la flexibilidad
-                        y el cierre o transición entre etapas.
-                    </p>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- POLARIDADES -->
-
-        <section class="section polarity-section" id="polaridades">
-
-            <div class="section-heading">
-                <span class="section-number">07 / LAS POLARIDADES</span>
-                <h2>Dos orientaciones <span>complementarias</span></h2>
-                <p>
-                    En la astrología occidental, los signos también
-                    se agrupan en dos polaridades simbólicas.
-                </p>
-            </div>
-
-            <div class="polarity-grid">
-
-                <article class="polarity-card">
-                    <span class="polarity-symbol">☀</span>
-                    <h3>Polaridad masculina</h3>
-                    <p class="polarity-signs">
-                        Aries · Géminis · Leo · Libra · Sagitario · Acuario
-                    </p>
-                    <p>
-                        Tradicionalmente asociada con una expresión
-                        más activa, exterior o expansiva.
-                    </p>
-                </article>
-
-                <article class="polarity-card">
-                    <span class="polarity-symbol">☾</span>
-                    <h3>Polaridad femenina</h3>
-                    <p class="polarity-signs">
-                        Tauro · Cáncer · Virgo · Escorpio · Capricornio · Piscis
-                    </p>
-                    <p>
-                        Tradicionalmente asociada con una expresión
-                        más receptiva, interior o concentrada.
-                    </p>
-                </article>
-
-            </div>
-
-            <p class="small-note">
-                Estas denominaciones pertenecen al simbolismo tradicional
-                y no describen el género ni determinan la personalidad
-                de una persona.
-            </p>
-
-        </section>
-
-
-        <!-- LOS DOCE SIGNOS -->
-
-        <section class="section section-dark signs-section" id="signos">
-
-            <div class="section-heading">
-                <span class="section-number">08 / EL ZODÍACO</span>
-                <h2>Los doce signos <span>del zodíaco</span></h2>
-                <p>
-                    Explora sus motivaciones, fortalezas, desafíos,
-                    elementos, modalidades y regencias tradicionales.
-                </p>
-            </div>
-
-            <div class="signs-intro">
-                <span>✦</span>
-                <p>
-                    El signo solar es solo una parte de la carta natal.
-                    Cada signo adquiere matices diferentes según el planeta,
-                    la casa y los aspectos que se estén interpretando.
-                </p>
-            </div>
-
-            <div class="sign-grid">
-
-                <article class="sign-card aries">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♈</span>
-                        <span class="sign-order">01 / 12</span>
-                    </div>
-                    <h3>Aries</h3>
-                    <p class="sign-date">21 de marzo – 19 de abril</p>
-                    <p class="sign-summary">
-                        La iniciativa, el impulso y el comienzo.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Fuego</span><span>Cardinal</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Abrir caminos y actuar con autonomía.</p>
-                        <p><strong>Fortalezas</strong> Valentía, espontaneidad y decisión.</p>
-                        <p><strong>Desafíos</strong> Impaciencia, impulsividad y precipitación.</p>
-                        <p><strong>Polaridad</strong> Masculina</p>
-                        <p><strong>Regente</strong> Marte</p>
-                    </div>
-                </article>
-
-                <article class="sign-card taurus">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♉</span>
-                        <span class="sign-order">02 / 12</span>
-                    </div>
-                    <h3>Tauro</h3>
-                    <p class="sign-date">20 de abril – 20 de mayo</p>
-                    <p class="sign-summary">
-                        La estabilidad, el disfrute y la construcción.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Tierra</span><span>Fija</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Crear seguridad y conservar lo valioso.</p>
-                        <p><strong>Fortalezas</strong> Paciencia, constancia y practicidad.</p>
-                        <p><strong>Desafíos</strong> Terquedad, resistencia al cambio y apego.</p>
-                        <p><strong>Polaridad</strong> Femenina</p>
-                        <p><strong>Regente</strong> Venus</p>
-                    </div>
-                </article>
-
-                <article class="sign-card gemini">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♊</span>
-                        <span class="sign-order">03 / 12</span>
-                    </div>
-                    <h3>Géminis</h3>
-                    <p class="sign-date">21 de mayo – 20 de junio</p>
-                    <p class="sign-summary">
-                        La curiosidad, las ideas y la comunicación.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Aire</span><span>Mutable</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Aprender, conectar e intercambiar información.</p>
-                        <p><strong>Fortalezas</strong> Ingenio, versatilidad y facilidad comunicativa.</p>
-                        <p><strong>Desafíos</strong> Dispersión, inquietud e inconstancia.</p>
-                        <p><strong>Polaridad</strong> Masculina</p>
-                        <p><strong>Regente</strong> Mercurio</p>
-                    </div>
-                </article>
-
-                <article class="sign-card cancer">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♋</span>
-                        <span class="sign-order">04 / 12</span>
-                    </div>
-                    <h3>Cáncer</h3>
-                    <p class="sign-date">21 de junio – 22 de julio</p>
-                    <p class="sign-summary">
-                        El cuidado, la memoria y la pertenencia.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Agua</span><span>Cardinal</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Proteger y construir un refugio emocional.</p>
-                        <p><strong>Fortalezas</strong> Sensibilidad, intuición y cuidado.</p>
-                        <p><strong>Desafíos</strong> Susceptibilidad, retraimiento y apego al pasado.</p>
-                        <p><strong>Polaridad</strong> Femenina</p>
-                        <p><strong>Regente</strong> Luna</p>
-                    </div>
-                </article>
-
-                <article class="sign-card leo">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♌</span>
-                        <span class="sign-order">05 / 12</span>
-                    </div>
-                    <h3>Leo</h3>
-                    <p class="sign-date">23 de julio – 22 de agosto</p>
-                    <p class="sign-summary">
-                        La creatividad, la expresión y el corazón.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Fuego</span><span>Fija</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Expresar su identidad y crear con entusiasmo.</p>
-                        <p><strong>Fortalezas</strong> Generosidad, calidez y creatividad.</p>
-                        <p><strong>Desafíos</strong> Orgullo, necesidad de reconocimiento y dramatismo.</p>
-                        <p><strong>Polaridad</strong> Masculina</p>
-                        <p><strong>Regente</strong> Sol</p>
-                    </div>
-                </article>
-
-                <article class="sign-card virgo">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♍</span>
-                        <span class="sign-order">06 / 12</span>
-                    </div>
-                    <h3>Virgo</h3>
-                    <p class="sign-date">23 de agosto – 22 de septiembre</p>
-                    <p class="sign-summary">
-                        El análisis, el orden y la mejora continua.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Tierra</span><span>Mutable</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Comprender los detalles y ser útil.</p>
-                        <p><strong>Fortalezas</strong> Observación, organización y discernimiento.</p>
-                        <p><strong>Desafíos</strong> Perfeccionismo, crítica y preocupación excesiva.</p>
-                        <p><strong>Polaridad</strong> Femenina</p>
-                        <p><strong>Regente</strong> Mercurio</p>
-                    </div>
-                </article>
-
-                <article class="sign-card libra">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♎</span>
-                        <span class="sign-order">07 / 12</span>
-                    </div>
-                    <h3>Libra</h3>
-                    <p class="sign-date">23 de septiembre – 22 de octubre</p>
-                    <p class="sign-summary">
-                        El equilibrio, el encuentro y la armonía.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Aire</span><span>Cardinal</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Crear vínculos equilibrados y cooperativos.</p>
-                        <p><strong>Fortalezas</strong> Diplomacia, sentido estético y cooperación.</p>
-                        <p><strong>Desafíos</strong> Indecisión, complacencia y evitación del conflicto.</p>
-                        <p><strong>Polaridad</strong> Masculina</p>
-                        <p><strong>Regente</strong> Venus</p>
-                    </div>
-                </article>
-
-                <article class="sign-card scorpio">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♏</span>
-                        <span class="sign-order">08 / 12</span>
-                    </div>
-                    <h3>Escorpio</h3>
-                    <p class="sign-date">23 de octubre – 21 de noviembre</p>
-                    <p class="sign-summary">
-                        La profundidad, la transformación y la intensidad.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Agua</span><span>Fija</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Explorar lo oculto y transformar lo profundo.</p>
-                        <p><strong>Fortalezas</strong> Perseverancia, profundidad y determinación.</p>
-                        <p><strong>Desafíos</strong> Desconfianza, control y dificultad para soltar.</p>
-                        <p><strong>Polaridad</strong> Femenina</p>
-                        <p><strong>Regentes</strong> Marte tradicional; Plutón moderno</p>
-                    </div>
-                </article>
-
-                <article class="sign-card sagittarius">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♐</span>
-                        <span class="sign-order">09 / 12</span>
-                    </div>
-                    <h3>Sagitario</h3>
-                    <p class="sign-date">22 de noviembre – 21 de diciembre</p>
-                    <p class="sign-summary">
-                        La exploración, el sentido y la expansión.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Fuego</span><span>Mutable</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Descubrir horizontes y ampliar perspectivas.</p>
-                        <p><strong>Fortalezas</strong> Optimismo, franqueza y entusiasmo.</p>
-                        <p><strong>Desafíos</strong> Exageración, inquietud y exceso de confianza.</p>
-                        <p><strong>Polaridad</strong> Masculina</p>
-                        <p><strong>Regente</strong> Júpiter</p>
-                    </div>
-                </article>
-
-                <article class="sign-card capricorn">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♑</span>
-                        <span class="sign-order">10 / 12</span>
-                    </div>
-                    <h3>Capricornio</h3>
-                    <p class="sign-date">22 de diciembre – 19 de enero</p>
-                    <p class="sign-summary">
-                        La responsabilidad, la estructura y la ambición.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Tierra</span><span>Cardinal</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Construir logros duraderos y asumir responsabilidades.</p>
-                        <p><strong>Fortalezas</strong> Disciplina, estrategia y perseverancia.</p>
-                        <p><strong>Desafíos</strong> Rigidez, exigencia y exceso de control.</p>
-                        <p><strong>Polaridad</strong> Femenina</p>
-                        <p><strong>Regente</strong> Saturno</p>
-                    </div>
-                </article>
-
-                <article class="sign-card aquarius">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♒</span>
-                        <span class="sign-order">11 / 12</span>
-                    </div>
-                    <h3>Acuario</h3>
-                    <p class="sign-date">20 de enero – 18 de febrero</p>
-                    <p class="sign-summary">
-                        La innovación, la independencia y lo colectivo.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Aire</span><span>Fija</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Explorar nuevas ideas y cuestionar lo establecido.</p>
-                        <p><strong>Fortalezas</strong> Originalidad, visión e independencia.</p>
-                        <p><strong>Desafíos</strong> Distanciamiento, terquedad y rebeldía automática.</p>
-                        <p><strong>Polaridad</strong> Masculina</p>
-                        <p><strong>Regentes</strong> Saturno tradicional; Urano moderno</p>
-                    </div>
-                </article>
-
-                <article class="sign-card pisces">
-                    <div class="sign-top">
-                        <span class="sign-symbol">♓</span>
-                        <span class="sign-order">12 / 12</span>
-                    </div>
-                    <h3>Piscis</h3>
-                    <p class="sign-date">19 de febrero – 20 de marzo</p>
-                    <p class="sign-summary">
-                        La imaginación, la sensibilidad y la compasión.
-                    </p>
-                    <div class="sign-tags">
-                        <span>Agua</span><span>Mutable</span>
-                    </div>
-                    <div class="sign-details">
-                        <p><strong>Motivación</strong> Encontrar conexión, significado e inspiración.</p>
-                        <p><strong>Fortalezas</strong> Empatía, imaginación y sensibilidad artística.</p>
-                        <p><strong>Desafíos</strong> Idealización, evasión y límites poco claros.</p>
-                        <p><strong>Polaridad</strong> Femenina</p>
-                        <p><strong>Regentes</strong> Júpiter tradicional; Neptuno moderno</p>
-                    </div>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- CIERRE -->
-
-        <section class="final-section">
-
-            <div class="final-orbit">☾</div>
-
-            <span class="eyebrow">EL COMIENZO DE TU CAMINO</span>
-
-            <h2>El cielo tiene muchos símbolos.<br>
-                <span>Aprende a relacionarlos.</span>
-            </h2>
-
-            <p>
-                Estudiar astrología es aprender a observar, comparar,
-                formular preguntas y construir interpretaciones
-                con criterio y sensibilidad.
-            </p>
-
-            <div class="siguiente-leccion">
-    <a href="index2.html">
-        SIGUIENTE TEMA →
-    </a>
-</div>
-
-        </section>
-
-    </main>
-
-
-    <footer class="footer">
-        <a href="#inicio" class="brand footer-brand">
-            <span class="brand-symbol">☾</span>
-            <span>ASTRO <strong>ROJO</strong></span>
-        </a>
-
-        <p>Un espacio de aprendizaje, simbolismo y autoconocimiento.</p>
-
-        <span class="footer-copy">ASTRO ROJO © 2026</span>
-    </footer>
+    </div>
+</main>
+
+<footer class="pie">
+    <strong>ASTRO ROJO</strong>
+    <p>Astrología · Simbolismo · Autoconocimiento</p>
+    <p>Contenido educativo para aprender a interpretar la carta natal.</p>
+</footer>
 
 </body>
 </html>
