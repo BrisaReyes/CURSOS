@@ -1,219 +1,1280 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Los 12 signos zodiacales — Astro Rojo</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<main class="container">
 
-    <header class="welcome">
-        <span class="simbolo">✧</span>
-        <p class="etiqueta">ASTRO ROJO · LECCIÓN 2</p>
-        <h1>Los doce signos <span>del zodíaco</span></h1>
-        <p class="subtitulo">
-            Elementos, modalidades, características y formas de
-            interpretar el simbolismo de cada signo.
+    <meta name="description" content="Curso de astrología: los planetas y puntos principales de la carta natal, sus significados y su interpretación por signo y casa.">
+
+    <title>Planetas y puntos principales — ASTRO ROJO</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .planet-course {
+            width: 100%;
+            color: #f5eeee;
+        }
+
+        .planet-hero {
+            padding: 45px 22px;
+            text-align: center;
+        }
+
+        .planet-hero h1 {
+            margin: 15px 0;
+            color: #ff304f;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+        }
+
+        .planet-hero p {
+            max-width: 780px;
+            margin: 0 auto;
+            color: #d8c9cd;
+            line-height: 1.9;
+        }
+
+        .planet-label {
+            color: #ff7185;
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .planet-panel {
+            margin: 28px 0;
+            padding: 25px;
+            border: 1px solid #60212d;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #211014, #100a0d);
+        }
+
+        .planet-panel h2 {
+            margin-bottom: 16px;
+            color: #ff526b;
+        }
+
+        .planet-panel h3 {
+            margin: 22px 0 10px;
+            color: #ff8192;
+        }
+
+        .planet-panel p,
+        .planet-panel li {
+            color: #e0d3d7;
+            line-height: 1.9;
+        }
+
+        .planet-panel p + p {
+            margin-top: 12px;
+        }
+
+        .planet-index {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .planet-index a {
+            display: block;
+            padding: 12px 14px;
+            border: 1px solid #51202a;
+            border-radius: 10px;
+            background: #190d11;
+            color: #ffdfe5;
+            text-decoration: none;
+            transition: .2s;
+        }
+
+        .planet-index a:hover {
+            border-color: #ff526b;
+            color: #ff7185;
+        }
+
+        .planet-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .planet-card {
+            min-width: 0;
+            padding: 23px;
+            border: 1px solid #60212d;
+            border-radius: 17px;
+            background:
+                radial-gradient(circle at top right, #4b142155, transparent 50%),
+                linear-gradient(145deg, #1d1014, #0e090b);
+            scroll-margin-top: 20px;
+        }
+
+        .planet-card:hover {
+            border-color: #a83249;
+        }
+
+        .planet-card .symbol {
+            display: block;
+            margin-bottom: 8px;
+            color: #ff526b;
+            font-size: 2.7rem;
+        }
+
+        .planet-card .category {
+            color: #e88a9a;
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+        }
+
+        .planet-card h2 {
+            margin: 8px 0 12px;
+            color: #fff0f3;
+            font-size: 1.6rem;
+        }
+
+        .planet-card p {
+            color: #ddcfd3;
+            line-height: 1.85;
+        }
+
+        .planet-card .question {
+            margin-bottom: 15px;
+            color: #ff8b9d;
+            font-style: italic;
+        }
+
+        .planet-detail {
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #49202a;
+        }
+
+        .planet-detail h3 {
+            margin: 0 0 8px;
+            color: #ff7185;
+            font-size: 1rem;
+        }
+
+        .planet-example {
+            margin-top: 18px;
+            padding: 15px;
+            border-left: 3px solid #ed3654;
+            border-radius: 0 10px 10px 0;
+            background: #2a1118;
+        }
+
+        .planet-example strong {
+            color: #ff8b9d;
+        }
+
+        .planet-note {
+            margin-top: 15px;
+            color: #bdaab0 !important;
+            font-size: .9rem;
+        }
+
+        .planet-formula {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .planet-formula div {
+            padding: 17px;
+            border: 1px solid #57202b;
+            border-radius: 12px;
+            background: #170c10;
+        }
+
+        .planet-formula strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #ff7185;
+        }
+
+        .planet-formula p {
+            font-size: .92rem;
+        }
+
+        .planet-exercise li {
+            margin: 8px 0;
+        }
+
+        .planet-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #ff8799;
+            text-decoration: none;
+        }
+
+        .planet-footer {
+            padding: 30px 15px;
+            text-align: center;
+            color: #bdaab0;
+        }
+
+        @media (max-width: 650px) {
+            .planet-grid,
+            .planet-index,
+            .planet-formula {
+                grid-template-columns: 1fr;
+            }
+
+            .planet-panel {
+                padding: 19px;
+            }
+
+            .planet-card {
+                padding: 19px;
+            }
+
+            .planet-hero {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="container planet-course">
+
+    <!-- PORTADA -->
+
+    <header class="planet-hero">
+
+        <a href="index.html" class="planet-back">← Volver al curso</a>
+
+        <div class="hero-glow"></div>
+
+        <span class="moon">☾</span>
+
+        <p class="planet-label">ASTRO ROJO · CURSO DE ASTROLOGÍA</p>
+
+        <h1>Planetas y puntos principales</h1>
+
+        <p>
+            Descubrí el significado simbólico de los planetas,
+            comprendé cómo se expresan según el signo zodiacal
+            y aprendé a interpretar el área de la vida representada
+            por cada casa astrológica.
         </p>
+
     </header>
 
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">01</span>
-            <div>
-                <p class="etiqueta">LA BASE DEL ZODÍACO</p>
-                <h2>Los cuatro elementos</h2>
-            </div>
-        </div>
 
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-icono">🔥</span>
-                <h3>Fuego</h3>
-                <p><strong>Aries · Leo · Sagitario</strong></p>
-                <p>Se asocia simbólicamente con la iniciativa, la energía, la expresión y el entusiasmo.</p>
-            </article>
+    <!-- INTRODUCCIÓN -->
 
-            <article class="study-card">
-                <span class="card-icono">🌱</span>
-                <h3>Tierra</h3>
-                <p><strong>Tauro · Virgo · Capricornio</strong></p>
-                <p>Se vincula con lo práctico, la estabilidad, la organización y la construcción.</p>
-            </article>
+    <section class="planet-panel" id="introduccion">
 
-            <article class="study-card">
-                <span class="card-icono">🌬️</span>
-                <h3>Aire</h3>
-                <p><strong>Géminis · Libra · Acuario</strong></p>
-                <p>Se relaciona con las ideas, la comunicación, el intercambio y la perspectiva mental.</p>
-            </article>
+        <p class="planet-label">01 · FUNDAMENTOS</p>
 
-            <article class="study-card">
-                <span class="card-icono">🌊</span>
-                <h3>Agua</h3>
-                <p><strong>Cáncer · Escorpio · Piscis</strong></p>
-                <p>Se asocia con la sensibilidad, la intuición, la profundidad y el mundo emocional.</p>
-            </article>
-        </div>
-    </section>
+        <h2>¿Qué representan los planetas en la carta natal?</h2>
 
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">02</span>
-            <div>
-                <p class="etiqueta">LOS DOCE SIGNOS</p>
-                <h2>Características principales</h2>
-            </div>
-        </div>
-
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-icono">♈</span>
-                <h3>Aries</h3>
-                <p><strong>Fuego · Cardinal</strong></p>
-                <p>Iniciativa, impulso, valentía y comienzo. Su desafío simbólico es aprender a administrar la impaciencia.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♉</span>
-                <h3>Tauro</h3>
-                <p><strong>Tierra · Fijo</strong></p>
-                <p>Estabilidad, disfrute, constancia y seguridad. Su desafío es flexibilizarse ante los cambios.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♊</span>
-                <h3>Géminis</h3>
-                <p><strong>Aire · Mutable</strong></p>
-                <p>Curiosidad, comunicación, aprendizaje y variedad. Su desafío es sostener la atención.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♋</span>
-                <h3>Cáncer</h3>
-                <p><strong>Agua · Cardinal</strong></p>
-                <p>Cuidado, pertenencia, memoria y sensibilidad. Su desafío es encontrar equilibrio entre protegerse y abrirse.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♌</span>
-                <h3>Leo</h3>
-                <p><strong>Fuego · Fijo</strong></p>
-                <p>Creatividad, expresión, generosidad y reconocimiento. Su desafío es compartir el protagonismo.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♍</span>
-                <h3>Virgo</h3>
-                <p><strong>Tierra · Mutable</strong></p>
-                <p>Análisis, servicio, detalle y mejora. Su desafío es no exigir perfección en todo.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♎</span>
-                <h3>Libra</h3>
-                <p><strong>Aire · Cardinal</strong></p>
-                <p>Equilibrio, cooperación, estética y acuerdos. Su desafío es decidir sin depender siempre de la aprobación externa.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♏</span>
-                <h3>Escorpio</h3>
-                <p><strong>Agua · Fijo</strong></p>
-                <p>Profundidad, transformación, intensidad y reserva. Su desafío es aprender a confiar y soltar el control.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♐</span>
-                <h3>Sagitario</h3>
-                <p><strong>Fuego · Mutable</strong></p>
-                <p>Exploración, búsqueda de sentido, expansión y aprendizaje. Su desafío es atender los detalles y compromisos.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♑</span>
-                <h3>Capricornio</h3>
-                <p><strong>Tierra · Cardinal</strong></p>
-                <p>Responsabilidad, estrategia, disciplina y objetivos. Su desafío es equilibrar las obligaciones con el descanso.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♒</span>
-                <h3>Acuario</h3>
-                <p><strong>Aire · Fijo</strong></p>
-                <p>Innovación, independencia, comunidad e ideas originales. Su desafío es combinar autonomía y cercanía.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♓</span>
-                <h3>Piscis</h3>
-                <p><strong>Agua · Mutable</strong></p>
-                <p>Imaginación, empatía, sensibilidad y simbolismo. Su desafío es establecer límites claros.</p>
-            </article>
-        </div>
-    </section>
-
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">03</span>
-            <div>
-                <p class="etiqueta">LAS TRES MODALIDADES</p>
-                <h2>Cómo se expresa la energía</h2>
-            </div>
-        </div>
-
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-icono">➜</span>
-                <h3>Cardinal</h3>
-                <p>Aries, Cáncer, Libra y Capricornio. Simboliza iniciativa y apertura de etapas.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">◆</span>
-                <h3>Fija</h3>
-                <p>Tauro, Leo, Escorpio y Acuario. Simboliza continuidad, concentración y estabilidad.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">↗</span>
-                <h3>Mutable</h3>
-                <p>Géminis, Virgo, Sagitario y Piscis. Simboliza adaptación, transición y flexibilidad.</p>
-            </article>
-        </div>
-    </section>
-
-    <section class="principio">
-        <span class="principio-simbolo">✦</span>
-        <p class="etiqueta">EJERCICIO DE OBSERVACIÓN</p>
-        <h2>Elemento y modalidad</h2>
         <p>
-            Elegí un signo y combiná su elemento con su modalidad.
-            Por ejemplo, Aries es fuego cardinal: en la tradición
-            astrológica se relaciona con iniciar acciones con energía.
-            Esta combinación ofrece más información que una palabra aislada.
+            En astrología, los planetas representan diferentes funciones
+            de la experiencia humana. El Sol se relaciona con la identidad,
+            la Luna con las necesidades emocionales, Mercurio con el
+            pensamiento, Venus con los afectos y Marte con la acción.
         </p>
+
+        <p>
+            Júpiter y Saturno simbolizan, respectivamente, procesos
+            de expansión y responsabilidad. Urano, Neptuno y Plutón
+            se interpretan principalmente mediante temas colectivos,
+            generacionales y de transformación.
+        </p>
+
+        <p>
+            Quirón y los nodos lunares complementan la lectura.
+            Quirón se asocia simbólicamente con experiencias sensibles
+            y aprendizaje; los nodos, con patrones conocidos y
+            direcciones de desarrollo.
+        </p>
+
+        <div class="planet-example">
+            <strong>La regla principal</strong>
+            <p>
+                Planeta = qué función representa.
+                Signo = cómo se expresa.
+                Casa = en qué ámbito de la vida se manifiesta.
+            </p>
+        </div>
+
     </section>
 
-    <section class="siguiente-leccion">
-        <p class="etiqueta">SIGUIENTE ETAPA</p>
-        <h2>¿Qué representan los planetas?</h2>
-        <p>Aprendé a interpretar el Sol, la Luna, el Ascendente y las casas.</p>
-        <a href="index.html" class="boton-principal">← VOLVER A INDEX</a>
-        <br><br>
-        <a href="index3.html" class="boton-principal">IR A INDEX 3 <span>→</span></a>
+
+    <!-- ÍNDICE -->
+
+    <nav class="planet-panel">
+
+        <h2>Contenido del módulo</h2>
+
+        <p>
+            Seleccioná un tema para ir directamente a su explicación.
+        </p>
+
+        <div class="planet-index">
+            <a href="#sol">☉ Sol — identidad</a>
+            <a href="#luna">☽ Luna — emociones</a>
+            <a href="#mercurio">☿ Mercurio — pensamiento</a>
+            <a href="#venus">♀ Venus — afectos y valores</a>
+            <a href="#marte">♂ Marte — acción y deseo</a>
+            <a href="#jupiter">♃ Júpiter — expansión</a>
+            <a href="#saturno">♄ Saturno — responsabilidad</a>
+            <a href="#urano">♅ Urano — innovación</a>
+            <a href="#neptuno">♆ Neptuno — imaginación</a>
+            <a href="#pluton">♇ Plutón — transformación</a>
+            <a href="#quiron">⚷ Quirón — aprendizaje</a>
+            <a href="#nodos">☊ ☋ Nodos lunares</a>
+            <a href="#integracion">Cómo integrar la carta</a>
+            <a href="#practica">Actividad práctica</a>
+        </div>
+
+    </nav>
+
+
+    <!-- MÉTODO DE INTERPRETACIÓN -->
+
+    <section class="planet-panel" id="metodo">
+
+        <p class="planet-label">02 · MÉTODO DE INTERPRETACIÓN</p>
+
+        <h2>Cómo leer un planeta según su signo y su casa</h2>
+
+        <div class="planet-formula">
+
+            <div>
+                <strong>1. Planeta</strong>
+                <p>
+                    Identificá la función: sentir, pensar, amar,
+                    actuar, crecer o asumir responsabilidades.
+                </p>
+            </div>
+
+            <div>
+                <strong>2. Signo</strong>
+                <p>
+                    Observá el estilo: directo, constante,
+                    adaptable, emocional, racional u otra cualidad.
+                </p>
+            </div>
+
+            <div>
+                <strong>3. Casa</strong>
+                <p>
+                    Identificá el área: identidad, recursos,
+                    comunicación, hogar, vínculos, trabajo o vocación.
+                </p>
+            </div>
+
+        </div>
+
+        <h3>Los signos modifican el estilo</h3>
+
+        <p>
+            Un mismo planeta puede expresarse de maneras diferentes
+            según el signo. Marte en Aries, por ejemplo, puede simbolizar
+            una acción rápida y directa; Marte en Capricornio puede
+            simbolizar una acción planificada, paciente y estratégica.
+        </p>
+
+        <h3>Las casas señalan el área de experiencia</h3>
+
+        <p>
+            Marte en casa 3 puede poner énfasis en la comunicación,
+            el aprendizaje y las iniciativas cotidianas. Marte en casa 10
+            puede asociarse con la ambición, los objetivos profesionales
+            y la manera de asumir responsabilidades públicas.
+        </p>
+
+        <p class="planet-note">
+            Los ejemplos son interpretaciones simbólicas. Una lectura
+            completa considera también los aspectos planetarios,
+            las regencias y el conjunto de la carta.
+        </p>
+
     </section>
 
-    <footer class="footer">
-        <span class="footer-simbolo">☾</span>
-        <p>ASTRO ROJO</p>
-        <span>Astrología · Tarot · Autoconocimiento</span>
+
+    <!-- LOS DIEZ PLANETAS -->
+
+    <section class="planet-panel">
+
+        <p class="planet-label">03 · LOS DIEZ PLANETAS</p>
+
+        <h2>Significado e interpretación</h2>
+
+        <div class="planet-grid">
+
+
+            <!-- SOL -->
+
+            <article class="planet-card" id="sol">
+
+                <span class="symbol">☉</span>
+                <span class="category">IDENTIDAD Y VITALIDAD</span>
+
+                <h2>El Sol</h2>
+
+                <p class="question">
+                    ¿Quién soy y cómo desarrollo mi identidad?
+                </p>
+
+                <p>
+                    El Sol simboliza la identidad consciente,
+                    la voluntad, la vitalidad, la creatividad y el
+                    proceso de desarrollar una expresión propia.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>El Sol según el signo</h3>
+                    <p>
+                        El signo solar describe un estilo de expresión
+                        de la identidad. En Aries puede destacar la
+                        iniciativa; en Tauro, la estabilidad; en Géminis,
+                        la curiosidad; en Cáncer, la sensibilidad;
+                        en Leo, la creatividad; y en Virgo, el análisis.
+                    </p>
+                    <p>
+                        En Libra puede enfatizar la cooperación; en
+                        Escorpio, la profundidad; en Sagitario, la
+                        exploración; en Capricornio, la responsabilidad;
+                        en Acuario, la originalidad; y en Piscis,
+                        la imaginación y la sensibilidad.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>El Sol según la casa</h3>
+                    <p>
+                        Casa 1: identidad y presencia personal.
+                        Casa 4: raíces y vida privada.
+                        Casa 5: creatividad y expresión.
+                        Casa 10: vocación, metas y reconocimiento.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Sol en Leo en casa 5: una lectura posible
+                        enfatiza la creatividad, la expresión personal
+                        y el deseo de desarrollar talentos propios.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- LUNA -->
+
+            <article class="planet-card" id="luna">
+
+                <span class="symbol">☽</span>
+                <span class="category">EMOCIONES Y NECESIDADES</span>
+
+                <h2>La Luna</h2>
+
+                <p class="question">
+                    ¿Qué necesito para sentirme emocionalmente seguro?
+                </p>
+
+                <p>
+                    La Luna representa las necesidades afectivas,
+                    los hábitos, la memoria, las reacciones emocionales
+                    y las formas de buscar protección y pertenencia.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>La Luna según el signo</h3>
+                    <p>
+                        En Aries puede simbolizar reacciones espontáneas;
+                        en Tauro, una necesidad de estabilidad;
+                        en Géminis, el procesamiento de emociones
+                        mediante el diálogo; y en Cáncer, una fuerte
+                        importancia de la contención.
+                    </p>
+                    <p>
+                        En Leo puede buscar expresión afectiva;
+                        en Virgo, orden y utilidad; en Libra,
+                        reciprocidad; en Escorpio, profundidad;
+                        en Sagitario, libertad; en Capricornio,
+                        control y estructura; en Acuario, espacio
+                        personal; y en Piscis, sensibilidad e imaginación.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>La Luna según la casa</h3>
+                    <p>
+                        Casa 2: seguridad y recursos.
+                        Casa 4: hogar y raíces.
+                        Casa 7: vínculos cercanos.
+                        Casa 12: intimidad y mundo interior.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Luna en Tauro en casa 4: puede simbolizar
+                        una necesidad de estabilidad emocional,
+                        comodidad y continuidad en el entorno privado.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- MERCURIO -->
+
+            <article class="planet-card" id="mercurio">
+
+                <span class="symbol">☿</span>
+                <span class="category">PENSAMIENTO Y COMUNICACIÓN</span>
+
+                <h2>Mercurio</h2>
+
+                <p class="question">
+                    ¿Cómo pienso, aprendo y comunico mis ideas?
+                </p>
+
+                <p>
+                    Mercurio simboliza el pensamiento, el lenguaje,
+                    la curiosidad, el aprendizaje y la manera de
+                    organizar y compartir información.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Mercurio según el signo</h3>
+                    <p>
+                        En Géminis puede representar una mente versátil;
+                        en Virgo, una atención analítica a los detalles;
+                        en Aries, una comunicación directa; en Libra,
+                        una consideración de diferentes perspectivas;
+                        y en Capricornio, un pensamiento estructurado.
+                    </p>
+                    <p>
+                        Los demás signos aportan sus propias cualidades
+                        al modo de aprender, conversar y procesar ideas.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Mercurio según la casa</h3>
+                    <p>
+                        Casa 3: comunicación cotidiana y aprendizaje.
+                        Casa 6: organización y tareas.
+                        Casa 9: estudios superiores y filosofía.
+                        Casa 10: comunicación profesional.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Mercurio en Virgo en casa 3: puede sugerir
+                        un estilo de comunicación detallista,
+                        organizado y orientado a comprender información.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- VENUS -->
+
+            <article class="planet-card" id="venus">
+
+                <span class="symbol">♀</span>
+                <span class="category">AFECTO, VALORES Y PLACER</span>
+
+                <h2>Venus</h2>
+
+                <p class="question">
+                    ¿Qué valoro y cómo construyo mis vínculos?
+                </p>
+
+                <p>
+                    Venus simboliza el afecto, la atracción, el placer,
+                    los valores personales, la armonía y las preferencias
+                    en las relaciones.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Venus según el signo</h3>
+                    <p>
+                        En Libra puede valorar la reciprocidad;
+                        en Tauro, la estabilidad y lo sensorial;
+                        en Géminis, la conversación; en Escorpio,
+                        la intensidad; y en Capricornio, la constancia
+                        y el compromiso.
+                    </p>
+                    <p>
+                        El signo ayuda a explorar cómo se expresa
+                        el cariño, qué se aprecia y qué cualidades
+                        se buscan en una relación.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Venus según la casa</h3>
+                    <p>
+                        Casa 2: recursos, autoestima y valores.
+                        Casa 5: romance y creatividad.
+                        Casa 7: pareja y asociaciones.
+                        Casa 11: amistades y proyectos compartidos.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Venus en Capricornio en casa 7: puede simbolizar
+                        una valoración de la estabilidad, los acuerdos
+                        y la construcción de relaciones duraderas.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- MARTE -->
+
+            <article class="planet-card" id="marte">
+
+                <span class="symbol">♂</span>
+                <span class="category">ACCIÓN, DESEO E INICIATIVA</span>
+
+                <h2>Marte</h2>
+
+                <p class="question">
+                    ¿Cómo actúo, persigo mis objetivos y defiendo mis límites?
+                </p>
+
+                <p>
+                    Marte representa la iniciativa, el deseo,
+                    la energía para actuar, la afirmación personal
+                    y el modo de afrontar desafíos.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Marte según el signo</h3>
+                    <p>
+                        En Aries puede simbolizar acción directa;
+                        en Tauro, perseverancia; en Géminis,
+                        iniciativa intelectual; en Leo, expresión
+                        decidida; y en Capricornio, planificación
+                        y disciplina.
+                    </p>
+                    <p>
+                        El signo permite estudiar el ritmo, el estilo
+                        y las motivaciones con las que se afrontan
+                        las dificultades.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Marte según la casa</h3>
+                    <p>
+                        Casa 1: iniciativa personal.
+                        Casa 3: comunicación y movimiento.
+                        Casa 6: trabajo cotidiano.
+                        Casa 10: ambición y objetivos profesionales.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Marte en Aries en casa 1: puede sugerir
+                        una forma espontánea, directa y enérgica
+                        de tomar iniciativas.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- JÚPITER -->
+
+            <article class="planet-card" id="jupiter">
+
+                <span class="symbol">♃</span>
+                <span class="category">EXPANSIÓN Y CONOCIMIENTO</span>
+
+                <h2>Júpiter</h2>
+
+                <p class="question">
+                    ¿Cómo crezco, amplío mi perspectiva y busco sentido?
+                </p>
+
+                <p>
+                    Júpiter simboliza la expansión, las creencias,
+                    el optimismo, la búsqueda de sentido, la enseñanza
+                    y el interés por explorar nuevas posibilidades.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Júpiter según el signo</h3>
+                    <p>
+                        En Sagitario puede asociarse con la exploración
+                        y la filosofía; en Géminis, con la curiosidad;
+                        en Tauro, con el desarrollo de recursos;
+                        y en Acuario, con las ideas colectivas
+                        y la innovación.
+                    </p>
+                    <p>
+                        El signo muestra qué estilo simbólico adopta
+                        la búsqueda de crecimiento y conocimiento.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Júpiter según la casa</h3>
+                    <p>
+                        Casa 2: recursos y valores.
+                        Casa 5: creatividad y disfrute.
+                        Casa 9: estudios, viajes y filosofía.
+                        Casa 11: amistades, redes y proyectos colectivos.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Júpiter en Sagitario en casa 9: puede simbolizar
+                        entusiasmo por estudiar, viajar, enseñar
+                        o explorar diferentes visiones del mundo.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- SATURNO -->
+
+            <article class="planet-card" id="saturno">
+
+                <span class="symbol">♄</span>
+                <span class="category">ESTRUCTURA Y RESPONSABILIDAD</span>
+
+                <h2>Saturno</h2>
+
+                <p class="question">
+                    ¿Qué necesito aprender a construir con paciencia?
+                </p>
+
+                <p>
+                    Saturno representa los límites, la disciplina,
+                    la responsabilidad, la perseverancia, la estructura
+                    y los procesos de maduración.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Saturno según el signo</h3>
+                    <p>
+                        En Capricornio puede enfatizar la organización
+                        y la responsabilidad; en Virgo, el método
+                        y la precisión; en Leo, el desarrollo responsable
+                        de la expresión personal; y en Libra,
+                        la importancia de los acuerdos y la justicia.
+                    </p>
+                    <p>
+                        El signo ayuda a explorar cómo se afrontan
+                        las obligaciones, los límites y los desafíos.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Saturno según la casa</h3>
+                    <p>
+                        Casa 2: administración de recursos.
+                        Casa 4: hogar y raíces.
+                        Casa 7: acuerdos y compromisos.
+                        Casa 10: carrera, metas y responsabilidades públicas.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Saturno en Capricornio en casa 10: puede
+                        representar una orientación hacia objetivos
+                        profesionales de largo plazo y la construcción
+                        paciente de responsabilidades.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- URANO -->
+
+            <article class="planet-card" id="urano">
+
+                <span class="symbol">♅</span>
+                <span class="category">INNOVACIÓN Y LIBERTAD</span>
+
+                <h2>Urano</h2>
+
+                <p class="question">
+                    ¿Dónde busco independencia y nuevas posibilidades?
+                </p>
+
+                <p>
+                    Urano simboliza la innovación, la originalidad,
+                    la independencia, los cambios inesperados y
+                    el cuestionamiento de estructuras establecidas.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Urano según el signo</h3>
+                    <p>
+                        Su signo tiene una importante dimensión generacional,
+                        porque Urano permanece varios años en cada signo.
+                        En Acuario, por ejemplo, suele asociarse
+                        simbólicamente con la innovación y las ideas sociales.
+                    </p>
+                    <p>
+                        Para una interpretación personal más precisa,
+                        resulta especialmente útil observar la casa
+                        donde se encuentra.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Urano según la casa</h3>
+                    <p>
+                        Casa 3: comunicación e ideas originales.
+                        Casa 5: creatividad y expresión.
+                        Casa 7: formas no convencionales de relacionarse.
+                        Casa 11: grupos, redes y proyectos futuros.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Urano en casa 3 puede sugerir interés por
+                        aprender de formas poco convencionales,
+                        cuestionar ideas y explorar nuevas maneras
+                        de comunicar.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- NEPTUNO -->
+
+            <article class="planet-card" id="neptuno">
+
+                <span class="symbol">♆</span>
+                <span class="category">IMAGINACIÓN E IDEALES</span>
+
+                <h2>Neptuno</h2>
+
+                <p class="question">
+                    ¿Qué imagino, idealizo o busco más allá de lo concreto?
+                </p>
+
+                <p>
+                    Neptuno simboliza la imaginación, la inspiración,
+                    los ideales, la sensibilidad y la búsqueda de conexión
+                    con algo que trasciende lo cotidiano.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Neptuno según el signo</h3>
+                    <p>
+                        Su signo se interpreta principalmente en clave
+                        generacional. Neptuno en Piscis, por ejemplo,
+                        se asocia simbólicamente con imaginación,
+                        sensibilidad, espiritualidad e ideales colectivos.
+                    </p>
+                    <p>
+                        Conviene explorar tanto las posibilidades creativas
+                        como la tendencia a idealizar o perder claridad
+                        en determinadas situaciones.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Neptuno según la casa</h3>
+                    <p>
+                        Casa 5: imaginación y expresión artística.
+                        Casa 9: ideales, creencias y búsqueda espiritual.
+                        Casa 12: vida interior y contemplación.
+                        Casa 7: ideales y expectativas en las relaciones.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Neptuno en casa 5 puede relacionarse simbólicamente
+                        con la inspiración artística, la imaginación
+                        y la idealización del romance.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- PLUTÓN -->
+
+            <article class="planet-card" id="pluton">
+
+                <span class="symbol">♇</span>
+                <span class="category">TRANSFORMACIÓN Y PROFUNDIDAD</span>
+
+                <h2>Plutón</h2>
+
+                <p class="question">
+                    ¿Qué procesos profundos necesito comprender y transformar?
+                </p>
+
+                <p>
+                    Plutón simboliza la transformación, el poder,
+                    el control, la intensidad, los procesos de renovación
+                    y el enfrentamiento con aspectos profundos de la vida.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Plutón según el signo</h3>
+                    <p>
+                        Su signo tiene una dimensión generacional.
+                        Plutón en Escorpio, por ejemplo, se asocia
+                        con temas de profundidad emocional, tabúes,
+                        poder y regeneración.
+                    </p>
+                    <p>
+                        La interpretación personal requiere prestar
+                        especial atención a la casa y a sus aspectos.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Plutón según la casa</h3>
+                    <p>
+                        Casa 2: recursos, valores y seguridad.
+                        Casa 4: raíces e historia familiar.
+                        Casa 8: intimidad y recursos compartidos.
+                        Casa 10: vocación, autoridad y poder profesional.
+                    </p>
+                </div>
+
+                <div class="planet-example">
+                    <strong>Ejemplo</strong>
+                    <p>
+                        Plutón en casa 2 puede invitar a explorar
+                        cambios profundos en la relación con los recursos,
+                        la seguridad y los valores personales.
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUIRÓN -->
+
+    <section class="planet-panel" id="quiron">
+
+        <p class="planet-label">04 · CONTENIDO COMPLEMENTARIO</p>
+
+        <h2>⚷ Quirón: vulnerabilidad y aprendizaje</h2>
+
+        <p>
+            Quirón es un cuerpo menor del sistema solar que, en astrología,
+            se interpreta como símbolo de experiencias sensibles,
+            vulnerabilidades y aprendizajes que pueden integrarse
+            a lo largo de la vida.
+        </p>
+
+        <h3>¿Qué representa Quirón?</h3>
+
+        <p>
+            Su interpretación invita a reflexionar sobre situaciones
+            que generan inseguridad, sobre las estrategias que utilizamos
+            para afrontarlas y sobre cómo la experiencia puede favorecer
+            la comprensión de uno mismo y de otras personas.
+        </p>
+
+        <h3>Quirón según el signo</h3>
+
+        <p>
+            El signo aporta un estilo simbólico a esos temas.
+            Quirón en Aries puede invitar a explorar la afirmación
+            personal, la iniciativa y el derecho a ocupar espacio.
+            Quirón en Libra puede llevar a reflexionar sobre la
+            reciprocidad, la aceptación y el equilibrio en las relaciones.
+        </p>
+
+        <h3>Quirón según la casa</h3>
+
+        <p>
+            En casa 1 puede relacionarse con la identidad y la
+            autoafirmación; en casa 4, con el sentido de pertenencia
+            y las raíces; en casa 7, con los vínculos; y en casa 10,
+            con la vocación, la exposición pública o el reconocimiento.
+        </p>
+
+        <div class="planet-example">
+            <strong>Ejemplo de interpretación</strong>
+            <p>
+                Quirón en Libra en casa 7 puede servir como punto
+                de partida para explorar inseguridades en las relaciones,
+                el miedo al rechazo o el aprendizaje de acuerdos
+                más equilibrados. No constituye un diagnóstico.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- NODOS LUNARES -->
+
+    <section class="planet-panel" id="nodos">
+
+        <p class="planet-label">05 · CONTENIDO COMPLEMENTARIO</p>
+
+        <h2>Los nodos lunares</h2>
+
+        <p>
+            Los nodos lunares no son planetas: son puntos astronómicos
+            que se calculan donde la órbita de la Luna cruza la eclíptica.
+            En astrología se interpretan en conjunto y siempre están
+            en signos y casas opuestos.
+        </p>
+
+        <div class="planet-grid">
+
+            <article class="planet-card">
+
+                <span class="symbol">☊</span>
+                <span class="category">DESARROLLO Y EXPLORACIÓN</span>
+
+                <h2>Nodo Norte</h2>
+
+                <p class="question">
+                    ¿Qué cualidades puedo aprender a desarrollar?
+                </p>
+
+                <p>
+                    Simboliza experiencias nuevas, aprendizajes
+                    y direcciones de desarrollo. Se utiliza para
+                    reflexionar sobre hábitos que podemos ampliar
+                    y capacidades que podemos cultivar.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Según el signo</h3>
+                    <p>
+                        El signo describe cualidades que se pueden
+                        explorar. En Libra, por ejemplo, puede simbolizar
+                        el aprendizaje de cooperación, escucha
+                        y reciprocidad.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Según la casa</h3>
+                    <p>
+                        En casa 1, puede orientar la reflexión hacia
+                        la autonomía y la identidad; en casa 7,
+                        hacia la cooperación; en casa 10, hacia
+                        los objetivos y la participación pública.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <article class="planet-card">
+
+                <span class="symbol">☋</span>
+                <span class="category">HÁBITOS Y EXPERIENCIAS CONOCIDAS</span>
+
+                <h2>Nodo Sur</h2>
+
+                <p class="question">
+                    ¿Qué patrones me resultan familiares y puedo revisar?
+                </p>
+
+                <p>
+                    Simboliza hábitos, recursos conocidos y maneras
+                    de actuar que pueden surgir espontáneamente.
+                    La interpretación invita a reconocerlos sin
+                    considerarlos necesariamente negativos.
+                </p>
+
+                <div class="planet-detail">
+                    <h3>Según el signo</h3>
+                    <p>
+                        El signo describe cualidades que pueden
+                        resultar familiares. La tarea consiste en
+                        reconocer cuándo son útiles y cuándo conviene
+                        incorporar otras maneras de responder.
+                    </p>
+                </div>
+
+                <div class="planet-detail">
+                    <h3>Según la casa</h3>
+                    <p>
+                        En casa 1 puede señalar patrones relacionados
+                        con la autosuficiencia; en casa 7, con las
+                        dinámicas de pareja; en casa 4, con el pasado
+                        familiar y el sentido de pertenencia.
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+
+        <div class="planet-example">
+            <strong>La relación entre ambos nodos</strong>
+            <p>
+                El Nodo Norte y el Nodo Sur forman un eje.
+                Por ejemplo, con Nodo Norte en Libra y Nodo Sur en Aries,
+                la lectura puede explorar el equilibrio entre iniciativa
+                individual y cooperación. No se trata de abandonar la
+                autonomía, sino de integrar ambas cualidades.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- INTEGRACIÓN -->
+
+    <section class="planet-panel" id="integracion">
+
+        <p class="planet-label">06 · LECTURA INTEGRADA</p>
+
+        <h2>Cómo combinar planeta, signo y casa</h2>
+
+        <p>
+            Una interpretación completa no consiste en sumar
+            descripciones aisladas. El objetivo es construir una idea
+            coherente a partir de la función del planeta, su estilo
+            zodiacal y el ámbito vital que representa la casa.
+        </p>
+
+        <div class="planet-formula">
+
+            <div>
+                <strong>Venus</strong>
+                <p>
+                    Afecto, valores, atracción y preferencias
+                    en los vínculos.
+                </p>
+            </div>
+
+            <div>
+                <strong>Capricornio</strong>
+                <p>
+                    Estabilidad, compromiso, prudencia
+                    y construcción a largo plazo.
+                </p>
+            </div>
+
+            <div>
+                <strong>Casa 7</strong>
+                <p>
+                    Relaciones, pareja, asociaciones
+                    y acuerdos con otras personas.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="planet-example">
+            <strong>Interpretación final</strong>
+            <p>
+                Venus en Capricornio en casa 7 puede sugerir una
+                valoración de las relaciones estables, los acuerdos
+                claros y el compromiso. Para afinar la lectura,
+                se estudian los aspectos de Venus, su regente
+                y las demás posiciones de la carta.
+            </p>
+        </div>
+
+        <h3>Preguntas para profundizar</h3>
+
+        <ul>
+            <li>¿Cómo se complementan el planeta y el signo?</li>
+            <li>¿Qué tema de la casa ayuda a comprender la posición?</li>
+            <li>¿Hay otros planetas que aporten matices o tensiones?</li>
+            <li>¿Qué interpretación evita caer en afirmaciones absolutas?</li>
+        </ul>
+
+    </section>
+
+
+    <!-- ACTIVIDAD -->
+
+    <section class="planet-panel planet-exercise" id="practica">
+
+        <p class="planet-label">07 · ACTIVIDAD PRÁCTICA</p>
+
+        <h2>Construí tu primera interpretación</h2>
+
+        <p>
+            Elegí un planeta de una carta natal y utilizá las siguientes
+            preguntas para redactar una interpretación propia.
+        </p>
+
+        <ol>
+            <li>Identificá el planeta y explicá qué representa.</li>
+            <li>Buscá el signo donde se encuentra y describí su estilo.</li>
+            <li>Identificá la casa y el área vital que simboliza.</li>
+            <li>Combiná los tres elementos en un párrafo coherente.</li>
+            <li>Revisá si la interpretación es equilibrada y no determinista.</li>
+        </ol>
+
+        <div class="planet-example">
+            <strong>Desafío</strong>
+            <p>
+                Interpretá Marte en Leo en casa 10. Escribí primero
+                qué representa Marte, luego qué aporta Leo y finalmente
+                cómo influye el significado de la casa 10.
+                Cerrá con una interpretación que integre los tres niveles.
+            </p>
+        </div>
+
+        <h3>Objetivo de aprendizaje</h3>
+
+        <p>
+            Al terminar este módulo, deberías poder explicar el significado
+            de los diez planetas principales, reconocer el papel
+            complementario de Quirón y los nodos lunares, y comenzar
+            a interpretar una posición natal según su planeta, signo
+            y casa.
+        </p>
+
+    </section>
+
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer class="planet-footer">
+        <p>☾ ASTRO ROJO</p>
+        <p>Astrología · Simbolismo · Autoconocimiento</p>
+        <a href="index.html" class="planet-back">← Volver al inicio del curso</a>
     </footer>
 
 </main>
+
 </body>
 </html>
-
