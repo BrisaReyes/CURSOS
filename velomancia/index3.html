@@ -1,892 +1,1079 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10070b">
+<meta name="description" content="ASTRO ROJO — Aprende a interpretar simbólicamente las velas en lecturas de trabajo, dinero, prosperidad y limpieza energética.">
 
-    <meta charset="UTF-8">
+<title>Trabajo y Dinero — Astro Rojo</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<style>
+:root {
+    --fondo: #10070b;
+    --fondo-secundario: #190b10;
+    --tarjeta: #1d1015;
+    --rojo: #e21b3c;
+    --rojo-oscuro: #8f1028;
+    --texto: #f5eeee;
+    --texto-suave: #bbaeb2;
+    --borde: rgba(226, 27, 60, 0.24);
+}
 
-    <title>Lecturas para Trabajo y Dinero — Astro Rojo</title>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <link rel="stylesheet" href="style.css">
+html {
+    scroll-behavior: smooth;
+}
 
+body {
+    background:
+        radial-gradient(ellipse at top, #35101b 0%, transparent 45%),
+        var(--fondo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.75;
+    min-height: 100vh;
+}
+
+.container {
+    width: min(1120px, 92%);
+    margin: auto;
+    padding: 35px 0 60px;
+}
+
+/* PORTADA */
+
+.welcome {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 75px 30px 65px;
+    border: 1px solid var(--borde);
+    border-radius: 25px;
+    background:
+        radial-gradient(ellipse at center top, rgba(226, 27, 60, 0.2), transparent 65%),
+        linear-gradient(145deg, #241018, #10070b 75%);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+    margin-bottom: 35px;
+}
+
+.welcome::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(226, 27, 60, 0.07);
+    filter: blur(55px);
+    top: -120px;
+    left: calc(50% - 130px);
+}
+
+.welcome-icon {
+    position: relative;
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.welcome h1 {
+    position: relative;
+    font-size: clamp(2.1rem, 7vw, 4.3rem);
+    font-weight: 900;
+    letter-spacing: 3px;
+    line-height: 1.15;
+    margin-bottom: 22px;
+}
+
+.welcome h1 span {
+    display: block;
+    color: var(--rojo);
+}
+
+.welcome p {
+    position: relative;
+    max-width: 690px;
+    margin: auto;
+    color: var(--texto-suave);
+    font-size: 1rem;
+}
+
+.portada-linea {
+    width: 75px;
+    height: 3px;
+    background: var(--rojo);
+    margin: 25px auto 0;
+    border-radius: 10px;
+}
+
+/* NAVEGACIÓN */
+
+.indice {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 45px;
+}
+
+.indice a {
+    display: inline-block;
+    color: var(--texto-suave);
+    text-decoration: none;
+    border: 1px solid var(--borde);
+    background: rgba(255, 255, 255, 0.025);
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    transition: 0.25s;
+}
+
+.indice a:hover {
+    background: var(--rojo);
+    color: white;
+    border-color: var(--rojo);
+}
+
+/* SECCIONES */
+
+.tema-curso {
+    margin-bottom: 30px;
+    padding: 32px;
+    border: 1px solid var(--borde);
+    border-radius: 21px;
+    background: linear-gradient(145deg, rgba(34, 15, 23, 0.97), rgba(19, 9, 13, 0.97));
+}
+
+.seccion-titulo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.seccion-titulo::before {
+    content: "";
+    display: block;
+    width: 4px;
+    min-width: 4px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--rojo);
+}
+
+.seccion-titulo h2 {
+    font-size: clamp(1.15rem, 3vw, 1.55rem);
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+}
+
+.introduccion {
+    color: var(--texto-suave);
+    font-size: 0.98rem;
+}
+
+.introduccion p + p {
+    margin-top: 15px;
+}
+
+.introduccion strong {
+    color: var(--texto);
+}
+
+.introduccion em {
+    color: #ff7188;
+}
+
+/* TARJETAS */
+
+.study-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 25px;
+}
+
+.study-card {
+    position: relative;
+    overflow: hidden;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #24131a, #180c11);
+    transition: transform 0.25s, border-color 0.25s, background 0.25s;
+}
+
+.study-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--rojo);
+    transition: width 0.3s;
+}
+
+.study-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(226, 27, 60, 0.55);
+    background: linear-gradient(145deg, #2b141d, #1a0b11);
+}
+
+.study-card:hover::after {
+    width: 100%;
+}
+
+.study-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 17px;
+    border-radius: 13px;
+    border: 1px solid rgba(226, 27, 60, 0.3);
+    background: rgba(226, 27, 60, 0.1);
+    font-size: 1.35rem;
+}
+
+.study-card h3 {
+    color: var(--texto);
+    font-size: 1.08rem;
+    margin-bottom: 9px;
+}
+
+.study-card p {
+    color: var(--texto-suave);
+    font-size: 0.92rem;
+    line-height: 1.75;
+}
+
+/* BLOQUE DESTACADO */
+
+.principio {
+    position: relative;
+    overflow: hidden;
+    padding: 32px;
+    margin: 25px 0 0;
+    border: 1px solid rgba(226, 27, 60, 0.4);
+    border-radius: 18px;
+    background:
+        radial-gradient(ellipse at top left, rgba(226, 27, 60, 0.13), transparent 70%),
+        #1b0c12;
+}
+
+.principio-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.principio h3 {
+    color: #ff4968;
+    font-size: 1.12rem;
+    margin-bottom: 12px;
+    letter-spacing: 0.4px;
+}
+
+.principio p {
+    color: var(--texto-suave);
+    font-size: 0.95rem;
+}
+
+/* EJEMPLO */
+
+.ejemplo-caja {
+    margin-top: 22px;
+    padding: 23px;
+    border-left: 3px solid var(--rojo);
+    border-radius: 0 12px 12px 0;
+    background: rgba(226, 27, 60, 0.06);
+}
+
+.ejemplo-caja h3 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.ejemplo-caja p {
+    color: var(--texto-suave);
+    font-size: 0.94rem;
+}
+
+/* LISTA DE PASOS */
+
+.pasos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+    margin-top: 24px;
+}
+
+.paso {
+    padding: 20px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--borde);
+    background: rgba(226, 27, 60, 0.045);
+}
+
+.paso-numero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 14px;
+    border-radius: 50%;
+    background: var(--rojo);
+    color: white;
+    font-weight: bold;
+}
+
+.paso h3 {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.paso p {
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+}
+
+/* ADVERTENCIA */
+
+.nota-seguridad {
+    padding: 20px 22px;
+    margin-top: 22px;
+    border: 1px solid rgba(255, 190, 90, 0.25);
+    border-radius: 14px;
+    background: rgba(255, 190, 90, 0.045);
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+}
+
+.nota-seguridad strong {
+    color: #ffd08a;
+}
+
+/* PIE Y SIGUIENTE */
+
+.cierre {
+    text-align: center;
+    padding: 35px 25px;
+    margin: 35px 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #2a0d17, #16090e);
+    border: 1px solid var(--borde);
+}
+
+.cierre h2 {
+    color: var(--rojo);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    margin-bottom: 12px;
+}
+
+.cierre p {
+    max-width: 720px;
+    margin: auto;
+    color: var(--texto-suave);
+}
+
+.siguiente-leccion {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 35px;
+}
+
+.siguiente-leccion a {
+    display: inline-block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #e21b3c, #a80f2b);
+    box-shadow: 0 8px 25px rgba(226, 27, 60, 0.18);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.siguiente-leccion a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(226, 27, 60, 0.3);
+}
+
+@media (max-width: 700px) {
+    .container {
+        width: 94%;
+        padding-top: 15px;
+    }
+
+    .welcome {
+        padding: 55px 20px 45px;
+        border-radius: 19px;
+    }
+
+    .welcome h1 {
+        letter-spacing: 1.5px;
+    }
+
+    .tema-curso {
+        padding: 23px 18px;
+        border-radius: 17px;
+    }
+
+    .study-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .study-card {
+        padding: 22px;
+    }
+
+    .pasos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .principio {
+        padding: 25px 21px;
+    }
+
+    .indice {
+        gap: 8px;
+    }
+
+    .indice a {
+        font-size: 0.78rem;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .pasos {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
 <main class="container">
 
-
-    <!-- =========================
-         ENCABEZADO
-    ========================== -->
+    <!-- PORTADA -->
 
     <header class="welcome">
 
         <div class="welcome-icon">💰</div>
 
         <h1>
-            TRABAJO Y DINERO
+            TRABAJO
+            <span>Y DINERO</span>
         </h1>
 
         <p>
-            Lecturas de Velomancia para observar
-            situaciones laborales, oportunidades,
-            proyectos y procesos económicos.
+            Lecturas de velomancia para observar situaciones laborales,
+            oportunidades, proyectos, prosperidad y procesos económicos.
         </p>
+
+        <div class="portada-linea"></div>
 
     </header>
 
 
+    <!-- ÍNDICE -->
 
-    <!-- =========================
-         INTRODUCCIÓN
-    ========================== -->
+    <nav class="indice" aria-label="Índice de contenidos">
+        <a href="#introduccion">Introducción</a>
+        <a href="#trabajo">Trabajo</a>
+        <a href="#dinero">Dinero</a>
+        <a href="#intencion">Intención</a>
+        <a href="#bloqueos">Bloqueos</a>
+        <a href="#ejemplo">Ejemplo</a>
+        <a href="#registro">Registro</a>
+        <a href="#limpieza">Limpieza energética</a>
+    </nav>
 
-    <section class="tema-curso">
+
+    <!-- INTRODUCCIÓN -->
+
+    <section class="tema-curso" id="introduccion">
 
         <div class="seccion-titulo">
-
-            <h2>
-                💼 LECTURAS PARA TRABAJO Y DINERO
-            </h2>
-
+            <h2>LECTURAS PARA TRABAJO Y DINERO</h2>
         </div>
-
 
         <div class="introduccion">
-
             <p>
-                Las lecturas relacionadas con el trabajo
-                y el dinero permiten observar simbólicamente
-                el estado de una situación laboral,
-                económica o profesional.
-                La velomancia no reemplaza la planificación,
-                la toma de decisiones ni el análisis de una
-                situación real. La lectura funciona como una
-                herramienta de observación y reflexión sobre
-                aquello que estamos atravesando.
+                Las lecturas relacionadas con el trabajo y el dinero permiten
+                observar simbólicamente el estado de una situación laboral,
+                económica o profesional. La velomancia propone prestar atención
+                a la llama, el humo, la cera y el desarrollo de la combustión
+                para construir una interpretación vinculada con una pregunta.
             </p>
 
+            <p>
+                Esta práctica no reemplaza la planificación, la toma de
+                decisiones ni el análisis de una situación real. Su utilidad
+                está en ofrecer un espacio de reflexión sobre aquello que
+                estamos atravesando y las acciones que podemos considerar.
+            </p>
         </div>
-
 
     </section>
 
 
+    <!-- TRABAJO -->
 
-    <!-- =========================
-         LECTURAS PARA TRABAJO
-    ========================== -->
-
-    <section class="tema-curso">
+    <section class="tema-curso" id="trabajo">
 
         <div class="seccion-titulo">
-
-            <h2>
-                💼 TRABAJO
-            </h2>
-
+            <h2>TRABAJO Y DESARROLLO PROFESIONAL</h2>
         </div>
-
 
         <div class="introduccion">
-
             <p>
-                Una lectura laboral puede utilizarse para
-                observar el momento profesional que estamos
-                atravesando, posibles movimientos y aquello
-                que necesita mayor atención.
+                Una lectura laboral puede centrarse en el momento profesional
+                actual, los cambios que se están considerando y los aspectos
+                que necesitan mayor atención. Antes de comenzar, definí si
+                querés explorar tu empleo actual, una búsqueda laboral o un
+                proyecto específico.
             </p>
-
         </div>
-
 
         <div class="study-grid">
 
-
             <article class="study-card">
-
                 <div class="study-icon">🏢</div>
-
-                <h3>
-                    Situación actual
-                </h3>
-
+                <h3>Situación actual</h3>
                 <p>
-                    Observá cómo se encuentra actualmente
-                    la situación laboral y qué energía
-                    predomina en el proceso.
+                    Observá simbólicamente el estado del proceso laboral.
+                    Considerá también los hechos concretos: tus condiciones
+                    de trabajo, responsabilidades y posibilidades actuales.
                 </p>
-
             </article>
 
-
             <article class="study-card">
-
                 <div class="study-icon">🚪</div>
-
-                <h3>
-                    Nuevas oportunidades
-                </h3>
-
+                <h3>Nuevas oportunidades</h3>
                 <p>
-                    La lectura puede utilizarse para
-                    reflexionar sobre nuevas posibilidades,
-                    cambios o caminos que podrían aparecer.
+                    Utilizá la lectura para reflexionar sobre cambios,
+                    entrevistas, propuestas o caminos profesionales que
+                    estés evaluando.
                 </p>
-
             </article>
 
-
             <article class="study-card">
-
                 <div class="study-icon">📈</div>
-
-                <h3>
-                    Crecimiento
-                </h3>
-
+                <h3>Crecimiento profesional</h3>
                 <p>
-                    Observá si el proceso muestra señales
-                    simbólicas relacionadas con avance,
-                    expansión o desarrollo profesional.
+                    Explorá simbólicamente temas como el aprendizaje,
+                    la expansión de un proyecto, el reconocimiento y
+                    el desarrollo de nuevas habilidades.
                 </p>
-
             </article>
 
-
             <article class="study-card">
-
                 <div class="study-icon">⚠️</div>
-
-                <h3>
-                    Bloqueos
-                </h3>
-
+                <h3>Dificultades laborales</h3>
                 <p>
-                    Identificá aquello que podría estar
-                    generando dificultades, retrasos
-                    o falta de movimiento.
+                    Reflexioná sobre los obstáculos que percibís y distinguí
+                    entre factores externos, hábitos personales y cuestiones
+                    que podrías trabajar o cambiar.
                 </p>
-
             </article>
 
-
         </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         DINERO Y PROSPERIDAD
-    ========================== -->
-
-    <section class="tema-curso">
-
-        <div class="seccion-titulo">
-
-            <h2>
-                💰 LECTURAS PARA DINERO Y PROSPERIDAD
-            </h2>
-
-        </div>
-
-
-        <div class="introduccion">
-
-            <p>
-                Las lecturas económicas pueden enfocarse
-                en la relación que una persona tiene con
-                sus recursos, proyectos, oportunidades
-                y objetivos materiales.
-                Es importante evitar interpretar una señal
-                como una garantía de ganancias. La lectura
-                sirve para reflexionar y observar tendencias
-                simbólicas, no para asegurar resultados
-                financieros.
-            </p>
-
-        </div>
-
-
-        <div class="study-grid">
-
-
-            <article class="study-card">
-
-                <div class="study-icon">💵</div>
-
-                <h3>
-                    Recursos
-                </h3>
-
-                <p>
-                    Observá simbólicamente cómo se encuentra
-                    la situación económica y qué aspectos
-                    necesitan mayor atención.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">🌱</div>
-
-                <h3>
-                    Prosperidad
-                </h3>
-
-                <p>
-                    La prosperidad puede trabajarse como
-                    una intención de crecimiento, estabilidad
-                    y mejor administración de los recursos.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">🔑</div>
-
-                <h3>
-                    Oportunidades
-                </h3>
-
-                <p>
-                    Observá si aparecen elementos que puedan
-                    relacionarse simbólicamente con apertura,
-                    movimiento o nuevas posibilidades.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">🧱</div>
-
-                <h3>
-                    Obstáculos
-                </h3>
-
-                <p>
-                    Registrá las señales que puedan representar
-                    demoras, limitaciones o aspectos que requieren
-                    ser revisados.
-                </p>
-
-            </article>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         INTENCIÓN
-    ========================== -->
-
-    <section class="tema-curso">
-
-        <div class="seccion-titulo">
-
-            <h2>
-                🎯 FORMULAR LA INTENCIÓN
-            </h2>
-
-        </div>
-
-
-        <div class="introduccion">
-
-            <p>
-                Una buena lectura comienza con una pregunta
-                clara. Evitá mezclar trabajo, dinero,
-                relaciones y otros temas dentro de una
-                misma intención.
-                Cuanto más concreta sea la pregunta,
-                más fácil será registrar las señales
-                y relacionarlas con el contexto.
-            </p>
-
-        </div>
-
-
-        <div class="study-grid">
-
-
-            <article class="study-card">
-
-                <div class="study-icon">❓</div>
-
-                <h3>
-                    Pregunta concreta
-                </h3>
-
-                <p>
-                    Definí exactamente qué querés observar
-                    antes de encender la vela.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">🎯</div>
-
-                <h3>
-                    Un objetivo
-                </h3>
-
-                <p>
-                    Concentrá la lectura en una situación
-                    específica para evitar interpretaciones
-                    demasiado generales.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">📝</div>
-
-                <h3>
-                    Registro
-                </h3>
-
-                <p>
-                    Anotá la pregunta antes de comenzar
-                    para poder comparar posteriormente
-                    la observación con la interpretación.
-                </p>
-
-            </article>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         BLOQUEOS
-    ========================== -->
-
-    <section class="tema-curso">
-
-        <div class="seccion-titulo">
-
-            <h2>
-                ⚠️ BLOQUEOS LABORALES Y ECONÓMICOS
-            </h2>
-
-        </div>
-
-
-        <div class="introduccion">
-
-            <p>
-                Una lectura puede utilizarse para identificar
-                simbólicamente qué aspectos parecen estar
-                generando estancamiento o dificultad.
-            </p>
-
-        </div>
-
-
-        <div class="study-grid">
-
-
-            <article class="study-card">
-
-                <div class="study-icon">⏳</div>
-
-                <h3>
-                    Demoras
-                </h3>
-
-                <p>
-                    Situaciones que parecen necesitar
-                    más tiempo antes de mostrar cambios.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">🧱</div>
-
-                <h3>
-                    Resistencia
-                </h3>
-
-                <p>
-                    Elementos que pueden representar
-                    dificultades o falta de movimiento.
-                </p>
-
-            </article>
-
-
-            <article class="study-card">
-
-                <div class="study-icon">🔄</div>
-
-                <h3>
-                    Repetición
-                </h3>
-
-                <p>
-                    Patrones que se repiten pueden
-                    invitar a revisar decisiones,
-                    hábitos o estrategias.
-                </p>
-
-            </article>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         EJEMPLO
-    ========================== -->
-
-    <section class="tema-curso">
-
-        <div class="seccion-titulo">
-
-            <h2>
-                📖 EJEMPLO DE LECTURA
-            </h2>
-
-        </div>
-
-
-        <div class="introduccion">
-
-            <p>
-                <strong>Pregunta:</strong>
-                ¿Qué necesito observar sobre mi situación
-                laboral actual y qué puede favorecer mi avance?
-                Durante la lectura se registra el comportamiento
-                de la llama, el humo y la cera desde el comienzo
-                hasta el final.
-                La interpretación se realiza relacionando
-                todas las señales con la pregunta inicial,
-                evitando tomar una sola señal como una
-                respuesta definitiva.
-            </p>
-
-        </div>
-
 
         <div class="principio">
-
             <div class="principio-icon">💼</div>
-
-            <h3>
-                UNA LECTURA NO REEMPLAZA LA ACCIÓN
-            </h3>
-
+            <h3>OBSERVAR TAMBIÉN ES PREPARARSE</h3>
             <p>
-                Si la lectura muestra simbólicamente
-                una necesidad de movimiento, también
-                podemos preguntarnos qué acción concreta
-                podemos realizar: actualizar un currículum,
-                buscar oportunidades, mejorar una habilidad,
-                organizar las finanzas o revisar un proyecto.
+                Una lectura puede ayudarte a ordenar tus ideas, pero el avance
+                profesional también requiere acciones concretas: preparar un
+                currículum, desarrollar habilidades, investigar oportunidades
+                y establecer objetivos alcanzables.
             </p>
-
         </div>
 
     </section>
 
 
+    <!-- DINERO -->
 
-    <!-- =========================
-         REGISTRO
-    ========================== -->
-
-    <section class="tema-curso">
+    <section class="tema-curso" id="dinero">
 
         <div class="seccion-titulo">
-
-            <h2>
-                📝 REGISTRAR UNA LECTURA DE TRABAJO Y DINERO
-            </h2>
-
+            <h2>DINERO, RECURSOS Y PROSPERIDAD</h2>
         </div>
 
+        <div class="introduccion">
+            <p>
+                Las lecturas económicas pueden enfocarse en la relación con
+                los recursos, los proyectos, la estabilidad y los objetivos
+                materiales. La intención no consiste en predecir una ganancia
+                segura, sino en reflexionar sobre la situación y las decisiones
+                que podrían contribuir a mejorarla.
+            </p>
+        </div>
 
         <div class="study-grid">
 
-
             <article class="study-card">
-
-                <div class="study-icon">1</div>
-
-                <h3>
-                    Pregunta
-                </h3>
-
+                <div class="study-icon">💵</div>
+                <h3>Estado de los recursos</h3>
                 <p>
-                    Escribí exactamente qué querías
-                    observar.
+                    Observá cómo percibís tu situación económica e identificá
+                    qué aspectos requieren organización, revisión o una
+                    planificación más clara.
                 </p>
-
             </article>
 
-
             <article class="study-card">
-
-                <div class="study-icon">2</div>
-
-                <h3>
-                    Observación
-                </h3>
-
+                <div class="study-icon">🌱</div>
+                <h3>Prosperidad y estabilidad</h3>
                 <p>
-                    Registrá lo que ocurrió realmente
-                    durante la combustión.
+                    Trabajá la prosperidad como una intención de crecimiento,
+                    estabilidad y mejor administración de los recursos
+                    disponibles.
                 </p>
-
             </article>
 
-
             <article class="study-card">
-
-                <div class="study-icon">3</div>
-
-                <h3>
-                    Interpretación
-                </h3>
-
+                <div class="study-icon">🔑</div>
+                <h3>Posibles oportunidades</h3>
                 <p>
-                    Relacioná las señales con el contexto
-                    de la pregunta.
+                    Reflexioná sobre nuevas ideas, proyectos o alternativas
+                    que puedan relacionarse con tus objetivos económicos.
                 </p>
-
             </article>
 
-
             <article class="study-card">
-
-                <div class="study-icon">4</div>
-
-                <h3>
-                    Reflexión
-                </h3>
-
+                <div class="study-icon">🧱</div>
+                <h3>Limitaciones y gastos</h3>
                 <p>
-                    Pensá qué acción concreta podés tomar
-                    a partir de lo observado.
+                    Considerá qué dificultades necesitan atención: gastos,
+                    deudas, falta de planificación, ingresos variables u
+                    otros factores concretos.
                 </p>
-
             </article>
 
+        </div>
+
+        <div class="nota-seguridad">
+            <strong>Importante:</strong> ninguna señal de una vela garantiza
+            ingresos, ganancias, ascensos o resultados económicos. No tomes
+            decisiones financieras importantes basándote únicamente en una
+            interpretación simbólica.
+        </div>
+
+    </section>
+
+
+    <!-- INTENCIÓN -->
+
+    <section class="tema-curso" id="intencion">
+
+        <div class="seccion-titulo">
+            <h2>FORMULAR UNA INTENCIÓN CLARA</h2>
+        </div>
+
+        <div class="introduccion">
+            <p>
+                Una lectura comienza antes de encender la vela. La pregunta
+                orienta la observación y ayuda a evitar interpretaciones
+                demasiado generales. Es preferible trabajar un asunto por
+                vez, especialmente cuando se trata de situaciones laborales
+                o económicas complejas.
+            </p>
+        </div>
+
+        <div class="study-grid">
+
+            <article class="study-card">
+                <div class="study-icon">❓</div>
+                <h3>Una pregunta concreta</h3>
+                <p>
+                    Definí qué situación querés explorar. Por ejemplo:
+                    «¿Qué aspectos de mi búsqueda laboral necesito revisar?».
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🎯</div>
+                <h3>Un objetivo por lectura</h3>
+                <p>
+                    Evitá mezclar trabajo, dinero, relaciones y otros asuntos.
+                    Concentrarte en un tema facilita el registro y la reflexión.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">📝</div>
+                <h3>Escribir la intención</h3>
+                <p>
+                    Anotá la pregunta antes de comenzar. De este modo podrás
+                    volver a ella cuando analices las señales observadas.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🧭</div>
+                <h3>Mantener una actitud abierta</h3>
+                <p>
+                    No busques obligatoriamente una señal positiva o negativa.
+                    Registrá lo que ocurre y evitá forzar una conclusión.
+                </p>
+            </article>
 
         </div>
 
     </section>
 
 
+    <!-- BLOQUEOS -->
 
-    <!-- =========================
-         PRINCIPIO FINAL
-    ========================== -->
+    <section class="tema-curso" id="bloqueos">
 
-    <div class="principio">
+        <div class="seccion-titulo">
+            <h2>BLOQUEOS LABORALES Y ECONÓMICOS</h2>
+        </div>
 
-        <div class="principio-icon">💰</div>
+        <div class="introduccion">
+            <p>
+                En una lectura simbólica, la idea de bloqueo puede representar
+                una situación que se siente estancada, una dificultad que
+                necesita atención o un patrón que se repite. El comportamiento
+                de la vela, por sí solo, no demuestra que exista un bloqueo
+                energético ni permite determinar su causa.
+            </p>
+        </div>
 
-        <h3>
-            LA PROSPERIDAD TAMBIÉN SE CONSTRUYE
-        </h3>
+        <div class="study-grid">
+
+            <article class="study-card">
+                <div class="study-icon">⏳</div>
+                <h3>Demoras</h3>
+                <p>
+                    Utilizá el símbolo de la espera para reflexionar sobre
+                    los plazos, la preparación necesaria y aquello que
+                    depende de otras personas o circunstancias.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🧱</div>
+                <h3>Resistencia</h3>
+                <p>
+                    Explorá qué aspectos parecen dificultar el avance y
+                    diferenciá las limitaciones reales de los temores
+                    o las dudas personales.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🔄</div>
+                <h3>Patrones repetidos</h3>
+                <p>
+                    Si una dificultad se repite, preguntate qué decisiones,
+                    hábitos o estrategias podrían necesitar una revisión.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🗝️</div>
+                <h3>Alternativas posibles</h3>
+                <p>
+                    Convertí la reflexión en una pregunta práctica:
+                    ¿qué puedo aprender, cambiar, organizar o intentar
+                    de otra manera?
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- EJEMPLO -->
+
+    <section class="tema-curso" id="ejemplo">
+
+        <div class="seccion-titulo">
+            <h2>EJEMPLO DE UNA LECTURA LABORAL</h2>
+        </div>
+
+        <div class="ejemplo-caja">
+            <h3>Pregunta de partida</h3>
+            <p>
+                «¿Qué necesito revisar de mi situación laboral actual
+                para favorecer mi desarrollo profesional?».
+            </p>
+        </div>
+
+        <div class="introduccion" style="margin-top: 22px;">
+            <p>
+                Antes de encender la vela, anotá la pregunta y las condiciones
+                iniciales. Durante la combustión, observá la llama, el humo y
+                la cera sin sacar conclusiones apresuradas. Si algo cambia,
+                registrá cuándo ocurrió y qué circunstancias había en el
+                ambiente.
+            </p>
+
+            <p>
+                Al finalizar, reuní todas las observaciones y relacioná la
+                interpretación con la pregunta inicial. No tomes una sola
+                señal como respuesta definitiva ni como predicción segura.
+            </p>
+        </div>
+
+        <div class="principio">
+            <div class="principio-icon">🧭</div>
+            <h3>DE LA OBSERVACIÓN A LA ACCIÓN</h3>
+            <p>
+                Si la lectura te invita simbólicamente a pensar en el movimiento,
+                podés convertir esa reflexión en un paso concreto: actualizar
+                tu currículum, buscar ofertas, practicar una habilidad,
+                consultar una propuesta o revisar el plan de un proyecto.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- REGISTRO -->
+
+    <section class="tema-curso" id="registro">
+
+        <div class="seccion-titulo">
+            <h2>REGISTRAR UNA LECTURA</h2>
+        </div>
+
+        <div class="introduccion">
+            <p>
+                Un registro ordenado permite distinguir lo observado de lo
+                interpretado. También facilita comparar lecturas realizadas
+                en diferentes momentos sin modificar los recuerdos para
+                hacerlos coincidir con una conclusión posterior.
+            </p>
+        </div>
+
+        <div class="pasos">
+
+            <article class="paso">
+                <div class="paso-numero">1</div>
+                <h3>Pregunta</h3>
+                <p>
+                    Escribí la intención exacta y el contexto de la situación.
+                </p>
+            </article>
+
+            <article class="paso">
+                <div class="paso-numero">2</div>
+                <h3>Observación</h3>
+                <p>
+                    Anotá lo que ocurrió realmente durante la combustión.
+                </p>
+            </article>
+
+            <article class="paso">
+                <div class="paso-numero">3</div>
+                <h3>Interpretación</h3>
+                <p>
+                    Relacioná las señales con la pregunta sin convertirlas
+                    en certezas.
+                </p>
+            </article>
+
+            <article class="paso">
+                <div class="paso-numero">4</div>
+                <h3>Reflexión</h3>
+                <p>
+                    Definí qué idea o acción práctica te llevás de la lectura.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- LIMPIEZA ENERGÉTICA -->
+
+    <section class="tema-curso" id="limpieza">
+
+        <div class="seccion-titulo">
+            <h2>LIMPIEZA ENERGÉTICA Y RENOVACIÓN</h2>
+        </div>
+
+        <div class="introduccion">
+            <p>
+                La limpieza energética puede trabajarse simbólicamente como
+                una práctica de renovación, orden y liberación de aquello
+                que sentimos que ya no queremos continuar sosteniendo.
+                Dentro de la velomancia, la vela puede servir como elemento
+                de observación y como representación de una intención personal.
+            </p>
+
+            <p>
+                No es necesario atribuir cada cambio en la llama, el humo
+                o la cera a una causa energética. Es importante tener en cuenta
+                factores físicos como las corrientes de aire, la mecha y
+                la composición de la vela.
+            </p>
+        </div>
+
+        <div class="seccion-titulo" style="margin-top: 32px;">
+            <h2>PREPARAR UNA LIMPIEZA</h2>
+        </div>
+
+        <div class="study-grid">
+
+            <article class="study-card">
+                <div class="study-icon">🎯</div>
+                <h3>Definir la intención</h3>
+                <p>
+                    Antes de comenzar, establecé qué querés renovar, ordenar
+                    o dejar atrás. Una intención clara ayuda a mantener el
+                    foco durante la práctica.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🏠</div>
+                <h3>Preparar el espacio</h3>
+                <p>
+                    Elegí un lugar tranquilo y ventilado. Colocá la vela
+                    sobre una superficie estable y resistente al calor,
+                    lejos de cortinas y materiales inflamables.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">📝</div>
+                <h3>Registrar el comienzo</h3>
+                <p>
+                    Anotá tu intención y las condiciones iniciales.
+                    Esto te permitirá comparar la observación del comienzo
+                    con la del final.
+                </p>
+            </article>
+
+        </div>
+
+        <div class="seccion-titulo" style="margin-top: 35px;">
+            <h2>SEÑALES SIMBÓLICAS DE RENOVACIÓN</h2>
+        </div>
+
+        <div class="study-grid">
+
+            <article class="study-card">
+                <div class="study-icon">🌬️</div>
+                <h3>Mayor estabilidad</h3>
+                <p>
+                    Una llama estable puede interpretarse simbólicamente
+                    como una imagen de calma u orden. Primero, comprobá
+                    que no haya corrientes de aire.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🔥</div>
+                <h3>Cambios progresivos</h3>
+                <p>
+                    Registrá las variaciones de la llama a lo largo del
+                    proceso y considerá las condiciones físicas antes
+                    de elaborar una interpretación.
+                </p>
+            </article>
+
+            <article class="study-card">
+                <div class="study-icon">🕊️</div>
+                <h3>Sensación de cierre</h3>
+                <p>
+                    El final de la práctica puede representar simbólicamente
+                    el cierre de una etapa y la disposición a iniciar otra.
+                </p>
+            </article>
+
+        </div>
+
+        <div class="principio">
+            <div class="principio-icon">🧹</div>
+            <h3>LIMPIAR TAMBIÉN ES RENOVAR</h3>
+            <p>
+                Una limpieza simbólica puede acompañar la decisión de ordenar
+                el espacio, revisar hábitos, soltar preocupaciones y generar
+                condiciones para una nueva etapa.
+            </p>
+        </div>
+
+        <div class="seccion-titulo" style="margin-top: 35px;">
+            <h2>REGISTRAR LA LIMPIEZA</h2>
+        </div>
+
+        <div class="introduccion">
+            <p>
+                Al finalizar, anotá la intención establecida, cómo comenzó
+                la vela, qué cambios observaste, cómo se comportaron la llama,
+                el humo y la cera, y cómo terminó el proceso. Separá las
+                observaciones directas de las interpretaciones personales.
+            </p>
+        </div>
+
+        <div class="nota-seguridad">
+            <strong>Seguridad con las velas:</strong> nunca dejes una vela
+            encendida sin vigilancia, no la muevas mientras esté ardiendo,
+            mantenela lejos de niños y mascotas y apagála si produce humo
+            excesivo, una llama inusual o cualquier situación peligrosa.
+            No agregues aceites, hierbas ni otros materiales inflamables
+            a una vela encendida.
+        </div>
+
+        <div class="principio">
+            <div class="principio-icon">✨</div>
+            <h3>SOLTAR, ORDENAR Y RENOVAR</h3>
+            <p>
+                La limpieza energética puede utilizarse como una práctica
+                simbólica de renovación personal, enfocada en cerrar etapas,
+                recuperar claridad y elegir qué pasos dar a continuación.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- CIERRE -->
+
+    <section class="cierre">
+
+        <h2>LA PROSPERIDAD TAMBIÉN SE CONSTRUYE</h2>
 
         <p>
-            La velomancia puede utilizarse como una
-            herramienta simbólica de reflexión.
-            El crecimiento laboral y económico también
-            depende de nuestras decisiones, acciones,
-            aprendizaje y capacidad para reconocer
+            La velomancia ofrece un lenguaje simbólico para observar,
+            reflexionar y ordenar intenciones. El crecimiento laboral
+            y económico también depende de nuestras decisiones, acciones,
+            aprendizaje, planificación y capacidad para reconocer
             oportunidades reales.
         </p>
 
-    </div>
+    </section>
 
 
-
-<!-- =========================
-     LIMPIEZA ENERGÉTICA
-========================== -->
-
-<section class="tema-curso">
-
-    <div class="seccion-titulo">
-
-        <h2>
-            🧹 LIMPIEZA ENERGÉTICA
-        </h2>
-
-    </div>
-
-
-    <div class="introduccion">
-
-        <p>
-            La limpieza energética puede trabajarse
-            simbólicamente como una práctica de renovación,
-            orden y liberación de aquello que sentimos
-            que ya no queremos continuar sosteniendo.
-            Dentro de la velomancia, la vela puede utilizarse
-            como elemento de observación durante el proceso.
-            La intención está puesta en generar un espacio
-            de renovación personal y no en atribuir
-            automáticamente cada comportamiento de la vela
-            a una causa energética.
-        </p>
-
-    </div>
-
-
-    <div class="seccion-titulo">
-
-        <h2>
-            🕯️ PREPARAR UNA LIMPIEZA
-        </h2>
-
-    </div>
-
-
-    <div class="study-grid">
-
-
-        <article class="study-card">
-
-            <div class="study-icon">🎯</div>
-
-            <h3>
-                Definir la intención
-            </h3>
-
-            <p>
-                Antes de comenzar, establecé qué querés
-                limpiar, renovar o dejar atrás.
-                Una intención clara ayuda a mantener
-                el foco durante toda la práctica.
-            </p>
-
-        </article>
-
-
-        <article class="study-card">
-
-            <div class="study-icon">🏠</div>
-
-            <h3>
-                Preparar el espacio
-            </h3>
-
-            <p>
-                Elegí un lugar tranquilo, ventilado
-                y seguro. La vela debe colocarse sobre
-                una superficie estable y lejos de
-                materiales inflamables.
-            </p>
-
-        </article>
-
-
-        <article class="study-card">
-
-            <div class="study-icon">📝</div>
-
-            <h3>
-                Registrar el comienzo
-            </h3>
-
-            <p>
-                Anotá cómo se encuentra la vela antes
-                de encenderla y cuáles son las condiciones
-                iniciales del ambiente.
-            </p>
-
-        </article>
-
-
-    </div>
-
-
-    
-
-    <div class="seccion-titulo">
-
-        <h2>
-            ✨ SEÑALES DE RENOVACIÓN
-        </h2>
-
-    </div>
-
-
-    <div class="study-grid">
-
-
-        <article class="study-card">
-
-            <div class="study-icon">🌬️</div>
-
-            <h3>
-                Mayor estabilidad
-            </h3>
-
-            <p>
-                Una llama que se vuelve más estable puede
-                registrarse simbólicamente como una señal
-                de orden o equilibrio dentro del proceso.
-            </p>
-
-        </article>
-
-
-        <article class="study-card">
-
-            <div class="study-icon">🔥</div>
-
-            <h3>
-                Cambios progresivos
-            </h3>
-
-            <p>
-                Los cambios que aparecen gradualmente
-                pueden formar parte de la lectura del
-                proceso y deben observarse en conjunto.
-            </p>
-
-        </article>
-
-
-        <article class="study-card">
-
-            <div class="study-icon">🕊️</div>
-
-            <h3>
-                Sensación de cierre
-            </h3>
-
-            <p>
-                El final de la combustión puede utilizarse
-                simbólicamente para representar el cierre
-                de una etapa y el comienzo de otra.
-            </p>
-
-        </article>
-
-
-    </div>
-
-
-    <div class="principio">
-
-        <div class="principio-icon">
-            🧹
-        </div>
-
-        <h3>
-            LIMPIAR TAMBIÉN ES RENOVAR
-        </h3>
-
-        <p>
-            Una limpieza puede representar simbólicamente
-            la decisión de ordenar, soltar aquello que
-            genera desgaste y generar espacio para una
-            nueva etapa.
-        </p>
-
-    </div>
-
-
-    <div class="seccion-titulo">
-
-        <h2>
-            📝 REGISTRAR LA LIMPIEZA
-        </h2>
-
-    </div>
-
-
-    <div class="introduccion">
-
-        <p>
-            Al finalizar, anotá qué intención estableciste,
-            cómo comenzó la vela, qué cambios observaste,
-            cómo se comportaron la llama, el humo y la cera,
-            y cómo terminó el proceso.
-            Registrar cada etapa permite diferenciar
-            lo que realmente observaste de la interpretación
-            que realizaste posteriormente.
-        </p>
-
-    </div>
-
-
-    <div class="principio">
-
-        <div class="principio-icon">
-            ✨
-        </div>
-
-        <h3>
-            SOLTAR, ORDENAR Y RENOVAR
-        </h3>
-
-        <p>
-            La limpieza energética puede utilizarse como
-            una práctica simbólica de renovación personal,
-            enfocada en cerrar etapas y recuperar una
-            sensación de orden y claridad.
-        </p>
-
-    </div>
-
-</section>
-
-
-    <!-- =========================
-         SIGUIENTE LECCIÓN
-    ========================== -->
+    <!-- SIGUIENTE LECCIÓN -->
 
     <div class="siguiente-leccion">
-
-        <a href="index4.html">
-            EJERCICIOS →
-        </a>
-
+        <a href="index4.html">CONTINUAR CON LOS EJERCICIOS →</a>
     </div>
-
 
 </main>
 
 </body>
-
 </html>
-
