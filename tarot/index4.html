@@ -1,1945 +1,1030 @@
+HTML
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>ASTRO ROJO — Ejercicios de Tarot</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-
-        /* =========================================================
-           PÁGINA DE EJERCICIOS
-        ========================================================= */
-
-        .ejercicios-header {
-            position: relative;
-            text-align: center;
-            padding: 35px 20px 45px;
-        }
-
-        .ejercicios-header .mini-moon {
-            font-size: 38px;
-            color: #c9828c;
-            margin-bottom: 18px;
-            text-shadow:
-                0 0 20px rgba(170, 20, 40, 0.45);
-        }
-
-        .ejercicios-header h1 {
-            color: #f3eeee;
-            font-size: 40px;
-            font-weight: 400;
-            letter-spacing: 5px;
-            margin-bottom: 14px;
-        }
-
-        .ejercicios-header p {
-            max-width: 650px;
-            margin: 0 auto;
-            color: #9f9599;
-            font-size: 15px;
-            line-height: 1.8;
-        }
-
-
-        /* =========================================================
-           PROGRESO
-        ========================================================= */
-
-        .progreso {
-            width: 100%;
-            max-width: 760px;
-            margin: 0 auto 35px;
-        }
-
-        .progreso-superior {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .progreso-superior span {
-            color: #9f9599;
-            font-size: 12px;
-            letter-spacing: 1px;
-        }
-
-        .progreso-superior strong {
-            color: #c9828c;
-            font-size: 13px;
-            font-weight: 400;
-        }
-
-        .barra-progreso {
-            width: 100%;
-            height: 4px;
-            background: rgba(150, 35, 50, 0.15);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .barra-progreso span {
-            display: block;
-            width: 10%;
-            height: 100%;
-            background: #a93648;
-            border-radius: 10px;
-            transition: width 0.4s ease;
-        }
-
-
-        /* =========================================================
-           TARJETA PRINCIPAL
-        ========================================================= */
-
-        .ejercicio-panel {
-            position: relative;
-            max-width: 850px;
-            margin: 0 auto 35px;
-            padding: 45px 45px 50px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.045),
-                    rgba(100, 0, 15, 0.025)
-                );
-
-            border: 1px solid rgba(150, 35, 50, 0.35);
-            border-radius: 22px;
-
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.30);
-        }
-
-        .ejercicio-panel::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-
-            border-radius: 22px;
-
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    rgba(160, 0, 30, 0.12),
-                    transparent 55%
-                );
-
-            pointer-events: none;
-        }
-
-
-        /* =========================================================
-           NUMERO
-        ========================================================= */
-
-        .ejercicio-etiqueta {
-            position: relative;
-            z-index: 1;
-
-            text-align: center;
-            color: #a93648;
-
-            font-size: 11px;
-            letter-spacing: 3px;
-
-            margin-bottom: 12px;
-        }
-
-        .ejercicio-panel h2 {
-            position: relative;
-            z-index: 1;
-
-            text-align: center;
-
-            color: #eee9e4;
-            font-size: 27px;
-            font-weight: 400;
-
-            margin-bottom: 35px;
-        }
-
-
-        /* =========================================================
-           CARTA
-        ========================================================= */
-
-        .carta-practica {
-            position: relative;
-            z-index: 1;
-
-            width: 220px;
-            min-height: 275px;
-
-            margin: 0 auto 35px;
-            padding: 30px 20px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-
-            background:
-                radial-gradient(
-                    circle at 50% 20%,
-                    rgba(130, 0, 25, 0.35),
-                    rgba(10, 5, 8, 0.85)
-                );
-
-            border: 1px solid rgba(190, 55, 70, 0.45);
-            border-radius: 18px;
-
-            box-shadow:
-                0 15px 45px rgba(0, 0, 0, 0.35),
-                0 0 35px rgba(130, 0, 25, 0.10);
-        }
-
-        .carta-practica .simbolo {
-            font-size: 40px;
-            color: #a93648;
-            margin-bottom: 22px;
-        }
-
-        .carta-practica small {
-            color: #8f8589;
-            font-size: 10px;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .carta-practica h3 {
-            color: #f3eeee;
-            font-size: 23px;
-            font-weight: 400;
-            line-height: 1.3;
-            margin: 0;
-        }
-
-
-        /* =========================================================
-           PREGUNTA
-        ========================================================= */
-
-        .pregunta {
-            position: relative;
-            z-index: 1;
-
-            max-width: 650px;
-            margin: 0 auto 30px;
-
-            text-align: center;
-        }
-
-        .pregunta-label {
-            display: block;
-
-            color: #a93648;
-            font-size: 10px;
-            letter-spacing: 2px;
-
-            margin-bottom: 12px;
-        }
-
-        .pregunta p {
-            color: #eee9e4;
-            font-size: 17px;
-            line-height: 1.7;
-            margin: 0;
-        }
-
-
-        /* =========================================================
-           OPCIONES
-        ========================================================= */
-
-        .opciones {
-            position: relative;
-            z-index: 1;
-
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 15px;
-
-            max-width: 760px;
-            margin: 0 auto;
-        }
-
-        .opcion {
-            position: relative;
-
-            min-height: 155px;
-
-            padding: 24px 20px;
-
-            text-align: left;
-
-            background: rgba(12, 6, 9, 0.60);
-
-            border: 1px solid rgba(150, 35, 50, 0.25);
-            border-radius: 16px;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.25s ease,
-                border-color 0.25s ease,
-                background 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .opcion:hover {
-            transform: translateY(-4px);
-
-            border-color:
-                rgba(190, 55, 70, 0.65);
-
-            background:
-                rgba(35, 7, 12, 0.80);
-
-            box-shadow:
-                0 12px 30px rgba(0, 0, 0, 0.20);
-        }
-
-        .opcion-letra {
-            display: flex;
-
-            width: 31px;
-            height: 31px;
-
-            align-items: center;
-            justify-content: center;
-
-            margin-bottom: 18px;
-
-            border: 1px solid rgba(169, 54, 72, 0.50);
-            border-radius: 50%;
-
-            color: #c9828c;
-
-            font-size: 12px;
-        }
-
-        .opcion p {
-            color: #b8adb0;
-
-            font-size: 14px;
-            line-height: 1.7;
-
-            margin: 0;
-        }
-
-        .opcion.correcta {
-            border-color: #a93648;
-
-            background:
-                rgba(100, 0, 20, 0.45);
-
-            box-shadow:
-                0 0 30px rgba(150, 0, 30, 0.18);
-        }
-
-        .opcion.correcta .opcion-letra {
-            background: #8f2638;
-            color: #fff;
-        }
-
-        .opcion.incorrecta {
-            opacity: 0.45;
-        }
-
-        .opcion.bloqueada {
-            cursor: default;
-        }
-
-        .opcion.bloqueada:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-
-        /* =========================================================
-           RESULTADO
-        ========================================================= */
-
-        .resultado {
-            display: none;
-
-            position: relative;
-            z-index: 1;
-
-            max-width: 700px;
-
-            margin: 30px auto 0;
-            padding: 24px 28px;
-
-            background:
-                rgba(35, 7, 12, 0.70);
-
-            border:
-                1px solid rgba(169, 54, 72, 0.35);
-
-            border-radius: 15px;
-        }
-
-        .resultado.visible {
-            display: block;
-        }
-
-        .resultado-titulo {
-            color: #c9828c;
-            font-size: 13px;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .resultado p {
-            color: #a8a0a3;
-            font-size: 14px;
-            line-height: 1.8;
-            margin: 0;
-        }
-
-
-        /* =========================================================
-           BOTON SIGUIENTE
-        ========================================================= */
-
-        .boton-siguiente-ejercicio {
-            display: none;
-
-            margin: 25px auto 0;
-
-            padding: 12px 28px;
-
-            color: #f3eeee;
-
-            background:
-                rgba(130, 0, 25, 0.65);
-
-            border:
-                1px solid rgba(190, 70, 85, 0.55);
-
-            border-radius: 30px;
-
-            font-size: 13px;
-
-            cursor: pointer;
-        }
-
-        .boton-siguiente-ejercicio.visible {
-            display: block;
-        }
-
-        .boton-siguiente-ejercicio:hover {
-            background:
-                rgba(165, 0, 30, 0.9);
-        }
-
-
-        /* =========================================================
-           RESULTADO FINAL
-        ========================================================= */
-
-        .resultado-final {
-            display: none;
-
-            max-width: 650px;
-            margin: 30px auto;
-
-            padding: 35px 30px;
-
-            text-align: center;
-
-            background:
-                rgba(35, 7, 12, 0.75);
-
-            border:
-                1px solid rgba(169, 54, 72, 0.40);
-
-            border-radius: 18px;
-        }
-
-        .resultado-final.visible {
-            display: block;
-        }
-
-        .resultado-final .simbolo-final {
-            font-size: 38px;
-            color: #a93648;
-            margin-bottom: 15px;
-        }
-
-        .resultado-final h2 {
-            color: #eee9e4;
-            font-weight: 400;
-            margin-bottom: 15px;
-        }
-
-        .resultado-final p {
-            color: #a8a0a3;
-            font-size: 14px;
-            line-height: 1.8;
-            margin: 0;
-        }
-
-
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
-
-        @media (max-width: 800px) {
-
-            .opciones {
-                grid-template-columns: 1fr;
-                max-width: 550px;
-            }
-
-            .opcion {
-                min-height: auto;
-            }
-
-            .ejercicio-panel {
-                padding: 35px 25px 40px;
-            }
-
-        }
-
-        @media (max-width: 500px) {
-
-            .ejercicios-header h1 {
-                font-size: 29px;
-                letter-spacing: 3px;
-            }
-
-            .ejercicio-panel h2 {
-                font-size: 23px;
-            }
-
-            .carta-practica {
-                width: 190px;
-                min-height: 245px;
-            }
-
-            .pregunta p {
-                font-size: 15px;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10070b">
+<meta name="description" content="ASTRO ROJO — Arquetipos y psicología del Tarot, trabajo y dinero, y numerología aplicada a los Arcanos.">
+<title>ASTRO ROJO — Psicología, Trabajo y Numerología</title>
+
+<style>
+:root {
+    --fondo: #10070b;
+    --fondo-claro: #190b10;
+    --rojo: #e21b3c;
+    --rojo-oscuro: #7d1026;
+    --texto: #f3eeee;
+    --suave: #b9a9ad;
+    --borde: rgba(226, 27, 60, .25);
+    --dorado: #c9a66b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.75;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+.contenedor {
+    width: min(1120px, 90%);
+    margin: auto;
+}
+
+/* NAVEGACIÓN */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(16, 7, 11, .96);
+    border-bottom: 1px solid var(--borde);
+    backdrop-filter: blur(12px);
+}
+
+.nav {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    color: var(--rojo);
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: .17em;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    font-family: Arial, sans-serif;
+    font-size: .76rem;
+    letter-spacing: .04em;
+    color: var(--suave);
+}
+
+.nav-links a:hover {
+    color: var(--rojo);
+}
+
+/* PORTADA */
+
+.portada {
+    padding: 105px 0 85px;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 50% 15%, rgba(125, 16, 38, .35), transparent 60%),
+        linear-gradient(180deg, #19090f 0%, var(--fondo) 100%);
+    border-bottom: 1px solid var(--borde);
+}
+
+.etiqueta {
+    color: var(--rojo);
+    font-family: Arial, sans-serif;
+    font-size: .72rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+}
+
+.portada h1 {
+    max-width: 950px;
+    margin: 24px auto;
+    font-size: clamp(2.8rem, 8vw, 6.4rem);
+    font-weight: 400;
+    line-height: 1.03;
+    letter-spacing: -.045em;
+}
+
+.portada h1 span {
+    color: var(--rojo);
+    font: inherit;
+}
+
+.portada p {
+    max-width: 670px;
+    margin: 24px auto 0;
+    color: var(--suave);
+    font-size: 1.05rem;
+}
+
+.boton {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 13px 24px;
+    background: var(--rojo);
+    color: white;
+    border: 1px solid var(--rojo);
+    font-family: Arial, sans-serif;
+    font-size: .75rem;
+    font-weight: bold;
+    letter-spacing: .12em;
+    transition: .25s;
+}
+
+.boton:hover {
+    background: transparent;
+    color: var(--rojo);
+}
+
+/* INTRODUCCIÓN */
+
+.introduccion {
+    padding: 65px 0 30px;
+}
+
+.introduccion h2 {
+    margin-bottom: 14px;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400;
+}
+
+.introduccion p {
+    max-width: 820px;
+    color: var(--suave);
+}
+
+/* MÓDULOS */
+
+.modulo {
+    padding: 75px 0;
+    border-bottom: 1px solid var(--borde);
+    scroll-margin-top: 90px;
+}
+
+.modulo-cabecera {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 22px;
+    align-items: start;
+    margin-bottom: 38px;
+}
+
+.numero-modulo {
+    color: var(--rojo);
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.modulo h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.subtitulo {
+    margin-top: 12px;
+    color: var(--suave);
+    max-width: 720px;
+}
+
+.rejilla {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.tarjeta {
+    padding: 25px;
+    background: linear-gradient(145deg, #1b0b11, #12080c);
+    border: 1px solid var(--borde);
+    transition: border-color .25s, transform .25s;
+}
+
+.tarjeta:hover {
+    border-color: var(--rojo);
+    transform: translateY(-3px);
+}
+
+.tarjeta .simbolo {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--rojo);
+    font-size: 1.65rem;
+}
+
+.tarjeta h3 {
+    margin-bottom: 10px;
+    font-size: 1.35rem;
+    font-weight: 400;
+}
+
+.tarjeta p {
+    color: var(--suave);
+    font-size: .96rem;
+}
+
+.detalle {
+    margin-top: 15px;
+    padding-top: 13px;
+    border-top: 1px solid var(--borde);
+    color: var(--dorado);
+    font-size: .84rem;
+}
+
+/* EJERCICIOS */
+
+.ejercicio {
+    margin-top: 35px;
+    padding: 28px;
+    background: rgba(226, 27, 60, .055);
+    border-left: 3px solid var(--rojo);
+}
+
+.ejercicio h3 {
+    margin-bottom: 10px;
+    color: var(--rojo);
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.ejercicio p,
+.ejercicio li {
+    color: var(--suave);
+}
+
+.ejercicio ol,
+.ejercicio ul {
+    padding-left: 22px;
+    margin-top: 12px;
+}
+
+.pregunta {
+    margin-top: 17px;
+    color: var(--texto) !important;
+    font-style: italic;
+}
+
+/* TIRADAS */
+
+.tirada {
+    margin-top: 22px;
+    padding: 25px;
+    border: 1px solid var(--borde);
+    background: #14080d;
+}
+
+.tirada h3 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.posiciones {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.posicion {
+    padding: 15px 10px;
+    text-align: center;
+    border: 1px solid var(--borde);
+    color: var(--suave);
+    font-size: .9rem;
+}
+
+.posicion strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--rojo);
+    font-size: 1.2rem;
+}
+
+/* NUMEROLOGÍA */
+
+.numero-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.numero-card {
+    min-height: 160px;
+    padding: 18px 12px;
+    text-align: center;
+    background: #190b10;
+    border: 1px solid var(--borde);
+}
+
+.numero-card strong {
+    display: block;
+    color: var(--rojo);
+    font-size: 2.1rem;
+    font-weight: 400;
+}
+
+.numero-card h3 {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.numero-card p {
+    margin-top: 8px;
+    color: var(--suave);
+    font-size: .82rem;
+}
+
+/* TABLA */
+
+.tabla-contenedor {
+    margin-top: 25px;
+    overflow-x: auto;
+    border: 1px solid var(--borde);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--borde);
+}
+
+th {
+    color: var(--rojo);
+    font-weight: 400;
+    background: #1b0a10;
+}
+
+td {
+    color: var(--suave);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* CIERRE */
+
+.cierre {
+    padding: 85px 0;
+    text-align: center;
+    background: radial-gradient(ellipse at center, #280a13, var(--fondo) 70%);
+}
+
+.cierre h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+}
+
+.cierre p {
+    max-width: 640px;
+    margin: 18px auto;
+    color: var(--suave);
+}
+
+footer {
+    padding: 30px 0;
+    border-top: 1px solid var(--borde);
+    text-align: center;
+    color: var(--suave);
+    font-family: Arial, sans-serif;
+    font-size: .75rem;
+    letter-spacing: .08em;
+}
+
+footer span {
+    color: var(--rojo);
+}
+
+/* MÓVILES */
+
+@media (max-width: 700px) {
+    .nav {
+        padding: 15px 0;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .nav-links {
+        gap: 12px 17px;
+    }
+
+    .portada {
+        padding: 75px 0 65px;
+    }
+
+    .modulo {
+        padding: 55px 0;
+    }
+
+    .modulo-cabecera {
+        grid-template-columns: 45px 1fr;
+        gap: 12px;
+    }
+
+    .numero-modulo {
+        font-size: 1.8rem;
+    }
+
+    .rejilla {
+        grid-template-columns: 1fr;
+    }
+
+    .numero-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .numero-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .posiciones {
+        grid-template-columns: 1fr;
+    }
+
+    .tarjeta {
+        padding: 21px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-<main class="container">
+<header>
+    <div class="contenedor nav">
+        <a href="#" class="logo">ASTRO ROJO</a>
 
+        <nav class="nav-links">
+            <a href="#psicologia">PSICOLOGÍA</a>
+            <a href="#trabajo">TRABAJO Y DINERO</a>
+            <a href="#numerologia">NUMEROLOGÍA</a>
+        </nav>
+    </div>
+</header>
 
-    <!-- =========================================================
-         ENCABEZADO
-    ========================================================= -->
+<main>
 
-    <section class="ejercicios-header">
+<section class="portada">
+    <div class="contenedor">
+        <span class="etiqueta">ASTRO ROJO · ESTUDIO DEL TAROT</span>
 
-        <div class="mini-moon">
-            ☾
-        </div>
-
-        <h1>
-            EJERCICIOS DE TAROT
-        </h1>
+        <h1>EL ARTE<br><span>DE COMPRENDER</span></h1>
 
         <p>
-            Pon a prueba tus conocimientos, aprende a relacionar
-            las cartas y desarrolla tu propia forma de interpretar.
+            Explora el lenguaje psicológico de los arquetipos, utiliza
+            el Tarot para reflexionar sobre tu camino profesional y
+            descubre la relación simbólica entre los números y las cartas.
         </p>
 
-    </section>
+        <a href="#psicologia" class="boton">COMENZAR EL RECORRIDO →</a>
+    </div>
+</section>
 
+<section class="introduccion contenedor">
+    <span class="etiqueta">MÁS ALLÁ DEL SIGNIFICADO</span>
+    <h2>El Tarot como herramienta de reflexión</h2>
 
-    <!-- =========================================================
-         PROGRESO
-    ========================================================= -->
+    <p>
+        Una carta puede representar un conflicto, una oportunidad, un deseo
+        o una etapa de cambio. Aprender a interpretarla consiste en observar
+        sus símbolos, relacionarlos con una pregunta y construir una lectura
+        coherente. En este recorrido trabajaremos con el Tarot como lenguaje
+        simbólico, sin tomar sus interpretaciones como diagnósticos
+        psicológicos ni como predicciones infalibles.
+    </p>
+</section>
 
-    <div class="progreso">
+<!-- MÓDULO 1 -->
 
-        <div class="progreso-superior">
+<section class="modulo contenedor" id="psicologia">
 
-            <span>
-                PROGRESO DEL CURSO
-            </span>
-
-            <strong id="contador">
-                1 / 10
-            </strong>
-
+    <div class="modulo-cabecera">
+        <span class="numero-modulo">01</span>
+        <div>
+            <span class="etiqueta">EL MUNDO INTERIOR</span>
+            <h2>Arquetipos y psicología del Tarot</h2>
+            <p class="subtitulo">
+                El héroe, la sombra, los deseos y los cambios personales:
+                una lectura simbólica de las experiencias humanas.
+            </p>
         </div>
+    </div>
 
-        <div class="barra-progreso">
+    <div class="rejilla">
 
-            <span id="barra"></span>
+        <article class="tarjeta">
+            <span class="simbolo">♙</span>
+            <h3>El viaje del héroe</h3>
+            <p>
+                El Loco representa el comienzo de una aventura: abandonar
+                lo conocido, aceptar la incertidumbre y avanzar hacia una
+                experiencia nueva. El viaje puede entenderse como una
+                metáfora del aprendizaje y del crecimiento personal.
+            </p>
+            <div class="detalle">
+                Para reflexionar: ¿qué paso nuevo estoy evitando dar?
+            </div>
+        </article>
 
-        </div>
+        <article class="tarjeta">
+            <span class="simbolo">☾</span>
+            <h3>La sombra</h3>
+            <p>
+                La Luna, El Diablo y otras cartas pueden ayudarnos a explorar
+                aquello que cuesta reconocer: inseguridades, hábitos,
+                contradicciones o emociones que preferimos evitar.
+                La sombra no significa que seamos personas malas.
+            </p>
+            <div class="detalle">
+                Para reflexionar: ¿qué parte de mí necesita ser escuchada?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">✦</span>
+            <h3>La transformación</h3>
+            <p>
+                La Muerte simboliza el cierre de una etapa y la posibilidad
+                de renovación. La Torre puede representar la caída de una
+                estructura que ya no funciona. Ambas invitan a revisar
+                qué necesita cambiar.
+            </p>
+            <div class="detalle">
+                Para reflexionar: ¿qué necesito dejar atrás para avanzar?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">◇</span>
+            <h3>El miedo</h3>
+            <p>
+                El Ocho de Espadas puede representar una sensación de
+                limitación; el Nueve de Espadas, la preocupación.
+                Estas imágenes permiten diferenciar los obstáculos
+                concretos de las interpretaciones que hacemos de ellos.
+            </p>
+            <div class="detalle">
+                Para reflexionar: ¿qué sé con certeza y qué estoy suponiendo?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">♡</span>
+            <h3>El deseo</h3>
+            <p>
+                Los Enamorados, el As de Bastos y el Nueve de Copas pueden
+                abrir preguntas sobre la atracción, la motivación y la
+                satisfacción. El deseo no es solamente querer algo:
+                también implica descubrir por qué lo queremos.
+            </p>
+            <div class="detalle">
+                Para reflexionar: ¿esto responde a un deseo propio o a una expectativa ajena?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">⟳</span>
+            <h3>Los ciclos personales</h3>
+            <p>
+                La Rueda de la Fortuna, El Ermitaño y El Mundo representan,
+                respectivamente, cambios de ciclo, introspección y cierre.
+                Sus símbolos pueden ayudarnos a reconocer cuándo actuar,
+                observar o concluir una etapa.
+            </p>
+            <div class="detalle">
+                Para reflexionar: ¿en qué etapa siento que estoy hoy?
+            </div>
+        </article>
 
     </div>
 
-
-    <!-- =========================================================
-         EJERCICIO 1
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-1"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 01
-        </div>
-
-        <h2>
-            RECONOCER EL SIGNIFICADO
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ✦
-            </div>
-
-            <small>
-                CARTA
-            </small>
-
-            <h3>
-                LA EMPERATRIZ
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué representa mejor esta carta?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 1)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Aislamiento, retiro y búsqueda interior.
-                </p>
-
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 1)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Creatividad, crecimiento, fertilidad y abundancia.
-                </p>
-
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 1)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Conflicto, pérdida y ruptura emocional.
-                </p>
-
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-1"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                La Emperatriz se relaciona con creatividad,
-                crecimiento, expresión, fertilidad y abundancia.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-1"
-            onclick="mostrarEjercicio(2)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 2
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-2"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 02
-        </div>
-
-        <h2>
-            INTERPRETAR SEGÚN LA PREGUNTA
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ☾
-            </div>
-
-            <small>
-                CARTA
-            </small>
-
-            <h3>
-                EL ERMITAÑO
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué debería comprender sobre esta situación?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 2)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    Es momento de actuar impulsivamente
-                    sin reflexionar.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 2)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    Es necesario mirar hacia dentro y
-                    tomarse un tiempo para comprender.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 2)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    La situación tendrá un resultado
-                    inmediato y definitivo.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-2"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                El Ermitaño representa introspección, prudencia,
-                búsqueda interior y necesidad de comprender
-                antes de actuar.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-2"
-            onclick="mostrarEjercicio(3)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 3
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-3"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 03
-        </div>
-
-        <h2>
-            COMBINAR DOS CARTAS
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ♡
-            </div>
-
-            <small>
-                COMBINACIÓN
-            </small>
-
-            <h3>
-                DOS DE COPAS<br>
-                +<br>
-                DOS DE ESPADAS
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué interpretación tiene más sentido?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 3)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    Una situación completamente estable
-                    y sin ningún conflicto.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 3)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    Existe una conexión, pero también
-                    dudas o dificultad para avanzar.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 3)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    La lectura habla exclusivamente
-                    de problemas económicos.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-3"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                El Dos de Copas puede representar conexión
-                y reciprocidad, mientras que el Dos de Espadas
-                introduce dudas, bloqueo o indecisión.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-3"
-            onclick="mostrarEjercicio(4)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 4
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-4"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 04
-        </div>
-
-        <h2>
-            CARTAS INVERTIDAS
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ☀
-            </div>
-
-            <small>
-                CARTA INVERTIDA
-            </small>
-
-            <h3>
-                EL SOL
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué puede indicar una carta invertida?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 4)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    Significa necesariamente que todo
-                    saldrá mal.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 4)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    Puede señalar una dificultad,
-                    bloqueo o energía que no se expresa
-                    plenamente.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 4)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    Siempre tiene exactamente el mismo
-                    significado que cualquier carta invertida.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-4"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Una carta invertida no significa automáticamente
-                algo negativo. Puede señalar bloqueo, dificultad,
-                exceso o una energía que no se manifiesta
-                plenamente.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-4"
-            onclick="mostrarEjercicio(5)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 5
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-5"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 05
-        </div>
-
-        <h2>
-            REPETICIÓN DE NÚMEROS
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                3
-            </div>
-
-            <small>
-                TIRADA
-            </small>
-
-            <h3>
-                3 DE COPAS<br>
-                3 DE OROS<br>
-                3 DE ESPADAS
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué deberíamos observar?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 5)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    La repetición puede señalar una energía
-                    que merece especial atención.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 5)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    El número determina por sí solo el
-                    resultado de toda la lectura.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 5)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    Las tres cartas deben interpretarse
-                    exactamente igual.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-5"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                La repetición de un número puede destacar
-                una determinada energía o aprendizaje, pero
-                siempre debe relacionarse con las cartas
-                concretas y con el contexto.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-5"
-            onclick="mostrarEjercicio(6)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 6
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-6"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 06
-        </div>
-
-        <h2>
-            LECTURA DE AMOR
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ♡
-            </div>
-
-            <small>
-                CARTA
-            </small>
-
-            <h3>
-                DOS DE COPAS
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué puede representar en una lectura amorosa?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 6)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    Ausencia total de conexión emocional.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 6)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    Conexión, reciprocidad, encuentro
-                    o intercambio emocional.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 6)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    Una obligación económica entre
-                    dos personas.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-6"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                El Dos de Copas suele asociarse con conexión,
-                reciprocidad, encuentro y vínculo emocional.
-                La pregunta y las cartas que lo acompañan
-                determinan el matiz de la interpretación.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-6"
-            onclick="mostrarEjercicio(7)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 7
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-7"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 07
-        </div>
-
-        <h2>
-            CARTA DIFÍCIL
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ✦
-            </div>
-
-            <small>
-                CARTA
-            </small>
-
-            <h3>
-                LA MUERTE
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Cómo debería interpretarse esta carta?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 7)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    Como una predicción literal de muerte física.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 7)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    Como transformación, cierre de una etapa
-                    y comienzo de un proceso diferente.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 7)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    Como una carta que siempre anuncia
-                    algo negativo.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-7"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                La Muerte representa principalmente
-                transformación, cierre y transición.
-                No debe utilizarse para anunciar literalmente
-                la muerte de una persona.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-7"
-            onclick="mostrarEjercicio(8)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 8
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-8"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 08
-        </div>
-
-        <h2>
-            TRES CARTAS
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ☾
-            </div>
-
-            <small>
-                PASADO · PRESENTE · FUTURO
-            </small>
-
-            <h3>
-                5 DE COPAS<br>
-                EL ERMITAÑO<br>
-                EL SOL
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Cuál es la mejor forma de interpretarlas?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 8)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    Analizando cada carta por separado
-                    sin relacionarlas.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 8)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    Como una secuencia que muestra una
-                    evolución de la situación.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 8)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    Tomando solamente la última carta
-                    como respuesta.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-8"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Una tirada de tres cartas puede leerse como
-                una historia. Las cartas deben relacionarse
-                entre sí y con la posición que ocupa cada una.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-8"
-            onclick="mostrarEjercicio(9)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 9
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-9"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 09
-        </div>
-
-        <h2>
-            COMUNICAR UNA CARTA DIFÍCIL
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ⚔
-            </div>
-
-            <small>
-                CARTA
-            </small>
-
-            <h3>
-                3 DE ESPADAS
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                SITUACIÓN
-            </span>
-
-            <p>
-                ¿Qué debería evitar un tarotista al comunicar esta carta?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 9)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    Presentar una interpretación dolorosa
-                    como una certeza inevitable.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 9)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    Observar la pregunta y las cartas
-                    que acompañan la lectura.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 9)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    Explicar la carta de manera clara
-                    y responsable.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-9"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                El tarotista debe evitar generar miedo o
-                presentar una posibilidad como un hecho
-                inevitable. La interpretación debe considerar
-                siempre el contexto completo.
-            </p>
-
-        </div>
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-9"
-            onclick="mostrarEjercicio(10)"
-        >
-            ÚLTIMO EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 10
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-10"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO FINAL
-        </div>
-
-        <h2>
-            CONSTRUIR UNA LECTURA
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ✦
-            </div>
-
-            <small>
-                TIRADA
-            </small>
-
-            <h3>
-                LA ESTRELLA<br>
-                8 DE COPAS<br>
-                EL SOL
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Cuál es el enfoque correcto para realizar
-                una lectura completa?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 10)"
-            >
-                <span class="opcion-letra">A</span>
-
-                <p>
-                    Buscar solamente el significado individual
-                    de cada carta.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 10)"
-            >
-                <span class="opcion-letra">B</span>
-
-                <p>
-                    Elegir la carta más positiva e ignorar
-                    las demás.
-                </p>
-            </div>
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 10)"
-            >
-                <span class="opcion-letra">C</span>
-
-                <p>
-                    Relacionar pregunta, posiciones, cartas
-                    y contexto para construir una síntesis.
-                </p>
-            </div>
-
-        </div>
-
-        <div
-            class="resultado"
-            id="resultado-10"
-        >
-
-            <div class="resultado-titulo">
-                ✓ EJERCICIO FINAL COMPLETADO
-            </div>
-
-            <p>
-                Una lectura completa integra la pregunta,
-                la posición de cada carta, sus significados,
-                las combinaciones y el contexto general.
-                El objetivo es construir una interpretación
-                coherente, no simplemente enumerar significados.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================================
-         RESULTADO FINAL
-    ========================================================= -->
-
-    <section
-        class="resultado-final"
-        id="resultado-final"
-    >
-
-        <div class="simbolo-final">
-            ✦
-        </div>
-
-        <h2>
-            ¡EJERCICIOS COMPLETADOS!
-        </h2>
-
+    <div class="ejercicio">
+        <h3>Ejercicio práctico · Un espejo simbólico</h3>
         <p>
-            Has recorrido los ejercicios de interpretación
-            y puesto en práctica conceptos fundamentales
-            del Tarot.
+            Elegí una carta de los Arcanos Mayores y observá la escena antes
+            de consultar su significado tradicional.
+        </p>
+        <ol>
+            <li>Describí lo primero que llama tu atención.</li>
+            <li>Identificá qué emoción te despierta la imagen.</li>
+            <li>Relacioná esa emoción con una situación actual.</li>
+            <li>Anotá una pregunta que te ayude a comprender mejor esa situación.</li>
+            <li>Escribí una acción concreta que dependa de vos.</li>
+        </ol>
+        <p class="pregunta">
+            Recordá: una carta propone preguntas; no define tu personalidad
+            ni determina tu futuro.
+        </p>
+    </div>
+
+</section>
+
+<!-- MÓDULO 2 -->
+
+<section class="modulo contenedor" id="trabajo">
+
+    <div class="modulo-cabecera">
+        <span class="numero-modulo">02</span>
+        <div>
+            <span class="etiqueta">RECURSOS Y PROPÓSITO</span>
+            <h2>Tarot del trabajo y el dinero</h2>
+            <p class="subtitulo">
+                Utilizá los símbolos de las cartas para ordenar ideas,
+                reconocer recursos y explorar decisiones profesionales
+                con una mirada práctica.
+            </p>
+        </div>
+    </div>
+
+    <div class="rejilla">
+
+        <article class="tarjeta">
+            <span class="simbolo">♜</span>
+            <h3>Objetivos laborales</h3>
+            <p>
+                El Carro puede representar dirección y determinación;
+                el Ocho de Oros, aprendizaje y constancia. Estas cartas
+                permiten pensar qué objetivo perseguís y qué habilidades
+                necesitás desarrollar para acercarte a él.
+            </p>
+            <div class="detalle">
+                Pregunta guía: ¿cuál es mi siguiente paso profesional?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">✧</span>
+            <h3>Oportunidades</h3>
+            <p>
+                El As de Oros simboliza una posibilidad concreta; el Tres
+                de Bastos, expansión y planificación. La lectura puede
+                ayudarte a identificar alternativas que merecen
+                investigación, sin garantizar que vayan a materializarse.
+            </p>
+            <div class="detalle">
+                Pregunta guía: ¿qué opción vale la pena investigar?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">⚔</span>
+            <h3>Bloqueos y dificultades</h3>
+            <p>
+                El Ocho de Espadas puede invitar a revisar creencias
+                limitantes; el Cinco de Oros, preocupaciones relacionadas
+                con la escasez o la falta de apoyo. Contrastá siempre
+                la interpretación con los hechos de tu situación.
+            </p>
+            <div class="detalle">
+                Pregunta guía: ¿qué obstáculo puedo abordar primero?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">◎</span>
+            <h3>Administración de recursos</h3>
+            <p>
+                El Cuatro de Oros habla simbólicamente de conservación
+                y control; el Seis de Oros, de intercambio y equilibrio.
+                Son puntos de partida para revisar hábitos de gasto,
+                prioridades y distribución del tiempo y la energía.
+            </p>
+            <div class="detalle">
+                Pregunta guía: ¿cómo estoy utilizando lo que tengo?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">♔</span>
+            <h3>Decisiones profesionales</h3>
+            <p>
+                La Justicia invita a comparar consecuencias y criterios;
+                El Emperador, a evaluar estructura y responsabilidades.
+                Una lectura puede organizar los factores de una decisión,
+                pero no reemplaza el análisis de contratos, ingresos o riesgos.
+            </p>
+            <div class="detalle">
+                Pregunta guía: ¿qué información me falta para decidir?
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">✦</span>
+            <h3>Talentos y fortalezas</h3>
+            <p>
+                El Mago simboliza iniciativa y capacidad de utilizar
+                herramientas; la Reina de Bastos, confianza y creatividad.
+                Explorá qué habilidades ya poseés y cómo podrías aplicarlas
+                en tu trabajo o en un proyecto propio.
+            </p>
+            <div class="detalle">
+                Pregunta guía: ¿qué sé hacer y cómo puedo aprovecharlo?
+            </div>
+        </article>
+
+    </div>
+
+    <div class="tirada">
+        <h3>Tirada de cinco cartas · Camino profesional</h3>
+        <p class="subtitulo">
+            Formulá una pregunta abierta, por ejemplo: «¿Qué puedo revisar
+            para avanzar en mi situación laboral?».
         </p>
 
-    </section>
+        <div class="posiciones">
+            <div class="posicion"><strong>01</strong>Situación actual</div>
+            <div class="posicion"><strong>02</strong>Fortaleza disponible</div>
+            <div class="posicion"><strong>03</strong>Obstáculo a revisar</div>
+            <div class="posicion"><strong>04</strong>Opción por explorar</div>
+            <div class="posicion"><strong>05</strong>Próximo paso concreto</div>
+        </div>
+    </div>
 
+    <div class="tirada">
+        <h3>Tirada de cuatro cartas · Relación con el dinero</h3>
+        <div class="posiciones">
+            <div class="posicion"><strong>01</strong>Hábitos actuales</div>
+            <div class="posicion"><strong>02</strong>Recursos disponibles</div>
+            <div class="posicion"><strong>03</strong>Área que necesita atención</div>
+            <div class="posicion"><strong>04</strong>Acción para mejorar la organización</div>
+        </div>
+    </div>
+
+    <div class="ejercicio">
+        <h3>Del símbolo a la acción</h3>
+        <p>
+            Después de cada tirada, escribí una conclusión práctica.
+            Si una carta te sugiere organización, por ejemplo, podés revisar
+            tu presupuesto o armar una lista de prioridades.
+        </p>
+        <p class="pregunta">
+            Importante: no tomes decisiones financieras, inversiones o
+            renuncias laborales basándote únicamente en las cartas.
+            Utilizá información verificable y evaluá los riesgos reales.
+        </p>
+    </div>
+
+</section>
+
+<!-- MÓDULO 3 -->
+
+<section class="modulo contenedor" id="numerologia">
+
+    <div class="modulo-cabecera">
+        <span class="numero-modulo">03</span>
+        <div>
+            <span class="etiqueta">EL LENGUAJE DE LOS NÚMEROS</span>
+            <h2>Numerología aplicada al Tarot</h2>
+            <p class="subtitulo">
+                Los números permiten reconocer patrones dentro de los
+                Arcanos Menores. Del comienzo del As a la culminación
+                del Diez, cada etapa ofrece una clave interpretativa.
+            </p>
+        </div>
+    </div>
+
+    <h3 style="font-size:1.5rem;font-weight:400;margin-bottom:20px;">
+        El recorrido del 1 al 10
+    </h3>
+
+    <div class="numero-grid">
+
+        <article class="numero-card">
+            <strong>1</strong>
+            <h3>Inicio</h3>
+            <p>Potencial, semilla, impulso y oportunidad.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>2</strong>
+            <h3>Dualidad</h3>
+            <p>Elección, equilibrio, vínculo y contraste.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>3</strong>
+            <h3>Expansión</h3>
+            <p>Desarrollo, expresión y primera manifestación.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>4</strong>
+            <h3>Estructura</h3>
+            <p>Estabilidad, orden, base y consolidación.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>5</strong>
+            <h3>Conflicto</h3>
+            <p>Cambio, tensión, desafío y adaptación.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>6</strong>
+            <h3>Armonía</h3>
+            <p>Intercambio, ajuste, cooperación y recuperación.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>7</strong>
+            <h3>Evaluación</h3>
+            <p>Prueba, estrategia, búsqueda y perseverancia.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>8</strong>
+            <h3>Movimiento</h3>
+            <p>Dominio, trabajo, ritmo y desarrollo.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>9</strong>
+            <h3>Maduración</h3>
+            <p>Experiencia, culminación individual y balance.</p>
+        </article>
+
+        <article class="numero-card">
+            <strong>10</strong>
+            <h3>Culminación</h3>
+            <p>Resultado, ciclo completo y transición hacia otra etapa.</p>
+        </article>
+
+    </div>
+
+    <div class="ejercicio">
+        <h3>Cómo usar esta secuencia</h3>
+        <p>
+            Cuando aparezcan varios números del mismo palo, observá
+            si describen una progresión: una idea que comienza, una
+            dificultad que surge, un esfuerzo que madura y un resultado
+            que cierra una etapa. El contexto de la pregunta y el
+            significado particular de cada carta siguen siendo esenciales.
+        </p>
+    </div>
+
+    <h3 style="font-size:1.5rem;font-weight:400;margin:45px 0 15px;">
+        Los números maestros como referencia simbólica
+    </h3>
+
+    <div class="rejilla">
+
+        <article class="tarjeta">
+            <span class="simbolo">11</span>
+            <h3>El once</h3>
+            <p>
+                En algunas corrientes numerológicas, el 11 se asocia
+                con intuición, inspiración y percepción. Podés usarlo
+                como invitación a observar tus ideas y contrastarlas
+                con la realidad.
+            </p>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">22</span>
+            <h3>El veintidós</h3>
+            <p>
+                Suele relacionarse con construcción y materialización
+                de proyectos. Como símbolo, propone pensar cómo llevar
+                una visión a un plan organizado y sostenible.
+            </p>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">33</span>
+            <h3>El treinta y tres</h3>
+            <p>
+                Algunas tradiciones lo vinculan con servicio, enseñanza
+                y compasión. Puede inspirar preguntas sobre cómo compartir
+                conocimientos y contribuir al bienestar colectivo.
+            </p>
+        </article>
+
+        <article class="tarjeta">
+            <span class="simbolo">∞</span>
+            <h3>Una aclaración importante</h3>
+            <p>
+                Los números maestros pertenecen a determinadas corrientes
+                de numerología; no son una categoría universal del Tarot.
+                En los Arcanos Menores, las cartas numeradas llegan del As
+                al Diez. La relación con 11, 22 y 33 es interpretativa.
+            </p>
+        </article>
+
+    </div>
+
+    <h3 style="font-size:1.5rem;font-weight:400;margin:45px 0 15px;">
+        Los números y los cuatro palos
+    </h3>
+
+    <p class="subtitulo">
+        El número aporta una etapa simbólica; el palo indica el área
+        de experiencia en la que esa etapa se expresa.
+    </p>
+
+    <div class="tabla-contenedor">
+        <table>
+            <thead>
+                <tr>
+                    <th>Palo</th>
+                    <th>Elemento tradicional</th>
+                    <th>Área simbólica</th>
+                    <th>Ejemplo del número 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bastos</td>
+                    <td>Fuego</td>
+                    <td>Acción, energía y creatividad</td>
+                    <td>Competencia o tensión en la acción</td>
+                </tr>
+                <tr>
+                    <td>Copas</td>
+                    <td>Agua</td>
+                    <td>Emociones y vínculos</td>
+                    <td>Conflicto emocional o decepción</td>
+                </tr>
+                <tr>
+                    <td>Espadas</td>
+                    <td>Aire</td>
+                    <td>Pensamiento y comunicación</td>
+                    <td>Desacuerdo o enfrentamiento</td>
+                </tr>
+                <tr>
+                    <td>Oros</td>
+                    <td>Tierra</td>
+                    <td>Recursos y mundo material</td>
+                    <td>Inseguridad o dificultades materiales</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ejercicio">
+        <h3>Ejercicio práctico · Número + palo</h3>
+        <p>
+            Compará el Cinco de Bastos, el Cinco de Copas, el Cinco de
+            Espadas y el Cinco de Oros. Todos comparten el número cinco,
+            asociado aquí con tensión o desafío, pero cada palo expresa
+            esa tensión de una manera diferente.
+        </p>
+        <ol>
+            <li>Identificá el significado tradicional de cada carta.</li>
+            <li>Buscá qué tienen en común.</li>
+            <li>Explicá qué cambia al pasar de un palo a otro.</li>
+            <li>Construí una interpretación breve para una pregunta concreta.</li>
+        </ol>
+    </div>
+
+</section>
+
+<!-- CIERRE -->
+
+<section class="cierre">
+    <div class="contenedor">
+        <span class="etiqueta">ASTRO ROJO · PRÁCTICA Y REFLEXIÓN</span>
+        <h2>El conocimiento comienza con una pregunta.</h2>
+        <p>
+            Estudiar el Tarot es aprender a observar símbolos, reconocer
+            matices y construir interpretaciones responsables. La práctica
+            constante transforma los significados aislados en un lenguaje
+            que podés explorar con criterio propio.
+        </p>
+
+        <a href="index4.html" class="boton">IR A EJERCICIOS →</a>
+    </div>
+</section>
 
 </main>
 
-
-<script>
-
-    let ejercicioActual = 1;
-
-    let respondidos = 0;
-
-
-    function responder(elemento, correcta, numero) {
-
-        const panel =
-            document.getElementById(
-                "ejercicio-" + numero
-            );
-
-        const opciones =
-            panel.querySelectorAll(".opcion");
-
-        const resultado =
-            document.getElementById(
-                "resultado-" + numero
-            );
-
-        const siguiente =
-            document.getElementById(
-                "siguiente-" + numero
-            );
-
-
-        /* Evitar responder dos veces */
-
-        if (panel.dataset.respondido === "true") {
-            return;
-        }
-
-        panel.dataset.respondido = "true";
-
-        respondidos++;
-
-
-        /* Bloquear opciones */
-
-        opciones.forEach(function(opcion) {
-
-            opcion.classList.add("bloqueada");
-
-        });
-
-
-        /* Mostrar resultado */
-
-        if (correcta) {
-
-            elemento.classList.add("correcta");
-
-        } else {
-
-            elemento.classList.add("incorrecta");
-
-            opciones.forEach(function(opcion) {
-
-                const accion =
-                    opcion.getAttribute("onclick");
-
-                if (
-                    accion &&
-                    accion.includes("true")
-                ) {
-
-                    opcion.classList.add("correcta");
-
-                }
-
-            });
-
-        }
-
-
-        resultado.classList.add("visible");
-
-
-        /* Mostrar botón siguiente */
-
-        if (siguiente) {
-
-            siguiente.classList.add("visible");
-
-        }
-
-
-        /* Último ejercicio */
-
-        if (numero === 10) {
-
-            setTimeout(function() {
-
-                document
-                    .getElementById("resultado-final")
-                    .classList.add("visible");
-
-            }, 500);
-
-        }
-
-    }
-
-
-    function mostrarEjercicio(numero) {
-
-        const anterior =
-            document.getElementById(
-                "ejercicio-" + ejercicioActual
-            );
-
-        const siguiente =
-            document.getElementById(
-                "ejercicio-" + numero
-            );
-
-
-        if (anterior) {
-            anterior.style.display = "none";
-        }
-
-        if (siguiente) {
-
-            siguiente.style.display = "block";
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-
-
-        ejercicioActual = numero;
-
-
-        /* Contador */
-
-        document.getElementById("contador")
-            .textContent =
-            numero + " / 10";
-
-
-        /* Barra */
-
-        document
-            .getElementById("barra")
-            .style.width =
-            (numero * 10) + "%";
-
-    }
-
-</script>
+<footer>
+    <div class="contenedor">
+        <span>ASTRO ROJO</span> · ESTUDIO DEL TAROT
+    </div>
+</footer>
 
 </body>
-
 </html>
-
