@@ -1,1687 +1,1035 @@
+
 /* =========================
-RESET
+   ASTRO ROJO
+   CURSO DE ASTROLOGÍA
+========================= */
+
+
+/* =========================
+   RESET
 ========================= */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 
 /* =========================
-HTML
+   VARIABLES
+========================= */
+
+:root {
+    --background: #090608;
+    --background-secondary: #14080c;
+    --card: #190b10;
+    --card-hover: #210c13;
+
+    --red: #e21b3c;
+    --red-light: #ff3858;
+    --red-dark: #8f1028;
+
+    --text: #f4eeee;
+    --text-secondary: #d0bfc3;
+    --text-muted: #a58e95;
+
+    --border: rgba(226, 27, 60, 0.28);
+    --shadow: rgba(226, 27, 60, 0.12);
+}
+
+
+/* =========================
+   HTML
 ========================= */
 
 html {
-scroll-behavior: smooth;
+    scroll-behavior: smooth;
+    scroll-padding-top: 24px;
 }
 
+
 /* =========================
-BODY
+   BODY
 ========================= */
 
 body {
-min-height: 100vh;
+    min-height: 100vh;
 
+    background:
+        radial-gradient(
+            ellipse at top,
+            #3a0a15 0%,
+            #19080e 30%,
+            #090608 70%
+        );
 
-background:
-    radial-gradient(
-        circle at 50% 0%,
-        #3a080d 0%,
-        #16090c 35%,
-        #08070b 75%,
-        #050406 100%
-    );
+    background-color: var(--background);
 
-color: #eee9e4;
+    color: var(--text);
 
-font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-line-height: 1.7;
-
-overflow-x: hidden;
-```
-
-}
-
-/* =========================
-CONTENEDOR
-========================= */
-
-.container {
-width: 100%;
-max-width: 1100px;
-
-```
-margin: 0 auto;
-
-padding: 80px 30px 70px;
-```
-
-}
-
-/* =========================
-BIENVENIDA
-========================= */
-
-.welcome {
-position: relative;
-
-```
-text-align: center;
-
-padding: 35px 20px 30px;
-
-margin-bottom: 55px;
-
-overflow: hidden;
-```
-
-}
-
-/* =========================
-BRILLO ROJO
-========================= */
-
-.hero-glow {
-position: absolute;
-
-```
-width: 320px;
-height: 320px;
-
-left: 50%;
-top: 0;
-
-transform: translateX(-50%);
-
-background: rgba(150, 0, 25, 0.28);
-
-border-radius: 50%;
-
-filter: blur(100px);
-
-pointer-events: none;
-```
-
-}
-
-/* =========================
-LUNA PRINCIPAL
-========================= */
-
-.moon {
-position: relative;
-z-index: 1;
-
-```
-font-size: 52px;
-
-margin-bottom: 20px;
-
-color: #c9828c;
-
-filter:
-    drop-shadow(
-        0 0 15px rgba(200, 20, 40, 0.6)
-    );
-```
-
-}
-
-/* =========================
-ETIQUETA
-========================= */
-
-.etiqueta {
-position: relative;
-z-index: 1;
-
-```
-font-size: 11px;
-letter-spacing: 3px;
-
-color: #c9828c;
-
-margin-bottom: 20px;
-```
-
-}
-
-/* =========================
-TÍTULO PRINCIPAL
-========================= */
-
-.welcome h1 {
-position: relative;
-z-index: 1;
-
-```
-font-size: 52px;
-font-weight: 400;
-
-letter-spacing: 10px;
-
-line-height: 1.3;
-
-margin-bottom: 18px;
-
-color: #f3eeee;
-
-text-shadow:
-    0 0 20px rgba(150, 0, 25, 0.4);
-```
-
-}
-
-/* =========================
-SUBTÍTULO
-========================= */
-
-.welcome .subtitulo {
-position: relative;
-z-index: 1;
-
-```
-font-size: 20px;
-
-color: #d6a5ac;
-
-margin-bottom: 20px;
-```
-
-}
-
-/* =========================
-SEPARADORES
-========================= */
-
-.separador {
-color: #b94a5a;
-
-```
-font-size: 18px;
-
-letter-spacing: 5px;
-
-margin: 22px auto;
-```
-
-}
-
-/* =========================
-DESCRIPCIÓN
-========================= */
-
-.welcome .descripcion {
-position: relative;
-z-index: 1;
-
-```
-display: block;
-
-max-width: 650px;
-
-margin: 0 auto;
-
-color: #a49a9d;
-
-font-size: 14px;
-
-line-height: 1.9;
-```
-
-}
-
-/* =========================
-CONTENIDO
-========================= */
-
-.contenido {
-width: 100%;
-}
-
-/* =========================
-TÍTULOS DE SECCIÓN
-========================= */
-
-.seccion-titulo {
-text-align: center;
-
-```
-margin: 0 auto 28px;
-```
-
-}
-
-.seccion-titulo h2 {
-font-size: 18px;
-
-```
-font-weight: 400;
-
-letter-spacing: 4px;
-
-line-height: 1.7;
-
-color: #eee9e4;
-```
-
-}
-
-/* =========================
-INTRODUCCIÓN
-========================= */
-
-.introduccion {
-max-width: 760px;
-
-```
-margin: 0 auto 65px;
-
-text-align: center;
-```
-
-}
-
-.introduccion p {
-color: #aaa0a3;
-
-```
-font-size: 15px;
-
-line-height: 1.9;
-
-margin-bottom: 18px;
-```
-
-}
-
-/* =========================
-TARJETAS
-========================= */
-
-.study-grid {
-display: grid;
-
-```
-grid-template-columns: repeat(2, minmax(0, 1fr));
-
-gap: 20px;
-
-max-width: 950px;
-
-margin: 0 auto 60px;
-```
-
-}
-
-/* =========================
-TARJETAS DE FUNDAMENTOS
-========================= */
-
-.fundamentos-grid {
-grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-/* =========================
-TARJETA INDIVIDUAL
-========================= */
-
-.study-card {
-position: relative;
-
-```
-display: flex;
-flex-direction: column;
-
-align-items: center;
-
-min-width: 0;
-
-padding: 30px 22px;
-
-background:
-    linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.045),
-        rgba(100, 0, 15, 0.025)
-    );
-
-border: 1px solid rgba(150, 35, 50, 0.32);
-
-border-radius: 15px;
-
-text-align: center;
-
-transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
-```
-
-}
-
-/* =========================
-BRILLO INTERIOR
-========================= */
-
-.study-card::before {
-content: "";
-
-```
-position: absolute;
-
-inset: 0;
-
-border-radius: 15px;
-
-background:
-    radial-gradient(
-        circle at 50% 0%,
-        rgba(160, 0, 30, 0.10),
-        transparent 60%
-    );
-
-pointer-events: none;
-```
-
-}
-
-/* =========================
-EFECTO HOVER
-========================= */
-
-.study-card:hover {
-transform: translateY(-5px);
-
-```
-border-color: rgba(190, 55, 70, 0.60);
-
-background:
-    linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.055),
-        rgba(110, 0, 18, 0.06)
-    );
-
-box-shadow:
-    0 12px 35px rgba(100, 0, 20, 0.18);
-```
-
-}
-
-/* =========================
-NÚMERO DE MÓDULO
-========================= */
-
-.card-numero {
-position: relative;
-z-index: 1;
-
-```
-color: #b96a76;
-
-font-size: 10px;
-
-letter-spacing: 3px;
-
-margin-bottom: 22px;
-```
-
-}
-
-/* =========================
-ICONOS
-========================= */
-
-.study-icon {
-position: relative;
-z-index: 1;
-
-```
-font-size: 30px;
-
-margin-bottom: 18px;
-
-color: #c9828c;
-
-text-shadow:
-    0 0 15px rgba(170, 20, 40, 0.45);
-```
-
-}
-
-/* =========================
-TÍTULOS DE TARJETAS
-========================= */
-
-.study-card h3 {
-position: relative;
-z-index: 1;
-
-```
-font-size: 18px;
-
-font-weight: 400;
-
-line-height: 1.5;
-
-margin-bottom: 14px;
-
-color: #eee9e4;
-```
-
-}
-
-/* =========================
-TEXTO DE TARJETAS
-========================= */
-
-.study-card p {
-position: relative;
-z-index: 1;
-
-```
-color: #96909c;
-
-font-size: 14px;
-
-line-height: 1.8;
-
-margin-bottom: 17px;
-```
-
-}
-
-/* =========================
-LISTAS DE TEMAS
-========================= */
-
-.lista-temas {
-position: relative;
-z-index: 1;
-
-```
-width: 100%;
-
-list-style: none;
-
-text-align: left;
-
-margin: 0 0 25px;
-```
-
-}
-
-.lista-temas li {
-position: relative;
-
-```
-padding: 9px 0 9px 19px;
-
-border-bottom: 1px solid rgba(150, 35, 50, 0.13);
-
-color: #aaa0a3;
-
-font-size: 13px;
-
-line-height: 1.6;
-```
-
-}
-
-.lista-temas li::before {
-content: "✦";
-
-```
-position: absolute;
-
-left: 0;
-top: 10px;
-
-color: #a83b4c;
-
-font-size: 10px;
-```
-
-}
-
-/* =========================
-NOMBRES DE LOS SIGNOS
-========================= */
-
-.signos-lista {
-color: #d6a5ac !important;
-
-```
-font-size: 12px !important;
-
-letter-spacing: 0.3px;
-
-margin-bottom: 17px !important;
-```
-
-}
-
-/* =========================
-FICHAS DE LOS SIGNOS
-========================= */
-
-.signo-detalle {
-position: relative;
-
-```
-margin: 0 auto 25px;
-
-padding: 30px;
-
-background:
-    linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.035),
-        rgba(100, 0, 15, 0.07)
-    );
-
-border: 1px solid rgba(150, 35, 50, 0.32);
-
-border-radius: 15px;
-
-transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-```
-
-}
-
-.signo-detalle:hover {
-border-color: rgba(190, 55, 70, 0.5);
-
-```
-box-shadow:
-    0 10px 30px rgba(100, 0, 20, 0.12);
-```
-
-}
-
-/* =========================
-CABECERA DEL SIGNO
-========================= */
-
-.signo-cabecera {
-display: flex;
-
-```
-align-items: center;
-
-gap: 20px;
-
-padding-bottom: 23px;
-
-margin-bottom: 22px;
-
-border-bottom: 1px solid rgba(150, 35, 50, 0.25);
-```
-
-}
-
-/* =========================
-SÍMBOLO DEL SIGNO
-========================= */
-
-.signo-simbolo {
-flex-shrink: 0;
-
-```
-font-size: 48px;
-
-color: #c9828c;
-
-text-shadow:
-    0 0 18px rgba(170, 20, 40, 0.4);
-```
-
-}
-
-/* =========================
-NÚMERO DEL SIGNO
-========================= */
-
-.signo-numero {
-display: block;
-
-```
-color: #b96a76;
-
-font-size: 10px;
-
-letter-spacing: 2px;
-
-margin-bottom: 7px;
-```
-
-}
-
-/* =========================
-NOMBRE DEL SIGNO
-========================= */
-
-.signo-cabecera h3 {
-color: #eee9e4;
-
-```
-font-size: 25px;
-
-font-weight: 400;
-
-line-height: 1.4;
-
-margin-bottom: 5px;
-```
-
-}
-
-/* =========================
-LEMA DEL SIGNO
-========================= */
-
-.signo-lema {
-color: #d6a5ac;
-
-```
-font-size: 13px;
-
-line-height: 1.6;
-```
-
-}
-
-/* =========================
-DATOS ASTROLÓGICOS
-========================= */
-
-.signo-datos {
-display: flex;
-
-```
-flex-wrap: wrap;
-
-gap: 9px;
-
-margin-bottom: 24px;
-```
-
-}
-
-.signo-datos span {
-padding: 8px 12px;
-
-```
-color: #d5b7bc;
-
-font-size: 11px;
-
-line-height: 1.5;
-
-background: rgba(120, 0, 20, 0.2);
-
-border: 1px solid rgba(150, 35, 50, 0.28);
-
-border-radius: 30px;
-```
-
-}
-
-/* =========================
-SUBTÍTULOS DE CADA SIGNO
-========================= */
-
-.signo-detalle h4 {
-color: #d6a5ac;
-
-```
-font-size: 14px;
-
-font-weight: 400;
-
-letter-spacing: 0.8px;
-
-margin: 22px 0 10px;
-```
-
-}
-
-/* =========================
-EXPLICACIONES DE LOS SIGNOS
-========================= */
-
-.signo-detalle > p {
-color: #aaa0a3;
-
-```
-font-size: 14px;
-
-line-height: 1.9;
-```
-
-}
-
-/* =========================
-NOTAS ASTROLÓGICAS
-========================= */
-
-.signo-detalle .nota-astrologica {
-color: #84777c;
-
-```
-font-size: 12px;
-
-font-style: italic;
-
-margin-top: 16px;
-```
-
-}
-
-/* =========================
-PRINCIPIO
-========================= */
-
-.principio {
-max-width: 700px;
-
-```
-margin: 0 auto 60px;
-
-padding: 35px 30px;
-
-text-align: center;
-
-background: rgba(80, 0, 12, 0.18);
-
-border: 1px solid rgba(150, 35, 50, 0.28);
-
-border-radius: 16px;
-```
-
-}
-
-/* =========================
-ICONO PRINCIPIO
-========================= */
-
-.principio-icon {
-font-size: 25px;
-
-```
-color: #c9828c;
-
-margin-bottom: 15px;
-```
-
-}
-
-/* =========================
-TÍTULO PRINCIPIO
-========================= */
-
-.principio h2 {
-font-size: 17px;
-
-```
-font-weight: 400;
-
-letter-spacing: 3px;
-
-line-height: 1.6;
-
-margin-bottom: 15px;
-
-color: #eee9e4;
-```
-
-}
-
-/* =========================
-TEXTO PRINCIPIO
-========================= */
-
-.principio p {
-color: #a49a9d;
-
-```
-font-size: 14px;
-
-line-height: 1.9;
-```
-
-}
-
-/* =========================
-EJERCICIO
-========================= */
-
-.ejercicio {
-max-width: 760px;
-
-```
-margin: 0 auto 60px;
-
-padding: 32px;
-
-background: rgba(80, 0, 12, 0.18);
-
-border: 1px solid rgba(150, 35, 50, 0.3);
-
-border-radius: 16px;
-```
-
-}
-
-/* =========================
-ETIQUETA DEL EJERCICIO
-========================= */
-
-.ejercicio-etiqueta {
-color: #b96a76;
-
-```
-font-size: 10px;
-
-letter-spacing: 2px;
-
-margin-bottom: 14px;
-```
-
-}
-
-/* =========================
-TÍTULO DEL EJERCICIO
-========================= */
-
-.ejercicio > h2 {
-color: #eee9e4;
-
-```
-font-size: 22px;
-
-font-weight: 400;
-
-margin-bottom: 14px;
-```
-
-}
-
-/* =========================
-INTRODUCCIÓN DEL EJERCICIO
-========================= */
-
-.ejercicio > p {
-color: #a49a9d;
-
-```
-font-size: 14px;
-
-line-height: 1.8;
-
-margin-bottom: 25px;
-```
-
-}
-
-/* =========================
-PREGUNTAS
-========================= */
-
-.pregunta-ejercicio {
-padding: 18px 0;
-
-```
-border-top: 1px solid rgba(150, 35, 50, 0.22);
-```
-
-}
-
-.pregunta-ejercicio h3 {
-color: #d6c4c7;
-
-```
-font-size: 14px;
-
-font-weight: 400;
-
-line-height: 1.7;
-
-margin-bottom: 9px;
-```
-
-}
-
-.pregunta-ejercicio p {
-color: #a49a9d;
-
-```
-font-size: 13px;
-
-line-height: 1.8;
-```
-
-}
-
-/* =========================
-RESPUESTAS
-========================= */
-
-.respuesta {
-color: #c9828c;
-}
-
-/* =========================
-PIE DE PÁGINA
-========================= */
-
-.pie-pagina {
-text-align: center;
-
-```
-padding-top: 5px;
-```
-
-}
-
-.pie-pagina .separador {
-margin-bottom: 15px;
-}
-
-.pie-pagina p {
-color: #d6a5ac;
-
-```
-font-size: 13px;
-
-letter-spacing: 5px;
-
-margin-bottom: 12px;
-```
-
-}
-
-.pie-pagina span {
-color: #777078;
-
-```
-font-size: 9px;
-
-letter-spacing: 2px;
-
-line-height: 1.8;
-```
-
-}
-
-/* =========================
-TABLET
-========================= */
-
-@media (max-width: 850px) {
-
-```
-.container {
-    padding: 65px 24px 60px;
-}
-
-.study-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.fundamentos-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-```
-
-}
-
-/* =========================
-CELULAR
-========================= */
-
-@media (max-width: 600px) {
-
-```
-body {
-    width: 100%;
-
-    overflow-x: hidden;
-}
-
-.container {
-    width: 100%;
-
-    padding: 42px 16px 45px;
-}
-
-.welcome {
-    padding: 25px 5px;
-
-    margin-bottom: 40px;
-}
-
-.moon {
-    font-size: 42px;
-
-    margin-bottom: 15px;
-}
-
-.etiqueta {
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
+    font-size: 17px;
     line-height: 1.8;
 }
 
-.welcome h1 {
-    font-size: 28px;
 
-    letter-spacing: 5px;
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
 
-    line-height: 1.4;
-
-    margin-bottom: 15px;
+.container {
+    width: min(1400px, 94%);
+    margin: 0 auto;
+    padding: 40px 0 30px;
 }
 
-.welcome .subtitulo {
-    font-size: 16px;
 
-    line-height: 1.6;
+/* =========================
+   PORTADA
+========================= */
+
+.welcome {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    min-height: 440px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 65px 70px;
+
+    margin-bottom: 45px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(76, 8, 24, 0.95),
+            rgba(25, 7, 13, 0.98) 60%,
+            rgba(9, 6, 8, 1)
+        );
+
+    border: 1px solid rgba(226, 27, 60, 0.45);
+    border-radius: 24px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 0 35px rgba(226, 27, 60, 0.08);
+}
+
+
+/* Luz de fondo */
+
+.hero-glow {
+    position: absolute;
+    z-index: -1;
+
+    width: 480px;
+    height: 480px;
+
+    top: -220px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: rgba(226, 27, 60, 0.23);
+
+    filter: blur(90px);
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* Símbolo */
+
+.moon {
+    color: var(--red-light);
+
+    font-size: 66px;
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 15px rgba(226, 27, 60, 0.6),
+        0 0 40px rgba(226, 27, 60, 0.3);
+}
+
+
+/* Título principal */
+
+.welcome h1 {
+    color: var(--red-light);
+
+    font-size: clamp(44px, 6vw, 76px);
+
+    line-height: 1.15;
+
+    letter-spacing: 8px;
+
+    font-weight: 800;
+
+    text-shadow:
+        0 0 20px rgba(226, 27, 60, 0.35);
+
+    margin-bottom: 18px;
+}
+
+
+/* Subtítulo */
+
+.welcome > p {
+    color: #ffffff;
+
+    font-size: 25px;
+    font-weight: 600;
+
+    margin-bottom: 18px;
+}
+
+
+/* Descripción de portada */
+
+.welcome > span {
+    display: block;
+
+    max-width: 850px;
+
+    color: var(--text-secondary);
+
+    font-size: 18px;
+    line-height: 1.9;
+}
+
+
+/* =========================
+   SECCIONES
+========================= */
+
+.section-card {
+    margin-bottom: 35px;
+    padding: 42px 48px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(29, 12, 18, 0.97),
+            rgba(15, 8, 11, 0.98)
+        );
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================
+   TÍTULOS
+========================= */
+
+h2 {
+    color: var(--red-light);
+
+    font-size: 32px;
+    line-height: 1.35;
+
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+h3 {
+    color: #ff7187;
+
+    font-size: 23px;
+    line-height: 1.4;
+
+    margin-top: 30px;
+    margin-bottom: 12px;
+}
+
+
+h4 {
+    color: #f5a0ae;
+
+    font-size: 18px;
+    line-height: 1.5;
+
+    margin-top: 20px;
+    margin-bottom: 7px;
+}
+
+
+/* =========================
+   PÁRRAFOS
+========================= */
+
+p {
+    color: var(--text-secondary);
+
+    margin-bottom: 17px;
+}
+
+
+strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+
+/* =========================
+   LISTAS
+========================= */
+
+ul,
+ol {
+    padding-left: 27px;
+    margin: 15px 0 22px;
+}
+
+
+li {
+    color: var(--text-secondary);
+
+    padding-left: 5px;
+    margin-bottom: 9px;
+}
+
+
+li::marker {
+    color: var(--red-light);
+}
+
+
+/* =========================
+   CAJAS INFORMATIVAS
+========================= */
+
+.info-box {
+    margin: 30px 0;
+    padding: 25px 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(91, 12, 31, 0.3),
+            rgba(22, 8, 13, 0.7)
+        );
+
+    border: 1px solid rgba(226, 27, 60, 0.35);
+    border-left: 4px solid var(--red);
+
+    border-radius: 12px;
+}
+
+
+.info-box h3,
+.info-box h4 {
+    margin-top: 0;
+}
+
+
+.info-box p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================
+   CUADRÍCULAS
+========================= */
+
+.grid {
+    display: grid;
+    gap: 22px;
+
+    margin: 25px 0;
+}
+
+
+.grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+
+.grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+.grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+
+/* =========================
+   TARJETAS GENERALES
+========================= */
+
+.mini-card,
+.element-card {
+    min-width: 0;
+
+    padding: 26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #210d14,
+            #12090d
+        );
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.mini-card:hover,
+.element-card:hover {
+    transform: translateY(-4px);
+
+    background: var(--card-hover);
+
+    border-color: rgba(255, 56, 88, 0.65);
+
+    box-shadow:
+        0 10px 28px rgba(226, 27, 60, 0.1);
+}
+
+
+.mini-card h3,
+.mini-card h4,
+.element-card h3 {
+    margin-top: 0;
+}
+
+
+.mini-card p:last-child,
+.element-card p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================
+   TARJETAS DE ELEMENTOS
+========================= */
+
+.element-card {
+    text-align: center;
+
+    padding: 28px 20px;
+}
+
+
+.element-symbol {
+    display: block;
+
+    font-size: 42px;
+    line-height: 1.4;
 
     margin-bottom: 12px;
 }
 
-.welcome .descripcion {
-    max-width: 340px;
 
-    font-size: 13px;
+.element-card h3 {
+    font-size: 24px;
 
-    line-height: 1.8;
+    color: var(--red-light);
+
+    margin-bottom: 12px;
 }
 
-.hero-glow {
-    width: 210px;
-    height: 210px;
 
-    filter: blur(75px);
-}
+.element-card .sign-list {
+    color: #ff9baa;
 
-.seccion-titulo {
-    margin-bottom: 22px;
-}
-
-.seccion-titulo h2 {
-    font-size: 15px;
-
-    letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: 700;
 
     line-height: 1.7;
 }
 
-.introduccion {
-    margin-bottom: 42px;
+
+.element-card p {
+    font-size: 15px;
 }
 
-.introduccion p {
+
+/* =========================
+   LISTA DE SIGNOS
+========================= */
+
+.sign-list {
+    color: #ff9baa;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   TARJETAS DE SIGNOS
+========================= */
+
+.sign-card {
+    position: relative;
+
+    margin: 30px 0;
+    padding: 34px 38px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(35, 12, 20, 0.98),
+            rgba(16, 8, 12, 0.98)
+        );
+
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--red-dark);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.16);
+}
+
+
+/* Cabecera de cada signo */
+
+.sign-heading {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid rgba(226, 27, 60, 0.2);
+}
+
+
+.sign-heading h3 {
+    color: var(--red-light);
+
+    font-size: 32px;
+
+    margin: 0 0 5px;
+}
+
+
+.sign-heading p {
+    color: var(--text-muted);
+
     font-size: 14px;
 
-    line-height: 1.85;
+    margin: 0;
 }
 
-.study-grid {
-    grid-template-columns: 1fr;
 
-    gap: 15px;
+/* Símbolos zodiacales */
 
-    margin-bottom: 45px;
+.sign-symbol {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 76px;
+    height: 76px;
+
+    color: var(--red-light);
+
+    font-size: 48px;
+    line-height: 1;
+
+    background: rgba(226, 27, 60, 0.1);
+
+    border: 1px solid rgba(226, 27, 60, 0.35);
+    border-radius: 16px;
+
+    text-shadow:
+        0 0 15px rgba(226, 27, 60, 0.3);
 }
 
-.fundamentos-grid {
-    grid-template-columns: 1fr;
+
+/* Frase de cada signo */
+
+.sign-summary {
+    color: #ff9baa;
+
+    font-size: 19px;
+    font-weight: 600;
+
+    margin-bottom: 18px;
 }
 
-.study-card {
-    width: 100%;
 
-    min-height: auto;
+/* Datos del signo */
 
-    padding: 27px 20px;
+.sign-data {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 
-    border-radius: 14px;
+    margin: 24px 0;
+    padding: 18px;
+
+    background: rgba(0, 0, 0, 0.22);
+
+    border: 1px solid rgba(226, 27, 60, 0.2);
+    border-radius: 10px;
 }
 
-.study-card:hover {
-    transform: none;
+
+.sign-data span {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+    background: rgba(226, 27, 60, 0.07);
+
+    border: 1px solid rgba(226, 27, 60, 0.15);
+    border-radius: 7px;
 }
 
-.study-icon {
-    font-size: 28px;
 
+.sign-data strong {
+    color: #ff9baa;
+}
+
+
+/* =========================
+   COLORES DE LOS SIGNOS
+========================= */
+
+.aries {
+    border-left-color: #f04450;
+}
+
+.tauro {
+    border-left-color: #76a96c;
+}
+
+.geminis {
+    border-left-color: #d5b75e;
+}
+
+.cancer {
+    border-left-color: #88a8df;
+}
+
+.leo {
+    border-left-color: #f2a43a;
+}
+
+.virgo {
+    border-left-color: #a9a66b;
+}
+
+.libra {
+    border-left-color: #df86b8;
+}
+
+.escorpio {
+    border-left-color: #b22c52;
+}
+
+.sagitario {
+    border-left-color: #e47d43;
+}
+
+.capricornio {
+    border-left-color: #a89c8a;
+}
+
+.acuario {
+    border-left-color: #55b9d0;
+}
+
+.piscis {
+    border-left-color: #8c87d8;
+}
+
+
+/* =========================
+   COLORES DE LOS ELEMENTOS
+========================= */
+
+.fire {
+    border-top: 3px solid #e94b42;
+}
+
+.earth {
+    border-top: 3px solid #80a76d;
+}
+
+.air {
+    border-top: 3px solid #d6b75e;
+}
+
+.water {
+    border-top: 3px solid #658fe0;
+}
+
+
+/* =========================
+   PASOS DE INTERPRETACIÓN
+========================= */
+
+.steps-list {
+    counter-reset: none;
+}
+
+
+.steps-list li {
+    padding-left: 8px;
+    margin-bottom: 17px;
+}
+
+
+.steps-list strong {
+    color: #ff9baa;
+}
+
+
+/* =========================
+   COMPARACIÓN DE SIGNOS
+========================= */
+
+.comparison-card {
+    margin: 25px 0;
+    padding: 25px 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(41, 12, 21, 0.92),
+            rgba(17, 8, 12, 0.96)
+        );
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.comparison-card:hover {
+    border-color: rgba(255, 56, 88, 0.65);
+
+    transform: translateX(3px);
+}
+
+
+.comparison-card h3 {
+    margin-top: 0;
     margin-bottom: 15px;
 }
 
-.study-card h3 {
-    font-size: 17px;
 
-    margin-bottom: 11px;
+.comparison-card p:last-child {
+    margin-bottom: 0;
 }
 
-.study-card p {
-    font-size: 14px;
-
-    line-height: 1.8;
-}
-
-.signos-lista {
-    font-size: 12px !important;
-}
-
-.signo-detalle {
-    padding: 23px 19px;
-
-    margin-bottom: 18px;
-
-    border-radius: 14px;
-}
-
-.signo-cabecera {
-    gap: 14px;
-
-    padding-bottom: 18px;
-
-    margin-bottom: 18px;
-}
-
-.signo-simbolo {
-    font-size: 38px;
-}
-
-.signo-cabecera h3 {
-    font-size: 22px;
-}
-
-.signo-numero {
-    font-size: 9px;
-
-    letter-spacing: 1.5px;
-}
-
-.signo-datos {
-    gap: 7px;
-
-    margin-bottom: 20px;
-}
-
-.signo-datos span {
-    font-size: 10px;
-
-    padding: 7px 10px;
-}
-
-.signo-detalle h4 {
-    font-size: 13px;
-
-    margin: 19px 0 8px;
-}
-
-.signo-detalle > p {
-    font-size: 13px;
-
-    line-height: 1.85;
-}
-
-.signo-detalle .nota-astrologica {
-    font-size: 11px;
-}
-
-.principio {
-    width: 100%;
-
-    margin-bottom: 42px;
-
-    padding: 27px 19px;
-
-    border-radius: 14px;
-}
-
-.principio-icon {
-    font-size: 23px;
-
-    margin-bottom: 12px;
-}
-
-.principio h2 {
-    font-size: 15px;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 12px;
-}
-
-.principio p {
-    font-size: 14px;
-
-    line-height: 1.85;
-}
-
-.ejercicio {
-    padding: 25px 19px;
-
-    margin-bottom: 45px;
-}
-
-.ejercicio > h2 {
-    font-size: 20px;
-}
-
-.pregunta-ejercicio h3 {
-    font-size: 13px;
-}
-
-.pregunta-ejercicio p {
-    font-size: 13px;
-}
-
-.pie-pagina span {
-    font-size: 8px;
-
-    letter-spacing: 1.5px;
-}
-```
-
-}
 
 /* =========================
-CELULARES MUY PEQUEÑOS
+   CIERRE
 ========================= */
 
-@media (max-width: 380px) {
-
-```
-.container {
-    padding-left: 13px;
-    padding-right: 13px;
+.final-section {
+    border-color: rgba(226, 27, 60, 0.45);
 }
 
-.welcome h1 {
-    font-size: 25px;
 
-    letter-spacing: 4px;
+/* =========================
+   PIE DE PÁGINA
+========================= */
+
+.footer {
+    padding: 45px 20px 30px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(30, 8, 15, 0.1),
+            rgba(50, 7, 19, 0.35)
+        );
+
+    border-top: 1px solid var(--border);
+    border-radius: 16px;
 }
 
-.welcome .subtitulo {
-    font-size: 15px;
+
+.footer-symbol {
+    color: var(--red-light);
+
+    font-size: 45px;
+
+    margin-bottom: 10px;
+
+    text-shadow:
+        0 0 20px rgba(226, 27, 60, 0.35);
 }
 
-.study-card {
-    padding: 24px 17px;
+
+.footer h2 {
+    display: inline-block;
+
+    color: var(--red-light);
+
+    font-size: 29px;
+    letter-spacing: 5px;
+
+    border: none;
+
+    margin: 0 0 5px;
+    padding: 0;
 }
 
-.signo-detalle {
-    padding: 21px 16px;
+
+.footer p {
+    color: #ffffff;
+
+    margin: 8px 0;
 }
 
-.signo-simbolo {
-    font-size: 33px;
+
+.footer span {
+    color: var(--text-muted);
+
+    font-size: 14px;
 }
 
-.signo-cabecera {
-    gap: 11px;
+
+/* =========================
+   SELECCIÓN DE TEXTO
+========================= */
+
+::selection {
+    color: #ffffff;
+    background: #9e1230;
 }
 
-.signo-cabecera h3 {
-    font-size: 20px;
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+    width: 10px;
 }
 
-.signo-datos span {
-    font-size: 9px;
 
-    padding: 6px 8px;
+::-webkit-scrollbar-track {
+    background: #0b0709;
 }
 
-.principio {
-    padding: 25px 16px;
+
+::-webkit-scrollbar-thumb {
+    background: #6e1025;
+
+    border-radius: 10px;
 }
 
-.ejercicio {
-    padding: 23px 16px;
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--red);
 }
 
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1050px) {
+
+    .container {
+        width: 95%;
+    }
+
+    .section-card {
+        padding: 32px;
+    }
+
+    .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .welcome {
+        padding: 55px 40px;
+    }
 
 }
 
 
 /* =========================
-AJUSTES PARA ASTRO ROJO
+   CELULAR
 ========================= */
 
-.container {
-width: min(1100px, 100%);
-margin: 0 auto;
-padding: 24px;
-}
+@media (max-width: 650px) {
 
-.contenido {
-margin: 64px 0;
-min-width: 0;
-}
+    body {
+        font-size: 16px;
+        line-height: 1.75;
+    }
 
-.contenido p,
-.study-card p,
-.signo-detalle p {
-line-height: 1.85;
-overflow-wrap: anywhere;
-}
+    .container {
+        width: 94%;
+        padding-top: 18px;
+    }
 
-.seccion-titulo {
-margin: 48px 0 24px;
-text-align: center;
-}
+    .welcome {
+        min-height: 350px;
 
-.seccion-titulo h2 {
-font-size: clamp(1.15rem, 3vw, 1.7rem);
-line-height: 1.4;
-letter-spacing: 2px;
-overflow-wrap: anywhere;
-}
+        padding: 40px 22px;
 
-/* INTRODUCCIÓN */
+        margin-bottom: 25px;
 
-.introduccion {
-max-width: 850px;
-margin: 0 auto 32px;
-padding: 26px;
-border: 1px solid rgba(226, 27, 60, 0.25);
-border-radius: 18px;
-background: rgba(20, 10, 13, 0.75);
-}
+        border-radius: 16px;
+    }
 
-.introduccion p + p {
-margin-top: 16px;
-}
+    .moon {
+        font-size: 50px;
+        margin-bottom: 15px;
+    }
 
-/* CUADRÍCULAS */
+    .welcome h1 {
+        font-size: 38px;
+        letter-spacing: 3px;
+    }
 
-.study-grid {
-display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 22px;
-align-items: stretch;
-}
+    .welcome > p {
+        font-size: 21px;
+    }
 
-.fundamentos-grid {
-grid-template-columns: repeat(3, minmax(0, 1fr));
-}
+    .welcome > span {
+        font-size: 15px;
+        line-height: 1.8;
+    }
 
-.modalidades-grid {
-grid-template-columns: repeat(3, minmax(0, 1fr));
-}
+    .section-card {
+        padding: 24px 19px;
+        margin-bottom: 22px;
 
-.study-card {
-min-width: 0;
-padding: 26px;
-border: 1px solid rgba(226, 27, 60, 0.32);
-border-radius: 18px;
-background: linear-gradient(
-145deg,
-rgba(49, 12, 19, 0.85),
-rgba(12, 9, 11, 0.96)
-);
-transition: border-color 0.25s ease,
-transform 0.25s ease;
-}
+        border-radius: 14px;
+    }
 
-.study-card:hover {
-border-color: #e21b3c;
-transform: translateY(-3px);
-}
+    h2 {
+        font-size: 26px;
+    }
 
-.study-icon {
-margin-bottom: 14px;
-color: #f04a63;
-font-size: 2rem;
-}
+    h3 {
+        font-size: 21px;
+    }
 
-.study-card h3 {
-margin-bottom: 14px;
-color: #f3eeee;
-font-size: 1.3rem;
-}
+    h4 {
+        font-size: 17px;
+    }
 
-.signos-lista {
-margin-bottom: 14px;
-color: #ff8294;
-font-weight: bold;
-}
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
 
-/* FICHAS DE LOS DOCE SIGNOS */
+    .mini-card,
+    .element-card {
+        padding: 22px;
+    }
 
-.signo-detalle {
-min-width: 0;
-margin: 28px 0;
-padding: clamp(20px, 4vw, 34px);
-border: 1px solid rgba(226, 27, 60, 0.4);
-border-radius: 20px;
-background: linear-gradient(
-135deg,
-rgba(47, 10, 17, 0.92),
-rgba(12, 9, 11, 0.98)
-);
-box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
-}
+    .sign-card {
+        padding: 23px 19px;
+        margin: 22px 0;
+    }
 
-.signo-cabecera {
-display: flex;
-align-items: center;
-gap: 20px;
-margin-bottom: 24px;
-}
+    .sign-heading {
+        gap: 15px;
+    }
 
-.signo-cabecera > div {
-min-width: 0;
-}
+    .sign-heading h3 {
+        font-size: 26px;
+    }
 
-.signo-simbolo {
-flex: 0 0 auto;
-color: #f04a63;
-font-size: clamp(2.8rem, 7vw, 4.2rem);
-}
+    .sign-symbol {
+        width: 60px;
+        height: 60px;
+        font-size: 37px;
+    }
 
-.signo-numero {
-color: #ff8294;
-font-size: 0.78rem;
-letter-spacing: 1.5px;
-}
+    .sign-summary {
+        font-size: 17px;
+    }
 
-.signo-cabecera h3 {
-margin: 5px 0;
-font-size: clamp(1.7rem, 4vw, 2.3rem);
-}
+    .sign-data {
+        gap: 8px;
+        padding: 13px;
+    }
 
-.signo-lema {
-color: #d9bfc3;
-font-style: italic;
-}
+    .sign-data span {
+        font-size: 13px;
+    }
 
-.signo-datos {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-margin-bottom: 28px;
-}
+    .info-box {
+        padding: 20px;
+    }
 
-.signo-datos span {
-padding: 9px 13px;
-border: 1px solid rgba(226, 27, 60, 0.35);
-border-radius: 999px;
-background: rgba(226, 27, 60, 0.08);
-color: #f3dfe3;
-font-size: 0.88rem;
-}
+    .comparison-card {
+        padding: 21px;
+    }
 
-.signo-detalle h4 {
-margin: 24px 0 8px;
-color: #ff8294;
-font-size: 1.05rem;
-}
-
-.nota-astrologica {
-margin-top: 18px;
-padding: 14px;
-border-left: 3px solid #e21b3c;
-background: rgba(226, 27, 60, 0.07);
-font-size: 0.9rem;
-}
-
-/* SÍNTESIS Y EJERCICIOS */
-
-.principio,
-.ejercicio {
-margin: 48px 0;
-padding: clamp(22px, 4vw, 36px);
-border: 1px solid rgba(226, 27, 60, 0.35);
-border-radius: 20px;
-background: rgba(24, 9, 13, 0.9);
-}
-
-.principio h2,
-.ejercicio h2 {
-margin-bottom: 18px;
-}
-
-.principio-icon {
-margin-bottom: 12px;
-color: #f04a63;
-font-size: 2rem;
-}
-
-.ejercicio-etiqueta {
-margin-bottom: 12px;
-color: #ff8294;
-font-size: 0.8rem;
-letter-spacing: 1.5px;
-}
-
-.pregunta-ejercicio {
-margin-top: 20px;
-padding: 18px;
-border-radius: 12px;
-background: rgba(255, 255, 255, 0.035);
-}
-
-.pregunta-ejercicio h3 {
-margin-bottom: 10px;
-font-size: 1rem;
-line-height: 1.6;
-}
-
-.respuesta {
-color: #ff8294;
-font-weight: bold;
-}
-
-/* PIE DE PÁGINA */
-
-.pie-pagina {
-padding: 35px 10px;
-text-align: center;
-}
-
-.pie-pagina > p {
-margin: 12px 0;
-color: #ff8294;
-font-size: 1.2rem;
-letter-spacing: 3px;
-}
-
-.pie-pagina span {
-font-size: 0.8rem;
-letter-spacing: 1px;
-}
-
-/* TABLETS Y CELULARES */
-
-@media (max-width: 850px) {
-.container {
-padding: 20px;
-}
-
-```
-.fundamentos-grid,
-.modalidades-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-```
+    .footer {
+        padding: 35px 15px 25px;
+    }
 
 }
 
-@media (max-width: 600px) {
-.container {
-padding: 14px;
-}
 
-```
-.contenido {
-    margin: 42px 0;
-}
-
-.study-grid,
-.fundamentos-grid,
-.elementos-grid,
-.modalidades-grid,
-.polaridades-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-}
-
-.introduccion,
-.study-card {
-    padding: 20px;
-}
-
-.signo-detalle {
-    margin: 20px 0;
-    padding: 20px;
-}
-
-.signo-cabecera {
-    align-items: flex-start;
-    gap: 14px;
-}
-
-.signo-datos {
-    gap: 8px;
-}
-
-.signo-datos span {
-    max-width: 100%;
-    white-space: normal;
-}
-
-.seccion-titulo {
-    margin: 36px 0 20px;
-}
-```
-
-}
+/* =========================
+   ACCESIBILIDAD
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
-*,
-*::before,
-*::after {
-scroll-behavior: auto !important;
-transition: none !important;
-}
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+    }
+
 }
 
