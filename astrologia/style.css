@@ -1951,3 +1951,79 @@ button:disabled {
 }
 
 
+/* ==========================================
+   ASTRO ROJO — BOTONES VOLVER Y SIGUIENTE
+   Diseño unificado para todos los index
+========================================== */
+
+.next-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.next-links a.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 190px;
+    min-height: 48px;
+    padding: 12px 20px;
+
+    color: #f7eff1 !important;
+    background: #8e1029 !important;
+
+    border: 1px solid #e21b3c !important;
+    border-radius: 8px !important;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+
+    box-shadow: 0 4px 15px rgba(226, 27, 60, 0.12);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.next-links a.button:hover {
+    color: #ffffff !important;
+    background: #e21b3c !important;
+    border-color: #ff4965 !important;
+
+    box-shadow: 0 6px 22px rgba(226, 27, 60, 0.25);
+    transform: translateY(-2px);
+}
+
+.next-links a.button:active {
+    transform: translateY(0);
+}
+
+/* Adaptación a celulares */
+
+@media (max-width: 500px) {
+    .next-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .next-links a.button {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+
