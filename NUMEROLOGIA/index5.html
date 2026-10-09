@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10070b">
+    <meta name="description" content="Curso de numerología ASTRO ROJO: números compuestos del 10 al 99, numerología de pareja, familia e infancia.">
+    <title>ASTRO ROJO — Numerología Avanzada</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --rojo: #e21b3c;
+            --rojo-oscuro: #8e1027;
+            --fondo: #10070b;
+            --panel: #1b0d13;
+            --texto: #f3eeee;
+            --suave: #c5b7bd;
+            --borde: rgba(226, 27, 60, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 50% 0%, #3a101b 0%, #10070b 48%, #080508 100%);
+            color: var(--texto);
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: auto;
+        }
+
+        .hero {
+            min-height: 460px;
+            padding: 85px 20px 65px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-orbit {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border: 1px solid rgba(226, 27, 60, .22);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .orbit-one {
+            width: 350px;
+            height: 350px;
+        }
+
+        .orbit-two {
+            width: 440px;
+            height: 440px;
+            border-color: rgba(226, 27, 60, .10);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 750px;
+        }
+
+        .eyebrow,
+        .mini-label {
+            color: #ff7388;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font: 12px Arial, sans-serif;
+        }
+
+        .hero h1 {
+            margin: 18px 0;
+            font-size: clamp(45px, 9vw, 86px);
+            letter-spacing: 5px;
+            line-height: 1.05;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--rojo);
+        }
+
+        .hero-subtitle {
+            color: #f4c4cd;
+            font-size: clamp(20px, 4vw, 29px);
+            margin: 18px 0 12px;
+        }
+
+        .hero-description {
+            max-width: 630px;
+            margin: 0 auto;
+            color: var(--suave);
+        }
+
+        .hero-note {
+            color: #ff9bab;
+            font-size: 13px;
+            margin-top: 22px;
+        }
+
+        .hero-moon {
+            color: var(--rojo);
+            font-size: 30px;
+            margin-top: 20px;
+        }
+
+        .course-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--borde);
+            border-bottom: 1px solid var(--borde);
+            background: rgba(20, 7, 12, .8);
+        }
+
+        .course-strip-item {
+            text-align: center;
+            padding: 19px 8px;
+            border-right: 1px solid var(--borde);
+            font: 12px Arial, sans-serif;
+            color: var(--suave);
+        }
+
+        .course-strip-item:last-child {
+            border-right: 0;
+        }
+
+        .strip-icon {
+            display: block;
+            color: var(--rojo);
+            font-size: 23px;
+            margin-bottom: 4px;
+        }
+
+        .section {
+            padding: 75px 0;
+        }
+
+        .section-dark {
+            background: rgba(5, 3, 6, .35);
+            border-top: 1px solid rgba(255,255,255,.04);
+            border-bottom: 1px solid rgba(255,255,255,.04);
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 40px;
+        }
+
+        .section-number {
+            color: var(--rojo);
+            letter-spacing: 3px;
+            font: 12px Arial, sans-serif;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(27px, 5vw, 42px);
+            line-height: 1.2;
+            margin: 12px 0;
+        }
+
+        .section-heading p {
+            color: var(--suave);
+            margin: 0 auto;
+        }
+
+        .intro-layout,
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .intro-visual {
+            min-height: 260px;
+            border: 1px solid var(--borde);
+            border-radius: 22px;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle, #48101f, #1b0d13 70%);
+        }
+
+        .intro-circle {
+            width: 150px;
+            height: 150px;
+            border: 1px solid #c72a48;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: #ff7388;
+            font-size: 68px;
+            box-shadow: 0 0 40px rgba(226,27,60,.12);
+        }
+
+        .intro-text p,
+        .content-card p {
+            color: var(--suave);
+        }
+
+        .highlight-box {
+            padding: 18px 20px;
+            border-left: 3px solid var(--rojo);
+            background: rgba(226,27,60,.07);
+            border-radius: 0 12px 12px 0;
+            margin-top: 22px;
+            color: #f2dce1;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .content-card {
+            padding: 25px;
+            border: 1px solid var(--borde);
+            border-radius: 17px;
+            background: linear-gradient(145deg, rgba(48,14,25,.85), rgba(17,8,12,.95));
+        }
+
+        .card-icon {
+            font-size: 27px;
+            color: var(--rojo);
+        }
+
+        .card-index {
+            color: #ff7388;
+            font: 11px Arial, sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .content-card h3 {
+            margin: 8px 0;
+            font-size: 23px;
+        }
+
+        .card-detail {
+            font-size: 13px;
+            color: #e4a7b3;
+        }
+
+        .number-tools {
+            padding: 25px;
+            border: 1px solid var(--borde);
+            border-radius: 18px;
+            background: rgba(20, 7, 12, .85);
+            margin-bottom: 25px;
+        }
+
+        .number-tools p {
+            color: var(--suave);
+        }
+
+        .number-progress {
+            color: #ff9bab;
+            font: 12px Arial, sans-serif;
+            letter-spacing: 1px;
+            margin: 15px 0;
+        }
+
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .number-card {
+            padding: 19px;
+            border: 1px solid var(--borde);
+            background: rgba(36, 10, 19, .82);
+            border-radius: 14px;
+        }
+
+        .number-card h3 {
+            color: #ff7388;
+            font-size: 23px;
+            margin: 0 0 7px;
+        }
+
+        .number-card p {
+            margin: 0;
+            color: var(--suave);
+            font-size: 14px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--rojo);
+            background: var(--rojo);
+            color: white;
+            border-radius: 999px;
+            padding: 12px 22px;
+            cursor: pointer;
+            transition: .2s ease;
+            font: 13px Arial, sans-serif;
+            letter-spacing: .4px;
+        }
+
+        .button:hover {
+            background: #a5102a;
+            transform: translateY(-2px);
+        }
+
+        .button.secondary {
+            background: transparent;
+            color: #ff9bab;
+        }
+
+        .button.secondary:hover {
+            background: rgba(226,27,60,.12);
+        }
+
+        .relationship-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .relationship-card {
+            border: 1px solid var(--borde);
+            border-radius: 17px;
+            padding: 24px;
+            background: rgba(26, 9, 15, .9);
+        }
+
+        .relationship-card .symbol {
+            color: var(--rojo);
+            font-size: 32px;
+        }
+
+        .relationship-card h3 {
+            margin: 8px 0;
+            font-size: 22px;
+        }
+
+        .relationship-card p,
+        .relationship-card li {
+            color: var(--suave);
+            font-size: 14px;
+        }
+
+        .relationship-card ul {
+            padding-left: 19px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .step-card {
+            padding: 19px;
+            border-top: 2px solid var(--rojo);
+            background: rgba(226,27,60,.06);
+        }
+
+        .step-number {
+            color: #ff7388;
+            font: 12px Arial, sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .step-card h3 {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+
+        .step-card p {
+            color: var(--suave);
+            font-size: 14px;
+        }
+
+        .notice {
+            padding: 18px;
+            border: 1px solid rgba(255,180,90,.35);
+            border-radius: 12px;
+            background: rgba(255,180,90,.05);
+            color: #ead8c6;
+            font-size: 14px;
+            margin-top: 25px;
+        }
+
+        .final-section {
+            padding: 65px 0;
+            text-align: center;
+        }
+
+        .final-section h2 {
+            font-size: clamp(28px, 5vw, 40px);
+        }
+
+        .final-section p {
+            color: var(--suave);
+            max-width: 700px;
+            margin: 0 auto 24px;
+        }
+
+        .footer {
+            padding: 28px 0;
+            border-top: 1px solid var(--borde);
+            text-align: center;
+            color: var(--suave);
+            font: 12px Arial, sans-serif;
+        }
+
+        .footer-brand {
+            color: var(--rojo);
+            font: bold 19px Georgia, serif;
+            letter-spacing: 3px;
+            margin-bottom: 7px;
+        }
+
+        @media (max-width: 760px) {
+            .course-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .course-strip-item:nth-child(2) {
+                border-right: 0;
+            }
+
+            .course-strip-item:nth-child(-n+2) {
+                border-bottom: 1px solid var(--borde);
+            }
+
+            .intro-layout,
+            .two-columns,
+            .content-grid,
+            .number-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .relationship-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .section {
+                padding: 55px 0;
+            }
+
+            .hero {
+                min-height: 410px;
+                padding-top: 65px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .number-tools {
+                padding: 17px;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <!-- PORTADA -->
+
+    <section class="hero" id="inicio">
+        <div class="hero-orbit orbit-one"></div>
+        <div class="hero-orbit orbit-two"></div>
+
+        <div class="hero-content">
+            <div class="eyebrow">CURSO DE NUMEROLOGÍA · NIVEL AVANZADO</div>
+
+            <h1>
+                ASTRO
+                <span>ROJO</span>
+            </h1>
+
+            <div class="hero-subtitle">
+                Numerología y vínculos
+            </div>
+
+            <p class="hero-description">
+                Explora los números compuestos del 10 al 99 y aprende
+                a utilizarlos como lenguaje simbólico para reflexionar
+                sobre las relaciones de pareja, la familia y la infancia.
+            </p>
+
+            <p class="hero-note">
+                Una herramienta de reflexión, no una sentencia sobre tu destino.
+            </p>
+
+            <div class="hero-moon">☾</div>
+        </div>
+    </section>
+
+
+    <!-- NAVEGACIÓN VISUAL -->
+
+    <div class="course-strip">
+        <a class="course-strip-item" href="#compuestos">
+            <span class="strip-icon">◇</span>
+            Números 10–99
+        </a>
+
+        <a class="course-strip-item" href="#pareja">
+            <span class="strip-icon">♡</span>
+            Pareja
+        </a>
+
+        <a class="course-strip-item" href="#familia">
+            <span class="strip-icon">⌂</span>
+            Familia
+        </a>
+
+        <a class="course-strip-item" href="#infancia">
+            <span class="strip-icon">✧</span>
+            Infancia
+        </a>
+    </div>
+
+
+    <!-- INTRODUCCIÓN -->
+
+    <section class="section">
+        <div class="container">
+            <div class="intro-layout">
+
+                <div class="intro-visual">
+                    <div class="intro-circle">9</div>
+                </div>
+
+                <div class="intro-text">
+                    <div class="mini-label">01 · INTRODUCCIÓN</div>
+
+                    <h2>Los números como lenguaje simbólico</h2>
+
+                    <p>
+                        En numerología, cada cifra se interpreta dentro
+                        de un sistema simbólico. Algunos métodos estudian
+                        tanto el número compuesto como la cifra reducida
+                        que se obtiene al sumar sus dígitos.
+                    </p>
+
+                    <p>
+                        Por ejemplo, el 24 puede estudiarse como número
+                        compuesto y también reducirse a 6
+                        (2 + 4 = 6). Ambos niveles pueden utilizarse
+                        como puntos de partida para una reflexión.
+                    </p>
+
+                    <div class="highlight-box">
+                        No existe una interpretación única y universal
+                        para cada número. En esta lección utilizaremos
+                        significados orientativos, sin considerarlos
+                        diagnósticos ni predicciones comprobadas.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- NÚMEROS COMPUESTOS -->
+
+    <section class="section section-dark" id="compuestos">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-number">02 · BIBLIOTECA NUMEROLÓGICA</div>
+
+                <h2>Números compuestos del 10 al 99</h2>
+
+                <p>
+                    Consulta las interpretaciones por grupos de diez.
+                    Al principio se muestran únicamente los números
+                    del 10 al 19. Puedes avanzar progresivamente
+                    y ocultar los grupos que hayas abierto.
+                </p>
+            </div>
+
+            <div class="number-tools">
+                <div class="mini-label">GUÍA DE CONSULTA</div>
+
+                <p>
+                    Estos significados son propuestas simbólicas para
+                    estudiar cada número. No describen de forma objetiva
+                    la personalidad ni permiten predecir acontecimientos.
+                </p>
+
+                <div class="number-progress" id="number-progress"
+                     aria-live="polite">
+                    Grupo visible: 10–19
+                </div>
+
+                <div id="number-grid" class="number-grid"></div>
+
+                <div class="button-row">
+                    <button class="button" id="show-next" type="button">
+                        Mostrar siguiente grupo
+                    </button>
+
+                    <button class="button secondary" id="hide-groups"
+                            type="button">
+                        Ocultar grupos avanzados
+                    </button>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Cómo practicar:</strong> elige un número,
+                lee su interpretación y escribe qué ideas te sugiere.
+                Contrasta esas ideas con tu experiencia sin forzar
+                que encajen con una situación determinada.
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- PAREJA -->
+
+    <section class="section" id="pareja">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-number">03 · NUMEROLOGÍA APLICADA</div>
+
+                <h2>Numerología de la pareja</h2>
+
+                <p>
+                    Una propuesta simbólica para conversar sobre
+                    afinidades, necesidades, diferencias y expectativas
+                    dentro de una relación.
+                </p>
+            </div>
+
+            <div class="relationship-grid">
+
+                <article class="relationship-card">
+                    <div class="symbol">♡</div>
+                    <h3>Los dos caminos de vida</h3>
+
+                    <p>
+                        Compara los números de camino de vida de ambas
+                        personas como una actividad de reflexión.
+                    </p>
+
+                    <ul>
+                        <li>¿Qué necesidades personales reconoce cada una?</li>
+                        <li>¿Cómo vive cada persona la independencia?</li>
+                        <li>¿Qué objetivos comparten?</li>
+                    </ul>
+                </article>
+
+                <article class="relationship-card">
+                    <div class="symbol">∞</div>
+                    <h3>El número del vínculo</h3>
+
+                    <p>
+                        Algunos practicantes suman los números personales
+                        para crear un número simbólico de la relación.
+                        Este procedimiento varía según la escuela.
+                    </p>
+
+                    <ul>
+                        <li>Define qué método vas a utilizar.</li>
+                        <li>Registra la operación completa.</li>
+                        <li>Usa el resultado como disparador de diálogo.</li>
+                    </ul>
+                </article>
+
+                <article class="relationship-card">
+                    <div class="symbol">☾</div>
+                    <h3>Desafíos y comunicación</h3>
+
+                    <p>
+                        La interpretación puede servir para formular
+                        preguntas, pero no para decidir si una pareja
+                        está destinada a permanecer unida.
+                    </p>
+
+                    <ul>
+                        <li>¿Cómo resuelven sus desacuerdos?</li>
+                        <li>¿Pueden expresar límites y necesidades?</li>
+                        <li>¿Qué acuerdos necesitan construir?</li>
+                    </ul>
+                </article>
+
+            </div>
+
+            <div class="notice">
+                <strong>Importante:</strong> ningún número puede confirmar
+                fidelidad, amor, compatibilidad definitiva o el futuro
+                de una relación. Para evaluar un vínculo, prioriza
+                los comportamientos reales, el respeto y la comunicación.
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FAMILIA -->
+
+    <section class="section section-dark" id="familia">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-number">04 · VÍNCULOS Y CONVIVENCIA</div>
+
+                <h2>Numerología familiar</h2>
+
+                <p>
+                    Utiliza los números como una actividad compartida
+                    para conversar sobre diferencias individuales,
+                    formas de colaboración y necesidades dentro del hogar.
+                </p>
+            </div>
+
+            <div class="content-grid">
+
+                <article class="content-card">
+                    <div class="card-icon">⌂</div>
+                    <div class="card-index">A · MAPA FAMILIAR</div>
+
+                    <h3>Los números de cada integrante</h3>
+
+                    <p>
+                        Reúne los números calculados mediante un mismo
+                        método para cada integrante de la familia.
+                        Anota sus significados simbólicos sin asignar
+                        roles fijos a las personas.
+                    </p>
+
+                    <div class="card-detail">
+                        Práctica: crea una ficha individual por integrante.
+                    </div>
+                </article>
+
+                <article class="content-card">
+                    <div class="card-icon">◇</div>
+                    <div class="card-index">B · DIFERENCIAS</div>
+
+                    <h3>Distintas maneras de relacionarse</h3>
+
+                    <p>
+                        Explora qué temas pueden servir para hablar
+                        sobre autonomía, cooperación, expresión emocional
+                        y distribución de responsabilidades.
+                    </p>
+
+                    <div class="card-detail">
+                        Práctica: escribe tres preguntas abiertas para conversar.
+                    </div>
+                </article>
+
+                <article class="content-card">
+                    <div class="card-icon">∞</div>
+                    <div class="card-index">C · HISTORIA FAMILIAR</div>
+
+                    <h3>Tradiciones y experiencias</h3>
+
+                    <p>
+                        Relaciona los ejercicios numerológicos con
+                        recuerdos, costumbres y acontecimientos
+                        familiares que las personas quieran compartir.
+                    </p>
+
+                    <div class="card-detail">
+                        Práctica: registra coincidencias sin atribuirles causalidad.
+                    </div>
+                </article>
+
+                <article class="content-card">
+                    <div class="card-icon">✧</div>
+                    <div class="card-index">D · CONVIVENCIA</div>
+
+                    <h3>Acuerdos y límites saludables</h3>
+
+                    <p>
+                        Convierte la reflexión en acciones concretas:
+                        escucha, reparto de tareas, respeto por los
+                        espacios personales y resolución de conflictos.
+                    </p>
+
+                    <div class="card-detail">
+                        Práctica: propone un acuerdo realista para mejorar la convivencia.
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="highlight-box">
+                La numerología familiar no debe utilizarse para señalar
+                a una persona como responsable de los problemas,
+                ni para imponerle un papel dentro de la familia.
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- INFANCIA -->
+
+    <section class="section" id="infancia">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-number">05 · ACOMPAÑAMIENTO RESPETUOSO</div>
+
+                <h2>Numerología infantil</h2>
+
+                <p>
+                    Una introducción para adultos que desean abordar
+                    la numerología como juego simbólico, sin convertir
+                    los resultados en etiquetas sobre niños y niñas.
+                </p>
+            </div>
+
+            <div class="two-columns">
+
+                <div class="content-card">
+                    <div class="card-icon">✧</div>
+
+                    <h3>Una herramienta lúdica</h3>
+
+                    <p>
+                        Puedes presentar los números mediante cuentos,
+                        dibujos, colores y actividades creativas.
+                        El objetivo es estimular la imaginación
+                        y la conversación, no definir cómo es un niño.
+                    </p>
+
+                    <p>
+                        Las preferencias, habilidades y emociones
+                        infantiles cambian con el tiempo y dependen
+                        de muchas experiencias.
+                    </p>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-index">PROPUESTAS DE ACTIVIDAD</div>
+
+                    <h3>Ideas para explorar</h3>
+
+                    <p>
+                        <strong>1.</strong> Crear una tarjeta con el
+                        número de nacimiento y decorarla libremente.
+                    </p>
+
+                    <p>
+                        <strong>2.</strong> Inventar un cuento en el que
+                        aparezcan números y personajes imaginarios.
+                    </p>
+
+                    <p>
+                        <strong>3.</strong> Preguntar qué significado
+                        inventaría el propio niño para un número.
+                    </p>
+
+                    <p>
+                        <strong>4.</strong> Permitir que cambie de opinión
+                        y que no participe si no le interesa.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="notice">
+                <strong>Cuidado con las etiquetas:</strong> evita frases
+                como “es difícil porque nació con este número” o
+                “su número demuestra que será exitoso”. No utilices
+                numerología para tomar decisiones educativas, médicas
+                o psicológicas sobre un menor. Protege sus datos
+                personales y respeta su privacidad.
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- MÉTODO DE LECTURA -->
+
+    <section class="section section-dark">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-number">06 · MÉTODO DE ESTUDIO</div>
+
+                <h2>Cómo preparar una lectura responsable</h2>
+
+                <p>
+                    Un método ordenado permite presentar la interpretación
+                    como una práctica reflexiva y diferenciar los símbolos
+                    de los hechos comprobables.
+                </p>
+            </div>
+
+            <div class="steps">
+
+                <article class="step-card">
+                    <div class="step-number">PASO 01</div>
+                    <h3>Define el método</h3>
+                    <p>
+                        Explica qué sistema utilizas y cómo calculas
+                        cada número antes de interpretar el resultado.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <div class="step-number">PASO 02</div>
+                    <h3>Describe el símbolo</h3>
+                    <p>
+                        Presenta el significado tradicional como una
+                        posibilidad interpretativa, no como una certeza.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <div class="step-number">PASO 03</div>
+                    <h3>Formula preguntas</h3>
+                    <p>
+                        Invita a reflexionar con preguntas abiertas
+                        y permite que la persona discrepe.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <div class="step-number">PASO 04</div>
+                    <h3>Respeta la experiencia</h3>
+                    <p>
+                        No fuerces coincidencias ni presentes
+                        interpretaciones como hechos demostrados.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CIERRE -->
+
+    <section class="final-section">
+        <div class="container">
+
+            <div class="mini-label">CIERRE DE LA LECCIÓN</div>
+
+            <h2>Los números abren preguntas, no dictan destinos.</h2>
+
+            <p>
+                Practica con los números compuestos, compara diferentes
+                interpretaciones y utiliza las actividades sobre pareja,
+                familia e infancia para aprender a comunicar ideas
+                simbólicas con respeto y responsabilidad.
+            </p>
+
+            <a class="button" href="index4.html">
+                CONTINUAR A LOS EJERCICIOS →
+            </a>
+
+            <div style="margin-top: 18px;">
+                <a href="#inicio" style="color:#ff9bab; font-size:13px;">
+                    ↑ Volver al inicio
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">☾ ASTRO ROJO</div>
+
+            <div>
+                Curso de numerología · Estudio simbólico y reflexión personal
+            </div>
+
+            <p>
+                La numerología es una práctica simbólica y no cuenta
+                con validación científica como método predictivo.
+            </p>
+        </div>
+    </footer>
+
+</main>
+
+
+<script>
+    // =========================================
+    // NÚMEROS COMPUESTOS DEL 10 AL 99
+    // Se muestran diez números por grupo.
+    // =========================================
+
+    const interpretaciones = [
+        "Iniciativa y comienzos; invita a explorar cómo una idea se convierte en acción.",
+        "Cooperación y sensibilidad; propone reflexionar sobre la escucha y los acuerdos.",
+        "Expresión y creatividad; sugiere explorar la comunicación y las ideas propias.",
+        "Orden y constancia; invita a observar los hábitos y la construcción de bases.",
+        "Cambio y libertad; propone reflexionar sobre la flexibilidad y la adaptación.",
+        "Cuidado y responsabilidad; invita a pensar en el equilibrio entre dar y recibir.",
+        "Búsqueda interior; sugiere estudio, contemplación y preguntas profundas.",
+        "Organización y gestión; invita a examinar objetivos y uso de recursos.",
+        "Cierre y perspectiva amplia; propone revisar aprendizajes y prioridades.",
+
+        "Inicio de una etapa; invita a reconocer recursos propios y nuevas posibilidades.",
+        "Cooperación sensible; propone explorar intuición, escucha y colaboración.",
+        "Comunicación creativa; sugiere combinar iniciativa con expresión.",
+        "Planificación y esfuerzo; invita a convertir ideas en pasos concretos.",
+        "Adaptación y movimiento; propone observar cómo se gestionan los cambios.",
+        "Armonía y cuidado; invita a reflexionar sobre el afecto y los compromisos.",
+        "Introspección y aprendizaje; sugiere tiempo para comprender una experiencia.",
+        "Ambición organizada; propone revisar objetivos y responsabilidad personal.",
+        "Cierre y renovación; invita a soltar hábitos que ya no resultan útiles.",
+
+        "Independencia y colaboración; propone equilibrar iniciativa y escucha.",
+        "Sensibilidad en los vínculos; invita a considerar necesidades y límites.",
+        "Expresión compartida; sugiere dialogar y dar espacio a la creatividad.",
+        "Construcción paciente; propone ordenar responsabilidades y expectativas.",
+        "Movimiento y variedad; invita a revisar la relación con la libertad.",
+        "Cuidado mutuo; sugiere explorar reciprocidad y sentido de pertenencia.",
+        "Observación y profundidad; propone aprender antes de sacar conclusiones.",
+        "Organización y metas; invita a revisar cómo se administra el esfuerzo.",
+        "Visión colectiva; sugiere considerar el impacto de las decisiones.",
+
+        "Iniciativa práctica; propone transformar una intención en una acción.",
+        "Cooperación estable; invita a construir confianza mediante acuerdos.",
+        "Creatividad estructurada; sugiere dar forma a ideas con planificación.",
+        "Constancia y método; propone valorar los avances graduales.",
+        "Cambio con responsabilidad; invita a experimentar sin perder el rumbo.",
+        "Compromiso y equilibrio; sugiere cuidar sin asumirlo todo.",
+        "Investigación y reflexión; propone buscar claridad en temas complejos.",
+        "Gestión y disciplina; invita a evaluar objetivos realistas.",
+        "Servicio y perspectiva; sugiere combinar logros con consideración por otros.",
+
+        "Voluntad y sensibilidad; propone equilibrar decisión y empatía.",
+        "Diálogo y paciencia; invita a escuchar antes de responder.",
+        "Entusiasmo creativo; sugiere comunicar ideas con claridad.",
+        "Estabilidad y esfuerzo; propone sostener proyectos con hábitos.",
+        "Versatilidad; invita a explorar opciones y adaptarse a nuevas circunstancias.",
+        "Armonía en los vínculos; sugiere conversar sobre compromisos compartidos.",
+        "Curiosidad interior; propone profundizar sin apresurar conclusiones.",
+        "Ambición consciente; invita a relacionar metas con valores personales.",
+        "Comprensión y cierre; sugiere integrar lo aprendido y mirar el conjunto.",
+
+        "Autonomía y cooperación; invita a compartir decisiones sin perder la individualidad.",
+        "Empatía y diálogo; propone comprender diferentes perspectivas.",
+        "Expresión y disfrute; sugiere dar espacio a la creatividad compartida.",
+        "Orden y seguridad; invita a construir rutinas sostenibles.",
+        "Exploración y cambio; propone mantener flexibilidad ante lo inesperado.",
+        "Responsabilidad afectiva; invita a revisar el equilibrio entre apoyo y autonomía.",
+        "Estudio y contemplación; sugiere buscar significado a través de preguntas.",
+        "Dirección y organización; propone priorizar objetivos concretos.",
+        "Generosidad y perspectiva; invita a pensar en contribuciones y límites.",
+
+        "Iniciativa con experiencia; propone aprender de las decisiones anteriores.",
+        "Cooperación y sensibilidad; invita a fortalecer la confianza mediante el diálogo.",
+        "Comunicación consciente; sugiere expresar ideas sin dejar de escuchar.",
+        "Trabajo constante; propone mejorar procesos y cuidar la paciencia.",
+        "Cambio gradual; invita a adaptarse conservando aquello que funciona.",
+        "Cuidado equilibrado; sugiere combinar compromiso y respeto por el espacio propio.",
+        "Análisis y aprendizaje; propone revisar creencias y ampliar perspectivas.",
+        "Administración responsable; invita a relacionar recursos con prioridades.",
+        "Integración y propósito; sugiere reconocer aprendizajes y cerrar etapas.",
+
+        "Autonomía práctica; invita a tomar iniciativa con responsabilidad.",
+        "Escucha y colaboración; propone construir acuerdos sin anular diferencias.",
+        "Creatividad compartida; sugiere explorar ideas y expresarlas con libertad.",
+        "Estructura y perseverancia; invita a fortalecer bases y hábitos.",
+        "Libertad consciente; propone explorar cambios sin ignorar consecuencias.",
+        "Vínculos y responsabilidad; sugiere revisar cómo se distribuye el cuidado.",
+        "Introspección y perspectiva; invita a detenerse y comprender antes de actuar.",
+        "Objetivos y organización; propone planificar con criterio y constancia.",
+        "Cierre y generosidad; invita a integrar experiencias sin cargar con todo.",
+
+        "Liderazgo personal; propone actuar con iniciativa y mantener apertura al diálogo.",
+        "Sensibilidad relacional; invita a escuchar y expresar necesidades con claridad.",
+        "Expresión madura; sugiere compartir ideas con creatividad y consideración.",
+        "Construcción sólida; propone convertir planes en resultados sostenibles.",
+        "Adaptación y experiencia; invita a utilizar los cambios como oportunidades de aprendizaje.",
+        "Compromiso equilibrado; sugiere cuidar los vínculos sin descuidarse.",
+        "Búsqueda de conocimiento; propone combinar reflexión con experiencia cotidiana.",
+        "Gestión y propósito; invita a utilizar recursos de manera coherente con los valores.",
+        "Comprensión amplia; sugiere integrar aprendizajes y pensar en el bien común.",
+
+        "Iniciativa renovada; invita a comenzar con claridad y revisar las motivaciones.",
+        "Cooperación consciente; propone reconocer diferencias y crear acuerdos.",
+        "Comunicación e imaginación; sugiere desarrollar proyectos creativos.",
+        "Organización y perseverancia; invita a sostener procesos sin exigir perfección.",
+        "Transformación y flexibilidad; propone revisar hábitos y abrirse a alternativas.",
+        "Cuidado y pertenencia; sugiere construir relaciones con reciprocidad.",
+        "Reflexión y sabiduría; invita a estudiar, observar y formular nuevas preguntas.",
+        "Responsabilidad y objetivos; propone relacionar la ambición con el bienestar.",
+        "Integración y cierre; invita a reconocer lo aprendido y abrir espacio a una nueva etapa."
+    ];
+
+    const numberGrid = document.getElementById("number-grid");
+    const showNextButton = document.getElementById("show-next");
+    const hideButton = document.getElementById("hide-groups");
+    const progress = document.getElementById("number-progress");
+
+    let visibleCount = 10;
+
+    function renderNumbers() {
+        numberGrid.innerHTML = "";
+
+        for (let i = 0; i < visibleCount; i++) {
+            const number = i + 10;
+
+            const card = document.createElement("article");
+            card.className = "number-card";
+
+            const title = document.createElement("h3");
+            title.textContent = number;
+
+            const description = document.createElement("p");
+            description.textContent = interpretaciones[i];
+
+            card.appendChild(title);
+            card.appendChild(description);
+            numberGrid.appendChild(card);
+        }
+
+        const first = 10;
+        const last = 9 + visibleCount;
+
+        progress.textContent =
+            visibleCount === 90
+                ? "Todos los números visibles: 10–99"
+                : "Números visibles: 10–" + last;
+
+        showNextButton.hidden = visibleCount >= 90;
+        hideButton.hidden = visibleCount <= 10;
+
+        showNextButton.textContent =
+            visibleCount >= 80
+                ? "Mostrar últimos números"
+                : "Mostrar siguiente grupo";
+    }
+
+    showNextButton.addEventListener("click", function () {
+        visibleCount = Math.min(visibleCount + 10, 90);
+        renderNumbers();
+    });
+
+    hideButton.addEventListener("click", function () {
+        visibleCount = 10;
+        renderNumbers();
+
+        document.getElementById("compuestos").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+
+    renderNumbers();
+</script>
+
+</body>
+</html>
