@@ -160,7 +160,7 @@ back_urls: {
     pending: `${BASE_URL}/`,
     failure: `${BASE_URL}/`
 },
-auto_return: "approved",
+auto_return: "approved"
 
             })
         }
