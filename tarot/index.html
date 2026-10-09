@@ -1,1285 +1,1452 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b080a">
-    <meta name="description" content="ASTRO ROJO — Explora los Arcanos Mayores del Tarot.">
-    <title>ASTRO ROJO — Tarot</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* =====================================
-           ASTRO ROJO — TAROT EDITORIAL
-        ===================================== */
-
-        :root {
-            --fondo: #0b080a;
-            --fondo-2: #130a0e;
-            --rojo: #e51b3e;
-            --rojo-claro: #ff526d;
-            --bordo: #651021;
-            --texto: #f5edef;
-            --suave: #b7a6ab;
-            --linea: rgba(255, 255, 255, .12);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
-        }
-
-        body {
-            min-height: 100vh;
-            background:
-                radial-gradient(ellipse at 80% 5%,
-                    rgba(115, 12, 36, .25), transparent 32%),
-                radial-gradient(ellipse at 0% 45%,
-                    rgba(90, 10, 29, .13), transparent 35%),
-                var(--fondo);
-            color: var(--texto);
-            font-family: Arial, Helvetica, sans-serif;
-            line-height: 1.6;
-        }
-
-        body.modal-abierto {
-            overflow: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input {
-            font: inherit;
-        }
-
-        button {
-            color: inherit;
-        }
-
-        .contenedor {
-            width: min(1180px, calc(100% - 40px));
-            margin-inline: auto;
-        }
-
-        .sobrelinea {
-            color: var(--rojo-claro);
-            font-size: .72rem;
-            font-weight: 700;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-        }
-
-        /* NAVEGACIÓN */
-
-        .barra {
-            position: relative;
-            z-index: 5;
-            border-bottom: 1px solid var(--linea);
-            background: rgba(11, 8, 10, .8);
-        }
-
-        .barra-interior {
-            min-height: 76px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: .9rem;
-            font-weight: 800;
-            letter-spacing: .2em;
-        }
-
-        .logo-simbolo {
-            display: grid;
-            place-items: center;
-            width: 34px;
-            height: 34px;
-            border: 1px solid var(--rojo);
-            color: var(--rojo-claro);
-            transform: rotate(45deg);
-            font-size: 1rem;
-        }
-
-        .logo-simbolo span {
-            transform: rotate(-45deg);
-        }
-
-        .barra-enlace {
-            color: var(--suave);
-            font-size: .85rem;
-            transition: color .2s;
-        }
-
-        .barra-enlace:hover {
-            color: white;
-        }
-
-        /* PORTADA EDITORIAL */
-
-        .portada {
-            position: relative;
-            overflow: hidden;
-            padding: 100px 0 80px;
-            border-bottom: 1px solid var(--linea);
-        }
-
-        .portada::after {
-            content: "XXII";
-            position: absolute;
-            top: 10px;
-            right: -20px;
-            color: rgba(229, 27, 62, .055);
-            font-family: Georgia, serif;
-            font-size: clamp(13rem, 35vw, 31rem);
-            font-weight: bold;
-            line-height: 1;
-            pointer-events: none;
-        }
-
-        .portada-grid {
-            display: grid;
-            grid-template-columns: 1.5fr .5fr;
-            align-items: end;
-            gap: 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .portada h1 {
-            max-width: 850px;
-            margin: 25px 0;
-            font-size: clamp(3.4rem, 9.5vw, 8rem);
-            font-weight: 800;
-            letter-spacing: -.085em;
-            line-height: .89;
-        }
-
-        .portada h1 span {
-            display: block;
-            color: var(--rojo);
-        }
-
-        .portada-descripcion {
-            max-width: 510px;
-            color: #c6b7bb;
-            font-size: 1rem;
-            line-height: 1.9;
-        }
-
-        .portada-acciones {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .boton-rojo {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 48px;
-            padding: 0 22px;
-            background: var(--rojo);
-            border: 1px solid var(--rojo);
-            color: white;
-            font-size: .85rem;
-            font-weight: 700;
-            transition: .2s;
-        }
-
-        .boton-rojo:hover {
-            background: #b81030;
-            transform: translateY(-2px);
-        }
-
-        .enlace-simple {
-            color: #d7c8cc;
-            font-size: .85rem;
-        }
-
-        .enlace-simple:hover {
-            color: var(--rojo-claro);
-        }
-
-        .portada-lateral {
-            padding: 25px 0 8px 24px;
-            border-left: 1px solid rgba(229, 27, 62, .6);
-        }
-
-        .portada-lateral .numero-grande {
-            color: var(--rojo);
-            font-family: Georgia, serif;
-            font-size: 5rem;
-            line-height: 1;
-        }
-
-        .portada-lateral p {
-            margin-top: 14px;
-            color: var(--suave);
-            font-size: .84rem;
-        }
-
-        .portada-lateral strong {
-            display: block;
-            margin-top: 20px;
-            color: var(--texto);
-            font-size: .76rem;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-        }
-
-        /* FRANJA */
-
-        .franja {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border-bottom: 1px solid var(--linea);
-        }
-
-        .franja-item {
-            padding: 25px 20px;
-            text-align: center;
-            border-right: 1px solid var(--linea);
-        }
-
-        .franja-item:last-child {
-            border-right: 0;
-        }
-
-        .franja-item strong {
-            display: block;
-            color: var(--rojo-claro);
-            font-size: .78rem;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-        }
-
-        .franja-item span {
-            display: block;
-            margin-top: 5px;
-            color: var(--suave);
-            font-size: .82rem;
-        }
-
-        /* INTRODUCCIÓN */
-
-        .introduccion {
-            display: grid;
-            grid-template-columns: .8fr 1.2fr;
-            gap: 70px;
-            padding-top: 100px;
-            padding-bottom: 95px;
-        }
-
-        .introduccion h2 {
-            margin-top: 15px;
-            font-size: clamp(2rem, 4.5vw, 3.7rem);
-            letter-spacing: -.055em;
-            line-height: 1.05;
-        }
-
-        .introduccion h2 span {
-            color: var(--rojo);
-        }
-
-        .intro-texto {
-            padding-top: 10px;
-        }
-
-        .intro-texto p {
-            margin-bottom: 18px;
-            color: #c7b7bc;
-            font-size: .98rem;
-            line-height: 1.9;
-        }
-
-        .intro-destacado {
-            margin-top: 28px;
-            padding: 18px 22px;
-            border-left: 2px solid var(--rojo);
-            background: linear-gradient(90deg,
-                rgba(229, 27, 62, .09), transparent);
-            color: #eadde0;
-            font-family: Georgia, serif;
-            font-size: 1.05rem;
-        }
-
-        /* SECCIÓN DE CARTAS */
-
-        .seccion-cartas {
-            padding: 75px 0 100px;
-            background: linear-gradient(180deg,
-                rgba(255,255,255,.015), transparent 50%);
-            border-top: 1px solid var(--linea);
-        }
-
-        .encabezado-cartas {
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
-            gap: 25px;
-            margin-bottom: 35px;
-        }
-
-        .encabezado-cartas h2 {
-            margin-top: 12px;
-            font-size: clamp(2.2rem, 5vw, 4.4rem);
-            letter-spacing: -.07em;
-            line-height: 1;
-        }
-
-        .encabezado-cartas h2 span {
-            color: var(--rojo);
-        }
-
-        .encabezado-cartas p {
-            max-width: 300px;
-            color: var(--suave);
-            font-size: .85rem;
-        }
-
-        .herramientas {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .buscador {
-            width: 100%;
-            min-height: 48px;
-            padding: 0 16px;
-            color: white;
-            background: #140c10;
-            border: 1px solid #39202a;
-            outline: none;
-            border-radius: 0;
-        }
-
-        .buscador:focus {
-            border-color: var(--rojo);
-        }
-
-        .buscador::placeholder {
-            color: #927d84;
-        }
-
-        .contador {
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            padding: 0 16px;
-            border: 1px solid #39202a;
-            color: var(--suave);
-            font-size: .8rem;
-        }
-
-        .arcanos-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            border-top: 1px solid var(--linea);
-            border-left: 1px solid var(--linea);
-        }
-
-        .arcano {
-            position: relative;
-            min-width: 0;
-            min-height: 230px;
-            padding: 23px 20px;
-            text-align: left;
-            background: transparent;
-            border: 0;
-            border-right: 1px solid var(--linea);
-            border-bottom: 1px solid var(--linea);
-            cursor: pointer;
-            overflow: hidden;
-            transition: background .25s;
-        }
-
-        .arcano::before {
-            content: "";
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            right: -35px;
-            bottom: -45px;
-            border: 1px solid rgba(229, 27, 62, .17);
-            transform: rotate(45deg);
-            transition: .3s;
-        }
-
-        .arcano:hover {
-            background: linear-gradient(140deg,
-                rgba(104, 13, 36, .28), rgba(15, 9, 12, .1));
-        }
-
-        .arcano:hover::before {
-            transform: rotate(65deg) scale(1.2);
-            border-color: rgba(229, 27, 62, .55);
-        }
-
-        .arcano-numero {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--rojo-claro);
-            font-size: .76rem;
-            letter-spacing: .16em;
-        }
-
-        .arcano-marca {
-            color: #6f3444;
-            font-family: Georgia, serif;
-            font-size: 1.5rem;
-        }
-
-        .arcano h3 {
-            position: relative;
-            z-index: 1;
-            margin-top: 42px;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(1.2rem, 2vw, 1.55rem);
-            font-weight: 400;
-            letter-spacing: -.025em;
-        }
-
-        .arcano-descripcion {
-            position: relative;
-            z-index: 1;
-            display: block;
-            margin-top: 8px;
-            color: #a9969d;
-            font-size: .79rem;
-        }
-
-        .arcano-abrir {
-            display: inline-block;
-            margin-top: 18px;
-            color: var(--rojo-claro);
-            font-size: .72rem;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-        }
-
-        .sin-resultados {
-            display: none;
-            padding: 35px 0;
-            color: var(--suave);
-        }
-
-        /* MODAL */
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            z-index: 20;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, .83);
-            backdrop-filter: blur(10px);
-        }
-
-        .modal.activo {
-            display: flex;
-        }
-
-        .modal-contenido {
-            position: relative;
-            width: min(560px, 100%);
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: clamp(25px, 5vw, 45px);
-            border: 1px solid rgba(229, 27, 62, .45);
-            background:
-                radial-gradient(ellipse at top right,
-                    rgba(117, 13, 39, .27), transparent 50%),
-                #100a0d;
-            animation: entrada .2s ease-out;
-        }
-
-        @keyframes entrada {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-cerrar {
-            position: absolute;
-            top: 14px;
-            right: 17px;
-            width: 38px;
-            height: 38px;
-            border: 1px solid var(--linea);
-            background: transparent;
-            color: white;
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
-
-        .modal-numero {
-            color: var(--rojo);
-            font-family: Georgia, serif;
-            font-size: 4rem;
-            line-height: 1.1;
-        }
-
-        .modal h2 {
-            margin: 10px 0 20px;
-            font-family: Georgia, serif;
-            font-size: clamp(2rem, 6vw, 3rem);
-            font-weight: 400;
-            line-height: 1.1;
-        }
-
-        .modal p {
-            margin-top: 14px;
-            color: #cbbbc0;
-            line-height: 1.85;
-        }
-
-        .modal-etiqueta {
-            margin-top: 28px;
-            padding-top: 18px;
-            border-top: 1px solid var(--linea);
-            color: var(--rojo-claro);
-            font-size: .74rem;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-        }
-
-        /* CIERRE Y NAVEGACIÓN */
-
-        .cierre {
-            padding: 75px 0;
-            border-top: 1px solid var(--linea);
-        }
-
-        .cierre-interior {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            gap: 30px;
-            padding: 38px;
-            border: 1px solid rgba(229, 27, 62, .25);
-            background: linear-gradient(115deg,
-                rgba(94, 10, 32, .23), rgba(14, 9, 11, .35));
-        }
-
-        .cierre h2 {
-            margin: 12px 0;
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            letter-spacing: -.055em;
-        }
-
-        .cierre p {
-            max-width: 570px;
-            color: var(--suave);
-            font-size: .9rem;
-        }
-
-        .navegacion {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 28px;
-        }
-
-        .navegacion a {
-            display: inline-block;
-            padding: 13px 17px;
-            border: 1px solid #48212c;
-            color: #dfcdd2;
-            font-size: .82rem;
-            transition: .2s;
-        }
-
-        .navegacion a:hover {
-            border-color: var(--rojo);
-            color: white;
-        }
-
-        footer {
-            padding: 30px 20px;
-            border-top: 1px solid var(--linea);
-            text-align: center;
-        }
-
-        footer strong {
-            color: var(--rojo);
-            font-size: .8rem;
-            letter-spacing: .25em;
-        }
-
-        footer p {
-            margin-top: 7px;
-            color: #8e7c82;
-            font-size: .76rem;
-        }
-
-        /* RESPONSIVE */
-
-        @media (max-width: 850px) {
-            .portada-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portada-lateral {
-                max-width: 390px;
-                margin-top: 15px;
-            }
-
-            .introduccion {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                padding-top: 75px;
-                padding-bottom: 70px;
-            }
-
-            .arcanos-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-
-            .encabezado-cartas {
-                align-items: start;
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 560px) {
-            .contenedor {
-                width: calc(100% - 30px);
-            }
-
-            .barra-interior {
-                min-height: 65px;
-            }
-
-            .logo {
-                font-size: .75rem;
-                letter-spacing: .13em;
-            }
-
-            .barra-enlace {
-                font-size: .76rem;
-            }
-
-            .portada {
-                padding: 75px 0 55px;
-            }
-
-            .portada h1 {
-                font-size: clamp(3.2rem, 16vw, 5.5rem);
-            }
-
-            .portada-descripcion {
-                font-size: .92rem;
-            }
-
-            .portada-lateral .numero-grande {
-                font-size: 4rem;
-            }
-
-            .franja-item {
-                padding: 18px 7px;
-            }
-
-            .franja-item strong {
-                font-size: .65rem;
-                letter-spacing: .06em;
-            }
-
-            .franja-item span {
-                font-size: .72rem;
-            }
-
-            .introduccion h2 {
-                font-size: 2.6rem;
-            }
-
-            .seccion-cartas {
-                padding: 60px 0 70px;
-            }
-
-            .arcanos-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .arcano {
-                min-height: 205px;
-                padding: 17px 13px;
-            }
-
-            .arcano h3 {
-                margin-top: 34px;
-                font-size: 1.18rem;
-            }
-
-            .arcano-descripcion {
-                font-size: .74rem;
-            }
-
-            .arcano-marca {
-                font-size: 1.2rem;
-            }
-
-            .contador {
-                padding: 0 10px;
-                font-size: .72rem;
-            }
-
-            .herramientas {
-                gap: 8px;
-            }
-
-            .cierre-interior {
-                grid-template-columns: 1fr;
-                padding: 25px 20px;
-            }
-
-            .cierre-interior .boton-rojo {
-                width: 100%;
-            }
-
-            .navegacion {
-                flex-direction: column;
-            }
-
-            .navegacion a {
-                text-align: center;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: .01ms !important;
-                transition-duration: .01ms !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10070b">
+<meta name="description" content="Aprende Tarot desde cero: historia, Arcanos Mayores, colores y símbolos con ASTRO ROJO.">
+
+<title>ASTRO ROJO — Curso de Tarot</title>
+
+<style>
+:root {
+    --fondo: #10070b;
+    --fondo2: #1b0b10;
+    --rojo: #e21b3c;
+    --rojo2: #a90e2b;
+    --texto: #f5eeee;
+    --suave: #bbaeb2;
+    --borde: rgba(255,255,255,.10);
+    --panel: rgba(255,255,255,.035);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 50% 0%, #481019 0%, transparent 43%),
+        var(--fondo);
+    color: var(--texto);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.75;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+.contenedor {
+    width: min(1120px, 91%);
+    margin: auto;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(16,7,11,.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--borde);
+}
+
+.nav {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.logo {
+    color: var(--rojo);
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-size: 18px;
+}
+
+.nav a:last-child {
+    color: var(--suave);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.hero {
+    padding: 90px 0 70px;
+    text-align: center;
+}
+
+.etiqueta {
+    display: inline-block;
+    border: 1px solid rgba(226,27,60,.45);
+    color: #ff8194;
+    border-radius: 30px;
+    padding: 6px 13px;
+    font: 11px Arial, sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font: 900 clamp(42px, 9vw, 86px)/1 Arial, sans-serif;
+    letter-spacing: -4px;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--rojo);
+}
+
+.hero p {
+    max-width: 680px;
+    margin: auto;
+    color: var(--suave);
+    font-size: 17px;
+}
+
+.hero-botones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.boton {
+    display: inline-block;
+    border: 1px solid var(--rojo);
+    background: var(--rojo);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font: bold 12px Arial, sans-serif;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.boton:hover {
+    background: #ff3153;
+    transform: translateY(-2px);
+}
+
+.boton.secundario {
+    background: transparent;
+    border-color: var(--borde);
+}
+
+.indice {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    justify-content: center;
+    padding: 20px 0 45px;
+}
+
+.indice a {
+    font: 11px Arial, sans-serif;
+    color: var(--suave);
+    border: 1px solid var(--borde);
+    padding: 8px 12px;
+    border-radius: 30px;
+}
+
+.indice a:hover {
+    border-color: var(--rojo);
+    color: white;
+}
+
+.seccion {
+    padding: 65px 0;
+    border-top: 1px solid var(--borde);
+}
+
+.numero {
+    color: var(--rojo);
+    font: bold 11px Arial, sans-serif;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font: 800 clamp(29px, 5vw, 43px)/1.15 Arial, sans-serif;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font: bold 20px/1.3 Arial, sans-serif;
+    margin-bottom: 12px;
+}
+
+h4 {
+    font: bold 14px Arial, sans-serif;
+    margin-bottom: 8px;
+    color: #ff9baa;
+}
+
+p {
+    color: #d1c3c7;
+    margin-bottom: 15px;
+}
+
+.intro-grid,
+.historia-grid,
+.dos-columnas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.caja {
+    border: 1px solid var(--borde);
+    background: var(--panel);
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.simbolo-grande {
+    color: var(--rojo);
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.dato {
+    border-left: 3px solid var(--rojo);
+    background: rgba(226,27,60,.07);
+    padding: 20px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.dato strong {
+    color: #ff8c9e;
+}
+
+.linea-tiempo {
+    display: grid;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.epoca {
+    display: grid;
+    grid-template-columns: 95px 1fr;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+}
+
+.epoca strong {
+    color: var(--rojo);
+    font: bold 13px Arial, sans-serif;
+}
+
+.epoca p {
+    margin: 0;
+}
+
+.carta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.carta {
+    min-width: 0;
+    overflow: hidden;
+    background: #190b10;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    transition: .2s;
+}
+
+.carta:hover {
+    border-color: rgba(226,27,60,.7);
+    transform: translateY(-3px);
+}
+
+.carta-imagen {
+    background: #24151a;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+}
+
+.carta-imagen img {
+    width: 100%;
+    max-width: 165px;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.carta-contenido {
+    padding: 16px;
+}
+
+.carta-contenido h3 {
+    font-size: 15px;
+}
+
+.carta-contenido p {
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.palabras {
+    color: #ff8c9e;
+    font: 10px/1.7 Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.carta-fallback {
+    font-size: 48px;
+    color: var(--rojo);
+    text-align: center;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.filtros button {
+    padding: 9px 13px;
+    border: 1px solid var(--borde);
+    border-radius: 30px;
+    color: var(--suave);
+    background: transparent;
+    font: 11px Arial, sans-serif;
+    cursor: pointer;
+}
+
+.filtros button.activo {
+    color: white;
+    background: var(--rojo2);
+    border-color: var(--rojo);
+}
+
+.busqueda {
+    width: 100%;
+    padding: 14px;
+    border-radius: 7px;
+    border: 1px solid var(--borde);
+    background: #190b10;
+    color: white;
+    outline: none;
+}
+
+.busqueda:focus {
+    border-color: var(--rojo);
+}
+
+.colores-grid,
+.simbolos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.color-caja {
+    border: 1px solid var(--borde);
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--panel);
+}
+
+.muestra {
+    height: 7px;
+    border-radius: 5px;
+    margin-bottom: 17px;
+}
+
+.color-caja p,
+.simbolo-caja p {
+    font-size: 14px;
+}
+
+.color-caja h3,
+.simbolo-caja h3 {
+    font-size: 16px;
+}
+
+.rojo { background: #d51e3d; }
+.azul { background: #397bc4; }
+.amarillo { background: #e5b82c; }
+.blanco { background: #f4eee9; }
+.negro { background: #50464a; }
+.verde { background: #40875b; }
+.naranja { background: #d87535; }
+.morado { background: #8557ad; }
+.rosa { background: #d77b96; }
+
+.simbolo-caja {
+    border: 1px solid var(--borde);
+    padding: 22px;
+    border-radius: 10px;
+    background: var(--panel);
+}
+
+.simbolo-icono {
+    font-size: 30px;
+    color: #ff738a;
+    margin-bottom: 10px;
+}
+
+.ejercicio {
+    border: 1px solid rgba(226,27,60,.35);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 25px;
+    background: linear-gradient(135deg, rgba(226,27,60,.10), transparent);
+}
+
+.ejercicio button {
+    margin-top: 10px;
+}
+
+.respuesta {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--borde);
+}
+
+.respuesta.visible {
+    display: block;
+}
+
+.lista {
+    padding-left: 20px;
+    color: #d1c3c7;
+}
+
+.lista li {
+    margin-bottom: 9px;
+}
+
+.progreso {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    height: 3px;
+    width: 0;
+    background: var(--rojo);
+}
+
+footer {
+    text-align: center;
+    padding: 45px 15px;
+    border-top: 1px solid var(--borde);
+    color: var(--suave);
+    font: 11px Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 800px) {
+    .carta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .colores-grid,
+    .simbolos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .carta-imagen {
+        min-height: 190px;
+    }
+
+    .carta-imagen img {
+        height: 190px;
+    }
+}
+
+@media (max-width: 520px) {
+    .hero {
+        padding: 65px 0 45px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .intro-grid,
+    .historia-grid,
+    .dos-columnas,
+    .colores-grid,
+    .simbolos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .carta-grid {
+        gap: 10px;
+    }
+
+    .carta-imagen {
+        padding: 8px;
+        min-height: 165px;
+    }
+
+    .carta-imagen img {
+        height: 165px;
+    }
+
+    .carta-contenido {
+        padding: 12px;
+    }
+
+    .carta-contenido h3 {
+        font-size: 13px;
+    }
+
+    .carta-contenido p {
+        font-size: 12px;
+    }
+
+    .epoca {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .caja {
+        padding: 20px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- NAVEGACIÓN -->
+<div class="progreso" id="progreso"></div>
 
-    <header class="barra">
-        <div class="contenedor barra-interior">
+<header>
+    <div class="contenedor nav">
+        <a class="logo" href="../index.html">ASTRO ROJO</a>
+        <a href="#contenido">CURSO DE TAROT ↘</a>
+    </div>
+</header>
 
-            <a href="../index.html" class="logo">
-                <span class="logo-simbolo"><span>✦</span></span>
-                <span>ASTRO ROJO</span>
-            </a>
+<main id="contenido">
 
-            <a href="#arcanos" class="barra-enlace">
-                Explorar los arcanos ↘
-            </a>
+<section class="hero contenedor">
+    <span class="etiqueta">Escuela ASTRO ROJO · Nivel inicial</span>
+    <h1>EL ARTE DEL <span>TAROT</span></h1>
+    <p>
+        78 cartas. Infinitos símbolos. Un lenguaje para explorar
+        las emociones, los conflictos, las decisiones y las posibilidades
+        de la experiencia humana.
+    </p>
 
-        </div>
-    </header>
+    <div class="hero-botones">
+        <a class="boton" href="#introduccion">Comenzar la clase ↘</a>
+        <a class="boton secundario" href="#arcanos">Conocer los Arcanos</a>
+    </div>
+</section>
 
-    <main>
+<nav class="indice contenedor">
+    <a href="#introduccion">01 · Introducción</a>
+    <a href="#historia">02 · Historia</a>
+    <a href="#arcanos">03 · Arcanos Mayores</a>
+    <a href="#colores">04 · Colores</a>
+    <a href="#simbolos">05 · Simbología</a>
+    <a href="#practica">06 · Práctica</a>
+</nav>
 
-        <!-- PORTADA -->
+<section class="seccion" id="introduccion">
+<div class="contenedor">
+    <div class="numero">CAPÍTULO 01</div>
+    <h2>¿Qué es el Tarot?</h2>
+    <p>
+        El Tarot es un mazo de 78 cartas ilustradas con personajes,
+        escenas, colores y símbolos. Cada carta ofrece una combinación
+        de imágenes que puede interpretarse de diferentes maneras según
+        la pregunta, la posición y las cartas que la acompañan.
+    </p>
+    <p>
+        En una lectura, el Tarot puede utilizarse como una herramienta
+        simbólica para reflexionar sobre una situación, reconocer
+        emociones, explorar alternativas y formular nuevas preguntas.
+        No es necesario memorizar todo desde el primer día:
+        aprender a observar es el primer paso.
+    </p>
 
-        <section class="portada">
-            <div class="contenedor portada-grid">
+    <div class="intro-grid">
+        <article class="caja">
+            <div class="simbolo-grande">✦</div>
+            <h3>Los 22 Arcanos Mayores</h3>
+            <p>
+                Representan grandes temas y experiencias: comienzos,
+                decisiones, cambios, crisis, descubrimientos y cierres
+                de ciclo. Sus escenas suelen contener símbolos centrales
+                para la interpretación.
+            </p>
+        </article>
 
-                <div>
-                    <span class="sobrelinea">
-                        El lenguaje de los símbolos
-                    </span>
+        <article class="caja">
+            <div class="simbolo-grande">✧</div>
+            <h3>Los 56 Arcanos Menores</h3>
+            <p>
+                Se dividen en Bastos, Copas, Espadas y Oros. Sus cartas
+                permiten explorar situaciones cotidianas, vínculos,
+                pensamientos, recursos, acciones y desafíos concretos.
+            </p>
+        </article>
+    </div>
 
-                    <h1>
-                        EL ARTE
-                        <span>DEL TAROT.</span>
-                    </h1>
+    <div class="dato">
+        <strong>Una idea fundamental:</strong>
+        una carta no tiene una sola traducción fija. La imagen,
+        la pregunta, la posición y las cartas cercanas modifican
+        su significado.
+    </div>
 
-                    <p class="portada-descripcion">
-                        Veintidós arcanos. Veintidós perspectivas.
-                        Un recorrido por los símbolos, los arquetipos
-                        y las distintas experiencias del camino humano.
-                    </p>
+    <h3>¿El Tarot predice el futuro?</h3>
+    <p>
+        Algunas tradiciones lo utilizan con una finalidad adivinatoria.
+        También puede abordarse como un lenguaje simbólico de reflexión.
+        En este curso aprenderemos a interpretar posibilidades sin
+        presentar una lectura como una certeza inevitable.
+    </p>
+</div>
+</section>
 
-                    <div class="portada-acciones">
-                        <a href="#arcanos" class="boton-rojo">
-                            Explorar los arcanos ↗
-                        </a>
+<section class="seccion" id="historia">
+<div class="contenedor">
+    <div class="numero">CAPÍTULO 02</div>
+    <h2>Una historia llena de misterios</h2>
+    <p>
+        Aunque hoy asociamos el Tarot con la espiritualidad y el
+        autoconocimiento, sus primeros usos documentados fueron
+        diferentes. Su historia combina juegos de cartas, arte,
+        cultura y posteriores corrientes esotéricas.
+    </p>
 
-                        <a href="#introduccion" class="enlace-simple">
-                            Conocer el Tarot
-                        </a>
-                    </div>
-                </div>
-
-                <aside class="portada-lateral">
-                    <div class="numero-grande">0—21</div>
-
-                    <p>
-                        Una introducción a los Arcanos Mayores y
-                        a sus diferentes formas de interpretación.
-                    </p>
-
-                    <strong>ASTRO ROJO · ESTUDIO I</strong>
-                </aside>
-
-            </div>
-        </section>
-
-        <!-- FRANJA -->
-
-        <section class="contenedor franja">
-            <div class="franja-item">
-                <strong>22 arcanos</strong>
-                <span>Un recorrido simbólico</span>
-            </div>
-
-            <div class="franja-item">
-                <strong>Interpretación</strong>
-                <span>Significados y contexto</span>
-            </div>
-
-            <div class="franja-item">
-                <strong>Aprendizaje</strong>
-                <span>Observación y práctica</span>
-            </div>
-        </section>
-
-        <!-- INTRODUCCIÓN -->
-
-        <section class="contenedor introduccion" id="introduccion">
-
+    <div class="linea-tiempo">
+        <article class="epoca">
+            <strong>SIGLO XV</strong>
             <div>
-                <span class="sobrelinea">01 / Fundamentos</span>
-
-                <h2>
-                    Leer más allá
-                    <span>de la carta.</span>
-                </h2>
-            </div>
-
-            <div class="intro-texto">
+                <h3>Los primeros triunfos</h3>
                 <p>
-                    El Tarot es un sistema de imágenes y símbolos.
-                    Cada carta presenta escenas, personajes y elementos
-                    que pueden explorarse desde diferentes perspectivas.
+                    En el norte de Italia se crearon mazos de cartas
+                    con triunfos ilustrados, utilizados en juegos.
+                    Algunos ejemplares fueron encargados por familias
+                    nobles y decorados con gran detalle.
                 </p>
+            </div>
+        </article>
 
+        <article class="epoca">
+            <strong>SIGLOS XVII–XVIII</strong>
+            <div>
+                <h3>El Tarot se extiende</h3>
                 <p>
-                    Aprender Tarot implica conocer los significados
-                    tradicionales y, al mismo tiempo, comprender cómo
-                    una carta se relaciona con la pregunta, su posición
-                    y las demás cartas de una tirada.
+                    Diferentes diseños se difundieron por Europa.
+                    Los mazos adquirieron estilos regionales, como
+                    el Tarot de Marsella, que se convirtió en una
+                    referencia importante para muchas barajas posteriores.
                 </p>
+            </div>
+        </article>
 
+        <article class="epoca">
+            <strong>SIGLO XVIII</strong>
+            <div>
+                <h3>Una nueva lectura esotérica</h3>
                 <p>
-                    En esta primera etapa vas a recorrer los 22 Arcanos
-                    Mayores, desde El Loco hasta El Mundo.
+                    Autores franceses comenzaron a relacionar las
+                    cartas con sistemas de conocimiento oculto.
+                    Desde entonces se desarrollaron numerosas
+                    interpretaciones simbólicas y espirituales.
                 </p>
-
-                <div class="intro-destacado">
-                    Una carta no se interpreta aislada del contexto:
-                    el conjunto es parte esencial de la lectura.
-                </div>
             </div>
+        </article>
 
-        </section>
-
-        <!-- ARCANOS -->
-
-        <section class="seccion-cartas" id="arcanos">
-            <div class="contenedor">
-
-                <div class="encabezado-cartas">
-                    <div>
-                        <span class="sobrelinea">02 / La colección</span>
-                        <h2>Los <span>Arcanos</span><br>Mayores.</h2>
-                    </div>
-
-                    <p>
-                        Seleccioná una carta para consultar una
-                        introducción a su significado simbólico.
-                    </p>
-                </div>
-
-                <div class="herramientas">
-                    <input
-                        class="buscador"
-                        type="search"
-                        id="buscarArcano"
-                        placeholder="Buscar una carta..."
-                        aria-label="Buscar un arcano por nombre"
-                    >
-
-                    <div class="contador" id="contador">
-                        22 cartas
-                    </div>
-                </div>
-
-                <div class="arcanos-grid" id="rejillaArcanos">
-
-                    <button class="arcano" data-nombre="El Loco" data-numero="0" data-significado="El Loco representa el comienzo de un camino, la apertura a lo desconocido y la disposición a vivir nuevas experiencias. Invita a explorar con curiosidad, sin olvidar la importancia de reconocer los riesgos y las propias responsabilidades." data-clave="Comienzos · Libertad · Espontaneidad">
-                        <span class="arcano-numero">00 <span class="arcano-marca">✳</span></span>
-                        <h3>El Loco</h3>
-                        <span class="arcano-descripcion">El primer paso</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Mago" data-numero="I" data-significado="El Mago simboliza la iniciativa, la habilidad y la capacidad de convertir una idea en acción. Invita a reconocer los recursos disponibles y utilizarlos con intención, enfoque y responsabilidad." data-clave="Iniciativa · Habilidad · Acción">
-                        <span class="arcano-numero">I <span class="arcano-marca">✦</span></span>
-                        <h3>El Mago</h3>
-                        <span class="arcano-descripcion">La voluntad creadora</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Sacerdotisa" data-numero="II" data-significado="La Sacerdotisa se relaciona con la intuición, la observación y el conocimiento interior. Sugiere escuchar antes de actuar, prestar atención a lo que todavía no está claro y dar espacio a la reflexión." data-clave="Intuición · Silencio · Percepción">
-                        <span class="arcano-numero">II <span class="arcano-marca">☾</span></span>
-                        <h3>La Sacerdotisa</h3>
-                        <span class="arcano-descripcion">El saber interior</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Emperatriz" data-numero="III" data-significado="La Emperatriz representa la creatividad, el crecimiento y la capacidad de nutrir proyectos y vínculos. Habla de cuidar aquello que se desea desarrollar y permitir que las ideas maduren." data-clave="Creatividad · Cuidado · Abundancia">
-                        <span class="arcano-numero">III <span class="arcano-marca">❋</span></span>
-                        <h3>La Emperatriz</h3>
-                        <span class="arcano-descripcion">La fuerza creadora</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Emperador" data-numero="IV" data-significado="El Emperador simboliza la estructura, los límites y la organización. Invita a construir bases firmes, asumir responsabilidades y distinguir entre el control útil y la rigidez excesiva." data-clave="Estructura · Orden · Responsabilidad">
-                        <span class="arcano-numero">IV <span class="arcano-marca">◇</span></span>
-                        <h3>El Emperador</h3>
-                        <span class="arcano-descripcion">El orden y la estructura</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Hierofante" data-numero="V" data-significado="El Hierofante se asocia con la tradición, la enseñanza y los sistemas de creencias. Puede invitar a estudiar, buscar orientación o revisar las normas que influyen en las decisiones personales." data-clave="Tradición · Enseñanza · Valores">
-                        <span class="arcano-numero">V <span class="arcano-marca">✧</span></span>
-                        <h3>El Hierofante</h3>
-                        <span class="arcano-descripcion">La tradición y el saber</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="Los Enamorados" data-numero="VI" data-significado="Los Enamorados representan los vínculos, la afinidad y las decisiones que reflejan los propios valores. Además del amor, pueden hablar de elegir con conciencia y asumir las consecuencias de esa elección." data-clave="Vínculos · Elección · Afinidad">
-                        <span class="arcano-numero">VI <span class="arcano-marca">♡</span></span>
-                        <h3>Los Enamorados</h3>
-                        <span class="arcano-descripcion">El encuentro y la elección</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Carro" data-numero="VII" data-significado="El Carro simboliza el avance, la dirección y la voluntad de superar obstáculos. Invita a mantener el rumbo, integrar fuerzas opuestas y actuar con determinación sin perder el equilibrio." data-clave="Avance · Dirección · Determinación">
-                        <span class="arcano-numero">VII <span class="arcano-marca">➤</span></span>
-                        <h3>El Carro</h3>
-                        <span class="arcano-descripcion">El impulso hacia adelante</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Fuerza" data-numero="VIII" data-significado="La Fuerza se relaciona con el coraje, la paciencia y el dominio consciente de los impulsos. Sugiere que la firmeza no siempre necesita imponerse: también puede expresarse mediante la calma y la perseverancia." data-clave="Coraje · Paciencia · Autodominio">
-                        <span class="arcano-numero">VIII <span class="arcano-marca">∞</span></span>
-                        <h3>La Fuerza</h3>
-                        <span class="arcano-descripcion">El poder interior</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Ermitaño" data-numero="IX" data-significado="El Ermitaño representa la introspección, la prudencia y la búsqueda de claridad. Puede señalar la necesidad de tomar distancia del ruido externo para comprender mejor una situación." data-clave="Reflexión · Prudencia · Búsqueda">
-                        <span class="arcano-numero">IX <span class="arcano-marca">⌁</span></span>
-                        <h3>El Ermitaño</h3>
-                        <span class="arcano-descripcion">La búsqueda interior</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Rueda de la Fortuna" data-numero="X" data-significado="La Rueda de la Fortuna simboliza los ciclos, los cambios y las circunstancias que se transforman. Invita a reconocer qué está cambiando, qué puede aprenderse y dónde todavía existe capacidad de elección." data-clave="Ciclos · Cambio · Adaptación">
-                        <span class="arcano-numero">X <span class="arcano-marca">◉</span></span>
-                        <h3>La Rueda de la Fortuna</h3>
-                        <span class="arcano-descripcion">Los ciclos de la vida</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Justicia" data-numero="XI" data-significado="La Justicia representa el equilibrio, la honestidad y la evaluación de los hechos. Invita a mirar una situación con objetividad, reconocer responsabilidades y considerar las consecuencias de cada decisión." data-clave="Equilibrio · Honestidad · Consecuencias">
-                        <span class="arcano-numero">XI <span class="arcano-marca">⚖</span></span>
-                        <h3>La Justicia</h3>
-                        <span class="arcano-descripcion">La verdad y el equilibrio</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Colgado" data-numero="XII" data-significado="El Colgado se vincula con la pausa, la entrega y los cambios de perspectiva. Puede invitar a dejar de forzar una situación y observarla desde un ángulo diferente antes de actuar." data-clave="Pausa · Perspectiva · Aceptación">
-                        <span class="arcano-numero">XII <span class="arcano-marca">▽</span></span>
-                        <h3>El Colgado</h3>
-                        <span class="arcano-descripcion">La mirada diferente</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Muerte" data-numero="XIII" data-significado="La Muerte simboliza transformación, cierre y renovación. Generalmente invita a reconocer lo que terminó o necesita cambiar para dar lugar a una etapa diferente; no debe interpretarse automáticamente como muerte física." data-clave="Transformación · Cierre · Renovación">
-                        <span class="arcano-numero">XIII <span class="arcano-marca">✕</span></span>
-                        <h3>La Muerte</h3>
-                        <span class="arcano-descripcion">El final que transforma</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Templanza" data-numero="XIV" data-significado="La Templanza representa la moderación, la integración y la búsqueda de armonía. Invita a combinar distintas necesidades, respetar los tiempos y encontrar una manera más equilibrada de avanzar." data-clave="Armonía · Integración · Moderación">
-                        <span class="arcano-numero">XIV <span class="arcano-marca">≈</span></span>
-                        <h3>La Templanza</h3>
-                        <span class="arcano-descripcion">El arte de equilibrar</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Diablo" data-numero="XV" data-significado="El Diablo explora los apegos, las tentaciones y los patrones que pueden limitar la libertad. Invita a observar deseos, dependencias y hábitos sin juzgarse, para reconocer dónde es posible recuperar capacidad de elección." data-clave="Apego · Deseo · Liberación">
-                        <span class="arcano-numero">XV <span class="arcano-marca">◆</span></span>
-                        <h3>El Diablo</h3>
-                        <span class="arcano-descripcion">Los vínculos y las ataduras</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Torre" data-numero="XVI" data-significado="La Torre representa la ruptura de estructuras, las revelaciones y la revisión de aquello que parecía seguro. Puede señalar la necesidad de afrontar una verdad y reconstruir sobre bases más honestas." data-clave="Ruptura · Revelación · Reconstrucción">
-                        <span class="arcano-numero">XVI <span class="arcano-marca">ϟ</span></span>
-                        <h3>La Torre</h3>
-                        <span class="arcano-descripcion">El cambio inesperado</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Estrella" data-numero="XVII" data-significado="La Estrella se asocia con la esperanza, la inspiración y la recuperación de la confianza. Invita a reconectar con lo que da sentido, cuidar el bienestar y avanzar sin exigir resultados inmediatos." data-clave="Esperanza · Inspiración · Confianza">
-                        <span class="arcano-numero">XVII <span class="arcano-marca">✧</span></span>
-                        <h3>La Estrella</h3>
-                        <span class="arcano-descripcion">La luz que orienta</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="La Luna" data-numero="XVIII" data-significado="La Luna simboliza el mundo emocional, la imaginación y aquello que todavía resulta incierto. Invita a explorar los sentimientos, distinguir intuiciones de suposiciones y buscar claridad antes de sacar conclusiones." data-clave="Emociones · Intuición · Incertidumbre">
-                        <span class="arcano-numero">XVIII <span class="arcano-marca">☾</span></span>
-                        <h3>La Luna</h3>
-                        <span class="arcano-descripcion">Lo que aún no se ve claro</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Sol" data-numero="XIX" data-significado="El Sol representa claridad, vitalidad y expresión abierta. Se relaciona con la confianza, la alegría compartida y la posibilidad de comprender una situación con mayor transparencia." data-clave="Claridad · Vitalidad · Alegría">
-                        <span class="arcano-numero">XIX <span class="arcano-marca">☼</span></span>
-                        <h3>El Sol</h3>
-                        <span class="arcano-descripcion">La claridad y la vitalidad</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Juicio" data-numero="XX" data-significado="El Juicio se relaciona con la revisión del pasado, el despertar y la toma de conciencia. Invita a reconocer lo aprendido, responder a una nueva comprensión y decidir qué merece continuar." data-clave="Conciencia · Revisión · Renovación">
-                        <span class="arcano-numero">XX <span class="arcano-marca">↑</span></span>
-                        <h3>El Juicio</h3>
-                        <span class="arcano-descripcion">La llamada a despertar</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                    <button class="arcano" data-nombre="El Mundo" data-numero="XXI" data-significado="El Mundo representa culminación, integración y una etapa que encuentra sentido. Puede simbolizar el reconocimiento de lo recorrido y la preparación para comenzar un nuevo ciclo desde una experiencia más amplia." data-clave="Culminación · Integración · Plenitud">
-                        <span class="arcano-numero">XXI <span class="arcano-marca">◎</span></span>
-                        <h3>El Mundo</h3>
-                        <span class="arcano-descripcion">El ciclo que se completa</span>
-                        <span class="arcano-abrir">Descubrir ↗</span>
-                    </button>
-
-                </div>
-
-                <p class="sin-resultados" id="sinResultados">
-                    No encontramos cartas con ese nombre. Probá con otra búsqueda.
+        <article class="epoca">
+            <strong>1909</strong>
+            <div>
+                <h3>Un mazo que cambió la enseñanza</h3>
+                <p>
+                    Se publicó el mazo Rider–Waite–Smith, asociado
+                    a Arthur Edward Waite y a las ilustraciones de
+                    Pamela Colman Smith. Sus escenas detalladas
+                    facilitaron la interpretación visual de los
+                    Arcanos Menores.
                 </p>
-
             </div>
-        </section>
+        </article>
 
-        <!-- CIERRE -->
-
-        <section class="contenedor cierre">
-            <div class="cierre-interior">
-
-                <div>
-                    <span class="sobrelinea">03 / Continuá tu recorrido</span>
-                    <h2>El estudio continúa.</h2>
-                    <p>
-                        Los Arcanos Mayores son el comienzo.
-                        Seguí explorando el lenguaje del Tarot y sus
-                        distintas formas de interpretación.
-                    </p>
-                </div>
-
-                <a href="index2.html" class="boton-rojo">
-                    Arcanos Menores ↗
-                </a>
-
+        <article class="epoca">
+            <strong>ACTUALIDAD</strong>
+            <div>
+                <h3>Un lenguaje en evolución</h3>
+                <p>
+                    Hoy existen mazos tradicionales, artísticos,
+                    contemporáneos y temáticos. Cada creador puede
+                    reinterpretar los símbolos sin que todas las
+                    barajas tengan exactamente el mismo aspecto.
+                </p>
             </div>
+        </article>
+    </div>
 
-            <nav class="navegacion">
-                <a href="../index.html">← Volver a ASTRO ROJO</a>
-                <a href="#arcanos">Volver a los Arcanos Mayores ↑</a>
-            </nav>
-        </section>
+    <div class="dato">
+        <strong>Dato curioso:</strong>
+        el Tarot no nació como un sistema documentado del antiguo
+        Egipto. La conexión con Egipto forma parte de interpretaciones
+        esotéricas posteriores, no de su origen histórico demostrado.
+    </div>
+</div>
+</section>
 
-    </main>
+<section class="seccion" id="arcanos">
+<div class="contenedor">
+    <div class="numero">CAPÍTULO 03</div>
+    <h2>Introducción a los Arcanos Mayores</h2>
+    <p>
+        La palabra <em>arcano</em> se relaciona con algo reservado
+        o misterioso. En el Tarot, los Arcanos Mayores son 22 cartas
+        numeradas, tradicionalmente desde El Loco hasta El Mundo.
+        En el sistema Rider–Waite–Smith, El Loco suele llevar el
+        número 0.
+    </p>
+    <p>
+        Muchos lectores interpretan estas cartas como un recorrido
+        simbólico de aprendizaje: El Loco comienza una experiencia,
+        atraviesa encuentros y pruebas, transforma su mirada y llega
+        a una nueva comprensión representada por El Mundo.
+    </p>
 
-    <footer>
-        <strong>ASTRO ROJO</strong>
-        <p>Tarot · Astrología · Numerología</p>
-        <p>Un espacio de estudio, símbolos e interpretación.</p>
-    </footer>
+    <div class="dato">
+        <strong>Cómo estudiar cada carta:</strong>
+        observa primero la escena. Después identifica los personajes,
+        sus gestos, los objetos, los colores y la dirección de sus
+        miradas. Finalmente, relaciona esos detalles con la pregunta.
+    </div>
 
-    <!-- VENTANA DE CADA ARCANO -->
-
-    <div
-        class="modal"
-        id="modalArcano"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modalTitulo"
-        aria-hidden="true"
+    <input
+        class="busqueda"
+        id="buscarCarta"
+        type="search"
+        placeholder="Buscar un arcano por nombre..."
+        aria-label="Buscar un arcano"
     >
-        <div class="modal-contenido">
 
-            <button
-                class="modal-cerrar"
-                id="cerrarModal"
-                type="button"
-                aria-label="Cerrar"
-            >×</button>
+    <div class="filtros" id="filtros">
+        <button class="activo" data-filtro="todos">Todos los arcanos</button>
+        <button data-filtro="comienzo">Comienzos</button>
+        <button data-filtro="aprendizaje">Aprendizaje</button>
+        <button data-filtro="cambio">Cambios</button>
+        <button data-filtro="culminacion">Culminación</button>
+    </div>
 
-            <div class="modal-numero" id="modalNumero"></div>
+    <div class="carta-grid" id="rejillaCartas">
 
-            <span class="sobrelinea">Arcano mayor</span>
+        <article class="carta" data-nombre="el loco" data-grupo="comienzo">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/9/90/RWS_Tarot_00_Fool.jpg" alt="El Loco, Tarot Rider Waite Smith">
+            </div>
+            <div class="carta-contenido">
+                <h3>0 · El Loco</h3>
+                <p>Un viajero se acerca al comienzo de una aventura. Habla de libertad, curiosidad y apertura, pero también de actuar sin medir los riesgos.</p>
+                <div class="palabras">Inicio · Confianza · Aventura</div>
+            </div>
+        </article>
 
-            <h2 id="modalTitulo"></h2>
+        <article class="carta" data-nombre="el mago" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/d/de/RWS_Tarot_01_Magician.jpg" alt="El Mago">
+            </div>
+            <div class="carta-contenido">
+                <h3>I · El Mago</h3>
+                <p>Con herramientas a su disposición, representa iniciativa, habilidad y capacidad para convertir una idea en acción.</p>
+                <div class="palabras">Acción · Talento · Iniciativa</div>
+            </div>
+        </article>
 
-            <p id="modalSignificado"></p>
+        <article class="carta" data-nombre="la sacerdotisa" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/8/88/RWS_Tarot_02_High_Priestess.jpg" alt="La Sacerdotisa">
+            </div>
+            <div class="carta-contenido">
+                <h3>II · La Sacerdotisa</h3>
+                <p>Sentada entre dos columnas, invita a observar, escuchar la intuición y reconocer aquello que todavía no está claro.</p>
+                <div class="palabras">Intuición · Silencio · Misterio</div>
+            </div>
+        </article>
 
-            <div class="modal-etiqueta" id="modalClaves"></div>
+        <article class="carta" data-nombre="la emperatriz" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/d/d2/RWS_Tarot_03_Empress.jpg" alt="La Emperatriz">
+            </div>
+            <div class="carta-contenido">
+                <h3>III · La Emperatriz</h3>
+                <p>Rodeada de naturaleza, simboliza creatividad, cuidado, fertilidad entendida en sentido amplio y crecimiento.</p>
+                <div class="palabras">Creación · Abundancia · Cuidado</div>
+            </div>
+        </article>
 
+        <article class="carta" data-nombre="el emperador" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/c/c3/RWS_Tarot_04_Emperor.jpg" alt="El Emperador">
+            </div>
+            <div class="carta-contenido">
+                <h3>IV · El Emperador</h3>
+                <p>Representa estructura, autoridad, límites y la necesidad de construir bases firmes.</p>
+                <div class="palabras">Orden · Liderazgo · Estabilidad</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="el hierofante sumo sacerdote" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/8/8d/RWS_Tarot_05_Hierophant.jpg" alt="El Hierofante">
+            </div>
+            <div class="carta-contenido">
+                <h3>V · El Hierofante</h3>
+                <p>Se vincula con las tradiciones, la enseñanza, las creencias compartidas y el aprendizaje dentro de una comunidad.</p>
+                <div class="palabras">Tradición · Enseñanza · Valores</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="los enamorados amantes" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/3/3a/TheLovers.jpg" alt="Los Enamorados">
+            </div>
+            <div class="carta-contenido">
+                <h3>VI · Los Enamorados</h3>
+                <p>Habla de vínculos, afinidad y decisiones que exigen reconocer qué valores queremos respetar.</p>
+                <div class="palabras">Elección · Vínculo · Valores</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="el carro" data-grupo="comienzo">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/9/9b/RWS_Tarot_07_Chariot.jpg" alt="El Carro">
+            </div>
+            <div class="carta-contenido">
+                <h3>VII · El Carro</h3>
+                <p>Dos esfinges de colores opuestos acompañan al conductor. La carta invita a dirigir fuerzas distintas hacia un objetivo.</p>
+                <div class="palabras">Voluntad · Dirección · Dominio</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="la fuerza" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/f/f5/RWS_Tarot_08_Strength.jpg" alt="La Fuerza">
+            </div>
+            <div class="carta-contenido">
+                <h3>VIII · La Fuerza</h3>
+                <p>Una figura se relaciona serenamente con un león. Simboliza coraje, paciencia y regulación de los impulsos.</p>
+                <div class="palabras">Coraje · Paciencia · Serenidad</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="el ermitaño" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/4/4d/RWS_Tarot_09_Hermit.jpg" alt="El Ermitaño">
+            </div>
+            <div class="carta-contenido">
+                <h3>IX · El Ermitaño</h3>
+                <p>Avanza con una lámpara en la oscuridad. Representa introspección, prudencia y búsqueda personal.</p>
+                <div class="palabras">Búsqueda · Prudencia · Reflexión</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="la rueda de la fortuna" data-grupo="cambio">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg" alt="La Rueda de la Fortuna">
+            </div>
+            <div class="carta-contenido">
+                <h3>X · La Rueda de la Fortuna</h3>
+                <p>Una rueda en movimiento habla de ciclos, giros inesperados y circunstancias que cambian.</p>
+                <div class="palabras">Ciclo · Cambio · Oportunidad</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="la justicia" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/e/e0/RWS_Tarot_11_Justice.jpg" alt="La Justicia">
+            </div>
+            <div class="carta-contenido">
+                <h3>XI · La Justicia</h3>
+                <p>La balanza y la espada remiten al equilibrio, la responsabilidad y las consecuencias de nuestras decisiones.</p>
+                <div class="palabras">Equilibrio · Verdad · Responsabilidad</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="el colgado" data-grupo="cambio">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/2/2b/RWS_Tarot_12_Hanged_Man.jpg" alt="El Colgado">
+            </div>
+            <div class="carta-contenido">
+                <h3>XII · El Colgado</h3>
+                <p>Una pausa que permite mirar desde otro ángulo. Sugiere paciencia y cambio de perspectiva.</p>
+                <div class="palabras">Pausa · Entrega · Perspectiva</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="la muerte" data-grupo="cambio">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/d/d7/RWS_Tarot_13_Death.jpg" alt="La Muerte">
+            </div>
+            <div class="carta-contenido">
+                <h3>XIII · La Muerte</h3>
+                <p>Generalmente representa el final de una etapa, una transformación o la necesidad de soltar lo que ya no sirve. No anuncia literalmente una muerte.</p>
+                <div class="palabras">Cierre · Renovación · Transformación</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="la templanza" data-grupo="aprendizaje">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/f/f8/RWS_Tarot_14_Temperance.jpg" alt="La Templanza">
+            </div>
+            <div class="carta-contenido">
+                <h3>XIV · La Templanza</h3>
+                <p>Una figura mezcla líquidos entre dos copas. Simboliza integración, moderación y búsqueda de armonía.</p>
+                <div class="palabras">Armonía · Paciencia · Integración</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="el diablo" data-grupo="cambio">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/5/55/RWS_Tarot_15_Devil.jpg" alt="El Diablo">
+            </div>
+            <div class="carta-contenido">
+                <h3>XV · El Diablo</h3>
+                <p>Invita a examinar apegos, tentaciones, dependencias y patrones que pueden limitar nuestra libertad.</p>
+                <div class="palabras">Deseo · Apego · Sombra</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="la torre" data-grupo="cambio">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/5/53/RWS_Tarot_16_Tower.jpg" alt="La Torre">
+            </div>
+            <div class="carta-contenido">
+                <h3>XVI · La Torre</h3>
+                <p>Una estructura es alcanzada por un rayo. Puede simbolizar una revelación, una ruptura o el derrumbe de una falsa seguridad.</p>
+                <div class="palabras">Revelación · Ruptura · Despertar</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="la estrella" data-grupo="cambio">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/d/db/RWS_Tarot_17_Star.jpg" alt="La Estrella">
+            </div>
+            <div class="carta-contenido">
+                <h3>XVII · La Estrella</h3>
+                <p>Bajo un cielo estrellado, una figura vierte agua. Habla de esperanza, renovación y confianza recuperada.</p>
+                <div class="palabras">Esperanza · Calma · Inspiración</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="la luna" data-grupo="cambio">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/7/7f/RWS_Tarot_18_Moon.jpg" alt="La Luna">
+            </div>
+            <div class="carta-contenido">
+                <h3>XVIII · La Luna</h3>
+                <p>Un paisaje nocturno con animales y un sendero representa incertidumbre, imaginación, temores e información incompleta.</p>
+                <div class="palabras">Sueños · Intuición · Incertidumbre</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="el sol" data-grupo="culminacion">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/1/17/RWS_Tarot_19_Sun.jpg" alt="El Sol">
+            </div>
+            <div class="carta-contenido">
+                <h3>XIX · El Sol</h3>
+                <p>La luz ilumina la escena. Se asocia con vitalidad, claridad, disfrute y reconocimiento de lo que antes estaba oculto.</p>
+                <div class="palabras">Claridad · Alegría · Vitalidad</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="el juicio" data-grupo="culminacion">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/d/dd/RWS_Tarot_20_Judgement.jpg" alt="El Juicio">
+            </div>
+            <div class="carta-contenido">
+                <h3>XX · El Juicio</h3>
+                <p>Las figuras se levantan ante una llamada. Representa revisión, despertar, evaluación y la posibilidad de responder de otra manera.</p>
+                <div class="palabras">Despertar · Evaluación · Llamado</div>
+            </div>
+        </article>
+
+        <article class="carta" data-nombre="el mundo" data-grupo="culminacion">
+            <div class="carta-imagen">
+                <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/f/ff/RWS_Tarot_21_World.jpg" alt="El Mundo">
+            </div>
+            <div class="carta-contenido">
+                <h3>XXI · El Mundo</h3>
+                <p>Una figura aparece dentro de una corona ovalada. Simboliza culminación, integración y cierre de un recorrido.</p>
+                <div class="palabras">Logro · Integración · Culminación</div>
+            </div>
+        </article>
+
+    </div>
+
+    <p id="sinResultados" style="display:none; margin-top:20px;">
+        No encontramos cartas con ese nombre. Prueba otra búsqueda.
+    </p>
+
+    <div class="dato">
+        <strong>Atención con la numeración:</strong>
+        en el sistema Rider–Waite–Smith, La Fuerza suele ser VIII
+        y La Justicia XI. En el Tarot de Marsella, estas dos cartas
+        suelen intercambiar esos números. Por eso conviene saber
+        qué mazo estamos estudiando.
+    </div>
+</div>
+</section>
+
+<section class="seccion" id="colores">
+<div class="contenedor">
+    <div class="numero">CAPÍTULO 04</div>
+    <h2>El lenguaje de los colores</h2>
+    <p>
+        Los colores aportan matices emocionales y visuales. No existe
+        un diccionario universal que funcione igual en todos los mazos:
+        observa dónde aparece el color, cuánto espacio ocupa y con
+        qué otros símbolos se combina.
+    </p>
+
+    <div class="colores-grid">
+        <article class="color-caja">
+            <div class="muestra rojo"></div>
+            <h3>Rojo</h3>
+            <p>Puede sugerir energía, pasión, impulso, deseo, valentía o conflicto. Importa si aparece en una corona, una capa o una escena de peligro.</p>
+        </article>
+
+        <article class="color-caja">
+            <div class="muestra azul"></div>
+            <h3>Azul</h3>
+            <p>Se asocia a menudo con reflexión, serenidad, profundidad emocional o contemplación. Su sentido depende del personaje y la escena.</p>
+        </article>
+
+        <article class="color-caja">
+            <div class="muestra amarillo"></div>
+            <h3>Amarillo y dorado</h3>
+            <p>Pueden evocar luz, conciencia, vitalidad, atención y claridad. También destacan elementos que merecen una observación especial.</p>
+        </article>
+
+        <article class="color-caja">
+            <div class="muestra blanco"></div>
+            <h3>Blanco</h3>
+            <p>Puede sugerir apertura, claridad, sencillez, pureza simbólica o una nueva posibilidad. No siempre significa inocencia.</p>
+        </article>
+
+        <article class="color-caja">
+            <div class="muestra negro"></div>
+            <h3>Negro</h3>
+            <p>Puede remitir a lo desconocido, el misterio, la introspección o los aspectos que todavía no se comprenden. No significa necesariamente maldad.</p>
+        </article>
+
+        <article class="color-caja">
+            <div class="muestra verde"></div>
+            <h3>Verde</h3>
+            <p>Frecuentemente se relaciona con naturaleza, crecimiento, recuperación y recursos materiales o vitales.</p>
+        </article>
+
+        <article class="color-caja">
+            <div class="muestra naranja"></div>
+            <h3>Naranja</h3>
+            <p>Puede transmitir calidez, entusiasmo, creatividad y movimiento, especialmente cuando domina una escena luminosa.</p>
+        </article>
+
+        <article class="color-caja">
+            <div class="muestra morado"></div>
+            <h3>Violeta</h3>
+            <p>En interpretaciones modernas puede vincularse con espiritualidad, imaginación, introspección y transformación interior.</p>
+        </article>
+
+        <article class="color-caja">
+            <div class="muestra rosa"></div>
+            <h3>Rosa</h3>
+            <p>Puede sugerir ternura, sensibilidad, afecto y receptividad. Su presencia no garantiza una relación romántica.</p>
+        </article>
+    </div>
+
+    <div class="ejercicio">
+        <h3>Ejercicio de observación</h3>
+        <p>
+            Imagina una carta en la que predomina el rojo, pero el
+            personaje tiene una postura tranquila y está rodeado de
+            un paisaje verde. ¿Qué te dice esa combinación?
+        </p>
+        <button class="boton" onclick="alternar('respuestaColor', this)">
+            Ver una posible interpretación
+        </button>
+        <div class="respuesta" id="respuestaColor">
+            <p>
+                El rojo podría representar energía o deseo, mientras
+                que el verde podría sugerir crecimiento o estabilidad.
+                La postura tranquila introduce la idea de una energía
+                que se administra en vez de desbordarse. Es una hipótesis
+                de lectura, no una traducción obligatoria.
+            </p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="seccion" id="simbolos">
+<div class="contenedor">
+    <div class="numero">CAPÍTULO 05</div>
+    <h2>Símbolos que cuentan historias</h2>
+    <p>
+        En el Tarot, un pequeño detalle puede cambiar la interpretación
+        de una carta. En vez de memorizar símbolos aislados, estudia
+        qué hacen dentro de la escena y cómo se relacionan entre sí.
+    </p>
+
+    <div class="simbolos-grid">
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">♟</div>
+            <h3>La esfinge</h3>
+            <p>
+                En El Carro, las dos esfinges —una clara y otra oscura—
+                pueden representar fuerzas opuestas, deseos diferentes
+                o impulsos que necesitan dirección. El conductor debe
+                mantener el rumbo.
+            </p>
+            <p><strong>Pregunta:</strong> ¿qué fuerzas opuestas estás intentando equilibrar?</p>
+        </article>
+
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">☾</div>
+            <h3>La Luna</h3>
+            <p>
+                Puede señalar incertidumbre, imaginación, intuición
+                o temores. Su luz es indirecta: invita a avanzar con
+                atención cuando todavía no se ve todo con claridad.
+            </p>
+            <p><strong>Pregunta:</strong> ¿qué sabes realmente y qué estás suponiendo?</p>
+        </article>
+
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">☀</div>
+            <h3>El Sol</h3>
+            <p>
+                Se relaciona con iluminación, vitalidad y visibilidad.
+                Cuando una escena queda expuesta a la luz, ciertos
+                detalles se vuelven imposibles de ignorar.
+            </p>
+            <p><strong>Pregunta:</strong> ¿qué necesitas mirar con mayor claridad?</p>
+        </article>
+
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">♜</div>
+            <h3>Las columnas</h3>
+            <p>
+                En cartas como La Sacerdotisa, pueden crear un umbral
+                entre dos espacios. El contraste entre ambas invita
+                a observar dualidades, límites y transiciones.
+            </p>
+            <p><strong>Pregunta:</strong> ¿entre qué dos posibilidades estás situado?</p>
+        </article>
+
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">♙</div>
+            <h3>La corona</h3>
+            <p>
+                Puede expresar autoridad, responsabilidad, dignidad
+                o dominio. También invita a preguntar si el poder
+                se ejerce con sabiduría o con rigidez.
+            </p>
+            <p><strong>Pregunta:</strong> ¿quién tiene el control en esta escena?</p>
+        </article>
+
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">♧</div>
+            <h3>Los árboles y las plantas</h3>
+            <p>
+                El entorno natural puede sugerir crecimiento,
+                arraigo, ciclos, vitalidad o condiciones que
+                favorecen o dificultan un desarrollo.
+            </p>
+            <p><strong>Pregunta:</strong> ¿qué necesita tiempo para crecer?</p>
+        </article>
+
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">♙</div>
+            <h3>Los animales</h3>
+            <p>
+                Un león, un perro o un caballo pueden aportar
+                asociaciones con instinto, compañía, fuerza o
+                movimiento. Observa su conducta y relación con
+                las figuras humanas.
+            </p>
+            <p><strong>Pregunta:</strong> ¿el animal acompaña, protege o amenaza?</p>
+        </article>
+
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">〰</div>
+            <h3>El agua</h3>
+            <p>
+                Puede relacionarse con emociones, movimiento,
+                profundidad y adaptación. Un río tranquilo no
+                transmite lo mismo que un mar agitado.
+            </p>
+            <p><strong>Pregunta:</strong> ¿qué emoción parece moverse en la imagen?</p>
+        </article>
+
+        <article class="simbolo-caja">
+            <div class="simbolo-icono">⛰</div>
+            <h3>Las montañas</h3>
+            <p>
+                Pueden evocar desafíos, distancia, metas o un camino
+                que requiere esfuerzo. Observa si el personaje mira
+                hacia ellas, las escala o les da la espalda.
+            </p>
+            <p><strong>Pregunta:</strong> ¿qué obstáculo o meta aparece a lo lejos?</p>
+        </article>
+    </div>
+
+    <div class="dato">
+        <strong>Un detalle importante:</strong>
+        un símbolo no tiene que significar siempre lo mismo.
+        El agua puede ser calma en una carta y peligro en otra.
+        La escena completa tiene prioridad sobre una asociación aislada.
+    </div>
+</div>
+</section>
+
+<section class="seccion" id="practica">
+<div class="contenedor">
+    <div class="numero">CAPÍTULO 06</div>
+    <h2>Tu primera interpretación</h2>
+    <p>
+        Antes de consultar un significado aprendido, dedica unos
+        segundos a observar la imagen. Este método te ayudará a
+        desarrollar una interpretación propia y argumentada.
+    </p>
+
+    <div class="dos-columnas">
+        <article class="caja">
+            <h3>1. Observa</h3>
+            <ul class="lista">
+                <li>¿Quién aparece en la carta?</li>
+                <li>¿Qué está haciendo?</li>
+                <li>¿Qué colores predominan?</li>
+                <li>¿Qué objetos llaman tu atención?</li>
+                <li>¿Qué sensación te produce la escena?</li>
+            </ul>
+        </article>
+
+        <article class="caja">
+            <h3>2. Relaciona</h3>
+            <ul class="lista">
+                <li>¿Cuál es el tema central?</li>
+                <li>¿Qué detalle respalda tu interpretación?</li>
+                <li>¿Cómo se relaciona con la pregunta?</li>
+                <li>¿Qué otra lectura sería posible?</li>
+                <li>¿Qué consejo práctico podrías extraer?</li>
+            </ul>
+        </article>
+    </div>
+
+    <div class="ejercicio">
+        <h3>Desafío: El Carro</h3>
+        <p>
+            Imagina que preguntas cómo afrontar un proyecto y aparece
+            El Carro. Piensa en las dos esfinges, el conductor y la
+            dirección de la escena. ¿Qué interpretación te parece
+            más coherente?
+        </p>
+
+        <button class="boton" onclick="alternar('respuestaCarro', this)">
+            Mostrar respuesta orientativa
+        </button>
+
+        <div class="respuesta" id="respuestaCarro">
+            <p>
+                Una interpretación posible es avanzar con decisión,
+                pero sin perder el control de las fuerzas que tiran
+                en direcciones distintas. La carta invita a definir
+                un objetivo, organizar los recursos y sostener la
+                atención. No garantiza el éxito: destaca la importancia
+                de cómo se conduce la situación.
+            </p>
         </div>
     </div>
 
-    <script>
-        /* =====================================
-           BÚSQUEDA DE ARCANOS
-        ===================================== */
+    <div class="ejercicio">
+        <h3>Comprueba lo aprendido</h3>
+        <p>¿Cuál es la mejor manera de interpretar un símbolo del Tarot?</p>
 
-        const buscador = document.getElementById("buscarArcano");
-        const cartas = Array.from(document.querySelectorAll(".arcano"));
-        const contador = document.getElementById("contador");
-        const sinResultados = document.getElementById("sinResultados");
+        <div style="display:grid; gap:10px; margin-top:18px;">
+            <button class="boton secundario" onclick="responderQuiz(0)">
+                A. Usar siempre el mismo significado.
+            </button>
+            <button class="boton secundario" onclick="responderQuiz(1)">
+                B. Observarlo dentro de la escena y relacionarlo con la pregunta.
+            </button>
+            <button class="boton secundario" onclick="responderQuiz(0)">
+                C. Ignorar las otras cartas.
+            </button>
+        </div>
 
-        buscador.addEventListener("input", function () {
-            const consulta = this.value
-                .trim()
-                .toLocaleLowerCase("es");
+        <p id="resultadoQuiz" style="margin-top:18px;" aria-live="polite"></p>
+    </div>
+</div>
+</section>
 
-            let visibles = 0;
+<section class="seccion">
+<div class="contenedor">
+    <div class="numero">CIERRE DE LA CLASE</div>
+    <h2>El primer paso del viaje</h2>
+    <p>
+        Ya conoces el origen histórico general del Tarot, la diferencia
+        entre Arcanos Mayores y Menores, algunas asociaciones cromáticas
+        y varios símbolos importantes. La siguiente etapa será estudiar
+        las cartas una por una y aprender a interpretar sus relaciones.
+    </p>
 
-            cartas.forEach(function (carta) {
-                const nombre = carta.dataset.nombre
-                    .toLocaleLowerCase("es");
+    <div class="dato">
+        <strong>Recuerda:</strong>
+        una buena interpretación no consiste en recitar palabras clave,
+        sino en explicar cómo los detalles de la carta se relacionan
+        con la situación consultada.
+    </div>
 
-                const numero = carta.dataset.numero
-                    .toLocaleLowerCase("es");
+    <div class="hero-botones">
+        <a class="boton secundario" href="../index.html">Volver al inicio</a>
+        <a class="boton" href="index2.html">Continuar al siguiente módulo ↗</a>
+    </div>
+</div>
+</section>
 
-                const coincide =
-                    nombre.includes(consulta) ||
-                    numero === consulta;
+</main>
 
-                carta.hidden = !coincide;
+<footer>
+    <p style="margin-bottom:8px; color:#e21b3c; font-weight:bold; letter-spacing:3px;">
+        ASTRO ROJO
+    </p>
+    TAROT · SIMBOLOGÍA · AUTOCONOCIMIENTO
+</footer>
 
-                if (coincide) {
-                    visibles++;
-                }
-            });
+<script>
+const cartas = document.querySelectorAll(".carta");
+const buscarCarta = document.getElementById("buscarCarta");
+const botonesFiltro = document.querySelectorAll("#filtros button");
+const sinResultados = document.getElementById("sinResultados");
 
-            contador.textContent =
-                visibles + (visibles === 1 ? " carta" : " cartas");
+let filtroActual = "todos";
 
-            sinResultados.style.display =
-                visibles === 0 ? "block" : "none";
-        });
+function filtrarCartas() {
+    const texto = buscarCarta.value
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
 
-        /* =====================================
-           MODAL INTERACTIVO
-        ===================================== */
+    let visibles = 0;
 
-        const modal = document.getElementById("modalArcano");
-        const cerrarModal = document.getElementById("cerrarModal");
+    cartas.forEach(carta => {
+        const nombre = (carta.dataset.nombre || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
 
-        const modalNumero = document.getElementById("modalNumero");
-        const modalTitulo = document.getElementById("modalTitulo");
-        const modalSignificado = document.getElementById("modalSignificado");
-        const modalClaves = document.getElementById("modalClaves");
+        const grupo = carta.dataset.grupo;
+        const coincideTexto = nombre.includes(texto);
+        const coincideGrupo =
+            filtroActual === "todos" || grupo === filtroActual;
 
-        let elementoAnterior = null;
+        const mostrar = coincideTexto && coincideGrupo;
 
-        function abrirArcano(carta) {
-            elementoAnterior = document.activeElement;
+        carta.style.display = mostrar ? "" : "none";
 
-            modalNumero.textContent = carta.dataset.numero;
-            modalTitulo.textContent = carta.dataset.nombre;
-            modalSignificado.textContent = carta.dataset.significado;
-            modalClaves.textContent = carta.dataset.clave;
+        if (mostrar) visibles++;
+    });
 
-            modal.classList.add("activo");
-            modal.setAttribute("aria-hidden", "false");
-            document.body.classList.add("modal-abierto");
+    sinResultados.style.display = visibles ? "none" : "block";
+}
 
-            cerrarModal.focus();
-        }
+buscarCarta.addEventListener("input", filtrarCartas);
 
-        function cerrarVentana() {
-            modal.classList.remove("activo");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.classList.remove("modal-abierto");
+botonesFiltro.forEach(boton => {
+    boton.addEventListener("click", () => {
+        botonesFiltro.forEach(b => b.classList.remove("activo"));
+        boton.classList.add("activo");
 
-            if (elementoAnterior) {
-                elementoAnterior.focus();
-            }
-        }
+        filtroActual = boton.dataset.filtro;
+        filtrarCartas();
+    });
+});
 
-        cartas.forEach(function (carta) {
-            carta.addEventListener("click", function () {
-                abrirArcano(carta);
-            });
-        });
+function alternar(id, boton) {
+    const respuesta = document.getElementById(id);
+    const visible = respuesta.classList.toggle("visible");
 
-        cerrarModal.addEventListener("click", cerrarVentana);
+    boton.textContent = visible
+        ? "Ocultar respuesta"
+        : "Ver respuesta";
+}
 
-        modal.addEventListener("click", function (evento) {
-            if (evento.target === modal) {
-                cerrarVentana();
-            }
-        });
+function responderQuiz(opcion) {
+    const resultado = document.getElementById("resultadoQuiz");
 
-        document.addEventListener("keydown", function (evento) {
-            if (evento.key === "Escape" && modal.classList.contains("activo")) {
-                cerrarVentana();
-            }
-        });
-    </script>
+    if (opcion === 1) {
+        resultado.textContent =
+            "¡Correcto! El contexto y la pregunta ayudan a comprender el símbolo.";
+        resultado.style.color = "#8ee0a3";
+    } else {
+        resultado.textContent =
+            "Todavía no. Recuerda observar la escena completa y relacionarla con la pregunta.";
+        resultado.style.color = "#ff8c9e";
+    }
+}
+
+window.addEventListener("scroll", () => {
+    const documento = document.documentElement;
+    const recorrido =
+        documento.scrollHeight - documento.clientHeight;
+
+    const porcentaje = recorrido > 0
+        ? (documento.scrollTop / recorrido) * 100
+        : 0;
+
+    document.getElementById("progreso").style.width =
+        porcentaje + "%";
+});
+
+// Si alguna imagen externa falla, mostrar un símbolo de reemplazo.
+document.querySelectorAll(".carta-imagen img").forEach(img => {
+    img.addEventListener("error", () => {
+        const reemplazo = document.createElement("div");
+        reemplazo.className = "carta-fallback";
+        reemplazo.textContent = "☾";
+        reemplazo.setAttribute("aria-label", "Imagen no disponible");
+        img.replaceWith(reemplazo);
+    });
+});
+</script>
 
 </body>
 </html>
