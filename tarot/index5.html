@@ -1,1 +1,835 @@
 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10070b">
+<title>ASTRO ROJO — 25 Ejercicios de Tarot</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root {
+    --fondo: #10070b;
+    --rojo: #a93648;
+    --rojo-claro: #c9828c;
+    --texto: #f3eeee;
+    --suave: #a8a0a3;
+    --borde: rgba(169,54,72,.35);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+.container {
+    width: min(1000px, 92%);
+    margin: auto;
+    padding-bottom: 60px;
+}
+
+.ejercicios-header {
+    text-align: center;
+    padding: 45px 15px 35px;
+}
+
+.mini-moon {
+    color: var(--rojo-claro);
+    font-size: 38px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(170,20,40,.45);
+}
+
+.ejercicios-header h1 {
+    font-size: clamp(27px, 5vw, 40px);
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.ejercicios-header p {
+    max-width: 650px;
+    margin: auto;
+    color: var(--suave);
+    line-height: 1.8;
+}
+
+.progreso {
+    max-width: 760px;
+    margin: 0 auto 30px;
+}
+
+.progreso-superior {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: var(--suave);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.progreso-superior strong {
+    color: var(--rojo-claro);
+    font-weight: 400;
+}
+
+.barra-progreso {
+    height: 5px;
+    background: rgba(150,35,50,.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.barra-progreso span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--rojo);
+    transition: width .35s ease;
+}
+
+.ejercicio-panel {
+    max-width: 850px;
+    margin: auto;
+    padding: 40px clamp(18px, 5vw, 45px);
+    background: linear-gradient(145deg,rgba(255,255,255,.035),rgba(100,0,15,.035));
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.ejercicio-etiqueta {
+    text-align: center;
+    color: var(--rojo-claro);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.ejercicio-panel h2 {
+    text-align: center;
+    font-size: clamp(21px, 4vw, 28px);
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.carta-practica {
+    width: min(270px, 100%);
+    min-height: 205px;
+    margin: 0 auto 30px;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(circle at 50% 20%,rgba(130,0,25,.35),rgba(10,5,8,.85));
+    border: 1px solid rgba(190,55,70,.45);
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+}
+
+.carta-practica .simbolo {
+    color: var(--rojo-claro);
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.carta-practica small {
+    color: #8f8589;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.carta-practica h3 {
+    font-size: 21px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.pregunta {
+    max-width: 680px;
+    text-align: center;
+    margin: 0 auto 28px;
+}
+
+.pregunta-label {
+    display: block;
+    color: var(--rojo-claro);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.pregunta p {
+    color: var(--texto);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.opciones {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 13px;
+}
+
+.opcion {
+    min-height: 150px;
+    padding: 20px;
+    text-align: left;
+    background: rgba(12,6,9,.7);
+    border: 1px solid rgba(150,35,50,.25);
+    border-radius: 14px;
+    cursor: pointer;
+    color: var(--suave);
+    transition: .2s;
+}
+
+.opcion:hover:not(.bloqueada) {
+    transform: translateY(-3px);
+    border-color: var(--rojo-claro);
+    background: rgba(35,7,12,.8);
+}
+
+.opcion-letra {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    border: 1px solid var(--borde);
+    border-radius: 50%;
+    color: var(--rojo-claro);
+    font-size: 12px;
+}
+
+.opcion p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.opcion.correcta {
+    border-color: #a93648;
+    background: rgba(100,0,20,.4);
+    color: var(--texto);
+}
+
+.opcion.correcta .opcion-letra {
+    background: #8f2638;
+    color: white;
+}
+
+.opcion.incorrecta {
+    opacity: .48;
+}
+
+.opcion.bloqueada {
+    cursor: default;
+}
+
+.resultado {
+    display: none;
+    margin: 25px auto 0;
+    padding: 23px;
+    background: rgba(35,7,12,.7);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+}
+
+.resultado.visible { display: block; }
+
+.resultado-titulo {
+    color: var(--rojo-claro);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.resultado p {
+    color: #c0b6b9;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.boton-siguiente-ejercicio,
+.boton-reiniciar {
+    display: none;
+    margin: 25px auto 0;
+    padding: 13px 25px;
+    color: var(--texto);
+    background: rgba(130,0,25,.65);
+    border: 1px solid rgba(190,70,85,.55);
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.boton-siguiente-ejercicio.visible,
+.boton-reiniciar.visible {
+    display: block;
+}
+
+.boton-siguiente-ejercicio:hover,
+.boton-reiniciar:hover {
+    background: rgba(165,0,30,.9);
+}
+
+.resultado-final {
+    display: none;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 35px 25px;
+    text-align: center;
+    background: rgba(35,7,12,.75);
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+}
+
+.resultado-final.visible { display: block; }
+
+.resultado-final .simbolo-final {
+    color: var(--rojo-claro);
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.resultado-final h2 {
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.resultado-final p {
+    color: var(--suave);
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+@media(max-width:760px) {
+    .opciones { grid-template-columns: 1fr; }
+    .opcion { min-height: auto; }
+    .ejercicio-panel { padding-top: 30px; padding-bottom: 30px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+<section class="ejercicios-header">
+    <div class="mini-moon">☾</div>
+    <h1>EJERCICIOS DE TAROT</h1>
+    <p>
+        Veinticinco desafíos para entrenar tu interpretación,
+        relacionar los símbolos y desarrollar una lectura
+        personal, coherente y responsable.
+    </p>
+</section>
+
+<div class="progreso">
+    <div class="progreso-superior">
+        <span>PROGRESO DEL CURSO</span>
+        <strong id="contador">0 / 25 completados</strong>
+    </div>
+    <div class="barra-progreso">
+        <span id="barra"></span>
+    </div>
+</div>
+
+<div id="contenedor-ejercicios"></div>
+
+<section class="resultado-final" id="resultado-final">
+    <div class="simbolo-final">✦</div>
+    <h2>¡RECORRISTE LOS 25 EJERCICIOS!</h2>
+    <p id="resumen-final"></p>
+    <p>
+        Seguí practicando: el objetivo no es memorizar respuestas,
+        sino aprender a observar, relacionar e interpretar las cartas.
+    </p>
+    <button class="boton-reiniciar visible" onclick="reiniciar()">
+        VOLVER A PRACTICAR ↻
+    </button>
+</section>
+
+</main>
+
+<script>
+const ejercicios = [
+{
+tema:"FUNDAMENTOS",
+titulo:"Reconocer el significado",
+simbolo:"✦",
+carta:"LA EMPERATRIZ",
+pregunta:"¿Qué representa tradicionalmente esta carta?",
+opciones:[
+"Aislamiento, retiro y búsqueda interior.",
+"Creatividad, crecimiento, fertilidad y abundancia.",
+"Conflicto, pérdida y ruptura emocional."
+],
+correcta:1,
+explicacion:"La Emperatriz se relaciona con creatividad, crecimiento, expresión, fertilidad y abundancia. El contexto determina cómo se expresa esa energía en la lectura."
+},
+{
+tema:"FUNDAMENTOS",
+titulo:"Interpretar una carta",
+simbolo:"☾",
+carta:"EL ERMITAÑO",
+pregunta:"Ante una situación confusa, ¿qué orientación simbólica puede ofrecer?",
+opciones:[
+"Actuar impulsivamente y evitar pensar.",
+"Tomarse tiempo para reflexionar y buscar claridad interior.",
+"Esperar que otra persona resuelva todo."
+],
+correcta:1,
+explicacion:"El Ermitaño representa introspección, prudencia y búsqueda interior. Puede invitar a detenerse y examinar la situación antes de actuar."
+},
+{
+tema:"COMBINACIONES",
+titulo:"Relacionar dos cartas",
+simbolo:"♡",
+carta:"DOS DE COPAS + DOS DE ESPADAS",
+pregunta:"¿Qué interpretación combina mejor ambas cartas en una consulta amorosa?",
+opciones:[
+"Una relación sin dudas ni dificultades.",
+"Puede haber conexión, pero también indecisión o dificultad para afrontar algo.",
+"Las cartas hablan exclusivamente de dinero."
+],
+correcta:1,
+explicacion:"El Dos de Copas puede representar conexión y reciprocidad. El Dos de Espadas introduce dudas, bloqueo o una decisión postergada."
+},
+{
+tema:"CARTAS INVERTIDAS",
+titulo:"Leer una inversión",
+simbolo:"☀",
+carta:"EL SOL INVERTIDO",
+pregunta:"¿Cómo puede interpretarse una carta invertida?",
+opciones:[
+"Siempre anuncia una desgracia.",
+"Puede señalar bloqueo, exceso, demora o una energía que no se expresa plenamente.",
+"Todas las cartas invertidas tienen el mismo significado."
+],
+correcta:1,
+explicacion:"Las inversiones se interpretan de distintas maneras según el método utilizado. No son automáticamente negativas: pueden indicar bloqueo, interiorización, exceso o dificultad."
+},
+{
+tema:"NUMEROLOGÍA",
+titulo:"Observar números repetidos",
+simbolo:"3",
+carta:"TRES DE COPAS · TRES DE OROS · TRES DE ESPADAS",
+pregunta:"¿Qué conviene observar cuando se repite un número?",
+opciones:[
+"El número determina por sí solo toda la lectura.",
+"La repetición puede destacar un tema, pero hay que relacionarlo con cada palo y posición.",
+"Las tres cartas significan exactamente lo mismo."
+],
+correcta:1,
+explicacion:"Los números repetidos pueden destacar una etapa o patrón. El palo y el significado particular de cada carta aportan matices distintos."
+},
+{
+tema:"AMOR",
+titulo:"Interpretar una carta de amor",
+simbolo:"♡",
+carta:"DOS DE COPAS",
+pregunta:"¿Qué representa habitualmente en una lectura de vínculos?",
+opciones:[
+"Ausencia total de conexión.",
+"Encuentro, reciprocidad, cooperación o intercambio emocional.",
+"Una obligación financiera."
+],
+correcta:1,
+explicacion:"El Dos de Copas suele asociarse con conexión, encuentro y reciprocidad. No demuestra por sí solo lo que otra persona siente; se interpreta simbólicamente dentro de la tirada."
+},
+{
+tema:"CARTAS DIFÍCILES",
+titulo:"Comprender la transformación",
+simbolo:"✦",
+carta:"LA MUERTE",
+pregunta:"¿Cuál es una interpretación tradicional adecuada?",
+opciones:[
+"Predice necesariamente una muerte física.",
+"Simboliza cierre, transformación y transición entre etapas.",
+"Siempre significa fracaso."
+],
+correcta:1,
+explicacion:"La Muerte representa simbólicamente transformación, cierre y renovación. No debe utilizarse para anunciar literalmente la muerte de alguien."
+},
+{
+tema:"TIRADAS",
+titulo:"Leer una secuencia",
+simbolo:"☼",
+carta:"CINCO DE COPAS · EL ERMITAÑO · EL SOL",
+pregunta:"Si estas cartas ocupan pasado, presente y posible evolución, ¿cómo conviene leerlas?",
+opciones:[
+"Como tres significados aislados.",
+"Como una secuencia que puede narrar pesar, reflexión y una perspectiva más clara.",
+"Ignorando las dos primeras cartas."
+],
+correcta:1,
+explicacion:"Una tirada puede narrar una evolución simbólica. El Cinco de Copas sugiere pesar, El Ermitaño introspección y El Sol claridad o vitalidad. No garantiza un resultado futuro."
+},
+{
+tema:"ÉTICA",
+titulo:"Comunicar una carta difícil",
+simbolo:"⚔",
+carta:"TRES DE ESPADAS",
+pregunta:"¿Qué debería evitar un tarotista al explicar esta carta?",
+opciones:[
+"Presentar una interpretación dolorosa como una certeza inevitable.",
+"Considerar la pregunta y las cartas que la acompañan.",
+"Explicar que existen distintos matices posibles."
+],
+correcta:0,
+explicacion:"Una lectura responsable no transforma símbolos en amenazas ni certezas. El Tres de Espadas puede relacionarse con dolor, decepción o una verdad difícil de procesar, según el contexto."
+},
+{
+tema:"LECTURA COMPLETA",
+titulo:"Construir una síntesis",
+simbolo:"✦",
+carta:"LA ESTRELLA · OCHO DE COPAS · EL SOL",
+pregunta:"¿Qué permite construir una interpretación coherente?",
+opciones:[
+"Elegir solo la carta más positiva.",
+"Relacionar pregunta, posiciones, significados y contexto.",
+"Enumerar palabras clave sin conectarlas."
+],
+correcta:1,
+explicacion:"Una lectura completa integra la pregunta, las posiciones, los significados y las combinaciones. La síntesis debe tener sentido como conjunto."
+},
+{
+tema:"PSICOLOGÍA",
+titulo:"El viaje del héroe",
+simbolo:"♙",
+carta:"EL LOCO",
+pregunta:"¿Qué arquetipo puede representar El Loco al comenzar un camino?",
+opciones:[
+"La negativa absoluta a cambiar.",
+"El comienzo, la apertura a la experiencia y el paso hacia lo desconocido.",
+"El resultado final de todo proceso."
+],
+correcta:1,
+explicacion:"El Loco puede simbolizar el inicio de una aventura, curiosidad y disposición a explorar. También invita a considerar la diferencia entre valentía e imprudencia."
+},
+{
+tema:"PSICOLOGÍA",
+titulo:"Explorar la sombra",
+simbolo:"☾",
+carta:"LA LUNA",
+pregunta:"En una lectura reflexiva, ¿qué pregunta se relaciona mejor con esta carta?",
+opciones:[
+"¿Cómo puedo negar todo lo que siento?",
+"¿Qué temores, dudas o suposiciones necesito examinar?",
+"¿Qué hecho futuro está garantizado?"
+],
+correcta:1,
+explicacion:"La Luna puede representar incertidumbre, imaginación, temor o información poco clara. Como ejercicio de reflexión, invita a separar los hechos de las interpretaciones."
+},
+{
+tema:"PSICOLOGÍA",
+titulo:"Reconocer una transformación",
+simbolo:"⟳",
+carta:"LA TORRE",
+pregunta:"¿Qué reflexión puede abrir esta carta?",
+opciones:[
+"¿Qué estructura quizá necesita ser revisada porque ya no funciona?",
+"¿Cómo puedo asegurar que nada cambie jamás?",
+"¿Por qué todo cambio tiene que ser una catástrofe?"
+],
+correcta:0,
+explicacion:"La Torre puede simbolizar una ruptura de estructuras, una revelación o la necesidad de revisar una base inestable. No significa que vaya a ocurrir una desgracia literal."
+},
+{
+tema:"PSICOLOGÍA",
+titulo:"Diferenciar miedo y realidad",
+simbolo:"◇",
+carta:"NUEVE DE ESPADAS",
+pregunta:"¿Cuál es una forma útil de trabajar con su simbolismo?",
+opciones:[
+"Dar por hecho que todos los temores se cumplirán.",
+"Distinguir las preocupaciones de los hechos y buscar qué se puede abordar.",
+"Evitar hablar de cualquier emoción."
+],
+correcta:1,
+explicacion:"El Nueve de Espadas se asocia con preocupación, culpa o angustia mental. Una pregunta reflexiva útil es qué evidencia existe y qué apoyo o acción podría ayudar."
+},
+{
+tema:"PSICOLOGÍA",
+titulo:"Comprender el deseo",
+simbolo:"♡",
+carta:"AS DE BASTOS",
+pregunta:"¿Qué pregunta de reflexión encaja con esta carta?",
+opciones:[
+"¿Cómo puedo impedir cualquier iniciativa?",
+"¿Qué proyecto, interés o impulso creativo quiero explorar?",
+"¿Qué deseo ajeno debo obedecer obligatoriamente?"
+],
+correcta:1,
+explicacion:"El As de Bastos suele simbolizar chispa creativa, iniciativa y energía naciente. Puede ayudar a identificar qué despierta entusiasmo y cómo convertirlo en un primer paso."
+},
+{
+tema:"CICLOS PERSONALES",
+titulo:"Reconocer el cierre de un ciclo",
+simbolo:"◎",
+carta:"EL MUNDO",
+pregunta:"¿Qué tema representa tradicionalmente?",
+opciones:[
+"Un ciclo que llega a su culminación, integración o cierre.",
+"Un comienzo sin relación con ninguna experiencia anterior.",
+"Un conflicto que nunca puede resolverse."
+],
+correcta:0,
+explicacion:"El Mundo se relaciona con culminación, integración y cierre de ciclo. En una reflexión personal, invita a reconocer aprendizajes y decidir qué viene después."
+},
+{
+tema:"TRABAJO",
+titulo:"Definir un objetivo profesional",
+simbolo:"♜",
+carta:"EL CARRO",
+pregunta:"¿Qué aplicación práctica tiene esta carta en una consulta laboral?",
+opciones:[
+"Esperar resultados sin actuar.",
+"Definir una dirección y organizar esfuerzos para avanzar.",
+"Renunciar de inmediato sin evaluar alternativas."
+],
+correcta:1,
+explicacion:"El Carro simboliza dirección, determinación y conducción. Puede invitar a fijar objetivos y pasos concretos, sin asegurar que el éxito esté garantizado."
+},
+{
+tema:"TRABAJO",
+titulo:"Reconocer una oportunidad",
+simbolo:"✧",
+carta:"AS DE OROS",
+pregunta:"En una lectura laboral, ¿qué posibilidad puede representar?",
+opciones:[
+"Una oportunidad material o un comienzo que merece evaluarse.",
+"Una garantía de riqueza inmediata.",
+"Un resultado que no requiere esfuerzo ni planificación."
+],
+correcta:0,
+explicacion:"El As de Oros puede simbolizar una oportunidad práctica, un recurso o un nuevo comienzo material. Es importante investigar las condiciones reales antes de decidir."
+},
+{
+tema:"TRABAJO",
+titulo:"Examinar un bloqueo",
+simbolo:"⚔",
+carta:"OCHO DE ESPADAS",
+pregunta:"¿Qué pregunta puede ayudar a explorar su simbolismo en el trabajo?",
+opciones:[
+"¿Qué opciones percibo como imposibles y cuáles puedo verificar?",
+"¿Por qué debo abandonar toda iniciativa?",
+"¿Qué decisión está predeterminada sin importar lo que haga?"
+],
+correcta:0,
+explicacion:"El Ocho de Espadas puede representar sensación de limitación o falta de opciones. Conviene examinar las restricciones reales y las que podrían surgir de nuestras propias suposiciones."
+},
+{
+tema:"DINERO",
+titulo:"Administrar recursos",
+simbolo:"◎",
+carta:"CUATRO DE OROS",
+pregunta:"¿Qué reflexión financiera puede sugerir simbólicamente?",
+opciones:[
+"Conviene gastar sin revisar prioridades.",
+"Es útil examinar cómo se equilibran seguridad, ahorro y flexibilidad.",
+"Es una garantía de que el dinero nunca faltará."
+],
+correcta:1,
+explicacion:"El Cuatro de Oros se asocia con conservación, seguridad y control. Puede servir para revisar hábitos de ahorro, sin concluir que una única estrategia financiera sea siempre correcta."
+},
+{
+tema:"DECISIONES",
+titulo:"Evaluar alternativas",
+simbolo:"⚖",
+carta:"LA JUSTICIA",
+pregunta:"Ante una decisión profesional importante, ¿qué enfoque representa mejor esta carta?",
+opciones:[
+"Elegir por impulso y evitar revisar consecuencias.",
+"Comparar información, responsabilidades y posibles consecuencias.",
+"Dejar que una carta decida por completo."
+],
+correcta:1,
+explicacion:"La Justicia se relaciona con equilibrio, responsabilidad y evaluación. Para una decisión real, contrastá las opciones con datos, condiciones y consecuencias concretas."
+},
+{
+tema:"NUMEROLOGÍA",
+titulo:"El significado del uno",
+simbolo:"1",
+carta:"AS DE BASTOS",
+pregunta:"¿Qué idea numerológica suele asociarse al uno?",
+opciones:[
+"Inicio, potencial e impulso.",
+"Culminación definitiva.",
+"Estancamiento inevitable."
+],
+correcta:0,
+explicacion:"En una lectura numerológica simbólica, el uno se vincula con comienzo, iniciativa y potencial. El palo de Bastos añade el matiz de acción, energía y creatividad."
+},
+{
+tema:"NUMEROLOGÍA",
+titulo:"El desafío del cinco",
+simbolo:"5",
+carta:"CINCO DE BASTOS",
+pregunta:"¿Cómo se combina el simbolismo del cinco con el palo de Bastos?",
+opciones:[
+"Como tensión, competencia o desafío en el terreno de la acción.",
+"Como garantía de armonía sin esfuerzo.",
+"Como símbolo exclusivo de introspección."
+],
+correcta:0,
+explicacion:"El cinco suele asociarse con tensión, cambio o desafío. En Bastos, puede expresarse como competencia, diferencias de ideas o esfuerzos que chocan."
+},
+{
+tema:"NUMEROLOGÍA",
+titulo:"Relacionar número y palo",
+simbolo:"5",
+carta:"CINCO DE COPAS Y CINCO DE OROS",
+pregunta:"¿Por qué dos cartas con el mismo número no significan lo mismo?",
+opciones:[
+"Porque el palo y la imagen modifican el área y el matiz de la interpretación.",
+"Porque los números no tienen ninguna utilidad interpretativa.",
+"Porque una de las dos cartas debe ignorarse."
+],
+correcta:0,
+explicacion:"El número aporta un patrón simbólico general; el palo concreta el área. El Cinco de Copas suele relacionarse con decepción emocional, mientras que el Cinco de Oros puede señalar carencia, dificultad o exclusión."
+},
+{
+tema:"NUMEROLOGÍA",
+titulo:"Comprender los números maestros",
+simbolo:"11",
+carta:"11 · REFERENCIA NUMEROLÓGICA",
+pregunta:"¿Cómo deben abordarse los números maestros 11, 22 y 33 en un curso de Tarot?",
+opciones:[
+"Como una categoría universal de los Arcanos Menores.",
+"Como referencias de algunas corrientes numerológicas, diferenciadas de la estructura tradicional de los palos.",
+"Como pruebas científicas de que ocurrirá un acontecimiento."
+],
+correcta:1,
+explicacion:"El 11, el 22 y el 33 se consideran números maestros en algunas tradiciones numerológicas. No forman una categoría universal de los Arcanos Menores, que incluyen cartas numeradas del As al Diez."
+}
+];
+
+let actual = 0;
+let completados = 0;
+let aciertos = 0;
+let bloqueado = false;
+
+const contenedor = document.getElementById("contenedor-ejercicios");
+
+function crearEjercicios() {
+    contenedor.innerHTML = ejercicios.map((e, i) => `
+        <section class="ejercicio-panel" id="ejercicio-${i}" ${i === 0 ? "" : 'style="display:none"'}>
+            <div class="ejercicio-etiqueta">EJERCICIO ${String(i+1).padStart(2,"0")} · ${e.tema}</div>
+            <h2>${e.titulo}</h2>
+            <div class="carta-practica">
+                <div class="simbolo">${e.simbolo}</div>
+                <small>CARTA / CONCEPTO</small>
+                <h3>${e.carta}</h3>
+            </div>
+            <div class="pregunta">
+                <span class="pregunta-label">PREGUNTA</span>
+                <p>${e.pregunta}</p>
+            </div>
+            <div class="opciones">
+                ${e.opciones.map((op, j) => `
+                    <button class="opcion" type="button" data-opcion="${j}" onclick="responder(${i},${j},this)">
+                        <span class="opcion-letra">${String.fromCharCode(65+j)}</span>
+                        <p>${op}</p>
+                    </button>
+                `).join("")}
+            </div>
+            <div class="resultado" id="resultado-${i}" aria-live="polite">
+                <div class="resultado-titulo"></div>
+                <p></p>
+            </div>
+            <button class="boton-siguiente-ejercicio" id="siguiente-${i}" type="button" onclick="siguiente()">
+                ${i === ejercicios.length-1 ? "VER RESULTADO FINAL →" : "SIGUIENTE EJERCICIO →"}
+            </button>
+        </section>
+    `).join("");
+}
+
+function actualizarProgreso() {
+    document.getElementById("contador").textContent =
+        `${completados} / ${ejercicios.length} completados`;
+    document.getElementById("barra").style.width =
+        `${(completados / ejercicios.length) * 100}%`;
+}
+
+function responder(indice, opcionElegida, boton) {
+    const panel = document.getElementById(`ejercicio-${indice}`);
+    if (panel.dataset.respondido === "true") return;
+
+    panel.dataset.respondido = "true";
+    completados++;
+
+    const e = ejercicios[indice];
+    const opciones = panel.querySelectorAll(".opcion");
+    const correcta = opcionElegida === e.correcta;
+
+    if (correcta) aciertos++;
+
+    opciones.forEach((op) => {
+        op.classList.add("bloqueada");
+        op.disabled = true;
+        if (Number(op.dataset.opcion) === e.correcta) {
+            op.classList.add("correcta");
+        }
+    });
+
+    if (!correcta) boton.classList.add("incorrecta");
+
+    const resultado = document.getElementById(`resultado-${indice}`);
+    resultado.querySelector(".resultado-titulo").textContent =
+        correcta ? "✓ RESPUESTA CORRECTA" : "REVISEMOS LA RESPUESTA";
+    resultado.querySelector("p").textContent = e.explicacion;
+    resultado.classList.add("visible");
+
+    document.getElementById(`siguiente-${indice}`).classList.add("visible");
+    actualizarProgreso();
+}
+
+function siguiente() {
+    document.getElementById(`ejercicio-${actual}`).style.display = "none";
+
+    if (actual < ejercicios.length - 1) {
+        actual++;
+        document.getElementById(`ejercicio-${actual}`).style.display = "block";
+        window.scrollTo({top: 0, behavior: "smooth"});
+    } else {
+        document.getElementById("resultado-final").classList.add("visible");
+        document.getElementById("resumen-final").textContent =
+            `Respuestas correctas: ${aciertos} de ${ejercicios.length}. Completaste los 25 ejercicios. Usá las explicaciones para repasar los temas que quieras profundizar.`;
+        window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
+    }
+}
+
+function reiniciar() {
+    actual = 0;
+    completados = 0;
+    aciertos = 0;
+
+    document.getElementById("resultado-final").classList.remove("visible");
+    crearEjercicios();
+    actualizarProgreso();
+    window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+crearEjercicios();
+actualizarProgreso();
+</script>
+</body>
+</html>
