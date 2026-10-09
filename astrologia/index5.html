@@ -1,1577 +1,1458 @@
-
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ASTRO ROJO | Técnicas predictivas y ciclos</title>
 
-    <style>
-        /* =========================
-           RESET
-        ========================= */
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta name="theme-color" content="#10070b">
 
-        html {
-            scroll-behavior: smooth;
-        }
+<meta
+    name="description"
+    content="Curso de astrología: técnicas predictivas, tránsitos planetarios, revolución solar y lunar, progresiones y ciclos de Saturno y Júpiter."
+>
 
-        body {
-            min-height: 100vh;
-            background:
-                radial-gradient(circle at 50% 0%, #3a1018 0%, transparent 38%),
-                linear-gradient(180deg, #10090c, #080708 70%);
-            color: #eee7e9;
-            font-family: Georgia, "Times New Roman", serif;
-            line-height: 1.8;
-        }
+<title>ASTRO ROJO — Técnicas predictivas y ciclos</title>
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+<link rel="stylesheet" href="style.css">
+```
 
-        button,
-        input {
-            font: inherit;
-        }
-
-        /* =========================
-           CONTENEDOR
-        ========================= */
-
-        .container {
-            width: min(1100px, 92%);
-            margin: auto;
-        }
-
-        /* =========================
-           NAVEGACIÓN
-        ========================= */
-
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            padding: 24px 0;
-            border-bottom: 1px solid #4b2029;
-        }
-
-        .brand {
-            color: #f0445e;
-            font-size: 1.25rem;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-
-        .topbar a.back {
-            color: #d9b9c0;
-            font-size: 0.9rem;
-        }
-
-        .topbar a.back:hover {
-            color: #ff536d;
-        }
-
-        /* =========================
-           PORTADA
-        ========================= */
-
-        .hero {
-            text-align: center;
-            padding: 95px 15px 80px;
-        }
-
-        .moon {
-            color: #ed405b;
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-        }
-
-        .eyebrow {
-            color: #ed5268;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            color: #fff0f2;
-            font-size: clamp(2.3rem, 6vw, 4.5rem);
-            line-height: 1.2;
-            margin-bottom: 24px;
-            letter-spacing: 2px;
-        }
-
-        .hero p {
-            max-width: 760px;
-            margin: auto;
-            color: #d3c2c6;
-            font-size: 1.08rem;
-        }
-
-        .hero-line {
-            width: 90px;
-            height: 3px;
-            background: #e62c49;
-            margin: 35px auto 0;
-        }
-
-        /* =========================
-           ÍNDICE
-        ========================= */
-
-        .index-box {
-            padding: 28px;
-            background: rgba(35, 14, 20, 0.75);
-            border: 1px solid #52212c;
-            border-radius: 18px;
-            margin-bottom: 65px;
-        }
-
-        .index-box h2 {
-            font-size: 1.25rem;
-            color: #ff6379;
-            margin-bottom: 18px;
-        }
-
-        .index-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 10px;
-        }
-
-        .index-links a {
-            display: block;
-            padding: 11px 14px;
-            background: #180d11;
-            border: 1px solid #3f1c25;
-            border-radius: 9px;
-            color: #e6d5d9;
-            transition: 0.25s;
-        }
-
-        .index-links a:hover {
-            border-color: #e62c49;
-            color: #ff6379;
-            transform: translateY(-2px);
-        }
-
-        /* =========================
-           SECCIONES
-        ========================= */
-
-        section {
-            margin-bottom: 75px;
-            scroll-margin-top: 25px;
-        }
-
-        .section-label {
-            color: #e94a64;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 8px;
-        }
-
-        h2 {
-            color: #fff0f2;
-            font-size: clamp(1.7rem, 4vw, 2.5rem);
-            line-height: 1.3;
-            margin-bottom: 22px;
-        }
-
-        h3 {
-            color: #ff687e;
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-        }
-
-        p {
-            margin-bottom: 16px;
-            color: #d8cbd0;
-        }
-
-        strong {
-            color: #fff0f2;
-        }
-
-        .intro {
-            max-width: 850px;
-        }
-
-        /* =========================
-           TARJETAS
-        ========================= */
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
-            gap: 20px;
-            margin-top: 28px;
-        }
-
-        .card {
-            padding: 25px;
-            background: linear-gradient(145deg, #211017, #100b0e);
-            border: 1px solid #51222e;
-            border-radius: 15px;
-            transition: 0.25s;
-        }
-
-        .card:hover {
-            border-color: #e23a55;
-            transform: translateY(-3px);
-        }
-
-        .symbol {
-            font-size: 1.8rem;
-            color: #ed405b;
-            margin-bottom: 12px;
-        }
-
-        .card p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* =========================
-           BLOQUES DESTACADOS
-        ========================= */
-
-        .note {
-            padding: 24px;
-            margin: 25px 0;
-            border-left: 3px solid #e63b56;
-            background: rgba(78, 20, 32, 0.25);
-            border-radius: 0 12px 12px 0;
-        }
-
-        .note p:last-child {
-            margin-bottom: 0;
-        }
-
-        .formula {
-            padding: 25px;
-            margin: 25px 0;
-            text-align: center;
-            background: #200d13;
-            border: 1px solid #682434;
-            border-radius: 13px;
-            color: #ff8293;
-            font-size: 1.05rem;
-        }
-
-        /* =========================
-           LISTAS
-        ========================= */
-
-        ul,
-        ol {
-            padding-left: 24px;
-            color: #d8cbd0;
-            margin: 12px 0 20px;
-        }
-
-        li {
-            margin-bottom: 9px;
-        }
-
-        /* =========================
-           TABLA
-        ========================= */
-
-        .table-wrap {
-            overflow-x: auto;
-            margin-top: 25px;
-            border: 1px solid #51222e;
-            border-radius: 12px;
-        }
-
-        table {
-            width: 100%;
-            min-width: 550px;
-            border-collapse: collapse;
-            background: #110b0e;
-        }
-
-        th,
-        td {
-            padding: 16px;
-            text-align: left;
-            border-bottom: 1px solid #3b1b24;
-        }
-
-        th {
-            background: #35111b;
-            color: #ff788b;
-        }
-
-        td {
-            color: #d9cbd0;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* =========================
-           EJERCICIO
-        ========================= */
-
-        .exercise {
-            padding: 28px;
-            background: #160d11;
-            border: 1px solid #632737;
-            border-radius: 16px;
-            margin-top: 25px;
-        }
-
-        .question {
-            padding: 18px 0;
-            border-bottom: 1px solid #39202a;
-        }
-
-        .question:last-of-type {
-            border-bottom: none;
-        }
-
-        .question label {
-            display: block;
-            color: #f1dfe4;
-            margin-bottom: 10px;
-        }
-
-        .question input {
-            width: 100%;
-            padding: 12px;
-            background: #0b080a;
-            color: #fff0f2;
-            border: 1px solid #51222e;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .question input:focus {
-            border-color: #ef4964;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 13px 23px;
-            border: 1px solid #ed405b;
-            border-radius: 8px;
-            background: #9f1730;
-            color: white;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-
-        .btn:hover {
-            background: #d52848;
-        }
-
-        /* =========================
-           CIERRE
-        ========================= */
-
-        .closing {
-            text-align: center;
-            padding: 45px 25px;
-            border: 1px solid #572230;
-            background: radial-gradient(circle, #32111c, #120b0e);
-            border-radius: 18px;
-        }
-
-        .closing h2 {
-            color: #ff6279;
-        }
-
-        .course-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .course-links a {
-            padding: 10px 17px;
-            border: 1px solid #733044;
-            border-radius: 8px;
-            color: #f0dce1;
-        }
-
-        .course-links a:hover {
-            color: #ff647b;
-            border-color: #ed405b;
-        }
-
-        footer {
-            padding: 35px 0;
-            margin-top: 70px;
-            border-top: 1px solid #3d1b25;
-            text-align: center;
-            color: #9f858d;
-            font-size: 0.85rem;
-        }
-
-        @media (max-width: 600px) {
-            .topbar {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .hero {
-                padding-top: 65px;
-            }
-
-            .index-box,
-            .card,
-            .exercise {
-                padding: 20px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <div class="container">
-
-        <!-- =========================
-             NAVEGACIÓN
-        ========================= -->
-
-        <header class="topbar">
-            <a class="brand" href="index.html">☾ ASTRO ROJO</a>
-            <a class="back" href="index.html">← Volver al inicio del curso</a>
-        </header>
-
-
-        <!-- =========================
-             PORTADA
-        ========================= -->
-
-        <main>
-
-            <div class="hero">
-                <div class="moon">☾</div>
-
-                <div class="eyebrow">
-                    Formación astrológica · Módulo 06
-                </div>
-
-                <h1>Técnicas predictivas<br>y ciclos</h1>
-
-                <p>
-                    Aprende a observar los movimientos planetarios, reconocer
-                    períodos de cambio y comprender los ciclos personales
-                    desde una perspectiva simbólica, reflexiva y consciente.
-                    La astrología puede ofrecer preguntas y temas para explorar,
-                    pero no determina de manera inevitable lo que va a suceder.
-                </p>
-
-                <div class="hero-line"></div>
-            </div>
-
-
-            <!-- =========================
-                 ÍNDICE
-            ========================= -->
-
-            <nav class="index-box">
-                <h2>Contenido del módulo</h2>
-
-                <div class="index-links">
-                    <a href="#introduccion">01. Introducción a las técnicas predictivas</a>
-                    <a href="#transitos">02. Tránsitos planetarios</a>
-                    <a href="#revolucion-solar">03. Revolución solar</a>
-                    <a href="#revolucion-lunar">04. Revolución lunar</a>
-                    <a href="#progresiones">05. Progresiones</a>
-                    <a href="#saturno">06. Ciclos de Saturno</a>
-                    <a href="#jupiter">07. Ciclos de Júpiter</a>
-                    <a href="#periodos">08. Cómo analizar períodos</a>
-                    <a href="#etica">09. Ética e interpretación responsable</a>
-                    <a href="#ejemplo">10. Ejemplo práctico</a>
-                    <a href="#ejercicios">11. Ejercicios</a>
-                </div>
-            </nav>
-
-
-            <!-- =========================
-                 INTRODUCCIÓN
-            ========================= -->
-
-            <section id="introduccion">
-
-                <div class="section-label">Capítulo 01</div>
-
-                <h2>Introducción a las técnicas predictivas</h2>
-
-                <div class="intro">
-                    <p>
-                        En astrología, las técnicas predictivas son métodos
-                        utilizados para estudiar cómo determinados ciclos
-                        planetarios se relacionan simbólicamente con diferentes
-                        etapas de la vida. No todas observan el tiempo de la
-                        misma manera: algunas estudian los planetas en movimiento
-                        actual, otras se centran en el año personal y otras
-                        describen procesos de desarrollo a largo plazo.
-                    </p>
-
-                    <p>
-                        El objetivo no es adivinar un acontecimiento exacto,
-                        sino explorar qué temas podrían adquirir relevancia,
-                        qué áreas invitan a prestar atención y cómo una persona
-                        puede responder a las circunstancias que atraviesa.
-                    </p>
-                </div>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <div class="symbol">☿</div>
-                        <h3>Tránsitos</h3>
-                        <p>
-                            Observan las posiciones actuales de los planetas
-                            en relación con la carta natal.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <div class="symbol">☉</div>
-                        <h3>Revolución solar</h3>
-                        <p>
-                            Organiza una lectura simbólica del ciclo anual
-                            que comienza alrededor del retorno del Sol natal.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <div class="symbol">☽</div>
-                        <h3>Revolución lunar</h3>
-                        <p>
-                            Estudia el retorno de la Luna a su posición natal
-                            y ofrece una mirada a un ciclo aproximado de un mes.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <div class="symbol">✧</div>
-                        <h3>Progresiones</h3>
-                        <p>
-                            Exploran simbólicamente los cambios internos,
-                            la maduración y el desarrollo personal.
-                        </p>
-                    </article>
-
-                </div>
-
-                <div class="note">
-                    <p>
-                        <strong>Idea central:</strong> una técnica temporal
-                        no debe interpretarse de manera aislada. La carta natal,
-                        el contexto real, las decisiones personales y la
-                        combinación de distintos indicadores aportan profundidad
-                        a la lectura.
-                    </p>
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 TRÁNSITOS
-            ========================= -->
-
-            <section id="transitos">
-
-                <div class="section-label">Capítulo 02</div>
-
-                <h2>Tránsitos planetarios</h2>
-
-                <p>
-                    Un tránsito se estudia comparando la posición actual de
-                    un planeta con las posiciones de la carta natal. Se analiza
-                    qué planeta transita, qué punto natal toca, qué aspecto
-                    forma y en qué casa ocurre el contacto.
-                </p>
-
-                <h3>¿Qué elementos debemos observar?</h3>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <h3>1. Planeta en tránsito</h3>
-                        <p>
-                            Describe el principio simbólico que se encuentra
-                            activo. Marte puede asociarse con iniciativa y
-                            afirmación; Venus, con vínculos, valores y placer;
-                            Saturno, con límites, estructura y responsabilidad.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>2. Punto natal activado</h3>
-                        <p>
-                            Es el planeta, ángulo o punto de la carta natal
-                            que recibe el contacto. Ayuda a identificar qué
-                            función personal se está explorando.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>3. Aspecto</h3>
-                        <p>
-                            La conjunción, oposición, cuadratura, trígono
-                            o sextil aporta información sobre la relación
-                            geométrica entre ambos factores.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>4. Casa astrológica</h3>
-                        <p>
-                            La casa añade un área temática: relaciones,
-                            trabajo, recursos, hogar, estudios, proyectos
-                            u otros asuntos representados por la carta.
-                        </p>
-                    </article>
-
-                </div>
-
-                <h3>Los planetas y sus ritmos</h3>
-
-                <p>
-                    Los planetas rápidos suelen producir contactos de duración
-                    breve. Los planetas lentos permanecen más tiempo cerca de
-                    un punto natal y pueden señalar períodos extensos de
-                    reflexión o reorganización simbólica.
-                </p>
-
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Planeta</th>
-                                <th>Temas simbólicos</th>
-                                <th>Ritmo general</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Luna</td>
-                                <td>Emociones, necesidades y hábitos</td>
-                                <td>Muy rápido</td>
-                            </tr>
-                            <tr>
-                                <td>Mercurio</td>
-                                <td>Ideas, conversaciones y decisiones</td>
-                                <td>Rápido</td>
-                            </tr>
-                            <tr>
-                                <td>Venus</td>
-                                <td>Vínculos, valores y disfrute</td>
-                                <td>Rápido</td>
-                            </tr>
-                            <tr>
-                                <td>Marte</td>
-                                <td>Acción, energía y afirmación</td>
-                                <td>Semanas o meses</td>
-                            </tr>
-                            <tr>
-                                <td>Júpiter</td>
-                                <td>Expansión, aprendizaje y oportunidades</td>
-                                <td>Aproximadamente un año por signo</td>
-                            </tr>
-                            <tr>
-                                <td>Saturno</td>
-                                <td>Estructura, límites y compromiso</td>
-                                <td>Aproximadamente 2 a 3 años por signo</td>
-                            </tr>
-                            <tr>
-                                <td>Urano, Neptuno y Plutón</td>
-                                <td>Cambios colectivos y procesos profundos</td>
-                                <td>Varios años por signo, según el planeta</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="note">
-                    <p>
-                        <strong>Importante:</strong> los tiempos son aproximados.
-                        La velocidad real varía, y los períodos de retrogradación
-                        pueden hacer que un tránsito contacte una posición natal
-                        varias veces. Un tránsito no garantiza un acontecimiento.
-                    </p>
-                </div>
-
-                <h3>Tránsitos directos, retrógrados y contactos repetidos</h3>
-
-                <p>
-                    Cuando un planeta parece retroceder visto desde la Tierra,
-                    hablamos de movimiento retrógrado aparente. En astrología,
-                    esto se utiliza como recurso simbólico para revisar, retomar
-                    o reconsiderar asuntos. No significa que todo deba detenerse
-                    ni que necesariamente ocurra algo negativo.
-                </p>
-
-                <p>
-                    Algunos contactos se producen una sola vez; otros pueden
-                    repetirse por la retrogradación. Una lectura cuidadosa
-                    observa el conjunto del período, sin asignar un destino
-                    diferente a cada pasada.
-                </p>
-
-            </section>
-
-
-            <!-- =========================
-                 REVOLUCIÓN SOLAR
-            ========================= -->
-
-            <section id="revolucion-solar">
-
-                <div class="section-label">Capítulo 03</div>
-
-                <h2>Revolución solar</h2>
-
-                <p>
-                    La revolución solar es una carta calculada para el momento
-                    exacto en que el Sol regresa a la misma longitud zodiacal
-                    que ocupaba al nacer. Este retorno ocurre cerca del
-                    cumpleaños, pero no necesariamente en el mismo día ni
-                    a la misma hora.
-                </p>
-
-                <h3>¿Qué se analiza?</h3>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <h3>Ascendente anual</h3>
-                        <p>
-                            Se interpreta como una orientación simbólica
-                            para abordar el ciclo, teniendo en cuenta su
-                            regente y su relación con la carta natal.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Casa del Sol</h3>
-                        <p>
-                            Señala el área de la carta donde se concentra
-                            el Sol en la revolución y que puede servir como
-                            tema central de reflexión anual.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Luna anual</h3>
-                        <p>
-                            Se estudian su signo, casa y aspectos para
-                            explorar necesidades emocionales, adaptación
-                            y formas de buscar seguridad.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Regente del Ascendente</h3>
-                        <p>
-                            Su posición por signo, casa y aspectos ayuda
-                            a desarrollar la interpretación del mapa anual.
-                        </p>
-                    </article>
-
-                </div>
-
-                <h3>Cómo relacionarla con la carta natal</h3>
-
-                <ol>
-                    <li>Identificar los elementos más destacados de la revolución.</li>
-                    <li>Examinar la carta natal para comprender el contexto de esos temas.</li>
-                    <li>Observar si hay contactos entre planetas o ángulos de ambas cartas.</li>
-                    <li>Buscar temas recurrentes, sin forzar coincidencias.</li>
-                    <li>Traducir la lectura en preguntas útiles y posibilidades de acción.</li>
-                </ol>
-
-                <div class="note">
-                    <p>
-                        <strong>Ejemplo simbólico:</strong> una casa relacionada
-                        con la vida profesional muy destacada podría invitar a
-                        reflexionar sobre objetivos, responsabilidades y
-                        dirección laboral. No permite asegurar un ascenso,
-                        un despido ni un resultado específico.
-                    </p>
-                </div>
-
-                <p>
-                    Algunas escuelas consideran el lugar donde se pasa el
-                    cumpleaños al calcular la revolución solar. Como existen
-                    distintas prácticas y criterios interpretativos, conviene
-                    especificar qué método se está utilizando.
-                </p>
-
-            </section>
-
-
-            <!-- =========================
-                 REVOLUCIÓN LUNAR
-            ========================= -->
-
-            <section id="revolucion-lunar">
-
-                <div class="section-label">Capítulo 04</div>
-
-                <h2>Revolución lunar</h2>
-
-                <p>
-                    La revolución lunar se calcula cuando la Luna vuelve a
-                    la misma longitud zodiacal que tenía al nacer. Sucede
-                    aproximadamente cada 27,3 días, aunque el intervalo exacto
-                    entre retornos puede variar.
-                </p>
-
-                <p>
-                    En una lectura astrológica se utiliza para explorar el
-                    tono simbólico de un ciclo mensual, especialmente en
-                    relación con necesidades emocionales, rutinas y asuntos
-                    cotidianos.
-                </p>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <h3>La Luna y su casa</h3>
-                        <p>
-                            La casa donde se encuentra la Luna puede orientar
-                            la reflexión hacia un área particular de la vida.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>El Ascendente mensual</h3>
-                        <p>
-                            Se considera una descripción simbólica de la forma
-                            de encarar el período, no una garantía de sucesos.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Aspectos lunares</h3>
-                        <p>
-                            Se estudian las relaciones de la Luna con otros
-                            planetas para ampliar los temas emocionales.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Relación con el año</h3>
-                        <p>
-                            Se puede comparar con la revolución solar y los
-                            tránsitos para distinguir temas mensuales de
-                            tendencias más prolongadas.
-                        </p>
-                    </article>
-
-                </div>
-
-                <div class="note">
-                    <p>
-                        <strong>Una buena pregunta mensual:</strong>
-                        “¿Qué necesidades merecen más atención durante
-                        este período y qué hábitos puedo ajustar para
-                        acompañarlas?”
-                    </p>
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 PROGRESIONES
-            ========================= -->
-
-            <section id="progresiones">
-
-                <div class="section-label">Capítulo 05</div>
-
-                <h2>Progresiones: una introducción</h2>
-
-                <p>
-                    Las progresiones secundarias son una técnica tradicional
-                    que utiliza la equivalencia simbólica de un día después
-                    del nacimiento por cada año de vida. Se emplean para
-                    explorar procesos de desarrollo y cambios internos a lo
-                    largo del tiempo.
-                </p>
-
-                <p>
-                    No describen necesariamente acontecimientos externos.
-                    Su lenguaje se enfoca en cómo pueden evolucionar la
-                    identidad, las necesidades y la manera de vivir determinadas
-                    experiencias.
-                </p>
-
-                <h3>Elementos que suelen estudiarse</h3>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <h3>Sol progresado</h3>
-                        <p>
-                            Se asocia simbólicamente con la evolución de la
-                            identidad, el propósito personal y la expresión
-                            consciente a lo largo de la vida.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Luna progresada</h3>
-                        <p>
-                            Se utiliza para observar cambios en las necesidades
-                            emocionales, la intimidad y la forma de responder
-                            al entorno.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Planetas y aspectos</h3>
-                        <p>
-                            Los cambios de signo y los aspectos progresados
-                            con puntos natales se incorporan a la lectura
-                            según la técnica elegida.
-                        </p>
-                    </article>
-
-                </div>
-
-                <h3>Progresiones y tránsitos: ¿son lo mismo?</h3>
-
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Técnica</th>
-                                <th>Qué observa</th>
-                                <th>Pregunta orientativa</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tránsitos</td>
-                                <td>Movimientos planetarios actuales respecto de la carta natal.</td>
-                                <td>¿Qué tema parece estar activándose?</td>
-                            </tr>
-                            <tr>
-                                <td>Progresiones</td>
-                                <td>Desarrollo simbólico a lo largo del tiempo.</td>
-                                <td>¿Qué está madurando o cambiando internamente?</td>
-                            </tr>
-                            <tr>
-                                <td>Revoluciones</td>
-                                <td>Una carta calculada para un retorno planetario.</td>
-                                <td>¿Qué temas puedo explorar en este ciclo?</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="note">
-                    <p>
-                        Las progresiones secundarias son solo una de varias
-                        técnicas existentes. Las direcciones simbólicas,
-                        las profecciones y otros métodos pertenecen a
-                        tradiciones diferentes y pueden utilizar reglas
-                        distintas.
-                    </p>
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 SATURNO
-            ========================= -->
-
-            <section id="saturno">
-
-                <div class="section-label">Capítulo 06</div>
-
-                <h2>Ciclos de Saturno</h2>
-
-                <p>
-                    Saturno tarda aproximadamente 29,5 años en completar
-                    una vuelta alrededor del Sol. En astrología se asocia
-                    con estructura, límites, responsabilidad, paciencia
-                    y construcción a largo plazo.
-                </p>
-
-                <p>
-                    Su ciclo suele estudiarse como un símbolo de maduración:
-                    revisar compromisos, reconocer límites reales, sostener
-                    esfuerzos y decidir qué estructuras necesitan fortalecerse
-                    o transformarse.
-                </p>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <div class="symbol">♄</div>
-                        <h3>Primer retorno</h3>
-                        <p>
-                            Cerca de los 29 o 30 años, Saturno vuelve a su
-                            posición natal. Se utiliza para reflexionar sobre
-                            autonomía, compromisos, dirección y prioridades.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <div class="symbol">♄</div>
-                        <h3>Oposición de Saturno</h3>
-                        <p>
-                            Aproximadamente a mitad del ciclo, se puede
-                            explorar el equilibrio entre responsabilidades,
-                            expectativas y necesidades personales.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <div class="symbol">♄</div>
-                        <h3>Segundo retorno</h3>
-                        <p>
-                            Cerca de los 58 o 60 años, invita a revisar
-                            estructuras de vida, legado, prioridades y
-                            formas sostenibles de compromiso.
-                        </p>
-                    </article>
-
-                </div>
-
-                <h3>Cómo interpretar un tránsito de Saturno</h3>
-
-                <ol>
-                    <li>Identificar el punto natal que recibe el contacto.</li>
-                    <li>Observar la casa implicada y los temas que representa.</li>
-                    <li>Analizar el aspecto y la duración aproximada del tránsito.</li>
-                    <li>Preguntar qué responsabilidades, límites o planes requieren revisión.</li>
-                    <li>Evitar asociar Saturno automáticamente con pérdidas o castigos.</li>
-                </ol>
-
-                <div class="note">
-                    <p>
-                        <strong>Ejemplo:</strong> Saturno en aspecto con Venus
-                        puede utilizarse para reflexionar sobre acuerdos,
-                        límites, valores y expectativas en los vínculos.
-                        No significa necesariamente una separación. También
-                        puede acompañar una etapa de mayor compromiso o
-                        de decisiones más realistas.
-                    </p>
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 JÚPITER
-            ========================= -->
-
-            <section id="jupiter">
-
-                <div class="section-label">Capítulo 07</div>
-
-                <h2>Ciclos de Júpiter</h2>
-
-                <p>
-                    Júpiter tarda cerca de 11,9 años en completar su órbita
-                    alrededor del Sol. Su ciclo se asocia simbólicamente con
-                    expansión, aprendizaje, confianza, búsqueda de sentido
-                    y ampliación de horizontes.
-                </p>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <div class="symbol">♃</div>
-                        <h3>Retorno de Júpiter</h3>
-                        <p>
-                            Ocurre aproximadamente cada 12 años. Puede
-                            utilizarse para revisar creencias, proyectos
-                            de crecimiento y oportunidades de aprendizaje.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <div class="symbol">♃</div>
-                        <h3>Oposición de Júpiter</h3>
-                        <p>
-                            Cerca de la mitad del ciclo invita a evaluar
-                            el equilibrio entre expansión, expectativas
-                            y recursos disponibles.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <div class="symbol">♃</div>
-                        <h3>Expansión con criterio</h3>
-                        <p>
-                            Júpiter también puede simbolizar exceso de
-                            confianza. Crecer de manera sostenible implica
-                            evaluar límites, costos y consecuencias.
-                        </p>
-                    </article>
-
-                </div>
-
-                <h3>Júpiter y las oportunidades</h3>
-
-                <p>
-                    En una lectura simbólica, un tránsito favorable de Júpiter
-                    puede invitar a explorar estudios, contactos, viajes,
-                    proyectos o nuevas perspectivas, según la casa y los
-                    aspectos implicados.
-                </p>
-
-                <p>
-                    Sin embargo, una oportunidad no es una promesa de éxito.
-                    Para evaluar una decisión real, también importan la
-                    preparación, los recursos, el contexto y las acciones
-                    concretas de la persona.
-                </p>
-
-                <div class="note">
-                    <p>
-                        <strong>Pregunta orientativa:</strong>
-                        “¿Dónde puedo crecer de forma realista y qué necesito
-                        aprender para aprovechar mejor mis posibilidades?”
-                    </p>
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 ANALIZAR PERÍODOS
-            ========================= -->
-
-            <section id="periodos">
-
-                <div class="section-label">Capítulo 08</div>
-
-                <h2>Cómo analizar un período paso a paso</h2>
-
-                <p>
-                    Una interpretación temporal sólida combina técnica,
-                    contexto y síntesis. No se trata de acumular predicciones,
-                    sino de distinguir los temas principales de los secundarios
-                    y construir una lectura coherente.
-                </p>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <h3>01. Define el período</h3>
-                        <p>
-                            Aclara si estudiarás una semana, un mes, un año
-                            o una etapa de varios años. La escala temporal
-                            determina qué técnicas pueden resultar útiles.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>02. Estudia la carta natal</h3>
-                        <p>
-                            Identifica los planetas, casas y aspectos
-                            relevantes. La carta natal funciona como marco
-                            de referencia de la interpretación.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>03. Selecciona los indicadores</h3>
-                        <p>
-                            Revisa tránsitos importantes y, si corresponde,
-                            la revolución solar, la lunar o las progresiones.
-                            No es necesario dar el mismo peso a todo.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>04. Busca temas recurrentes</h3>
-                        <p>
-                            Observa si distintas técnicas señalan una misma
-                            área simbólica. La repetición puede orientar
-                            la reflexión, pero no confirma un acontecimiento.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>05. Considera el contexto real</h3>
-                        <p>
-                            Ten en cuenta la etapa vital, los objetivos,
-                            las decisiones actuales y la información
-                            que la persona comparte.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>06. Formula posibilidades</h3>
-                        <p>
-                            Expresa temas a explorar, preguntas y alternativas.
-                            Evita presentar una lectura como un hecho
-                            inevitable o una certeza objetiva.
-                        </p>
-                    </article>
-
-                </div>
-
-                <div class="formula">
-                    Carta natal + técnica temporal + contexto real
-                    + decisiones personales = interpretación más completa
-                </div>
-
-                <h3>Cómo distinguir lo central de lo secundario</h3>
-
-                <p>
-                    Para no sobrecargar una lectura, puedes priorizar los
-                    contactos más relevantes por cercanía, duración,
-                    relación con puntos natales importantes y coherencia
-                    con el tema consultado.
-                </p>
-
-                <p>
-                    Después, compara los indicadores entre sí. Si varios
-                    sugieren temas de organización y responsabilidad,
-                    puedes explorar cómo la persona administra sus
-                    compromisos. No hace falta convertir esa coincidencia
-                    en una predicción de pérdida, ascenso o ruptura.
-                </p>
-
-            </section>
-
-
-            <!-- =========================
-                 ÉTICA
-            ========================= -->
-
-            <section id="etica">
-
-                <div class="section-label">Capítulo 09</div>
-
-                <h2>Interpretar sin convertir el futuro en destino</h2>
-
-                <p>
-                    Una lectura responsable reconoce los límites de la
-                    astrología. Las técnicas predictivas pertenecen a un
-                    sistema simbólico de interpretación y no constituyen
-                    una forma científicamente establecida de garantizar
-                    acontecimientos futuros.
-                </p>
-
-                <p>
-                    Por eso, el lenguaje que elegimos importa. Una frase
-                    categórica puede provocar miedo, condicionar decisiones
-                    o hacer que una posibilidad se viva como una sentencia.
-                </p>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <h3>Evita decir</h3>
-                        <p>
-                            “Vas a separarte este año”.<br>
-                            “Vas a perder tu trabajo”.<br>
-                            “Te va a ocurrir algo malo”.<br>
-                            “Esta fecha garantiza el éxito”.
-                        </p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Es preferible decir</h3>
-                        <p>
-                            “Este período puede invitar a revisar tus vínculos”.<br>
-                            “Podrías explorar tus objetivos laborales y tus límites”.<br>
-                            “Conviene observar qué necesidades requieren atención”.<br>
-                            “Puedes evaluar oportunidades y riesgos con calma”.
-                        </p>
-                    </article>
-
-                </div>
-
-                <h3>Principios para una lectura consciente</h3>
-
-                <ul>
-                    <li><strong>No determinismo:</strong> una configuración astrológica no fija un resultado.</li>
-                    <li><strong>Autonomía:</strong> la persona conserva su capacidad de decidir y actuar.</li>
-                    <li><strong>Contexto:</strong> una interpretación debe considerar las circunstancias reales.</li>
-                    <li><strong>Humildad:</strong> distingue una hipótesis simbólica de un hecho comprobado.</li>
-                    <li><strong>Responsabilidad:</strong> evita alimentar miedo o dependencia de las predicciones.</li>
-                    <li><strong>Prudencia:</strong> no uses la astrología como sustituto de asesoramiento médico, legal o financiero.</li>
-                </ul>
-
-                <div class="note">
-                    <p>
-                        <strong>Recordatorio:</strong> el propósito de una
-                        lectura no debería ser quitarle poder a la persona,
-                        sino ayudarla a formular mejores preguntas, reconocer
-                        opciones y tomar decisiones con mayor conciencia.
-                    </p>
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 EJEMPLO
-            ========================= -->
-
-            <section id="ejemplo">
-
-                <div class="section-label">Capítulo 10</div>
-
-                <h2>Ejemplo de interpretación integrada</h2>
-
-                <p>
-                    Imaginemos una carta ficticia en la que Saturno en tránsito
-                    forma un aspecto importante con Venus natal. La revolución
-                    solar también destaca simbólicamente las relaciones y los
-                    compromisos.
-                </p>
-
-                <h3>Interpretación paso a paso</h3>
-
-                <ol>
-                    <li>
-                        <strong>Indicador principal:</strong> Saturno y Venus
-                        permiten explorar límites, valores, compromisos y
-                        expectativas afectivas.
-                    </li>
-                    <li>
-                        <strong>Contexto natal:</strong> se observa en qué
-                        casa está Venus y qué significado tiene dentro de
-                        la carta completa.
-                    </li>
-                    <li>
-                        <strong>Marco anual:</strong> la revolución solar
-                        aporta otros temas del ciclo, sin confirmar por sí
-                        sola ningún resultado.
-                    </li>
-                    <li>
-                        <strong>Realidad personal:</strong> se pregunta
-                        cómo se encuentran los vínculos y qué decisiones
-                        están efectivamente sobre la mesa.
-                    </li>
-                    <li>
-                        <strong>Síntesis:</strong> el período puede servir
-                        para revisar acuerdos, comunicar necesidades,
-                        establecer límites o fortalecer un compromiso.
-                    </li>
-                </ol>
-
-                <div class="formula">
-                    Interpretación final: “Puede ser un período útil para
-                    evaluar qué vínculos y acuerdos son sostenibles para ti,
-                    qué necesitas comunicar y qué límites quieres establecer”.
-                </div>
-
-                <p>
-                    Esta lectura propone un campo de reflexión. No afirma
-                    que vaya a ocurrir una separación, un compromiso o
-                    cualquier otro acontecimiento específico.
-                </p>
-
-            </section>
-
-
-            <!-- =========================
-                 EJERCICIOS
-            ========================= -->
-
-            <section id="ejercicios">
-
-                <div class="section-label">Capítulo 11</div>
-
-                <h2>Ejercicios de práctica</h2>
-
-                <p>
-                    Responde las siguientes preguntas para practicar la
-                    integración de técnicas temporales y el uso de un
-                    lenguaje no determinista. Tus respuestas se pueden
-                    guardar en un archivo de texto.
-                </p>
-
-                <div class="exercise">
-
-                    <form id="exercise-form">
-
-                        <div class="question">
-                            <label for="r1">
-                                1. ¿Cuál es la diferencia principal entre
-                                un tránsito y una progresión?
-                            </label>
-                            <input id="r1" name="r1" type="text"
-                                placeholder="Escribe tu respuesta...">
-                        </div>
-
-                        <div class="question">
-                            <label for="r2">
-                                2. ¿Qué elementos analizarías en una
-                                revolución solar?
-                            </label>
-                            <input id="r2" name="r2" type="text"
-                                placeholder="Escribe tu respuesta...">
-                        </div>
-
-                        <div class="question">
-                            <label for="r3">
-                                3. ¿Qué temas simbólicos se asocian con
-                                el retorno de Saturno?
-                            </label>
-                            <input id="r3" name="r3" type="text"
-                                placeholder="Escribe tu respuesta...">
-                        </div>
-
-                        <div class="question">
-                            <label for="r4">
-                                4. ¿Por qué un tránsito de Júpiter no
-                                garantiza una oportunidad exitosa?
-                            </label>
-                            <input id="r4" name="r4" type="text"
-                                placeholder="Escribe tu respuesta...">
-                        </div>
-
-                        <div class="question">
-                            <label for="r5">
-                                5. Reformula esta frase de manera responsable:
-                                “Vas a terminar tu relación este año”.
-                            </label>
-                            <input id="r5" name="r5" type="text"
-                                placeholder="Escribe tu respuesta...">
-                        </div>
-
-                        <div class="question">
-                            <label for="r6">
-                                6. ¿Cómo combinarías una técnica temporal
-                                con el contexto real de una persona?
-                            </label>
-                            <input id="r6" name="r6" type="text"
-                                placeholder="Escribe tu respuesta...">
-                        </div>
-
-                        <button class="btn" type="button" id="save-answers">
-                            Guardar mis respuestas
-                        </button>
-
-                    </form>
-
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 CIERRE
-            ========================= -->
-
-            <section class="closing">
-
-                <div class="moon">☾</div>
-
-                <h2>El tiempo como herramienta de conciencia</h2>
-
-                <p>
-                    Las técnicas predictivas pueden ayudarte a organizar
-                    una lectura temporal, reconocer ciclos simbólicos y
-                    explorar diferentes posibilidades. Su valor está en
-                    la reflexión, no en imponer un destino.
-                </p>
-
-                <p>
-                    Una buena interpretación conecta los símbolos con
-                    la realidad, respeta la autonomía de la persona y
-                    deja espacio para que la vida siga siendo abierta.
-                </p>
-
-                <div class="course-links">
-                    <a href="index.html">Introducción y signos</a>
-                    <a href="index2.html">Planetas</a>
-                    <a href="index3.html">Casas astrológicas</a>
-                    <a href="index5.html">Aspectos planetarios</a>
-                </div>
-
-            </section>
-
-        </main>
-
-
-        <!-- =========================
-             FOOTER
-        ========================= -->
-
-        <footer>
-            <p>☾ ASTRO ROJO</p>
-            <p>Estudio simbólico de la astrología · Módulo 06</p>
-        </footer>
+<main>
+
+```
+<!-- =========================
+     PORTADA
+========================== -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-orbit orbit-one"></div>
+    <div class="hero-orbit orbit-two"></div>
+
+    <div class="hero-content">
+
+        <p class="eyebrow">
+            ✦ CICLOS, TIEMPO Y LENGUAJE SIMBÓLICO ✦
+        </p>
+
+        <h1>
+            ASTRO
+            <br>
+            <span>ROJO</span>
+        </h1>
+
+        <h2>Técnicas predictivas y ciclos</h2>
+
+        <p class="hero-description">
+            Aprende a interpretar los movimientos planetarios,
+            los ciclos personales y las técnicas que permiten
+            explorar simbólicamente las distintas etapas de la vida.
+        </p>
+
+        <div class="hero-note">
+            <span>Tránsitos</span>
+            <span>Revoluciones</span>
+            <span>Progresiones</span>
+            <span>Ciclos</span>
+        </div>
 
     </div>
 
+    <div class="hero-moon">
 
-    <!-- =========================
-         GUARDAR EJERCICIOS
-    ========================= -->
+        <div class="moon-ring"></div>
 
-    <script>
-        document.getElementById("save-answers").addEventListener("click", function () {
+        <span class="moon-symbol">☾</span>
 
-            const questions = [
-                "1. Diferencia entre tránsitos y progresiones",
-                "2. Elementos de una revolución solar",
-                "3. Retorno de Saturno",
-                "4. Júpiter y las oportunidades",
-                "5. Interpretación no determinista",
-                "6. Técnica temporal y contexto real"
-            ];
+        <span class="moon-star star-one">✦</span>
+        <span class="moon-star star-two">✧</span>
+        <span class="moon-star star-three">✦</span>
 
-            let content = "ASTRO ROJO\n";
-            content += "Técnicas predictivas y ciclos — Ejercicios\n\n";
+    </div>
 
-            questions.forEach(function (question, index) {
-                const input = document.getElementById("r" + (index + 1));
-                content += question + "\n";
-                content += (input.value.trim() || "Sin responder") + "\n\n";
-            });
+</section>
 
-            const blob = new Blob(
-                ["\uFEFF" + content],
-                { type: "text/plain;charset=utf-8" }
-            );
 
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
+<!-- =========================
+     RESUMEN DEL MÓDULO
+========================== -->
 
-            link.href = url;
-            link.download = "astro-rojo-tecnicas-predictivas-ejercicios.txt";
+<section class="course-strip">
 
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
+    <div class="course-strip-item">
+        <span>☉</span>
+        <p>Tránsitos planetarios</p>
+    </div>
 
-            URL.revokeObjectURL(url);
-        });
-    </script>
+    <div class="course-strip-item">
+        <span>☀</span>
+        <p>Revolución solar</p>
+    </div>
+
+    <div class="course-strip-item">
+        <span>☾</span>
+        <p>Revolución lunar</p>
+    </div>
+
+    <div class="course-strip-item">
+        <span>♄</span>
+        <p>Ciclos planetarios</p>
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTRODUCCIÓN
+========================== -->
+
+<section class="section" id="introduccion">
+
+    <div class="section-heading">
+
+        <span class="section-number">01</span>
+
+        <div>
+            <p class="eyebrow">COMPRENDER EL TIEMPO</p>
+
+            <h2>
+                ¿Qué son las técnicas
+                <span>predictivas?</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">✧</span>
+
+            <h3>Una mirada sobre los ciclos</h3>
+
+            <p>
+                Dentro de la astrología, las técnicas predictivas
+                son métodos simbólicos que se utilizan para estudiar
+                determinados períodos de la vida y relacionarlos
+                con la carta natal.
+            </p>
+
+            <p>
+                En lugar de observar solamente la posición de los
+                planetas al nacer, estas técnicas consideran sus
+                movimientos posteriores y los ciclos que forman
+                a lo largo del tiempo.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">☉</span>
+
+            <h3>¿Para qué se utilizan?</h3>
+
+            <p>
+                Pueden utilizarse para explorar etapas de
+                crecimiento, cambios de prioridades, desafíos
+                personales, oportunidades de aprendizaje y momentos
+                de revisión.
+            </p>
+
+            <p>
+                Su propósito es construir una interpretación
+                coherente que dialogue con la carta natal, no
+                anunciar acontecimientos inevitables.
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>Un principio fundamental</h3>
+
+        <p>
+            La astrología es un sistema simbólico de interpretación
+            y sus afirmaciones predictivas no cuentan con validación
+            científica sólida. Por eso, sus técnicas deben estudiarse
+            como herramientas interpretativas, sin presentarlas como
+            métodos capaces de garantizar acontecimientos futuros.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TRÁNSITOS PLANETARIOS
+========================== -->
+
+<section class="section section-dark" id="transitos">
+
+    <div class="section-heading">
+
+        <span class="section-number">02</span>
+
+        <div>
+            <p class="eyebrow">EL CIELO EN MOVIMIENTO</p>
+
+            <h2>
+                Tránsitos
+                <span>planetarios</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <p>
+        Los tránsitos consisten en comparar las posiciones actuales
+        de los planetas con las posiciones que tenían en la carta
+        natal. En astrología, esta comparación se utiliza para
+        interpretar simbólicamente los temas que podrían cobrar
+        relevancia durante un período.
+    </p>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">☿</span>
+
+            <h3>Planetas rápidos</h3>
+
+            <p>
+                La Luna, Mercurio, Venus y Marte recorren el zodíaco
+                con relativa rapidez. Sus tránsitos suelen estudiarse
+                para observar variaciones cotidianas, emocionales,
+                comunicativas, vinculares y de iniciativa.
+            </p>
+
+            <p>
+                Debido a su frecuencia, conviene interpretar sus
+                contactos dentro de un contexto más amplio.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">♄</span>
+
+            <h3>Planetas lentos</h3>
+
+            <p>
+                Júpiter, Saturno, Urano, Neptuno y Plutón permanecen
+                durante períodos más prolongados en una zona del
+                zodíaco. Sus tránsitos suelen utilizarse para explorar
+                procesos amplios y cambios graduales.
+            </p>
+
+            <p>
+                En una interpretación astrológica, su importancia
+                depende de los contactos con la carta natal y de
+                los temas que se repiten.
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="section-heading">
+
+        <span class="section-number">03</span>
+
+        <div>
+            <p class="eyebrow">CÓMO LEER UN TRÁNSITO</p>
+
+            <h2>
+                Los elementos
+                <span>principales</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <h3>El planeta en tránsito</h3>
+
+            <p>
+                Representa el principio simbólico que se está
+                considerando. Por ejemplo, Saturno suele asociarse
+                con responsabilidad, límites, estructura y maduración.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <h3>El aspecto</h3>
+
+            <p>
+                Es la relación angular entre el planeta en tránsito
+                y un punto de la carta natal. La conjunción, la
+                oposición, la cuadratura, el trígono y el sextil
+                son algunos de los aspectos más utilizados.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <h3>La casa natal</h3>
+
+            <p>
+                La casa donde ocurre el contacto permite explorar
+                el área de experiencia asociada simbólicamente:
+                vínculos, trabajo, recursos, hogar, estudios,
+                proyectos u otros asuntos.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <h3>La duración</h3>
+
+            <p>
+                Algunos tránsitos son breves; otros pueden sentirse
+                como procesos prolongados dentro de la interpretación
+                astrológica. Los movimientos retrógrados aparentes
+                pueden hacer que un planeta vuelva a contactar
+                un mismo punto en varias ocasiones.
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>¿Cómo interpretar un tránsito?</h3>
+
+        <p>
+            No alcanza con conocer el significado aislado de un
+            planeta. Se estudian el planeta involucrado, el aspecto,
+            el punto natal que recibe el contacto, la casa relacionada
+            y el contexto general de la carta. Después se formula
+            una hipótesis simbólica, no una predicción cerrada.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REVOLUCIÓN SOLAR
+========================== -->
+
+<section class="section" id="revolucion-solar">
+
+    <div class="section-heading">
+
+        <span class="section-number">04</span>
+
+        <div>
+            <p class="eyebrow">UN NUEVO CICLO ANUAL</p>
+
+            <h2>
+                Revolución
+                <span>solar</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <p>
+        La revolución solar es una carta calculada para el momento
+        exacto en que el Sol regresa a la misma longitud zodiacal
+        que ocupaba en el nacimiento. Esto sucede aproximadamente
+        una vez al año, cerca del cumpleaños, aunque no necesariamente
+        en la misma fecha u hora del calendario.
+    </p>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">☀</span>
+
+            <h3>¿Qué se analiza?</h3>
+
+            <p>
+                La revolución solar se interpreta como un mapa
+                simbólico del ciclo anual. Se observa junto con
+                la carta natal, que sigue siendo la referencia
+                principal para comprender la estructura general
+                de la persona.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">⌂</span>
+
+            <h3>El Ascendente del año</h3>
+
+            <p>
+                En la interpretación tradicional, el Ascendente
+                de la revolución solar se utiliza como una pista
+                sobre la manera de abordar el período. Su signo,
+                su casa y su regente se estudian en relación
+                con la carta natal.
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="section-heading">
+
+        <span class="section-number">05</span>
+
+        <div>
+            <p class="eyebrow">PIEZAS DE LA CARTA ANUAL</p>
+
+            <h2>
+                ¿Qué elementos
+                <span>observar?</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <h3>El Sol</h3>
+
+            <p>
+                Se examina la casa donde queda ubicado el Sol
+                de la revolución solar para explorar qué temas
+                podrían adquirir mayor atención dentro de la
+                lectura del año.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <h3>La Luna</h3>
+
+            <p>
+                Se asocia simbólicamente con necesidades emocionales,
+                hábitos, sensibilidad y formas de responder a las
+                experiencias del período.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <h3>El Ascendente y su regente</h3>
+
+            <p>
+                Se estudia el signo ascendente, la posición de
+                su planeta regente y los aspectos que recibe.
+                Estos elementos se interpretan como partes de
+                una misma estructura.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <h3>Los contactos con la carta natal</h3>
+
+            <p>
+                Comparar ambas cartas ayuda a identificar
+                correspondencias entre los temas natales y los
+                símbolos destacados en el nuevo ciclo anual.
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>Importante al calcularla</h3>
+
+        <p>
+            La ubicación geográfica utilizada para calcular la
+            revolución solar puede modificar las casas y los
+            ángulos de la carta. Existen diferentes criterios
+            entre astrólogos sobre el lugar de cálculo. Por eso,
+            es necesario aclarar qué método se está utilizando
+            y mantenerlo de forma coherente.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REVOLUCIÓN LUNAR
+========================== -->
+
+<section class="section section-dark" id="revolucion-lunar">
+
+    <div class="section-heading">
+
+        <span class="section-number">06</span>
+
+        <div>
+            <p class="eyebrow">EL CICLO EMOCIONAL</p>
+
+            <h2>
+                Revolución
+                <span>lunar</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <p>
+        La revolución lunar es una carta calculada cuando la Luna
+        regresa a la misma longitud zodiacal que ocupaba al nacer.
+        Este retorno ocurre aproximadamente cada 27,3 días,
+        aunque el intervalo entre retornos lunares puede variar
+        ligeramente.
+    </p>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">☾</span>
+
+            <h3>Un ciclo mensual simbólico</h3>
+
+            <p>
+                En astrología, esta carta se utiliza para explorar
+                el tono emocional de un período relativamente breve,
+                así como los asuntos cotidianos que podrían adquirir
+                relevancia en la interpretación.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">✧</span>
+
+            <h3>¿Qué conviene observar?</h3>
+
+            <p>
+                Se analiza el Ascendente de la revolución lunar,
+                la casa donde se encuentra la Luna, los aspectos
+                principales y la relación de estos elementos con
+                la carta natal y la revolución solar.
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="comparison">
+
+        <div class="comparison-item">
+
+            <h3>Revolución solar</h3>
+
+            <p>
+                Ofrece un marco simbólico anual para organizar
+                los temas que se estudian durante ese ciclo.
+            </p>
+
+        </div>
+
+        <div class="comparison-item">
+
+            <h3>Revolución lunar</h3>
+
+            <p>
+                Permite observar un período más corto y relacionarlo
+                con el contexto anual, sin considerarlo un pronóstico
+                independiente.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>Cómo combinar ambas</h3>
+
+        <p>
+            Primero se estudia la carta natal y la revolución solar.
+            Después se utiliza la revolución lunar como una capa
+            complementaria. No es necesario atribuir un significado
+            extraordinario a cada cambio mensual: la interpretación
+            debe mantener proporción y coherencia.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PROGRESIONES
+========================== -->
+
+<section class="section" id="progresiones">
+
+    <div class="section-heading">
+
+        <span class="section-number">07</span>
+
+        <div>
+            <p class="eyebrow">DESARROLLO SIMBÓLICO</p>
+
+            <h2>
+                Introducción a las
+                <span>progresiones</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <p>
+        Las progresiones son técnicas astrológicas que representan
+        simbólicamente la evolución de la carta natal. A diferencia
+        de los tránsitos, que consideran el movimiento real de los
+        planetas en el cielo, las progresiones se calculan mediante
+        reglas simbólicas específicas.
+    </p>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">☉</span>
+
+            <h3>Progresiones secundarias</h3>
+
+            <p>
+                Uno de los métodos más conocidos utiliza la
+                equivalencia simbólica de un día después del
+                nacimiento por cada año de vida. Por ejemplo,
+                para estudiar simbólicamente una etapa cercana
+                a los 30 años, se observa el cielo correspondiente
+                a unos 30 días después del nacimiento.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">☾</span>
+
+            <h3>La Luna progresada</h3>
+
+            <p>
+                En la interpretación astrológica, se observa
+                para explorar cambios simbólicos en las necesidades
+                emocionales, los intereses y la manera de
+                involucrarse con distintas experiencias.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">✦</span>
+
+            <h3>El Sol progresado</h3>
+
+            <p>
+                Se utiliza para estudiar procesos de identidad,
+                dirección personal y desarrollo gradual. Los
+                cambios de signo o los contactos con otros
+                puntos natales pueden interpretarse como
+                etapas simbólicas de transición.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">⌘</span>
+
+            <h3>¿Cómo se diferencian de los tránsitos?</h3>
+
+            <p>
+                Los tránsitos comparan el cielo actual con la carta
+                natal. Las progresiones emplean un sistema simbólico
+                para representar el desarrollo. Algunas escuelas
+                combinan ambas técnicas, pero conviene aprender
+                primero qué aporta cada una.
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>Una introducción, no una regla absoluta</h3>
+
+        <p>
+            Existen distintos tipos de progresiones y métodos
+            complementarios. En este módulo nos centramos en las
+            progresiones secundarias como introducción, sin
+            asumir que una posición progresada determina por sí
+            misma una experiencia concreta.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CICLOS DE SATURNO
+========================== -->
+
+<section class="section section-dark" id="saturno">
+
+    <div class="section-heading">
+
+        <span class="section-number">08</span>
+
+        <div>
+            <p class="eyebrow">RESPONSABILIDAD Y MADURACIÓN</p>
+
+            <h2>
+                Los ciclos de
+                <span>Saturno</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <p>
+        Saturno tarda aproximadamente 29,5 años en completar
+        una vuelta alrededor del Sol. En astrología, su ciclo
+        se relaciona simbólicamente con la responsabilidad,
+        los límites, la organización, el compromiso y la
+        construcción de estructuras duraderas.
+    </p>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">♄</span>
+
+            <h3>Primer retorno de Saturno</h3>
+
+            <p>
+                Sucede aproximadamente entre los 29 y 30 años.
+                Se interpreta tradicionalmente como una etapa
+                para revisar decisiones, responsabilidades,
+                proyectos y formas de organizar la vida adulta.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">♄</span>
+
+            <h3>Segundo retorno de Saturno</h3>
+
+            <p>
+                Ocurre aproximadamente entre los 58 y 60 años.
+                En una lectura simbólica, puede utilizarse para
+                reflexionar sobre prioridades, legado, límites
+                personales y la manera de invertir el tiempo.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">◐</span>
+
+            <h3>La oposición de Saturno</h3>
+
+            <p>
+                Cerca de la mitad del ciclo, alrededor de los
+                14 o 15 años y nuevamente alrededor de los 44
+                o 45, Saturno puede formar una oposición a su
+                posición natal. El momento exacto depende
+                de la carta y del movimiento planetario.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">✧</span>
+
+            <h3>La pregunta central</h3>
+
+            <p>
+                En vez de asociar Saturno automáticamente con
+                pérdidas o dificultades, podemos preguntar:
+                ¿qué necesita mayor estructura?, ¿qué compromiso
+                requiere atención?, ¿qué límite conviene reconocer?
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>Saturno no significa castigo</h3>
+
+        <p>
+            Un retorno de Saturno no garantiza una crisis,
+            una separación, un cambio laboral ni ningún otro
+            acontecimiento. Es una etapa que algunas tradiciones
+            astrológicas utilizan como símbolo para reflexionar
+            sobre madurez, decisiones y responsabilidades.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CICLOS DE JÚPITER
+========================== -->
+
+<section class="section" id="jupiter">
+
+    <div class="section-heading">
+
+        <span class="section-number">09</span>
+
+        <div>
+            <p class="eyebrow">CRECIMIENTO Y APRENDIZAJE</p>
+
+            <h2>
+                Los ciclos de
+                <span>Júpiter</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <p>
+        Júpiter tarda aproximadamente 11,86 años en completar
+        su órbita alrededor del Sol. Por eso, su retorno a la
+        posición natal ocurre aproximadamente cada 12 años.
+        En astrología, se asocia con expansión, aprendizaje,
+        creencias, búsqueda de sentido y ampliación de horizontes.
+    </p>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">♃</span>
+
+            <h3>Retorno de Júpiter</h3>
+
+            <p>
+                Cerca de los 12, 24, 36, 48 y 60 años puede
+                producirse un retorno, aunque las fechas exactas
+                varían. Simbólicamente, se utiliza para revisar
+                la relación con el aprendizaje, los proyectos,
+                la confianza y las oportunidades.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">◐</span>
+
+            <h3>La oposición de Júpiter</h3>
+
+            <p>
+                Aproximadamente a mitad de su ciclo, cerca de
+                los seis años desde un retorno, puede formar
+                una oposición a su posición natal. Algunas
+                interpretaciones la relacionan con revisar
+                expectativas, creencias y formas de crecimiento.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">✦</span>
+
+            <h3>El crecimiento consciente</h3>
+
+            <p>
+                Júpiter también invita a considerar los excesos:
+                ampliar un proyecto sin evaluar recursos,
+                confiar demasiado en una promesa o asumir que
+                toda oportunidad terminará bien.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">☉</span>
+
+            <h3>Preguntas para la lectura</h3>
+
+            <p>
+                ¿Qué quiero aprender?, ¿qué oportunidades
+                puedo evaluar de forma realista?, ¿qué creencia
+                estoy dispuesto a revisar?, ¿cómo puedo crecer
+                sin descuidar mis límites?
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>Expansión no significa éxito garantizado</h3>
+
+        <p>
+            Un retorno de Júpiter no asegura dinero, ascensos,
+            viajes ni resultados favorables. Su significado
+            astrológico puede utilizarse como una invitación
+            a examinar las posibilidades disponibles y tomar
+            decisiones informadas.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTEGRACIÓN
+========================== -->
+
+<section class="section section-dark" id="analisis">
+
+    <div class="section-heading">
+
+        <span class="section-number">10</span>
+
+        <div>
+            <p class="eyebrow">UN MÉTODO DE TRABAJO</p>
+
+            <h2>
+                Cómo analizar un
+                <span>período</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <p>
+        Para construir una interpretación ordenada, conviene
+        trabajar por etapas. Acumular técnicas, aspectos y
+        significados sin una pregunta central puede generar
+        conclusiones confusas o contradictorias.
+    </p>
+
+    <div class="interpretation-steps">
+
+        <article class="step-card">
+
+            <span class="step-number">01</span>
+
+            <h3>Definir el período</h3>
+
+            <p>
+                Establece qué intervalo deseas estudiar:
+                algunas semanas, varios meses o un ciclo anual.
+                La duración orienta la elección de las técnicas.
+            </p>
+
+        </article>
+
+        <article class="step-card">
+
+            <span class="step-number">02</span>
+
+            <h3>Consultar la carta natal</h3>
+
+            <p>
+                Identifica los temas natales relevantes y
+                comprende qué representan los planetas,
+                las casas y los aspectos involucrados.
+            </p>
+
+        </article>
+
+        <article class="step-card">
+
+            <span class="step-number">03</span>
+
+            <h3>Elegir los indicadores</h3>
+
+            <p>
+                Selecciona los tránsitos, la revolución solar,
+                la revolución lunar o las progresiones que
+                correspondan a tu pregunta. No es necesario
+                utilizar todas las técnicas al mismo tiempo.
+            </p>
+
+        </article>
+
+        <article class="step-card">
+
+            <span class="step-number">04</span>
+
+            <h3>Buscar temas recurrentes</h3>
+
+            <p>
+                Observa si diferentes indicadores apuntan
+                simbólicamente a un mismo asunto. Una coincidencia
+                puede enriquecer la lectura, pero no demuestra
+                que vaya a ocurrir un evento.
+            </p>
+
+        </article>
+
+        <article class="step-card">
+
+            <span class="step-number">05</span>
+
+            <h3>Considerar la realidad</h3>
+
+            <p>
+                Integra el contexto concreto, las circunstancias,
+                los recursos y las decisiones de la persona.
+                Una carta no reemplaza el conocimiento de su
+                situación real.
+            </p>
+
+        </article>
+
+        <article class="step-card">
+
+            <span class="step-number">06</span>
+
+            <h3>Formular posibilidades</h3>
+
+            <p>
+                Expresa los resultados como preguntas,
+                temas de reflexión o posibilidades simbólicas.
+                Deja espacio para la autonomía, los cambios
+                y las distintas formas de vivir un período.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTERPRETACIÓN RESPONSABLE
+========================== -->
+
+<section class="section" id="responsabilidad">
+
+    <div class="section-heading">
+
+        <span class="section-number">11</span>
+
+        <div>
+            <p class="eyebrow">ÉTICA DE LA INTERPRETACIÓN</p>
+
+            <h2>
+                Interpretar sin
+                <span>determinismo</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <p>
+        Una lectura responsable reconoce que los símbolos pueden
+        tener diferentes significados según la persona y su
+        contexto. No se trata de eliminar toda interpretación
+        posible, sino de comunicarla con prudencia y sin convertir
+        una hipótesis en una sentencia.
+    </p>
+
+    <div class="comparison">
+
+        <div class="comparison-item">
+
+            <h3>Evitar afirmaciones absolutas</h3>
+
+            <p>
+                “Te vas a separar porque Venus está en tensión”.
+            </p>
+
+            <p>
+                “Vas a perder tu trabajo durante este tránsito”.
+            </p>
+
+            <p>
+                “Saturno te va a castigar”.
+            </p>
+
+        </div>
+
+        <div class="comparison-item">
+
+            <h3>Preferir un lenguaje abierto</h3>
+
+            <p>
+                “Este simbolismo puede invitarte a revisar
+                los acuerdos y las necesidades de tus vínculos”.
+            </p>
+
+            <p>
+                “Podría ser útil evaluar tus objetivos laborales
+                y la estabilidad de tus planes”.
+            </p>
+
+            <p>
+                “Este ciclo puede servir para reflexionar sobre
+                tus responsabilidades y tus límites”.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">✧</span>
+
+            <h3>Respetar la autonomía</h3>
+
+            <p>
+                La persona no debe sentir que perdió el control
+                de su vida por una interpretación astrológica.
+                Sus decisiones, circunstancias y acciones
+                siguen siendo importantes.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">☾</span>
+
+            <h3>Reconocer los límites</h3>
+
+            <p>
+                Una interpretación astrológica no reemplaza
+                el asesoramiento médico, psicológico, jurídico
+                ni financiero. Tampoco debe utilizarse para
+                generar miedo o dependencia.
+            </p>
+
+        </article>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>Una regla para recordar</h3>
+
+        <p>
+            Describe el simbolismo, plantea preguntas útiles
+            y ofrece posibilidades. Evita anunciar desgracias,
+            garantizar resultados o afirmar que un planeta
+            obliga a alguien a actuar de una manera determinada.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     EJEMPLO INTEGRADOR
+========================== -->
+
+<section class="section section-dark" id="ejemplo">
+
+    <div class="section-heading">
+
+        <span class="section-number">12</span>
+
+        <div>
+            <p class="eyebrow">LLEVAR LA TEORÍA A LA PRÁCTICA</p>
+
+            <h2>
+                Un ejemplo de
+                <span>interpretación</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <article class="content-card">
+
+        <h3>Situación hipotética</h3>
+
+        <p>
+            Imaginemos que una persona desea estudiar los próximos
+            meses porque está pensando en reorganizar su vida
+            profesional. En su lectura astrológica encuentra un
+            tránsito de Saturno relacionado simbólicamente con
+            sus responsabilidades y una revolución solar en la
+            que el trabajo aparece como uno de los temas destacados.
+        </p>
+
+        <p>
+            Una interpretación determinista afirmaría que la persona
+            perderá su empleo o atravesará una crisis inevitable.
+            Sin embargo, los símbolos no permiten concluir eso.
+        </p>
+
+        <h3>Cómo construir una lectura responsable</h3>
+
+        <p>
+            Primero se revisa la carta natal y el significado
+            de los indicadores. Después se considera el contexto
+            laboral real de la persona y se formulan preguntas:
+            ¿sus responsabilidades actuales son sostenibles?,
+            ¿necesita establecer límites?, ¿qué habilidades
+            quiere desarrollar?, ¿qué cambios puede planificar?
+        </p>
+
+        <p>
+            La lectura se convierte así en una herramienta
+            de reflexión. No determina el resultado, no sustituye
+            la evaluación práctica y no elimina la capacidad
+            de elegir.
+        </p>
+
+    </article>
+
+</section>
+
+
+<!-- =========================
+     EJERCICIOS
+========================== -->
+
+<section class="section" id="ejercicios">
+
+    <div class="section-heading">
+
+        <span class="section-number">13</span>
+
+        <div>
+            <p class="eyebrow">INTEGRAR LO APRENDIDO</p>
+
+            <h2>
+                Ejercicios de
+                <span>práctica</span>
+            </h2>
+        </div>
+
+    </div>
+
+    <div class="content-grid">
+
+        <article class="content-card">
+
+            <span class="card-symbol">01</span>
+
+            <h3>Reconocer un tránsito</h3>
+
+            <p>
+                Elige un planeta en tránsito y describe su
+                significado simbólico. Después identifica
+                qué punto de la carta natal contacta y qué
+                aspecto forma.
+            </p>
+
+            <p>
+                Escribe dos interpretaciones posibles sin
+                anunciar un acontecimiento inevitable.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">02</span>
+
+            <h3>Leer una revolución solar</h3>
+
+            <p>
+                Observa el Ascendente, su regente, la posición
+                del Sol y la Luna. Anota tres temas que podrían
+                explorarse durante el año y relaciónalos
+                con la carta natal.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">03</span>
+
+            <h3>Comparar ciclos</h3>
+
+            <p>
+                Explica con tus palabras la diferencia entre
+                un retorno de Saturno y uno de Júpiter.
+                ¿Qué preguntas simbólicas podrías formular
+                para cada ciclo?
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">04</span>
+
+            <h3>Reformular una predicción</h3>
+
+            <p>
+                Transforma la frase “vas a tener problemas
+                en tu relación” en una interpretación abierta
+                que invite a revisar necesidades, comunicación
+                y acuerdos sin dar por hecho un resultado.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">05</span>
+
+            <h3>Integrar las técnicas</h3>
+
+            <p>
+                Imagina que un tránsito, una revolución solar
+                y una progresión parecen relacionarse con
+                un mismo tema. Redacta una síntesis breve
+                y explica qué información adicional necesitarías
+                antes de sacar conclusiones.
+            </p>
+
+        </article>
+
+        <article class="content-card">
+
+            <span class="card-symbol">06</span>
+
+            <h3>Reflexionar sobre la ética</h3>
+
+            <p>
+                Escribe tres frases que evitarías en una
+                consulta y tres alternativas que respeten
+                la autonomía de la persona. Explica por qué
+                es importante comunicar los límites de
+                una interpretación astrológica.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CIERRE
+========================== -->
+
+<section class="final-section">
+
+    <div class="final-orbit"></div>
+
+    <p class="eyebrow">✦ FIN DEL MÓDULO ✦</p>
+
+    <h2>
+        El tiempo como
+        <span>herramienta de reflexión</span>
+    </h2>
+
+    <p>
+        Los tránsitos, las revoluciones, las progresiones
+        y los ciclos planetarios ofrecen diferentes lenguajes
+        simbólicos para estudiar etapas de la vida. Aprender
+        a integrarlos requiere práctica, criterio y respeto
+        por la libertad de cada persona.
+    </p>
+
+    <p>
+        La clave no es anunciar un destino inalterable,
+        sino construir interpretaciones coherentes que
+        ayuden a pensar, revisar prioridades y comprender
+        distintas posibilidades.
+    </p>
+
+    <a href="index5.html" class="siguiente-leccion">
+        ← VOLVER AL MÓDULO ANTERIOR
+    </a>
+
+    <a href="index.html" class="siguiente-leccion">
+        VOLVER AL INICIO →
+    </a>
+
+</section>
+
+
+<!-- =========================
+     PIE DE PÁGINA
+========================== -->
+
+<footer class="footer">
+
+    <a href="#inicio" class="footer-brand">
+        ASTRO <span>ROJO</span>
+    </a>
+
+    <p>
+        Un camino para estudiar los símbolos del cielo
+        y explorar el lenguaje de la astrología.
+    </p>
+
+    <p class="footer-copy">
+        © 2026 ASTRO ROJO · Curso de Astrología
+    </p>
+
+</footer>
+
+
+</main>
 
 </body>
-</html>
 
+</html>
