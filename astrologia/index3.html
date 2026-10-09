@@ -4,244 +4,835 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planetas y casas astrológicas — Astro Rojo</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta name="description" content="Curso de astrología ASTRO ROJO: aprende a interpretar las doce casas astrológicas, los planetas en las casas y las casas sin planetas.">
+
+    <title>Las doce casas astrológicas | ASTRO ROJO</title>
+
+    <style>
+        :root {
+            --rojo: #ff102f;
+            --rojo-claro: #ff4057;
+            --rojo-oscuro: #a90020;
+            --fondo: #090303;
+            --tarjeta: #190609;
+            --borde: #861126;
+            --texto: #fff1f2;
+            --texto-suave: #d5bfc2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: var(--texto);
+            background:
+                radial-gradient(
+                    circle at top,
+                    #460813 0%,
+                    #190407 38%,
+                    #090303 75%
+                );
+            line-height: 1.75;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 55px 15px 45px;
+            border-bottom: 1px solid var(--borde);
+            background: linear-gradient(
+                180deg,
+                rgba(120, 0, 22, 0.32),
+                transparent
+            );
+        }
+
+        .marca {
+            color: var(--rojo);
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-shadow: 0 0 25px rgba(255, 16, 47, 0.35);
+        }
+
+        .subtitulo {
+            color: var(--texto-suave);
+            font-size: 1.05rem;
+            margin-top: 5px;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 7px 16px;
+            border: 1px solid var(--rojo-oscuro);
+            border-radius: 30px;
+            color: var(--rojo-claro);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        main {
+            padding-bottom: 70px;
+        }
+
+        .introduccion {
+            padding: 45px 0 30px;
+        }
+
+        h1, h2, h3 {
+            color: var(--rojo-claro);
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 18px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .texto-suave {
+            color: var(--texto-suave);
+        }
+
+        .panel {
+            background: linear-gradient(
+                145deg,
+                rgba(80, 8, 20, 0.55),
+                rgba(20, 5, 8, 0.9)
+            );
+            border: 1px solid var(--borde);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .panel strong {
+            color: var(--rojo-claro);
+        }
+
+        .rejilla {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            margin: 25px 0 45px;
+        }
+
+        .casa {
+            background: linear-gradient(
+                145deg,
+                #26070d,
+                #100406
+            );
+            border: 1px solid var(--borde);
+            border-radius: 17px;
+            padding: 24px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .casa:hover {
+            transform: translateY(-3px);
+            border-color: var(--rojo);
+        }
+
+        .numero {
+            display: inline-flex;
+            width: 43px;
+            height: 43px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(
+                135deg,
+                var(--rojo),
+                var(--rojo-oscuro)
+            );
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            box-shadow: 0 0 16px rgba(255, 16, 47, 0.2);
+        }
+
+        .tema {
+            display: inline-block;
+            color: #ff8796;
+            font-size: 0.88rem;
+            margin-bottom: 12px;
+        }
+
+        .subseccion {
+            margin-top: 42px;
+            scroll-margin-top: 20px;
+        }
+
+        .lista {
+            padding-left: 22px;
+            margin: 12px 0 18px;
+        }
+
+        .lista li {
+            margin-bottom: 10px;
+        }
+
+        .ejemplo {
+            background: rgba(120, 0, 22, 0.18);
+            border-left: 3px solid var(--rojo);
+            border-radius: 0 10px 10px 0;
+            padding: 16px 18px;
+            margin: 18px 0;
+        }
+
+        .ejemplo strong {
+            color: var(--rojo-claro);
+        }
+
+        .pregunta {
+            color: #ff8796;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .actividad {
+            background: linear-gradient(
+                135deg,
+                #3c0711,
+                #160407
+            );
+            border: 1px solid #b20b2b;
+            border-radius: 18px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .actividad label {
+            display: block;
+            margin: 15px 0 7px;
+            color: var(--rojo-claro);
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 115px;
+            resize: vertical;
+            padding: 13px;
+            color: var(--texto);
+            background: #0b0305;
+            border: 1px solid var(--borde);
+            border-radius: 10px;
+            font: inherit;
+        }
+
+        textarea:focus {
+            outline: 1px solid var(--rojo);
+        }
+
+        .boton {
+            display: inline-block;
+            border: 1px solid var(--rojo-claro);
+            border-radius: 10px;
+            padding: 11px 18px;
+            margin-top: 14px;
+            color: white;
+            background: linear-gradient(
+                135deg,
+                var(--rojo),
+                var(--rojo-oscuro)
+            );
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            box-shadow: 0 0 18px rgba(255, 16, 47, 0.3);
+        }
+
+        .navegacion {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 1px solid var(--borde);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            border-top: 1px solid var(--borde);
+            color: var(--texto-suave);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 700px) {
+            .rejilla {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding-top: 40px;
+            }
+
+            .panel,
+            .casa,
+            .actividad {
+                padding: 20px;
+            }
+
+            .navegacion {
+                flex-direction: column;
+            }
+
+            .navegacion .boton {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
+<header>
+    <div class="container">
+        <div class="marca">ASTRO ROJO</div>
+        <p class="subtitulo">Astrología · Simbolismo · Autoconocimiento</p>
+        <span class="etiqueta">Curso de astrología · Módulo 3</span>
+    </div>
+</header>
+
 <main class="container">
 
-    <header class="welcome">
-        <span class="simbolo">☉</span>
-        <p class="etiqueta">ASTRO ROJO · LECCIÓN 3</p>
-        <h1>Planetas y <span>casas astrológicas</span></h1>
-        <p class="subtitulo">
-            Descubrí qué simboliza cada planeta, qué significan
-            el Sol, la Luna y el Ascendente, y cómo se interpretan las casas.
-        </p>
-    </header>
+    <section class="introduccion">
+        <h1>Las doce casas astrológicas</h1>
 
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">01</span>
-            <div>
-                <p class="etiqueta">LOS TRES GRANDES</p>
-                <h2>Sol, Luna y Ascendente</h2>
-            </div>
-        </div>
-
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-icono">☉</span>
-                <h3>Sol</h3>
-                <p>Se asocia con la identidad, la vitalidad, la expresión personal y el desarrollo del sentido de propósito.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">☽</span>
-                <h3>Luna</h3>
-                <p>Se relaciona con las necesidades emocionales, los hábitos, la seguridad y las respuestas instintivas.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">↗</span>
-                <h3>Ascendente</h3>
-                <p>Es el signo que ascendía por el horizonte oriental al nacer. Se interpreta como la manera de abordar experiencias nuevas.</p>
-            </article>
-        </div>
-
-        <div class="introduccion">
-            <p>
-                Para calcular el Ascendente con precisión se necesita
-                la hora y el lugar de nacimiento, además de la fecha.
-                Una hora inexacta puede modificar el Ascendente y la
-                distribución de las casas.
-            </p>
-        </div>
-    </section>
-
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">02</span>
-            <div>
-                <p class="etiqueta">LOS PLANETAS</p>
-                <h2>Funciones simbólicas</h2>
-            </div>
-        </div>
-
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-icono">☿</span>
-                <h3>Mercurio</h3>
-                <p>Comunicación, pensamiento, aprendizaje e intercambio de información.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♀</span>
-                <h3>Venus</h3>
-                <p>Afecto, vínculos, gustos, valores y formas de disfrutar.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♂</span>
-                <h3>Marte</h3>
-                <p>Acción, iniciativa, deseo, impulso y maneras de afrontar desafíos.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♃</span>
-                <h3>Júpiter</h3>
-                <p>Expansión, creencias, búsqueda de sentido, oportunidades y aprendizaje.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♄</span>
-                <h3>Saturno</h3>
-                <p>Límites, responsabilidad, estructura, esfuerzo y maduración.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♅</span>
-                <h3>Urano</h3>
-                <p>Cambio, independencia, innovación y ruptura de patrones.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♆</span>
-                <h3>Neptuno</h3>
-                <p>Imaginación, sensibilidad, ideales, espiritualidad y límites difusos.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-icono">♇</span>
-                <h3>Plutón</h3>
-                <p>Transformación, poder, intensidad y procesos profundos de cambio.</p>
-            </article>
-        </div>
-
-        <div class="aviso">
-            <span class="aviso-icono">✦</span>
-            <p>
-                En astrología tradicional, Marte, Júpiter y Saturno
-                se consideran planetas clásicos junto con Mercurio y Venus.
-                Urano, Neptuno y Plutón se incorporaron a las interpretaciones
-                modernas. El Sol y la Luna se llaman luminarias.
-            </p>
-        </div>
-    </section>
-
-    <section class="contenido">
-        <div class="seccion-titulo">
-            <span class="numero-seccion">03</span>
-            <div>
-                <p class="etiqueta">LAS DOCE CASAS</p>
-                <h2>Áreas de experiencia</h2>
-            </div>
-        </div>
-
-        <div class="study-grid">
-            <article class="study-card">
-                <span class="card-numero">CASA 1</span>
-                <h3>Identidad</h3>
-                <p>Presencia, inicio, expresión personal y forma de afrontar el mundo.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 2</span>
-                <h3>Recursos y valores</h3>
-                <p>Recursos materiales, posesiones, valoración personal y prioridades.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 3</span>
-                <h3>Comunicación</h3>
-                <p>Aprendizaje cotidiano, intercambios, entorno próximo y hermanos.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 4</span>
-                <h3>Hogar y raíces</h3>
-                <p>Familia, intimidad, origen y sentido de pertenencia.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 5</span>
-                <h3>Creatividad</h3>
-                <p>Expresión creativa, placer, romances y proyectos personales.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 6</span>
-                <h3>Rutina y servicio</h3>
-                <p>Hábitos, tareas cotidianas, organización y trabajo diario.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 7</span>
-                <h3>Vínculos</h3>
-                <p>Pareja, asociaciones, acuerdos y relaciones de igual a igual.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 8</span>
-                <h3>Transformación</h3>
-                <p>Intimidad, recursos compartidos, pérdidas y cambios profundos.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 9</span>
-                <h3>Exploración</h3>
-                <p>Estudios superiores, filosofía, creencias y viajes lejanos.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 10</span>
-                <h3>Vocación pública</h3>
-                <p>Trayectoria profesional, responsabilidades, reputación y metas.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 11</span>
-                <h3>Comunidad</h3>
-                <p>Amistades, redes, grupos, proyectos compartidos y aspiraciones.</p>
-            </article>
-
-            <article class="study-card">
-                <span class="card-numero">CASA 12</span>
-                <h3>Mundo interior</h3>
-                <p>Retiro, introspección, procesos inconscientes y asuntos privados.</p>
-            </article>
-        </div>
-    </section>
-
-    <section class="principio">
-        <span class="principio-simbolo">✦</span>
-        <p class="etiqueta">MÉTODO DE INTERPRETACIÓN</p>
-        <h2>Planeta + signo + casa</h2>
         <p>
-            Para empezar a interpretar una posición, preguntate:
-            ¿qué función representa el planeta?, ¿cómo se expresa
-            mediante el signo?, ¿en qué área de experiencia aparece
-            según la casa? Esta combinación permite construir una
-            interpretación más completa.
+            Las casas astrológicas representan las distintas áreas de la vida
+            en las que se manifiestan los símbolos de una carta natal. Mientras
+            los planetas describen funciones y energías, y los signos muestran
+            cómo se expresan, las casas indican en qué ámbito de la experiencia
+            se desarrollan.
+        </p>
+
+        <p>
+            Aprender a interpretar las casas permite explorar temas como la
+            identidad, los recursos personales, la comunicación, la familia,
+            el amor, el trabajo, las relaciones, la transformación, las
+            creencias, la vocación, las amistades y el mundo inconsciente.
+        </p>
+
+        <div class="panel">
+            <h2>¿Cómo se organiza una carta natal?</h2>
+            <p>
+                La carta natal se divide en doce casas. Su distribución depende
+                de los datos de nacimiento y del sistema de casas utilizado.
+                El Ascendente marca el comienzo de la Casa 1 y constituye un
+                punto de referencia fundamental para interpretar el mapa.
+            </p>
+            <p>
+                <strong>Planetas:</strong> qué función o energía se expresa.
+            </p>
+            <p>
+                <strong>Signos:</strong> de qué manera se expresa esa energía.
+            </p>
+            <p>
+                <strong>Casas:</strong> en qué área de la vida se manifiesta.
+            </p>
+            <p class="texto-suave">
+                La astrología es un lenguaje simbólico e interpretativo. Sus
+                significados no deben tomarse como resultados científicos ni
+                como destinos inevitables.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Las doce casas, una por una</h2>
+        <p class="texto-suave">
+            Cada casa aborda un conjunto de experiencias. Su interpretación
+            se amplía al observar el signo de su cúspide, su planeta regente
+            y los planetas que se encuentran dentro de ella.
+        </p>
+
+        <div class="rejilla">
+
+            <article class="casa">
+                <span class="numero">1</span>
+                <h3>Casa 1 · Identidad</h3>
+                <span class="tema">El yo y la manera de presentarse</span>
+                <p>
+                    Se relaciona con la identidad, la apariencia, la actitud
+                    inicial y la forma de afrontar experiencias nuevas.
+                    El Ascendente es el punto de partida de esta casa.
+                </p>
+                <p><strong>Para interpretar:</strong> observa el signo ascendente,
+                    los planetas en Casa 1 y el regente del Ascendente.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Marte en Casa 1 puede simbolizar
+                    una forma directa, activa o enérgica de presentarse ante
+                    el mundo.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">2</span>
+                <h3>Casa 2 · Recursos y valores</h3>
+                <span class="tema">Dinero, posesiones, talentos y autoestima</span>
+                <p>
+                    Representa la relación con los recursos materiales, las
+                    capacidades personales, la seguridad y aquello que cada
+                    persona considera valioso.
+                </p>
+                <p><strong>Para interpretar:</strong> analiza cómo se construye
+                    la seguridad y cómo se administran los recursos.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Venus en Casa 2 puede asociarse
+                    simbólicamente con valorar la belleza, el disfrute, la
+                    armonía o los vínculos con los recursos.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">3</span>
+                <h3>Casa 3 · Comunicación</h3>
+                <span class="tema">Pensamiento, aprendizaje y entorno cercano</span>
+                <p>
+                    Se vincula con la comunicación cotidiana, el aprendizaje
+                    inicial, las preguntas, la escritura, los desplazamientos
+                    cortos y los vínculos con hermanos o personas cercanas.
+                </p>
+                <p><strong>Para interpretar:</strong> observa cómo se intercambia
+                    información y se procesa el entorno inmediato.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Mercurio en Casa 3 destaca
+                    simbólicamente la curiosidad, el intercambio de ideas y
+                    la necesidad de aprender.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">4</span>
+                <h3>Casa 4 · Familia y raíces</h3>
+                <span class="tema">Hogar, pertenencia e intimidad</span>
+                <p>
+                    Representa las raíces, la historia familiar, la vida
+                    privada y la sensación de pertenencia. También se relaciona
+                    con la base emocional desde la que una persona construye
+                    su mundo.
+                </p>
+                <p><strong>Para interpretar:</strong> considera el signo de la
+                    cúspide, los planetas presentes y el regente de la casa.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> La Luna en Casa 4 puede señalar
+                    una fuerte importancia simbólica de la intimidad, los
+                    recuerdos y la conexión con el hogar.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">5</span>
+                <h3>Casa 5 · Creatividad y placer</h3>
+                <span class="tema">Romance, expresión personal y juego</span>
+                <p>
+                    Se relaciona con la creatividad, los hobbies, el disfrute,
+                    el romance y la expresión espontánea. También se asocia
+                    tradicionalmente con los hijos.
+                </p>
+                <p><strong>Para interpretar:</strong> explora cómo la persona
+                    crea, disfruta, se expresa y busca experiencias estimulantes.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> El Sol en Casa 5 puede simbolizar
+                    una identidad que busca desarrollarse mediante la
+                    creatividad y la expresión personal.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">6</span>
+                <h3>Casa 6 · Trabajo cotidiano</h3>
+                <span class="tema">Rutinas, hábitos, servicio y organización</span>
+                <p>
+                    Representa las tareas diarias, los métodos de trabajo,
+                    los hábitos, la organización y la manera de contribuir
+                    mediante actividades concretas.
+                </p>
+                <p><strong>Para interpretar:</strong> observa qué rutinas ayudan
+                    a sostener el día a día y cómo se enfrenta la responsabilidad.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Saturno en Casa 6 puede simbolizar
+                    disciplina, constancia y necesidad de desarrollar una
+                    relación equilibrada con las obligaciones.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">7</span>
+                <h3>Casa 7 · Relaciones</h3>
+                <span class="tema">Pareja, asociaciones y acuerdos</span>
+                <p>
+                    Se vincula con las relaciones uno a uno, la pareja,
+                    las asociaciones, los contratos y la manera de encontrarse
+                    con otras personas en condiciones de reciprocidad.
+                </p>
+                <p><strong>Para interpretar:</strong> analiza las cualidades que
+                    se buscan en los vínculos y la forma de construir acuerdos.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Venus en Casa 7 puede destacar
+                    simbólicamente la cooperación, la armonía y la importancia
+                    de compartir experiencias.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">8</span>
+                <h3>Casa 8 · Transformación</h3>
+                <span class="tema">Intimidad, cambios y recursos compartidos</span>
+                <p>
+                    Representa los procesos de transformación profunda, la
+                    intimidad, la confianza, los recursos compartidos y la
+                    manera de afrontar pérdidas simbólicas o cierres de etapa.
+                </p>
+                <p><strong>Para interpretar:</strong> explora la relación con la
+                    vulnerabilidad, el control, la confianza y el cambio.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Plutón en Casa 8 puede simbolizar
+                    una búsqueda de profundidad y una atención especial a
+                    los procesos de cambio.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">9</span>
+                <h3>Casa 9 · Creencias y expansión</h3>
+                <span class="tema">Filosofía, estudios superiores y viajes</span>
+                <p>
+                    Se relaciona con las creencias, la filosofía, los estudios
+                    superiores, los viajes largos y la búsqueda de sentido.
+                    Invita a ampliar la perspectiva más allá de lo conocido.
+                </p>
+                <p><strong>Para interpretar:</strong> observa cómo se construyen
+                    las convicciones y qué experiencias amplían la visión del mundo.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Júpiter en Casa 9 puede asociarse
+                    con el interés por aprender, explorar otras culturas y
+                    desarrollar una visión amplia de la vida.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">10</span>
+                <h3>Casa 10 · Vocación y proyección</h3>
+                <span class="tema">Carrera, responsabilidades y reconocimiento</span>
+                <p>
+                    Se vincula con la vocación, los objetivos a largo plazo,
+                    la reputación, las responsabilidades públicas y la
+                    dirección que una persona busca construir en su vida.
+                </p>
+                <p><strong>Para interpretar:</strong> considera el Medio Cielo,
+                    los planetas presentes y el regente de la Casa 10.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> El Sol en Casa 10 puede simbolizar
+                    el deseo de desarrollar una identidad propia a través de
+                    metas, responsabilidades o contribuciones públicas.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">11</span>
+                <h3>Casa 11 · Amistades y proyectos</h3>
+                <span class="tema">Grupos, comunidad y aspiraciones futuras</span>
+                <p>
+                    Representa las amistades, los grupos, las redes de apoyo,
+                    los proyectos colectivos y las esperanzas relacionadas
+                    con el futuro.
+                </p>
+                <p><strong>Para interpretar:</strong> observa cómo se participa
+                    en grupos, qué ideales se comparten y qué objetivos se
+                    construyen con otras personas.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Urano en Casa 11 puede simbolizar
+                    afinidad con grupos originales, ideas innovadoras o formas
+                    poco convencionales de colaboración.
+                </div>
+            </article>
+
+            <article class="casa">
+                <span class="numero">12</span>
+                <h3>Casa 12 · Inconsciente e interioridad</h3>
+                <span class="tema">Retiro, mundo interno y procesos invisibles</span>
+                <p>
+                    Se asocia con la introspección, la vida interior, aquello
+                    que cuesta reconocer conscientemente, el retiro y la
+                    necesidad de espacios de silencio.
+                </p>
+                <p><strong>Para interpretar:</strong> explora los procesos
+                    internos, los patrones poco conscientes y la relación
+                    con la soledad o el descanso.</p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong> Neptuno en Casa 12 puede simbolizar
+                    sensibilidad hacia el mundo interior, imaginación y
+                    necesidad de límites claros.
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="subseccion">
+        <h2>Cómo interpretar planetas dentro de las casas</h2>
+
+        <p>
+            Un planeta dentro de una casa aporta su simbolismo al área de vida
+            representada por esa casa. No se interpreta de manera aislada:
+            conviene observar también el signo donde se encuentra, sus aspectos
+            con otros planetas y el regente de la casa.
+        </p>
+
+        <div class="panel">
+            <h3>Una fórmula práctica de interpretación</h3>
+            <p><strong>1. Identifica el planeta:</strong> ¿qué función simboliza?</p>
+            <p><strong>2. Observa el signo:</strong> ¿de qué manera se expresa?</p>
+            <p><strong>3. Ubica la casa:</strong> ¿en qué área de la vida se manifiesta?</p>
+            <p><strong>4. Revisa los aspectos:</strong> ¿cómo se relaciona con otros planetas?</p>
+            <p><strong>5. Integra el conjunto:</strong> construye una interpretación coherente, sin reducir a la persona a una sola posición.</p>
+        </div>
+
+        <div class="ejemplo">
+            <strong>Ejemplo completo: Marte en Libra en Casa 7.</strong>
+            <p>
+                Marte simboliza la iniciativa, el deseo y la manera de afrontar
+                conflictos. Libra se asocia con la búsqueda de equilibrio,
+                negociación y cooperación. La Casa 7 lleva estos temas al
+                terreno de los vínculos y los acuerdos.
+            </p>
+            <p>
+                Una lectura posible sería explorar cómo una persona expresa
+                sus deseos dentro de las relaciones, negocia diferencias y
+                aprende a defender sus necesidades sin perder de vista la
+                reciprocidad. No significa que todas las personas con esta
+                posición actúen de la misma manera.
+            </p>
+        </div>
+
+        <h3>¿Qué ocurre cuando hay varios planetas en una casa?</h3>
+        <p>
+            Una casa con varios planetas concentra distintos símbolos en
+            una misma área de la vida. Cada planeta aporta una función
+            diferente y puede relacionarse de formas variadas con los demás.
+            Esto no significa que esa área sea necesariamente mejor, peor
+            o más importante que todas las otras.
+        </p>
+
+        <h3>¿Y si un planeta está cerca de la cúspide?</h3>
+        <p>
+            La cúspide es el comienzo de una casa. Para saber en qué casa
+            está un planeta, conviene comprobar los grados exactos y el
+            sistema de casas utilizado. Las reglas para planetas próximos
+            a una cúspide pueden variar según la escuela astrológica.
         </p>
     </section>
 
-    <section class="siguiente-leccion">
-        <p class="etiqueta">SIGUIENTE ETAPA</p>
-        <h2>Aprendé a conectar las piezas</h2>
-        <p>En la próxima lección vas a estudiar los aspectos y practicar una lectura integrada.</p>
-        <a href="index2.html" class="boton-principal">← VOLVER A INDEX 2</a>
-        <br><br>
-        <a href="index4.html" class="boton-principal">IR A INDEX 4 <span>→</span></a>
+    <section class="subseccion">
+        <h2>¿Qué significa una casa sin planetas?</h2>
+
+        <p>
+            Una casa vacía es aquella que no contiene planetas natales dentro
+            de sus límites. Esto es completamente habitual: las doce casas
+            deben distribuirse entre un número limitado de planetas, por lo
+            que no todas estarán ocupadas.
+        </p>
+
+        <div class="panel">
+            <h3>Una casa vacía no significa una vida vacía</h3>
+            <p>
+                No indica que el área correspondiente vaya a estar ausente,
+                bloqueada o destinada al fracaso. Tampoco significa que
+                nunca ocurrirán acontecimientos relacionados con ella.
+            </p>
+            <p>
+                Para interpretarla, observa tres elementos:
+            </p>
+            <ul class="lista">
+                <li><strong>El signo de la cúspide:</strong> aporta matices simbólicos al área.</li>
+                <li><strong>El planeta regente:</strong> identifica el planeta que rige ese signo y dónde se encuentra en la carta.</li>
+                <li><strong>Los tránsitos y otros ciclos:</strong> dentro de la astrología, se utilizan para explorar cómo ciertos temas pueden adquirir relevancia en diferentes momentos.</li>
+            </ul>
+        </div>
+
+        <div class="ejemplo">
+            <strong>Ejemplo: Casa 7 sin planetas y cúspide en Aries.</strong>
+            <p>
+                Primero se observa Aries en la cúspide y se identifica a Marte
+                como su regente tradicional. Después se analiza dónde está
+                Marte, en qué signo y casa se encuentra y qué aspectos forma.
+                Esa información ayuda a construir una lectura simbólica de
+                las relaciones sin asumir que la persona tendrá dificultades
+                para encontrar pareja.
+            </p>
+        </div>
+
+        <h3>¿Todas las casas vacías se interpretan igual?</h3>
+        <p>
+            No. Una casa vacía en una carta puede tener un regente muy destacado
+            en otra parte del mapa. Por eso, la interpretación depende del
+            conjunto de la carta natal y no solamente de contar cuántos
+            planetas aparecen dentro de cada casa.
+        </p>
     </section>
 
-    <footer class="footer">
-        <span class="footer-simbolo">☾</span>
-        <p>ASTRO ROJO</p>
-        <span>Astrología · Tarot · Autoconocimiento</span>
-    </footer>
+    <section class="subseccion">
+        <h2>Cómo integrar las casas en una lectura</h2>
+
+        <p>
+            Para realizar una interpretación más completa, conecta las casas
+            relacionadas con un mismo tema. Por ejemplo, para explorar la
+            vida profesional puedes estudiar la Casa 2, vinculada con los
+            recursos; la Casa 6, relacionada con el trabajo cotidiano; y la
+            Casa 10, asociada con la vocación y la proyección pública.
+        </p>
+
+        <p>
+            En los vínculos, puedes considerar la Casa 5 para el romance y
+            la expresión afectiva, la Casa 7 para las relaciones y los
+            acuerdos, y la Casa 8 para la intimidad y los recursos compartidos.
+            Cada casa aporta una perspectiva distinta, sin reemplazar a las demás.
+        </p>
+
+        <div class="panel">
+            <h3>Regla de oro</h3>
+            <p>
+                No interpretes una posición como una sentencia. Formula
+                posibilidades, identifica matices y relaciona los símbolos
+                entre sí. Una buena lectura es una síntesis coherente de la
+                carta completa, no una lista de significados aislados.
+            </p>
+        </div>
+    </section>
+
+    <section class="subseccion">
+        <h2>Práctica: aprendé a interpretar</h2>
+
+        <p class="texto-suave">
+            Respondé las actividades con tus propias palabras. Podés guardar
+            tus respuestas en un archivo o copiarlas a tus apuntes.
+        </p>
+
+        <div class="actividad">
+            <h3>Ejercicio 1 · Reconocer las casas</h3>
+            <p>
+                Relacioná cada tema con su casa: comunicación, familia,
+                relaciones, vocación y mundo inconsciente.
+            </p>
+
+            <label for="ejercicio1">Tu respuesta</label>
+            <textarea id="ejercicio1" placeholder="Ejemplo: comunicación = Casa 3..."></textarea>
+
+            <h3 style="margin-top: 28px;">Ejercicio 2 · Interpretar una posición</h3>
+            <p>
+                Interpretá simbólicamente a Júpiter en Géminis en Casa 3.
+                ¿Qué aporta el planeta, qué matices introduce el signo y
+                en qué área se expresa?
+            </p>
+
+            <label for="ejercicio2">Tu interpretación</label>
+            <textarea id="ejercicio2" placeholder="Planeta, signo, casa e interpretación integrada..."></textarea>
+
+            <h3 style="margin-top: 28px;">Ejercicio 3 · Una casa vacía</h3>
+            <p>
+                Una carta tiene la Casa 2 vacía y su cúspide en Tauro.
+                ¿Qué deberías analizar para interpretarla?
+            </p>
+
+            <label for="ejercicio3">Tu respuesta</label>
+            <textarea id="ejercicio3" placeholder="Explicá qué mirarías y por qué..."></textarea>
+
+            <button class="boton" type="button" onclick="guardarRespuestas()">
+                Descargar mis respuestas
+            </button>
+
+            <p id="mensaje" class="texto-suave" aria-live="polite"></p>
+        </div>
+    </section>
+
+    <nav class="navegacion">
+        <a class="boton" href="index2.html">← Módulo anterior: Planetas</a>
+        <a class="boton" href="index4.html">Continuar al siguiente módulo →</a>
+    </nav>
 
 </main>
+
+<footer>
+    <p>☾ ASTRO ROJO · Curso de astrología</p>
+    <p>Un camino de aprendizaje, interpretación y autoconocimiento.</p>
+</footer>
+
+<script>
+    function guardarRespuestas() {
+        const respuestas = [
+            "ASTRO ROJO — Práctica de las doce casas astrológicas",
+            "",
+            "Ejercicio 1: Reconocer las casas",
+            document.getElementById("ejercicio1").value,
+            "",
+            "Ejercicio 2: Interpretar una posición",
+            document.getElementById("ejercicio2").value,
+            "",
+            "Ejercicio 3: Una casa vacía",
+            document.getElementById("ejercicio3").value
+        ].join("\n");
+
+        const archivo = new Blob(
+            [respuestas],
+            { type: "text/plain;charset=utf-8" }
+        );
+
+        const enlace = document.createElement("a");
+        enlace.href = URL.createObjectURL(archivo);
+        enlace.download = "practica-casas-astro-rojo.txt";
+        enlace.click();
+
+        URL.revokeObjectURL(enlace.href);
+
+        document.getElementById("mensaje").textContent =
+            "Si la descarga se completó, tus respuestas están guardadas en el archivo de texto.";
+    }
+</script>
+
 </body>
 </html>
 
