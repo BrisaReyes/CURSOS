@@ -1,2093 +1,235 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10070b">
+    <meta name="description" content="ASTRO ROJO — Curso de Velomancia. Aprende correspondencias, colores, lecturas con velas, fases lunares e interpretaciones simbólicas.">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>ASTRO ROJO — Ejercicios de Velomancia</title>
+    <title>ASTRO ROJO — Curso de Velomancia</title>
 
     <link rel="stylesheet" href="style.css">
-
-    <style>
-
-        /* =========================================================
-           PÁGINA DE EJERCICIOS
-        ========================================================= */
-
-        .ejercicios-header {
-            position: relative;
-            text-align: center;
-            padding: 35px 20px 45px;
-        }
-
-        .ejercicios-header .mini-moon {
-            font-size: 38px;
-            color: #c9828c;
-            margin-bottom: 18px;
-            text-shadow:
-                0 0 20px rgba(170, 20, 40, 0.45);
-        }
-
-        .ejercicios-header h1 {
-            color: #f3eeee;
-            font-size: 40px;
-            font-weight: 400;
-            letter-spacing: 5px;
-            margin-bottom: 14px;
-        }
-
-        .ejercicios-header p {
-            max-width: 650px;
-            margin: 0 auto;
-            color: #9f9599;
-            font-size: 15px;
-            line-height: 1.8;
-        }
-
-
-        /* =========================================================
-           PROGRESO
-        ========================================================= */
-
-        .progreso {
-            width: 100%;
-            max-width: 760px;
-            margin: 0 auto 35px;
-        }
-
-        .progreso-superior {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .progreso-superior span {
-            color: #9f9599;
-            font-size: 12px;
-            letter-spacing: 1px;
-        }
-
-        .progreso-superior strong {
-            color: #c9828c;
-            font-size: 13px;
-            font-weight: 400;
-        }
-
-        .barra-progreso {
-            width: 100%;
-            height: 4px;
-            background: rgba(150, 35, 50, 0.15);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .barra-progreso span {
-            display: block;
-            width: 10%;
-            height: 100%;
-            background: #a93648;
-            border-radius: 10px;
-            transition: width 0.4s ease;
-        }
-
-
-        /* =========================================================
-           TARJETA PRINCIPAL
-        ========================================================= */
-
-        .ejercicio-panel {
-            position: relative;
-            max-width: 850px;
-            margin: 0 auto 35px;
-            padding: 45px 45px 50px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.045),
-                    rgba(100, 0, 15, 0.025)
-                );
-
-            border: 1px solid rgba(150, 35, 50, 0.35);
-            border-radius: 22px;
-
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.30);
-        }
-
-        .ejercicio-panel::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 22px;
-
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    rgba(160, 0, 30, 0.12),
-                    transparent 55%
-                );
-
-            pointer-events: none;
-        }
-
-
-        /* =========================================================
-           NUMERO
-        ========================================================= */
-
-        .ejercicio-etiqueta {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            color: #a93648;
-            font-size: 11px;
-            letter-spacing: 3px;
-            margin-bottom: 12px;
-        }
-
-        .ejercicio-panel h2 {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            color: #eee9e4;
-            font-size: 27px;
-            font-weight: 400;
-            margin-bottom: 35px;
-        }
-
-
-        /* =========================================================
-           CARTA / VELA
-        ========================================================= */
-
-        .carta-practica {
-            position: relative;
-            z-index: 1;
-
-            width: 220px;
-            min-height: 275px;
-
-            margin: 0 auto 35px;
-            padding: 30px 20px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-
-            background:
-                radial-gradient(
-                    circle at 50% 20%,
-                    rgba(130, 0, 25, 0.35),
-                    rgba(10, 5, 8, 0.85)
-                );
-
-            border: 1px solid rgba(190, 55, 70, 0.45);
-            border-radius: 18px;
-
-            box-shadow:
-                0 15px 45px rgba(0, 0, 0, 0.35),
-                0 0 35px rgba(130, 0, 25, 0.10);
-        }
-
-        .carta-practica .simbolo {
-            font-size: 40px;
-            color: #a93648;
-            margin-bottom: 22px;
-        }
-
-        .carta-practica small {
-            color: #8f8589;
-            font-size: 10px;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .carta-practica h3 {
-            color: #f3eeee;
-            font-size: 23px;
-            font-weight: 400;
-            line-height: 1.3;
-            margin: 0;
-        }
-
-
-        /* =========================================================
-           PREGUNTA
-        ========================================================= */
-
-        .pregunta {
-            position: relative;
-            z-index: 1;
-            max-width: 650px;
-            margin: 0 auto 30px;
-            text-align: center;
-        }
-
-        .pregunta-label {
-            display: block;
-            color: #a93648;
-            font-size: 10px;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .pregunta p {
-            color: #eee9e4;
-            font-size: 17px;
-            line-height: 1.7;
-            margin: 0;
-        }
-
-
-        /* =========================================================
-           OPCIONES
-        ========================================================= */
-
-        .opciones {
-            position: relative;
-            z-index: 1;
-
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 15px;
-
-            max-width: 760px;
-            margin: 0 auto;
-        }
-
-        .opcion {
-            position: relative;
-
-            min-height: 155px;
-            padding: 24px 20px;
-
-            text-align: left;
-
-            background: rgba(12, 6, 9, 0.60);
-
-            border: 1px solid rgba(150, 35, 50, 0.25);
-            border-radius: 16px;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.25s ease,
-                border-color 0.25s ease,
-                background 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .opcion:hover {
-            transform: translateY(-4px);
-
-            border-color:
-                rgba(190, 55, 70, 0.65);
-
-            background:
-                rgba(35, 7, 12, 0.80);
-
-            box-shadow:
-                0 12px 30px rgba(0, 0, 0, 0.20);
-        }
-
-        .opcion-letra {
-            display: flex;
-
-            width: 31px;
-            height: 31px;
-
-            align-items: center;
-            justify-content: center;
-
-            margin-bottom: 18px;
-
-            border: 1px solid rgba(169, 54, 72, 0.50);
-            border-radius: 50%;
-
-            color: #c9828c;
-            font-size: 12px;
-        }
-
-        .opcion p {
-            color: #b8adb0;
-            font-size: 14px;
-            line-height: 1.7;
-            margin: 0;
-        }
-
-        .opcion.correcta {
-            border-color: #a93648;
-
-            background:
-                rgba(100, 0, 20, 0.45);
-
-            box-shadow:
-                0 0 30px rgba(150, 0, 30, 0.18);
-        }
-
-        .opcion.correcta .opcion-letra {
-            background: #8f2638;
-            color: #fff;
-        }
-
-        .opcion.incorrecta {
-            opacity: 0.45;
-        }
-
-        .opcion.bloqueada {
-            cursor: default;
-        }
-
-        .opcion.bloqueada:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-
-        /* =========================================================
-           RESULTADO
-        ========================================================= */
-
-        .resultado {
-            display: none;
-
-            position: relative;
-            z-index: 1;
-
-            max-width: 700px;
-            margin: 30px auto 0;
-            padding: 24px 28px;
-
-            background:
-                rgba(35, 7, 12, 0.70);
-
-            border:
-                1px solid rgba(169, 54, 72, 0.35);
-
-            border-radius: 15px;
-        }
-
-        .resultado.visible {
-            display: block;
-        }
-
-        .resultado-titulo {
-            color: #c9828c;
-            font-size: 13px;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .resultado p {
-            color: #a8a0a3;
-            font-size: 14px;
-            line-height: 1.8;
-            margin: 0;
-        }
-
-
-        /* =========================================================
-           BOTON SIGUIENTE
-        ========================================================= */
-
-        .boton-siguiente-ejercicio {
-            display: none;
-
-            margin: 25px auto 0;
-            padding: 12px 28px;
-
-            color: #f3eeee;
-
-            background:
-                rgba(130, 0, 25, 0.65);
-
-            border:
-                1px solid rgba(190, 70, 85, 0.55);
-
-            border-radius: 30px;
-
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .boton-siguiente-ejercicio.visible {
-            display: block;
-        }
-
-        .boton-siguiente-ejercicio:hover {
-            background:
-                rgba(165, 0, 30, 0.9);
-        }
-
-
-        /* =========================================================
-           RESULTADO FINAL
-        ========================================================= */
-
-        .resultado-final {
-            display: none;
-
-            max-width: 650px;
-            margin: 30px auto;
-
-            padding: 35px 30px;
-
-            text-align: center;
-
-            background:
-                rgba(35, 7, 12, 0.75);
-
-            border:
-                1px solid rgba(169, 54, 72, 0.40);
-
-            border-radius: 18px;
-        }
-
-        .resultado-final.visible {
-            display: block;
-        }
-
-        .resultado-final .simbolo-final {
-            font-size: 38px;
-            color: #a93648;
-            margin-bottom: 15px;
-        }
-
-        .resultado-final h2 {
-            color: #eee9e4;
-            font-weight: 400;
-            margin-bottom: 15px;
-        }
-
-        .resultado-final p {
-            color: #a8a0a3;
-            font-size: 14px;
-            line-height: 1.8;
-            margin: 0;
-        }
-
-
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
-
-        @media (max-width: 800px) {
-
-            .opciones {
-                grid-template-columns: 1fr;
-                max-width: 550px;
-            }
-
-            .opcion {
-                min-height: auto;
-            }
-
-            .ejercicio-panel {
-                padding: 35px 25px 40px;
-            }
-        }
-
-        @media (max-width: 500px) {
-
-            .ejercicios-header h1 {
-                font-size: 29px;
-                letter-spacing: 3px;
-            }
-
-            .ejercicio-panel h2 {
-                font-size: 23px;
-            }
-
-            .carta-practica {
-                width: 190px;
-                min-height: 245px;
-            }
-
-            .pregunta p {
-                font-size: 15px;
-            }
-        }
-
-    </style>
-
 </head>
-
 
 <body>
 
 <main class="container">
 
-
-    <!-- =========================================================
-         ENCABEZADO
-    ========================================================= -->
-
-    <section class="ejercicios-header">
-
-        <div class="mini-moon">
-            ☾
-        </div>
+    <header class="encabezado">
+        <p class="etiqueta">ASTRO ROJO · FORMACIÓN ESOTÉRICA</p>
 
         <h1>
-            EJERCICIOS DE VELOMANCIA
+            CURSO DE
+            <span>VELOMANCIA</span>
         </h1>
 
-        <p>
-            Poné a prueba tus conocimientos, aprendé a observar
-            las señales de la vela y desarrollá tu propia forma
-            de interpretar una lectura.
+        <p class="subtitulo">
+            El lenguaje simbólico de las velas, sus colores y sus formas.
+            Aprende a observar, interpretar y registrar cada lectura.
         </p>
+    </header>
 
-    </section>
+    <section class="introduccion">
+        <span class="numero-seccion">01 — FUNDAMENTOS</span>
 
-
-    <!-- =========================================================
-         PROGRESO
-    ========================================================= -->
-
-    <div class="progreso">
-
-        <div class="progreso-superior">
-
-            <span>
-                PROGRESO DEL CURSO
-            </span>
-
-            <strong id="contador">
-                1 / 10
-            </strong>
-
-        </div>
-
-        <div class="barra-progreso">
-
-            <span id="barra"></span>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================================================
-         EJERCICIO 1
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-1"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 01
-        </div>
-
-        <h2>
-            OBSERVAR LA LLAMA
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                🔥
-            </div>
-
-            <small>
-                SEÑAL
-            </small>
-
-            <h3>
-                LLAMA ESTABLE
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué puede representar simbólicamente una llama
-                estable durante una lectura?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 1)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Significa necesariamente que el resultado
-                    será exactamente el esperado.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 1)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Puede observarse como una señal de estabilidad
-                    o equilibrio dentro del proceso.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 1)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Indica siempre que no existe ningún
-                    tipo de dificultad.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-1"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Una llama estable puede interpretarse
-                simbólicamente como una señal de equilibrio
-                o estabilidad. Siempre debe observarse junto
-                con el resto de la lectura y las condiciones
-                de combustión.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-1"
-            onclick="mostrarEjercicio(2)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 2
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-2"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 02
-        </div>
-
-        <h2>
-            MOVIMIENTO DE LA LLAMA
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                🌬️
-            </div>
-
-            <small>
-                SEÑAL
-            </small>
-
-            <h3>
-                LLAMA QUE SE MUEVE
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué debería hacer primero un lector cuando
-                observa una llama que se mueve mucho?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 2)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Comprobar las condiciones del ambiente antes
-                    de atribuirle un significado simbólico.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 2)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Interpretarlo inmediatamente como una
-                    señal espiritual.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 2)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Considerarlo automáticamente como una
-                    señal negativa.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-2"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Antes de interpretar una señal, es importante
-                descartar corrientes de aire, ubicación de la vela,
-                tipo de mecha y otras condiciones físicas.
-                La observación debe preceder a la interpretación.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-2"
-            onclick="mostrarEjercicio(3)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 3
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-3"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 03
-        </div>
-
-        <h2>
-            OBSERVAR LA CERA
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                🕯️
-            </div>
-
-            <small>
-                SEÑAL
-            </small>
-
-            <h3>
-                RECORRIDO DE CERA
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué aspecto es importante observar cuando
-                se analiza el recorrido de la cera?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 3)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Solamente la cantidad de cera que quedó
-                    al final.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 3)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Su dirección, acumulaciones, formas y relación
-                    con el proceso completo.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 3)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Una forma aislada sin tener en cuenta
-                    cómo se produjo.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-3"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                La cera puede observarse por sus recorridos,
-                acumulaciones, formas y distribución. Lo más
-                importante es analizar cómo se desarrolló el
-                proceso completo y no una forma aislada.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-3"
-            onclick="mostrarEjercicio(4)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 4
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-4"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 04
-        </div>
-
-        <h2>
-            INTERPRETAR EL HUMO
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                🌫️
-            </div>
-
-            <small>
-                SEÑAL
-            </small>
-
-            <h3>
-                HUMO ASCENDENTE
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Cómo debería analizarse el comportamiento
-                del humo durante una lectura?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 4)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Como una señal que siempre tiene
-                    exactamente el mismo significado.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 4)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Observando su dirección, cantidad y comportamiento
-                    dentro del contexto de la lectura.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 4)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Ignorando completamente las condiciones
-                    del ambiente.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-4"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                El humo puede registrarse por su dirección,
-                cantidad y comportamiento. No existe una
-                interpretación universal para cada movimiento:
-                el contexto es fundamental.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-4"
-            onclick="mostrarEjercicio(5)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 5
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-5"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 05
-        </div>
-
-        <h2>
-            LA VELA SE APAGA
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                🕯️
-            </div>
-
-            <small>
-                SITUACIÓN
-            </small>
-
-            <h3>
-                LLAMA APAGADA
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué debería hacer un lector antes de interpretar
-                una vela que se apaga?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 5)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Revisar primero causas físicas como la mecha,
-                    el viento o la calidad de la vela.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 5)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Concluir inmediatamente que existe un bloqueo
-                    energético.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 5)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Considerar que la lectura terminó sin necesidad
-                    de observar nada más.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-5"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Una vela puede apagarse por muchas razones físicas.
-                La mecha, la cera, el viento y las condiciones
-                ambientales deben revisarse antes de construir
-                cualquier interpretación simbólica.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-5"
-            onclick="mostrarEjercicio(6)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 6
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-6"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 06
-        </div>
-
-        <h2>
-            SEÑALES FAVORABLES
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ✨
-            </div>
-
-            <small>
-                LECTURA
-            </small>
-
-            <h3>
-                LLAMA CLARA Y ESTABLE
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Cuál sería una forma responsable de interpretar
-                una señal aparentemente favorable?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 6)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Como una garantía absoluta de que el resultado
-                    será exactamente como se desea.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 6)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Como una señal simbólica positiva que debe
-                    relacionarse con el resto de la observación.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 6)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Como una predicción que no necesita
-                    contexto.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-6"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Una señal favorable puede utilizarse como parte
-                de una interpretación simbólica positiva, pero
-                nunca debería presentarse como una garantía
-                absoluta sobre el futuro.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-6"
-            onclick="mostrarEjercicio(7)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 7
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-7"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 07
-        </div>
-
-        <h2>
-            SEÑALES DE BLOQUEO
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ⛓️
-            </div>
-
-            <small>
-                LECTURA
-            </small>
-
-            <h3>
-                ACUMULACIÓN DE CERA
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Qué enfoque es más adecuado al observar una
-                acumulación de cera durante una lectura?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 7)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Afirmar que existe necesariamente un bloqueo
-                    energético externo.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 7)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Observar la acumulación, su ubicación y el
-                    contexto antes de interpretarla como símbolo.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 7)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Considerarla siempre como una señal negativa.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-7"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Una acumulación de cera puede formar parte
-                de una lectura simbólica, pero primero debe
-                observarse dónde aparece, cómo se produjo y
-                qué otros elementos acompañan el proceso.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-7"
-            onclick="mostrarEjercicio(8)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 8
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-8"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 08
-        </div>
-
-        <h2>
-            LECTURA DE AMOR
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                ❤️
-            </div>
-
-            <small>
-                INTENCIÓN
-            </small>
-
-            <h3>
-                ACERCAMIENTO
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                Si una persona realiza una lectura de velomancia
-                sobre una relación, ¿qué debería observar?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 8)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Solamente si la llama sube o baja.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 8)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    El comportamiento general de la vela y su
-                    relación con la intención y el contexto.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 8)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Una única señal como respuesta definitiva
-                    sobre los sentimientos de otra persona.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-8"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Una lectura amorosa debe observar el proceso
-                completo. La llama, el humo, la cera, el tiempo
-                de combustión y el contexto pueden formar parte
-                de la interpretación, sin convertir una señal
-                aislada en una certeza sobre otra persona.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-8"
-            onclick="mostrarEjercicio(9)"
-        >
-            SIGUIENTE EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 9
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-9"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO 09
-        </div>
-
-        <h2>
-            DIFERENCIAR SEÑAL Y ACCIDENTE
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                🔍
-            </div>
-
-            <small>
-                OBSERVACIÓN
-            </small>
-
-            <h3>
-                LLAMA INESTABLE
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                SITUACIÓN
-            </span>
-
-            <p>
-                La ventana está abierta y entra viento mientras
-                la llama se mueve. ¿Qué debería hacer el lector?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 9)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Reconocer primero la causa física antes de
-                    considerarla una señal simbólica.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 9)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Interpretar inmediatamente el movimiento
-                    como una señal energética.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 9)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Ignorar completamente el ambiente y continuar
-                    con la interpretación.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-9"
-        >
-
-            <div class="resultado-titulo">
-                ✓ RESPUESTA CORRECTA
-            </div>
-
-            <p>
-                Diferenciar una señal de un accidente o efecto
-                ambiental es fundamental. La observación rigurosa
-                evita interpretar como simbólico algo que puede
-                explicarse por las condiciones físicas.
-            </p>
-
-        </div>
-
-
-        <button
-            class="boton-siguiente-ejercicio"
-            id="siguiente-9"
-            onclick="mostrarEjercicio(10)"
-        >
-            ÚLTIMO EJERCICIO →
-        </button>
-
-    </section>
-
-
-    <!-- =========================================================
-         EJERCICIO 10
-    ========================================================= -->
-
-    <section
-        class="ejercicio-panel"
-        id="ejercicio-10"
-        style="display:none;"
-    >
-
-        <div class="ejercicio-etiqueta">
-            EJERCICIO FINAL
-        </div>
-
-        <h2>
-            CONSTRUIR UNA LECTURA COMPLETA
-        </h2>
-
-        <div class="carta-practica">
-
-            <div class="simbolo">
-                🕯️
-            </div>
-
-            <small>
-                LECTURA COMPLETA
-            </small>
-
-            <h3>
-                LLAMA · HUMO · CERA
-            </h3>
-
-        </div>
-
-        <div class="pregunta">
-
-            <span class="pregunta-label">
-                PREGUNTA
-            </span>
-
-            <p>
-                ¿Cuál es el enfoque correcto para realizar
-                una lectura completa de Velomancia?
-            </p>
-
-        </div>
-
-        <div class="opciones">
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 10)"
-            >
-
-                <span class="opcion-letra">
-                    A
-                </span>
-
-                <p>
-                    Elegir solamente la señal que parezca
-                    más llamativa.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, false, 10)"
-            >
-
-                <span class="opcion-letra">
-                    B
-                </span>
-
-                <p>
-                    Buscar un significado fijo para cada
-                    comportamiento de la vela.
-                </p>
-
-            </div>
-
-
-            <div
-                class="opcion"
-                onclick="responder(this, true, 10)"
-            >
-
-                <span class="opcion-letra">
-                    C
-                </span>
-
-                <p>
-                    Relacionar intención, condiciones, llama,
-                    humo, cera, tiempo y contexto para construir
-                    una interpretación coherente.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="resultado"
-            id="resultado-10"
-        >
-
-            <div class="resultado-titulo">
-                ✓ EJERCICIO FINAL COMPLETADO
-            </div>
-
-            <p>
-                Una lectura completa integra todos los elementos
-                observados durante la combustión. La intención,
-                las condiciones iniciales, la llama, el humo,
-                la cera, el tiempo y el desarrollo general deben
-                analizarse en conjunto. El objetivo no es buscar
-                significados automáticos, sino construir una
-                interpretación coherente y contextualizada.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================================
-         RESULTADO FINAL
-    ========================================================= -->
-
-    <section
-        class="resultado-final"
-        id="resultado-final"
-    >
-
-        <div class="simbolo-final">
-            ✦
-        </div>
-
-        <h2>
-            ¡EJERCICIOS COMPLETADOS!
-        </h2>
+        <h2>Comprender el arte de las velas</h2>
 
         <p>
-            Has recorrido los ejercicios de Velomancia,
-            practicado la observación de la llama, el humo,
-            la cera y aprendido a relacionar las señales
-            con el contexto de una lectura.
+            La velomancia es una práctica de interpretación simbólica
+            que observa elementos como la llama, la cera, el pabilo
+            y el humo. En este curso aprenderás sus asociaciones
+            tradicionales y diferentes formas de realizar lecturas,
+            sin confundir los símbolos con hechos comprobados
+            ni con predicciones infalibles.
         </p>
+    </section>
+
+    <section class="modulos">
+
+        <article class="modulo">
+            <span class="numero-seccion">02 — CORRESPONDENCIAS</span>
+            <h2>Correspondencias de las velas</h2>
+
+            <ul>
+                <li>Qué son las correspondencias en la velomancia.</li>
+                <li>Colores y significados tradicionales.</li>
+                <li>Cómo elegir una vela según la intención.</li>
+                <li>Diferencias entre simbolismo, creencias y afirmaciones no comprobadas.</li>
+                <li>Velas rituales, decorativas y aromáticas: diferencias de uso.</li>
+                <li>Cómo combinar intención, color y contexto.</li>
+                <li>Errores frecuentes al asignar significados a una vela.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">03 — EL SIGNIFICADO DE LOS COLORES</span>
+            <h2>El lenguaje cromático</h2>
+
+            <ul>
+                <li>Vela blanca: claridad, paz y renovación.</li>
+                <li>Vela roja: pasión, fuerza y determinación.</li>
+                <li>Vela rosa: afecto, ternura y amor propio.</li>
+                <li>Vela verde: crecimiento, equilibrio y prosperidad.</li>
+                <li>Vela amarilla: creatividad, aprendizaje y confianza.</li>
+                <li>Vela azul: serenidad, comunicación y reflexión.</li>
+                <li>Vela violeta: introspección, transformación y espiritualidad.</li>
+                <li>Vela negra: límites, cierre de ciclos y protección simbólica.</li>
+                <li>Velas de otros colores y sus asociaciones tradicionales.</li>
+                <li>Cómo seleccionar un color cuando existen varias intenciones.</li>
+                <li>Combinación de dos o más colores.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">04 — OBSERVACIÓN</span>
+            <h2>Los elementos de una vela</h2>
+
+            <ul>
+                <li>La llama: forma, altura, estabilidad y movimiento.</li>
+                <li>La cera: derretimiento, acumulaciones y recorrido.</li>
+                <li>El pabilo: posición, curvatura y residuos.</li>
+                <li>El humo: aparición, cantidad y dirección aparente.</li>
+                <li>La duración de la combustión.</li>
+                <li>Velas que se apagan o presentan dificultades al arder.</li>
+                <li>Cómo distinguir una señal simbólica de una causa física.</li>
+                <li>Cómo observar sin interpretar cada detalle de manera aislada.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">05 — LECTURAS BÁSICAS</span>
+            <h2>Cómo interpretar una, dos y tres velas</h2>
+
+            <ul>
+                <li>Preparación del espacio y definición de la intención.</li>
+                <li>Lectura de una sola vela: una intención y sus símbolos.</li>
+                <li>Lectura de dos velas: comparación y relación simbólica.</li>
+                <li>Lectura de tres velas: situación, proceso y posible evolución.</li>
+                <li>Cómo distribuir las velas antes de comenzar.</li>
+                <li>Qué observar durante cada etapa de la combustión.</li>
+                <li>Cómo interpretar diferencias entre varias velas.</li>
+                <li>Cómo formular conclusiones sin asegurar resultados futuros.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">06 — COMBINACIONES</span>
+            <h2>Lecturas con velas de distintos colores</h2>
+
+            <ul>
+                <li>Lecturas con dos colores y una intención común.</li>
+                <li>Lecturas con tres colores y funciones simbólicas diferentes.</li>
+                <li>Vela blanca combinada con otros colores.</li>
+                <li>Combinaciones tradicionales para armonía y equilibrio.</li>
+                <li>Cómo asignar un significado a cada vela antes de encenderla.</li>
+                <li>Cómo evitar interpretaciones contradictorias.</li>
+                <li>Ejercicios prácticos de observación y comparación.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">07 — AMOR PROPIO</span>
+            <h2>Lecturas para autoestima y bienestar personal</h2>
+
+            <ul>
+                <li>Velas asociadas tradicionalmente al amor propio.</li>
+                <li>Lecturas simbólicas sobre autoestima y seguridad personal.</li>
+                <li>Identificación de necesidades emocionales mediante preguntas reflexivas.</li>
+                <li>Velas para representar nuevos comienzos.</li>
+                <li>Ejercicios simbólicos de aceptación y autocuidado.</li>
+                <li>Lecturas para reconocer límites personales.</li>
+                <li>Cómo convertir una lectura en una práctica de reflexión.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">08 — CICLOS LUNARES</span>
+            <h2>Las fases lunares y las velas</h2>
+
+            <ul>
+                <li>Luna nueva: comienzos e intenciones.</li>
+                <li>Luna creciente: desarrollo y constancia.</li>
+                <li>Cuarto creciente: esfuerzo y toma de decisiones.</li>
+                <li>Luna llena: culminación y evaluación simbólica.</li>
+                <li>Luna menguante: revisión, desprendimiento y cierre.</li>
+                <li>Cómo relacionar la fase lunar con una intención.</li>
+                <li>Calendario lunar para organizar prácticas personales.</li>
+                <li>Qué diferencias existen entre tradición esotérica y evidencia científica.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">09 — ESTUDIO Y PROYECTOS</span>
+            <h2>Lecturas para metas, trabajo y aprendizaje</h2>
+
+            <ul>
+                <li>Lecturas simbólicas para proyectos nuevos.</li>
+                <li>Velas asociadas al estudio, la concentración y la disciplina.</li>
+                <li>Ejercicios para organizar objetivos académicos.</li>
+                <li>Lecturas para representar obstáculos y alternativas.</li>
+                <li>Trabajo, vocación y desarrollo profesional.</li>
+                <li>Proyectos personales y emprendimientos.</li>
+                <li>Prosperidad y administración responsable del dinero.</li>
+                <li>Lecturas para evaluar decisiones y prioridades.</li>
+                <li>Cómo transformar una intención en pasos concretos.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">10 — MÉTODO DE INTERPRETACIÓN</span>
+            <h2>Cómo construir una lectura completa</h2>
+
+            <ul>
+                <li>Cómo formular una pregunta clara y abierta.</li>
+                <li>Elección de la cantidad y el color de las velas.</li>
+                <li>Observación ordenada de cada elemento.</li>
+                <li>Relación entre los símbolos y la pregunta inicial.</li>
+                <li>Cómo diferenciar observación, interpretación e hipótesis.</li>
+                <li>Registro de resultados en un diario de velomancia.</li>
+                <li>Ejemplos prácticos con distintas situaciones.</li>
+                <li>Cómo revisar interpretaciones anteriores sin sesgos.</li>
+            </ul>
+        </article>
+
+        <article class="modulo">
+            <span class="numero-seccion">11 — PRÁCTICA Y RESPONSABILIDAD</span>
+            <h2>Ejercicios, límites y seguridad</h2>
+
+            <ul>
+                <li>Prácticas iniciales con una vela.</li>
+                <li>Ejercicios comparativos con dos y tres velas.</li>
+                <li>Cómo documentar una sesión paso a paso.</li>
+                <li>Errores comunes de principiantes.</li>
+                <li>Respeto por las decisiones y la autonomía de otras personas.</li>
+                <li>Por qué una lectura no demuestra sentimientos ni predice hechos.</li>
+                <li>Uso de portavelas y superficies resistentes al calor.</li>
+                <li>Ventilación, distancia de materiales inflamables y supervisión permanente.</li>
+                <li>Cómo apagar las velas de forma segura.</li>
+            </ul>
+        </article>
 
     </section>
 
+    <section class="cierre">
+        <span class="numero-seccion">12 — TRABAJO FINAL</span>
+
+        <h2>Tu primera lectura completa</h2>
+
+        <p>
+            Diseña una práctica con una intención concreta, selecciona
+            las velas, registra lo que observas y desarrolla una
+            interpretación simbólica coherente. Finaliza con una
+            reflexión personal y un plan de acción realista.
+        </p>
+    </section>
+
+    <footer class="pie">
+        <p>ASTRO ROJO</p>
+        <span>SIMBOLISMO · OBSERVACIÓN · AUTOCONOCIMIENTO</span>
+    </footer>
 
 </main>
 
-
-<script>
-
-    let ejercicioActual = 1;
-
-    let respondidos = 0;
-
-
-    function responder(elemento, correcta, numero) {
-
-        const panel =
-            document.getElementById(
-                "ejercicio-" + numero
-            );
-
-        const opciones =
-            panel.querySelectorAll(".opcion");
-
-        const resultado =
-            document.getElementById(
-                "resultado-" + numero
-            );
-
-        const siguiente =
-            document.getElementById(
-                "siguiente-" + numero
-            );
-
-
-        /* Evitar responder dos veces */
-
-        if (panel.dataset.respondido === "true") {
-            return;
-        }
-
-        panel.dataset.respondido = "true";
-
-        respondidos++;
-
-
-        /* Bloquear opciones */
-
-        opciones.forEach(function(opcion) {
-
-            opcion.classList.add("bloqueada");
-
-        });
-
-
-        /* Mostrar resultado */
-
-        if (correcta) {
-
-            elemento.classList.add("correcta");
-
-        } else {
-
-            elemento.classList.add("incorrecta");
-
-            opciones.forEach(function(opcion) {
-
-                const accion =
-                    opcion.getAttribute("onclick");
-
-                if (
-                    accion &&
-                    accion.includes("true")
-                ) {
-
-                    opcion.classList.add("correcta");
-
-                }
-
-            });
-
-        }
-
-
-        resultado.classList.add("visible");
-
-
-        /* Mostrar botón siguiente */
-
-        if (siguiente) {
-
-            siguiente.classList.add("visible");
-
-        }
-
-
-        /* Último ejercicio */
-
-        if (numero === 10) {
-
-            setTimeout(function() {
-
-                document
-                    .getElementById("resultado-final")
-                    .classList.add("visible");
-
-            }, 500);
-
-        }
-
-    }
-
-
-    function mostrarEjercicio(numero) {
-
-        const anterior =
-            document.getElementById(
-                "ejercicio-" + ejercicioActual
-            );
-
-        const siguiente =
-            document.getElementById(
-                "ejercicio-" + numero
-            );
-
-
-        if (anterior) {
-
-            anterior.style.display = "none";
-
-        }
-
-
-        if (siguiente) {
-
-            siguiente.style.display = "block";
-
-            window.scrollTo({
-
-                top: 0,
-
-                behavior: "smooth"
-
-            });
-
-        }
-
-
-        ejercicioActual = numero;
-
-
-        /* Contador */
-
-        document.getElementById("contador")
-            .textContent =
-            numero + " / 10";
-
-
-        /* Barra */
-
-        document
-            .getElementById("barra")
-            .style.width =
-            (numero * 10) + "%";
-
-    }
-
-</script>
-
 </body>
-
 </html>
-
