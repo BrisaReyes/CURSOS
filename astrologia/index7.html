@@ -1,0 +1,852 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTRO ROJO — Ejercicios de Astrología</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .ejercicios-header {
+            text-align: center;
+            padding: 35px 20px 45px;
+        }
+
+        .mini-moon {
+            font-size: 38px;
+            color: #c9828c;
+            margin-bottom: 18px;
+            text-shadow: 0 0 20px rgba(170,20,40,.45);
+        }
+
+        .ejercicios-header h1 {
+            color: #f3eeee;
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 14px;
+        }
+
+        .ejercicios-header p {
+            max-width: 650px;
+            margin: auto;
+            color: #9f9599;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .progreso {
+            width: 100%;
+            max-width: 760px;
+            margin: 0 auto 35px;
+        }
+
+        .progreso-superior {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .progreso-superior span {
+            color: #9f9599;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .progreso-superior strong {
+            color: #c9828c;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .barra-progreso {
+            height: 4px;
+            background: rgba(150,35,50,.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .barra-progreso span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: #a93648;
+            transition: width .4s ease;
+        }
+
+        .ejercicio-panel {
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto 35px;
+            padding: 45px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.045),
+                rgba(100,0,15,.025)
+            );
+            border: 1px solid rgba(150,35,50,.35);
+            border-radius: 22px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.3);
+            box-sizing: border-box;
+        }
+
+        .ejercicio-etiqueta {
+            text-align: center;
+            color: #a93648;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .ejercicio-panel h2 {
+            text-align: center;
+            color: #eee9e4;
+            font-size: 25px;
+            font-weight: 400;
+            margin: 0 0 30px;
+        }
+
+        .carta-practica {
+            width: 100%;
+            max-width: 270px;
+            min-height: 210px;
+            margin: 0 auto 30px;
+            padding: 28px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+            background: radial-gradient(
+                circle at 50% 20%,
+                rgba(130,0,25,.35),
+                rgba(10,5,8,.85)
+            );
+            border: 1px solid rgba(190,55,70,.45);
+            border-radius: 18px;
+            box-shadow: 0 15px 45px rgba(0,0,0,.35);
+        }
+
+        .carta-practica .simbolo {
+            font-size: 38px;
+            color: #a93648;
+            margin-bottom: 18px;
+        }
+
+        .carta-practica small {
+            color: #8f8589;
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .carta-practica h3 {
+            color: #f3eeee;
+            font-size: 21px;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .pregunta {
+            max-width: 650px;
+            margin: 0 auto 28px;
+            text-align: center;
+        }
+
+        .pregunta-label {
+            display: block;
+            color: #a93648;
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .pregunta p {
+            color: #eee9e4;
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .opciones {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            max-width: 760px;
+            margin: auto;
+        }
+
+        .opcion {
+            min-width: 0;
+            min-height: 155px;
+            padding: 22px 18px;
+            text-align: left;
+            box-sizing: border-box;
+            background: rgba(12,6,9,.6);
+            border: 1px solid rgba(150,35,50,.25);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .opcion:hover {
+            transform: translateY(-4px);
+            border-color: rgba(190,55,70,.65);
+            background: rgba(35,7,12,.8);
+        }
+
+        .opcion-letra {
+            display: flex;
+            width: 31px;
+            height: 31px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            border: 1px solid rgba(169,54,72,.5);
+            border-radius: 50%;
+            color: #c9828c;
+            font-size: 12px;
+        }
+
+        .opcion p {
+            color: #b8adb0;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .opcion.correcta {
+            border-color: #a93648;
+            background: rgba(100,0,20,.45);
+        }
+
+        .opcion.correcta .opcion-letra {
+            background: #8f2638;
+            color: white;
+        }
+
+        .opcion.incorrecta {
+            opacity: .5;
+        }
+
+        .opcion.bloqueada {
+            cursor: default;
+        }
+
+        .opcion.bloqueada:hover {
+            transform: none;
+        }
+
+        .resultado {
+            display: none;
+            max-width: 700px;
+            margin: 28px auto 0;
+            padding: 24px;
+            box-sizing: border-box;
+            background: rgba(35,7,12,.7);
+            border: 1px solid rgba(169,54,72,.35);
+            border-radius: 15px;
+        }
+
+        .resultado.visible {
+            display: block;
+        }
+
+        .resultado-titulo {
+            color: #c9828c;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .resultado p {
+            color: #a8a0a3;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .boton-siguiente-ejercicio {
+            display: none;
+            margin: 25px auto 0;
+            padding: 12px 28px;
+            color: #f3eeee;
+            background: rgba(130,0,25,.65);
+            border: 1px solid rgba(190,70,85,.55);
+            border-radius: 30px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .boton-siguiente-ejercicio.visible {
+            display: block;
+        }
+
+        .boton-siguiente-ejercicio:hover {
+            background: rgba(165,0,30,.9);
+        }
+
+        .resultado-final {
+            display: none;
+            max-width: 650px;
+            margin: 30px auto;
+            padding: 35px 30px;
+            text-align: center;
+            box-sizing: border-box;
+            background: rgba(35,7,12,.75);
+            border: 1px solid rgba(169,54,72,.4);
+            border-radius: 18px;
+        }
+
+        .resultado-final.visible {
+            display: block;
+        }
+
+        .resultado-final .simbolo-final {
+            font-size: 38px;
+            color: #a93648;
+            margin-bottom: 15px;
+        }
+
+        .resultado-final h2 {
+            color: #eee9e4;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .resultado-final p {
+            color: #a8a0a3;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .resultado-final strong {
+            color: #c9828c;
+        }
+
+        .reiniciar {
+            margin-top: 22px;
+            padding: 12px 25px;
+            color: #f3eeee;
+            background: rgba(130,0,25,.65);
+            border: 1px solid rgba(190,70,85,.55);
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 800px) {
+            .opciones {
+                grid-template-columns: minmax(0,1fr);
+                max-width: 550px;
+            }
+
+            .opcion {
+                min-height: auto;
+            }
+
+            .ejercicio-panel {
+                padding: 35px 25px 40px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .ejercicios-header h1 {
+                font-size: 27px;
+                letter-spacing: 2px;
+            }
+
+            .ejercicio-panel h2 {
+                font-size: 21px;
+            }
+
+            .pregunta p {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <section class="ejercicios-header">
+        <div class="mini-moon">☾</div>
+        <h1>EJERCICIOS DE ASTROLOGÍA</h1>
+        <p>
+            Pon a prueba tus conocimientos, relaciona los símbolos
+            astrológicos y aprende a construir interpretaciones
+            coherentes de una carta natal y una sinastría.
+        </p>
+    </section>
+
+    <div class="progreso">
+        <div class="progreso-superior">
+            <span>PROGRESO DEL CURSO</span>
+            <strong id="contador">1 / 15</strong>
+        </div>
+        <div class="barra-progreso">
+            <span id="barra"></span>
+        </div>
+    </div>
+
+    <div id="contenedor-ejercicios"></div>
+
+    <section class="resultado-final" id="resultado-final">
+        <div class="simbolo-final">✦</div>
+        <h2>¡RECORRISTE LOS 15 EJERCICIOS!</h2>
+        <p id="mensaje-final"></p>
+        <button class="reiniciar" onclick="reiniciarCurso()">
+            VOLVER A PRACTICAR
+        </button>
+    </section>
+
+</main>
+
+<script>
+const ejercicios = [
+    {
+        titulo: "FUNDAMENTOS DE LA ASTROLOGÍA",
+        simbolo: "☾",
+        etiqueta: "CONCEPTO",
+        carta: "LENGUAJE SIMBÓLICO",
+        pregunta: "¿Cuál es una forma adecuada de comprender la astrología dentro de su tradición?",
+        opciones: [
+            "Como un lenguaje simbólico para explorar patrones y significados.",
+            "Como una ciencia que demuestra con certeza el destino individual.",
+            "Como un sistema en el que todas las personas del mismo signo son iguales."
+        ],
+        correcta: 0,
+        explicacion: "La astrología se interpreta tradicionalmente como un lenguaje simbólico. No existe evidencia científica sólida de que las posiciones planetarias determinen la personalidad o predigan acontecimientos de forma fiable."
+    },
+    {
+        titulo: "LOS CUATRO ELEMENTOS",
+        simbolo: "🔥",
+        etiqueta: "ELEMENTOS",
+        carta: "FUEGO · TIERRA · AIRE · AGUA",
+        pregunta: "¿Qué conjunto corresponde a los signos de agua?",
+        opciones: [
+            "Aries, Leo y Sagitario.",
+            "Cáncer, Escorpio y Piscis.",
+            "Tauro, Virgo y Capricornio."
+        ],
+        correcta: 1,
+        explicacion: "Cáncer, Escorpio y Piscis pertenecen al elemento agua, asociado simbólicamente con emociones, sensibilidad, intuición y profundidad afectiva."
+    },
+    {
+        titulo: "MODALIDADES",
+        simbolo: "✦",
+        etiqueta: "CUALIDADES",
+        carta: "CARDINAL · FIJA · MUTABLE",
+        pregunta: "¿Qué modalidad comparten Aries, Cáncer, Libra y Capricornio?",
+        opciones: [
+            "Modalidad fija.",
+            "Modalidad mutable.",
+            "Modalidad cardinal."
+        ],
+        correcta: 2,
+        explicacion: "Los cuatro signos cardinales son Aries, Cáncer, Libra y Capricornio. Simbolizan el inicio de las estaciones y se asocian con iniciativa y comienzo."
+    },
+    {
+        titulo: "SOL, LUNA Y ASCENDENTE",
+        simbolo: "☉",
+        etiqueta: "TRÍADA PRINCIPAL",
+        carta: "SOL · LUNA · ASCENDENTE",
+        pregunta: "¿Qué describe mejor la función simbólica de la Luna en una carta natal?",
+        opciones: [
+            "Las necesidades emocionales, los hábitos y la forma de buscar seguridad.",
+            "Exclusivamente la profesión y el reconocimiento público.",
+            "Únicamente la apariencia física."
+        ],
+        correcta: 0,
+        explicacion: "La Luna se asocia con el mundo emocional, las necesidades de cuidado, los hábitos y las respuestas instintivas. Su interpretación también considera el signo, la casa y los aspectos."
+    },
+    {
+        titulo: "MERCURIO Y LA COMUNICACIÓN",
+        simbolo: "☿",
+        etiqueta: "PLANETAS",
+        carta: "MERCURIO",
+        pregunta: "En astrología natal, ¿qué temas se relacionan principalmente con Mercurio?",
+        opciones: [
+            "La disciplina y las responsabilidades a largo plazo.",
+            "La comunicación, el aprendizaje y el procesamiento de información.",
+            "La transformación profunda y los procesos colectivos."
+        ],
+        correcta: 1,
+        explicacion: "Mercurio simboliza la comunicación, el pensamiento, el aprendizaje y el intercambio de información. El signo y la casa aportan matices a su interpretación."
+    },
+    {
+        titulo: "VENUS Y MARTE",
+        simbolo: "♀",
+        etiqueta: "VÍNCULOS Y DESEO",
+        carta: "VENUS + MARTE",
+        pregunta: "¿Qué combinación de significados es la más habitual en la astrología tradicional?",
+        opciones: [
+            "Venus: estructura; Marte: memoria.",
+            "Venus: profesión; Marte: hogar.",
+            "Venus: afecto y valores; Marte: acción y deseo."
+        ],
+        correcta: 2,
+        explicacion: "Venus se relaciona con afecto, atracción, valores y placer. Marte representa iniciativa, impulso, deseo y forma de afrontar conflictos."
+    },
+    {
+        titulo: "JÚPITER Y SATURNO",
+        simbolo: "♄",
+        etiqueta: "CRECIMIENTO Y ESTRUCTURA",
+        carta: "JÚPITER + SATURNO",
+        pregunta: "¿Qué interpretación representa mejor la diferencia simbólica entre ambos?",
+        opciones: [
+            "Júpiter se asocia con expansión y sentido; Saturno, con límites y responsabilidad.",
+            "Júpiter representa exclusivamente el pasado y Saturno el futuro exacto.",
+            "Ambos simbolizan únicamente el amor romántico."
+        ],
+        correcta: 0,
+        explicacion: "Júpiter se asocia con expansión, aprendizaje y búsqueda de sentido. Saturno representa estructura, límites, compromiso y maduración. En una lectura pueden complementarse."
+    },
+    {
+        titulo: "LAS DOCE CASAS",
+        simbolo: "⌂",
+        etiqueta: "CASAS ASTROLÓGICAS",
+        carta: "CASA 10",
+        pregunta: "¿Qué áreas se estudian tradicionalmente a través de la casa 10?",
+        opciones: [
+            "La comunicación cotidiana y los hermanos.",
+            "La vocación, la imagen pública y la dirección profesional.",
+            "Los recursos compartidos y las transformaciones íntimas."
+        ],
+        correcta: 1,
+        explicacion: "La casa 10 se vincula con vocación, responsabilidades, reputación y proyección pública. Para interpretarla se observan también su signo, su regente y los planetas presentes."
+    },
+    {
+        titulo: "CASAS Y PLANETAS",
+        simbolo: "✧",
+        etiqueta: "INTERPRETACIÓN",
+        carta: "PLANETA + SIGNO + CASA",
+        pregunta: "¿Cómo se construye una interpretación básica de un planeta situado en una casa?",
+        opciones: [
+            "Se interpreta solo el nombre del planeta.",
+            "Se ignora el signo y se considera únicamente el elemento.",
+            "Se relaciona la función del planeta con el estilo del signo y el área vital de la casa."
+        ],
+        correcta: 2,
+        explicacion: "Una fórmula útil consiste en observar qué función simboliza el planeta, cómo se expresa mediante el signo y en qué ámbito se manifiesta según la casa. Después se integran regencias y aspectos."
+    },
+    {
+        titulo: "ASPECTOS PLANETARIOS",
+        simbolo: "☌",
+        etiqueta: "GEOMETRÍA SIMBÓLICA",
+        carta: "CONJUNCIÓN",
+        pregunta: "¿Qué describe una conjunción entre dos planetas?",
+        opciones: [
+            "Una cercanía angular entre ambos que combina sus significados.",
+            "Una separación exacta de 180 grados.",
+            "Una relación que siempre es armoniosa."
+        ],
+        correcta: 0,
+        explicacion: "La conjunción ocurre cuando dos planetas están próximos en longitud zodiacal, dentro del orbe considerado. Sus funciones se combinan; el resultado depende de los planetas y del contexto."
+    },
+    {
+        titulo: "TRÍGONO Y CUADRATURA",
+        simbolo: "△",
+        etiqueta: "ASPECTOS",
+        carta: "TRÍGONO · CUADRATURA",
+        pregunta: "¿Cuál es una diferencia tradicional entre estos dos aspectos?",
+        opciones: [
+            "La cuadratura es de 120° y el trígono de 90°.",
+            "El trígono es de unos 120° y la cuadratura de unos 90°.",
+            "Ambos son aspectos de unos 180°."
+        ],
+        correcta: 1,
+        explicacion: "El trígono se forma aproximadamente a 120° y suele asociarse con fluidez. La cuadratura, de unos 90°, se relaciona con tensión y necesidad de ajuste. Ningún aspecto debe interpretarse de manera aislada."
+    },
+    {
+        titulo: "REGENTE DEL ASCENDENTE",
+        simbolo: "↑",
+        etiqueta: "LECTURA NATAL",
+        carta: "ASCENDENTE EN LIBRA",
+        pregunta: "En el sistema tradicional de regencias, ¿qué planeta rige Libra y, por tanto, un Ascendente en Libra?",
+        opciones: [
+            "Marte.",
+            "Saturno.",
+            "Venus."
+        ],
+        correcta: 2,
+        explicacion: "Venus rige Libra en la astrología tradicional. Para estudiar al regente del Ascendente se analiza su signo, casa, aspectos y relación con el resto de la carta."
+    },
+    {
+        titulo: "PLANETAS DOMINANTES",
+        simbolo: "✦",
+        etiqueta: "SÍNTESIS NATAL",
+        carta: "¿QUÉ PLANETA DESTACA?",
+        pregunta: "¿Qué enfoque es más sólido para identificar un planeta especialmente relevante en una carta?",
+        opciones: [
+            "Examinar varios factores, como angularidad, regencias y aspectos, según el método elegido.",
+            "Elegir siempre el planeta más lejano del Sol.",
+            "Elegir el planeta que aparezca primero en una lista."
+        ],
+        correcta: 0,
+        explicacion: "No hay un único método universal para definir dominancia planetaria. Pueden considerarse planetas angulares, regentes importantes, aspectos y otros criterios explícitos, evitando conclusiones basadas en un solo factor."
+    },
+    {
+        titulo: "SINASTRÍA Y VÍNCULOS",
+        simbolo: "♡",
+        etiqueta: "COMPARACIÓN DE CARTAS",
+        carta: "VENUS DE UNA PERSONA\n+ MARTE DE LA OTRA",
+        pregunta: "¿Qué conviene hacer al analizar esta combinación en sinastría?",
+        opciones: [
+            "Afirmar que garantiza una relación duradera.",
+            "Explorar la atracción simbólica y contrastarla con otros contactos, casas y el contexto real.",
+            "Concluir que las dos personas son incompatibles si sus signos solares son distintos."
+        ],
+        correcta: 1,
+        explicacion: "Venus y Marte pueden explorarse como símbolos de afecto, atracción e iniciativa. La sinastría requiere observar el conjunto de contactos y no puede garantizar compatibilidad, sentimientos ni duración de una relación."
+    },
+    {
+        titulo: "CONSTRUIR UN INFORME COHERENTE",
+        simbolo: "☾",
+        etiqueta: "EJERCICIO FINAL",
+        carta: "SOL · LUNA · ASCENDENTE\nREGENTE · CASAS · ASPECTOS",
+        pregunta: "¿Cuál es el mejor método para redactar una interpretación natal completa?",
+        opciones: [
+            "Enumerar significados sin conectarlos entre sí.",
+            "Basar todo el informe en el signo solar.",
+            "Integrar los factores principales, buscar temas repetidos y explicar matices y contradicciones."
+        ],
+        correcta: 2,
+        explicacion: "Un informe coherente comienza por Sol, Luna y Ascendente; continúa con el regente del Ascendente, elementos, planetas destacados, casas y aspectos. Finalmente integra repeticiones, tensiones y matices en una síntesis clara, sin presentar la interpretación como destino inevitable."
+    }
+];
+
+let ejercicioActual = 0;
+let aciertos = 0;
+let respondidos = 0;
+
+const contenedor = document.getElementById("contenedor-ejercicios");
+
+function crearEjercicios() {
+    ejercicios.forEach((ejercicio, indice) => {
+        const numero = indice + 1;
+        const panel = document.createElement("section");
+
+        panel.className = "ejercicio-panel";
+        panel.id = "ejercicio-" + numero;
+
+        if (indice !== 0) {
+            panel.style.display = "none";
+        }
+
+        const letras = ["A", "B", "C"];
+
+        panel.innerHTML = `
+            <div class="ejercicio-etiqueta">
+                EJERCICIO ${String(numero).padStart(2, "0")}
+            </div>
+
+            <h2>${ejercicio.titulo}</h2>
+
+            <div class="carta-practica">
+                <div class="simbolo">${ejercicio.simbolo}</div>
+                <small>${ejercicio.etiqueta}</small>
+                <h3>${ejercicio.carta.replace(/\n/g, "<br>")}</h3>
+            </div>
+
+            <div class="pregunta">
+                <span class="pregunta-label">PREGUNTA</span>
+                <p>${ejercicio.pregunta}</p>
+            </div>
+
+            <div class="opciones">
+                ${ejercicio.opciones.map((opcion, i) => `
+                    <div class="opcion"
+                         role="button"
+                         tabindex="0"
+                         data-indice="${i}">
+                        <span class="opcion-letra">${letras[i]}</span>
+                        <p>${opcion}</p>
+                    </div>
+                `).join("")}
+            </div>
+
+            <div class="resultado" id="resultado-${numero}" aria-live="polite">
+                <div class="resultado-titulo"></div>
+                <p></p>
+            </div>
+
+            <button class="boton-siguiente-ejercicio"
+                    id="siguiente-${numero}">
+                ${numero === ejercicios.length
+                    ? "VER RESULTADO FINAL →"
+                    : "SIGUIENTE EJERCICIO →"}
+            </button>
+        `;
+
+        contenedor.appendChild(panel);
+
+        panel.querySelectorAll(".opcion").forEach(opcion => {
+            opcion.addEventListener("click", () => {
+                responder(opcion, numero);
+            });
+
+            opcion.addEventListener("keydown", evento => {
+                if (evento.key === "Enter" || evento.key === " ") {
+                    evento.preventDefault();
+                    responder(opcion, numero);
+                }
+            });
+        });
+
+        panel.querySelector(".boton-siguiente-ejercicio")
+            .addEventListener("click", () => {
+                if (numero < ejercicios.length) {
+                    mostrarEjercicio(numero + 1);
+                } else {
+                    mostrarResultadoFinal();
+                }
+            });
+    });
+}
+
+function responder(elemento, numero) {
+    const panel = document.getElementById("ejercicio-" + numero);
+
+    if (panel.dataset.respondido === "true") {
+        return;
+    }
+
+    panel.dataset.respondido = "true";
+
+    const ejercicio = ejercicios[numero - 1];
+    const opciones = panel.querySelectorAll(".opcion");
+    const seleccion = Number(elemento.dataset.indice);
+    const correcta = seleccion === ejercicio.correcta;
+
+    respondidos++;
+
+    if (correcta) {
+        aciertos++;
+    }
+
+    opciones.forEach((opcion, indice) => {
+        opcion.classList.add("bloqueada");
+        opcion.setAttribute("aria-disabled", "true");
+
+        if (indice === ejercicio.correcta) {
+            opcion.classList.add("correcta");
+        } else if (indice === seleccion) {
+            opcion.classList.add("incorrecta");
+        }
+    });
+
+    const resultado = document.getElementById("resultado-" + numero);
+    const titulo = resultado.querySelector(".resultado-titulo");
+    const texto = resultado.querySelector("p");
+
+    titulo.textContent = correcta
+        ? "✓ RESPUESTA CORRECTA"
+        : "✦ REPASEMOS LA RESPUESTA";
+
+    texto.textContent = ejercicio.explicacion;
+    resultado.classList.add("visible");
+
+    panel.querySelector(".boton-siguiente-ejercicio")
+        .classList.add("visible");
+}
+
+function mostrarEjercicio(numero) {
+    document.getElementById("ejercicio-" + ejercicioActualActual())
+        ?.style.setProperty("display", "none");
+
+    const siguiente = document.getElementById("ejercicio-" + numero);
+    siguiente.style.display = "block";
+
+    ejercicioActual = numero - 1;
+
+    document.getElementById("contador").textContent =
+        numero + " / " + ejercicios.length;
+
+    document.getElementById("barra").style.width =
+        (numero / ejercicios.length * 100) + "%";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function ejercicioActualActual() {
+    return ejercicioActual + 1;
+}
+
+function mostrarResultadoFinal() {
+    document.getElementById("ejercicio-" + ejercicios.length)
+        .style.display = "none";
+
+    document.getElementById("contador").textContent =
+        ejercicios.length + " / " + ejercicios.length;
+
+    document.getElementById("barra").style.width = "100%";
+
+    const porcentaje = Math.round((aciertos / ejercicios.length) * 100);
+
+    let mensaje;
+
+    if (porcentaje >= 85) {
+        mensaje = "¡Excelente trabajo! ";
+    } else if (porcentaje >= 60) {
+        mensaje = "¡Buen avance! ";
+    } else {
+        mensaje = "¡La práctica continúa! ";
+    }
+
+    document.getElementById("mensaje-final").innerHTML =
+        mensaje +
+        "Respondiste correctamente <strong>" + aciertos +
+        " de " + ejercicios.length + " preguntas (" +
+        porcentaje + "%)</strong>. Revisá las explicaciones y volvé a practicar para afianzar los conceptos.";
+
+    document.getElementById("resultado-final")
+        .classList.add("visible");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function reiniciarCurso() {
+    ejercicioActual = 0;
+    aciertos = 0;
+    respondidos = 0;
+
+    ejercicios.forEach((_, indice) => {
+        const panel = document.getElementById("ejercicio-" + (indice + 1));
+        panel.dataset.respondido = "false";
+        panel.style.display = indice === 0 ? "block" : "none";
+
+        panel.querySelectorAll(".opcion").forEach(opcion => {
+            opcion.classList.remove("correcta", "incorrecta", "bloqueada");
+            opcion.removeAttribute("aria-disabled");
+        });
+
+        panel.querySelector(".resultado").classList.remove("visible");
+        panel.querySelector(".boton-siguiente-ejercicio")
+            .classList.remove("visible");
+    });
+
+    document.getElementById("resultado-final")
+        .classList.remove("visible");
+
+    document.getElementById("contador").textContent =
+        "1 / " + ejercicios.length;
+
+    document.getElementById("barra").style.width = "0%";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+crearEjercicios();
+</script>
+
+</body>
+</html>
+
