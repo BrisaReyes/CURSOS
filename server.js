@@ -154,12 +154,14 @@ const precio = Number(process.env.MP_PRICE);
                 }],
                 external_reference: usuarioId,
                 notification_url: `${BASE_URL}/api/mp-webhook`,
-                back_urls: {
-                    success: `${BASE_URL}/api/pago-aprobado`,
-                    pending: INICIO_URL,
-                    failure: INICIO_URL
-                },
-                auto_return: "approved"
+                
+back_urls: {
+    success: `${BASE_URL}/api/pago-aprobado`,
+    pending: `${BASE_URL}/`,
+    failure: `${BASE_URL}/`
+},
+auto_return: "approved",
+
             })
         }
     );
