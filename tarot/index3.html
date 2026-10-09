@@ -1,1062 +1,429 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10070b">
+<meta name="description" content="ASTRO ROJO — Aprende a interpretar el Tarot, las tiradas de amor, los símbolos y las combinaciones de cartas.">
+<title>ASTRO ROJO — Interpretación del Tarot</title>
+<link rel="stylesheet" href="style.css">
 
-    <meta charset="UTF-8">
+<style>
+:root{
+  --bg:#0b080a;
+  --panel:#151014;
+  --red:#e51b3e;
+  --pink:#ff526d;
+  --white:#f4edf0;
+  --muted:#b8a9b0;
+  --line:rgba(255,255,255,.11);
+  --gold:#d6b47b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  margin:0;
+  background:radial-gradient(ellipse at 80% 0%,#32101a,transparent 38%),var(--bg);
+  color:var(--white);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.7;
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+.wrap{width:min(1160px,calc(100% - 30px));margin:auto}
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(11,8,10,.91);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  min-height:66px;display:flex;align-items:center;
+  justify-content:space-between;gap:15px;
+}
+.brand{font-weight:900;letter-spacing:.15em;font-size:.9rem}
+.brand span{color:var(--pink)}
+.navlinks{display:flex;align-items:center;gap:16px;font-size:.82rem;color:var(--muted)}
+.navlinks a:hover{color:white}
+.navlinks .next{background:var(--red);color:white;padding:9px 13px;border-radius:999px}
 
-    <title>Curso de Tarot — Lectura de Amor</title>
+.hero{padding:75px 0 55px;position:relative;overflow:hidden}
+.hero:after{
+  content:"☾";position:absolute;right:5%;top:0;
+  font-size:clamp(150px,25vw,300px);line-height:1;
+  color:rgba(229,27,62,.10);pointer-events:none;
+}
+.eyebrow{
+  color:var(--pink);font-size:.72rem;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;
+}
+.hero h1{
+  font-size:clamp(3rem,8vw,6.3rem);
+  line-height:.96;letter-spacing:-.06em;
+  margin:18px 0;max-width:900px;
+}
+.hero h1 span{
+  display:block;color:var(--pink);
+  font-family:Georgia,serif;font-weight:400;font-style:italic;
+}
+.hero p{max-width:690px;color:#d0c1c7;font-size:1.05rem}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:11px 17px;border-radius:999px;
+  background:#20151b;border:1px solid var(--line);
+  color:white;cursor:pointer;transition:.2s;
+}
+.btn.primary{background:var(--red);border-color:var(--red)}
+.btn:hover{border-color:var(--pink);transform:translateY(-2px)}
 
-    <link rel="stylesheet" href="style.css">
+.strip{border-block:1px solid var(--line);background:#ffffff06}
+.stripgrid{display:grid;grid-template-columns:repeat(4,1fr)}
+.stripitem{padding:18px;border-right:1px solid var(--line)}
+.stripitem:last-child{border:0}
+.stripitem strong,.stripitem small{display:block}
+.stripitem small{color:var(--muted)}
 
-    <style>
+section{padding:65px 0}
+.sectionhead{
+  display:flex;justify-content:space-between;
+  align-items:end;gap:25px;margin-bottom:28px;
+}
+.sectionhead h2{
+  font-size:clamp(2rem,5vw,3.5rem);
+  line-height:1.05;letter-spacing:-.045em;margin:8px 0;
+}
+.sectionhead p{max-width:470px;color:var(--muted);margin:0}
+.introgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
 
-        /* =========================================================
-           LECTURA DE AMOR
-        ========================================================= */
+.feature,.tirada-card,.info,.step{
+  background:linear-gradient(145deg,#21131a,#110d10);
+  border:1px solid var(--line);border-radius:19px;
+  transition:border-color .25s,transform .25s;
+}
+.feature{padding:27px}
+.feature h3{margin:0 0 8px}
+.feature p{color:#cbbdc3;margin:0}
+.mark{font:4rem Georgia,serif;color:var(--pink);line-height:1}
 
-        .tirada-introduccion {
-            max-width: 650px;
-            margin: 0 auto 35px;
-            text-align: center;
-        }
+.topicgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.topic{
+  padding:20px;border:1px solid var(--line);border-radius:18px;
+  background:var(--panel);
+}
+.topic .number{font-size:.72rem;color:var(--pink);letter-spacing:.15em;font-weight:800}
+.topic h3{margin:8px 0}
+.topic p{margin:0;color:var(--muted);font-size:.9rem}
 
-        .tirada-introduccion .tirada-numero {
-            display: block;
-            margin-bottom: 10px;
-            color: #a93648;
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
+.tirada-introduccion{max-width:700px;margin:0 auto 35px;text-align:center}
+.tirada-introduccion .tirada-numero{
+  display:block;margin-bottom:10px;color:var(--pink);
+  font-size:12px;letter-spacing:2px;
+}
+.tirada-introduccion h3{
+  color:var(--white);font:400 clamp(1.3rem,4vw,1.8rem) Georgia,serif;
+  letter-spacing:2px;margin:8px 0 15px;
+}
+.tirada-introduccion p{color:var(--muted);font-size:15px;line-height:1.8;margin:0 auto}
 
-        .tirada-introduccion h3 {
-            color: #eee9e4;
-            font-size: 25px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
+.tiradas-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;width:100%;margin:28px auto 0;
+}
+.tirada-card{min-height:185px;padding:25px 21px;text-align:left}
+.tirada-card:hover{transform:translateY(-4px);border-color:#ff526d80}
+.tirada-numero{
+  display:block;margin-bottom:12px;color:var(--pink);
+  font-size:12px;letter-spacing:2px;font-weight:700;
+}
+.tirada-card h3{color:var(--white);font-size:1rem;font-weight:600;line-height:1.4;margin:0 0 12px}
+.tirada-card p{margin:0;color:#b8a9b0;font-size:.88rem;line-height:1.75}
 
-        .tirada-introduccion p {
-            color: #a8a0a3;
-            font-size: 15px;
-            line-height: 1.8;
-            margin: 0 auto;
-        }
+.info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.info{padding:23px}
+.info h3{margin:0 0 8px}
+.info p{margin:0;color:var(--muted)}
+.symbol{font-size:1.7rem;color:var(--pink);margin-bottom:8px}
 
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.step{padding:20px}
+.step b{display:block;color:var(--pink);margin-bottom:10px;font-size:.75rem;letter-spacing:.12em}
+.step h3{font-size:1rem;margin:0 0 7px}
+.step p{font-size:.9rem;color:var(--muted);margin:0}
 
-        /* =========================================================
-           CAJAS DE LA TIRADA
-        ========================================================= */
+.ethics{
+  padding:clamp(22px,5vw,42px);
+  border:1px solid #e51b3e66;border-radius:22px;
+  background:linear-gradient(120deg,#e51b3e20,#ffffff04);
+}
+.ethics h2{font-size:clamp(1.8rem,4vw,3rem);margin:8px 0}
+.ethics p{color:#d1c3c9;max-width:850px}
 
-        .tiradas-grid {
-            position: relative;
-            z-index: 1;
+.final{text-align:center;padding:65px 0 80px}
+.final h2{font:italic 500 clamp(2rem,6vw,4rem) Georgia,serif}
+.final p{max-width:650px;margin:0 auto 22px;color:var(--muted)}
 
-            display: grid;
+.siguiente-leccion{text-align:center;padding:10px 15px 65px}
+.siguiente-leccion a{
+  display:inline-flex;justify-content:center;align-items:center;
+  padding:14px 24px;border-radius:999px;
+  background:var(--red);border:1px solid var(--red);
+  color:white;font-size:.85rem;font-weight:800;letter-spacing:.08em;
+  transition:.2s;
+}
+.siguiente-leccion a:hover{background:#b81230;transform:translateY(-2px)}
 
-            grid-template-columns:
-                repeat(3, 1fr);
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:.82rem}
+.footrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-            gap: 18px;
-
-            width: 100%;
-            max-width: 850px;
-
-            margin: 30px auto 0;
-        }
-
-
-        .tirada-card {
-            min-height: 190px;
-
-            padding: 28px 22px;
-
-            text-align: center;
-
-            background:
-                rgba(20, 5, 9, 0.55);
-
-            border:
-                1px solid
-                rgba(150, 35, 50, 0.25);
-
-            border-radius: 14px;
-
-            transition:
-                transform 0.3s ease,
-                border-color 0.3s ease,
-                background 0.3s ease;
-        }
-
-
-        .tirada-card:hover {
-            transform: translateY(-4px);
-
-            border-color:
-                rgba(190, 55, 70, 0.60);
-
-            background:
-                rgba(35, 7, 12, 0.75);
-        }
-
-
-        .tirada-numero {
-            display: block;
-
-            margin-bottom: 12px;
-
-            color: #a93648;
-
-            font-size: 12px;
-
-            letter-spacing: 2px;
-        }
-
-
-        .tirada-card h3 {
-            color: #eee9e4;
-
-            font-size: 16px;
-
-            font-weight: 400;
-
-            line-height: 1.4;
-
-            margin-bottom: 14px;
-        }
-
-
-        .tirada-card p {
-            max-width: 100%;
-
-            margin: 0;
-
-            color: #928a8e;
-
-            font-size: 13px;
-
-            line-height: 1.7;
-        }
-
-
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
-
-        @media (max-width: 800px) {
-
-            .tiradas-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-                max-width: 650px;
-            }
-
-        }
-
-
-        @media (max-width: 500px) {
-
-            .tiradas-grid {
-                grid-template-columns: 1fr;
-
-                max-width: 350px;
-            }
-
-        }
-
-    </style>
-
+@media(max-width:900px){
+  .topicgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .navlinks{gap:10px}
+  .navlinks a:not(.next){display:none}
+}
+@media(max-width:700px){
+  .tiradas-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .introgrid{grid-template-columns:1fr}
+  .info-grid{grid-template-columns:1fr}
+}
+@media(max-width:500px){
+  .wrap{width:calc(100% - 24px)}
+  .hero{padding:50px 0 38px}
+  .stripgrid{grid-template-columns:repeat(2,1fr)}
+  .stripitem:nth-child(2){border-right:0}
+  .stripitem:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  section{padding:45px 0}
+  .sectionhead{display:block}
+  .sectionhead p{margin-top:12px}
+  .tiradas-grid{grid-template-columns:1fr;max-width:400px}
+  .tirada-card{min-height:0;padding:23px}
+  .topicgrid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
 </head>
-
 
 <body>
 
-
-<main class="container">
-
-
-    <!-- =========================================================
-         LECTURA DE AMOR
-    ========================================================= -->
-
-    <section class="lesson">
-
-        <h2>LECTURA DE AMOR</h2>
-
-        <p>
-            Las lecturas de amor permiten analizar los vínculos
-            desde una perspectiva profunda, observando sentimientos,
-            pensamientos, intenciones, comportamientos y la energía
-            que existe entre las personas.
-         En una lectura amorosa no buscamos solamente saber
-            qué puede ocurrir. El objetivo es comprender qué está
-            sucediendo dentro de la conexión y qué factores pueden
-            estar influyendo en ella.
-        </p>
-
-        <p>
-            Las cartas pueden mostrar cómo se encuentra cada persona,
-            qué emociones están presentes, qué dificultades existen
-            y hacia dónde parece dirigirse la relación según las
-            energías actuales.
-          Para interpretar correctamente una lectura de amor es
-            fundamental tener en cuenta la pregunta, la posición
-            de cada carta y la combinación entre ellas.
-        </p>
-
-    </section>
-
-
-    <!-- =========================================================
-         TIRADAS DE AMOR
-    ========================================================= -->
-
-    <section class="lesson">
-
-        <h2>TIRADA DE AMOR</h2>
-
-
-
-        <div class="tiradas-grid">
-
-
-            <!-- =================================================
-                 CARTA 1
-            ================================================= -->
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    01
-                </span>
-
-                <h3>
-                    SENTIMIENTO PRINCIPAL
-                </h3>
-
-                <p>
-                    Representa la emoción principal que esta
-                    persona siente hacia ti en este momento.
-                </p>
-
-            </div>
-
-
-            <!-- =================================================
-                 CARTA 2
-            ================================================= -->
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    02
-                </span>
-
-                <h3>
-                    LO QUE PIENSA
-                </h3>
-
-                <p>
-                    Muestra cómo piensa sobre ti y qué percepción
-                    tiene actualmente del vínculo.
-                </p>
-
-            </div>
-
-
-            <!-- =================================================
-                 CARTA 3
-            ================================================= -->
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    03
-                </span>
-
-                <h3>
-                    LO QUE OCULTA
-                </h3>
-
-                <p>
-                    Revela sentimientos, pensamientos o emociones
-                    que pueden existir pero que todavía no expresa.
-                </p>
-
-            </div>
-
-
-            <!-- =================================================
-                 CARTA 4
-            ================================================= -->
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    04
-                </span>
-
-                <h3>
-                    LO QUE DESEA
-                </h3>
-
-                <p>
-                    Representa aquello que esta persona desea
-                    vivir o conseguir dentro de la conexión.
-                </p>
-
-            </div>
-
-
-            <!-- =================================================
-                 CARTA 5
-            ================================================= -->
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    05
-                </span>
-
-                <h3>
-                    LO QUE LA FRENA
-                </h3>
-
-                <p>
-                    Muestra los miedos, dudas, bloqueos o
-                    circunstancias que pueden impedir que actúe.
-                </p>
-
-            </div>
-
-
-            <!-- =================================================
-                 CARTA 6
-            ================================================= -->
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    06
-                </span>
-
-                <h3>
-                    PRÓXIMO MOVIMIENTO
-                </h3>
-
-                <p>
-                    Indica la tendencia de acción o comportamiento
-                    que puede manifestar próximamente.
-                </p>
-
-            </div>
-
-
-            <!-- =================================================
-                 CARTA 7
-            ================================================= -->
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    07
-                </span>
-
-                <h3>
-                    EVOLUCIÓN DEL VÍNCULO
-                </h3>
-
-                <p>
-                    Muestra hacia dónde tiende a desarrollarse
-                    la conexión teniendo en cuenta las energías
-                    presentes.
-                </p>
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-    <!-- =========================================================
-         TIRADA DE 3 CARTAS
-    ========================================================= -->
-
-    <section class="lesson">
-
-        <h2>TIRADA DE 3 CARTAS</h2>
-
-        <div class="tirada-introduccion">
-
-            <span class="tirada-numero">
-                TIRADA
-            </span>
-
-            <h3>
-                PASADO · PRESENTE · FUTURO
-            </h3>
-
-            <p>
-                Una tirada sencilla y versátil que permite observar
-                cómo se relacionan los acontecimientos del pasado
-                con la situación actual y su posible evolución.
-            </p>
-
-        </div>
-
-
-        <div class="tiradas-grid">
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    01
-                </span>
-
-                <h3>
-                    PASADO
-                </h3>
-
-                <p>
-                    Representa los acontecimientos, emociones o
-                    experiencias anteriores que todavía pueden
-                    influir en la situación.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    02
-                </span>
-
-                <h3>
-                    PRESENTE
-                </h3>
-
-                <p>
-                    Muestra la energía actual de la situación y
-                    aquello que está ocurriendo en este momento.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    03
-                </span>
-
-                <h3>
-                    FUTURO
-                </h3>
-
-                <p>
-                    Indica la tendencia hacia la que puede avanzar
-                    la situación según las energías presentes.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================================
-         REPETICIÓN DE NÚMEROS
-    ========================================================= -->
-
-    <section class="lesson">
-
-        <h2>REPETICIÓN DE NÚMEROS</h2>
-
-        <p>
-            Cuando durante una tirada aparecen varias cartas con
-            el mismo número, podemos prestar atención a esa
-            repetición. No se trata de una regla absoluta, sino
-            de una herramienta que puede aportar información
-            adicional sobre la energía de la lectura.
-        </p>
-
-        <div class="tiradas-grid">
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    01
-                </span>
-
-                <h3>
-                    NÚMEROS REPETIDOS
-                </h3>
-
-                <p>
-                    La aparición de varios números iguales puede
-                    señalar que una determinada etapa, aprendizaje
-                    o energía tiene especial importancia dentro
-                    de la situación consultada.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    02
-                </span>
-
-                <h3>
-                    OBSERVAR EL CONTEXTO
-                </h3>
-
-                <p>
-                    El significado de la repetición depende de las
-                    cartas que aparecen junto a esos números y de
-                    la posición que ocupan dentro de la tirada.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">
-                    03
-                </span>
-
-                <h3>
-                    ENERGÍA DOMINANTE
-                </h3>
-
-                <p>
-                    Cuando una numeración aparece varias veces,
-                    puede ayudarnos a reconocer una energía que
-                    se encuentra especialmente presente en la
-                    lectura.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-    <!-- =========================================================
-         CÓMO HACER UNA LECTURA COMPLETA
-    ========================================================= -->
-
-    <section class="lesson">
-
-        <h2>CÓMO HACER UNA LECTURA COMPLETA</h2>
-
-        <p>
-            Una lectura de Tarot no consiste solamente en conocer
-            el significado de cada carta. El verdadero trabajo
-            consiste en relacionar las cartas entre sí y construir
-            una interpretación coherente a partir de la pregunta
-            y de la situación consultada.
-        </p>
-
-
-        <div class="tiradas-grid">
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">01</span>
-
-                <h3>PREPARACIÓN</h3>
-
-                <p>
-                    Antes de comenzar, es importante crear un
-                    momento de concentración y tener clara la
-                    intención de la lectura.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">02</span>
-
-                <h3>PREGUNTA</h3>
-
-                <p>
-                    Formular una pregunta clara permite orientar
-                    la lectura y obtener una respuesta más útil
-                    y concreta.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">03</span>
-
-                <h3>ELECCIÓN DE TIRADA</h3>
-
-                <p>
-                    La tirada debe elegirse de acuerdo con la
-                    pregunta y con la profundidad que necesita
-                    la situación.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">04</span>
-
-                <h3>SELECCIÓN DE CARTAS</h3>
-
-                <p>
-                    Las cartas se seleccionan manteniendo el
-                    enfoque en la pregunta y respetando las
-                    posiciones establecidas por la tirada.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">05</span>
-
-                <h3>INTERPRETACIÓN INDIVIDUAL</h3>
-
-                <p>
-                    Primero observamos qué representa cada carta
-                    dentro de la posición que ocupa en la tirada.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">06</span>
-
-                <h3>COMBINACIÓN DE CARTAS</h3>
-
-                <p>
-                    Después relacionamos las cartas entre sí para
-                    descubrir cómo se complementan, refuerzan o
-                    contradicen dentro de la lectura.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">07</span>
-
-                <h3>SÍNTESIS FINAL</h3>
-
-                <p>
-                    Se integran las diferentes partes de la tirada
-                    para construir una interpretación general y
-                    coherente de la situación.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">08</span>
-
-                <h3>CONSEJO</h3>
-
-                <p>
-                    Finalmente podemos identificar qué enseñanza,
-                    orientación o actitud puede aportar la lectura
-                    frente a la situación consultada.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-<section class="lesson">
-
-    <h2>CÓMO LEER LA IMAGEN DE UNA CARTA</h2>
-
-    <p>
-        El Tarot no se interpreta únicamente a partir del significado
-        tradicional de cada carta. La imagen también puede aportar
-        información importante para comprender la energía de una
-        situación y profundizar la lectura.
-    </p>
-
-    <p>
-        Aprender a observar una carta permite desarrollar una
-        interpretación más intuitiva y completa. Para hacerlo,
-        podemos prestar atención a diferentes elementos visuales
-        presentes en la imagen.
-    </p>
-
-    <div class="tiradas-grid">
-
-        <div class="tirada-card">
-            <span class="tirada-numero">01</span>
-            <h3>PERSONAJES</h3>
-            <p>
-                Observa quién aparece en la carta, qué está haciendo,
-                cómo se relaciona con los demás personajes y qué papel
-                parece representar dentro de la escena.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">02</span>
-            <h3>MIRADAS</h3>
-            <p>
-                Presta atención hacia dónde miran los personajes.
-                La dirección de la mirada puede sugerir interés,
-                preocupación, búsqueda, rechazo o atención hacia
-                otro elemento de la escena.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">03</span>
-            <h3>DIRECCIÓN</h3>
-            <p>
-                Observa hacia dónde se desplazan o se orientan los
-                personajes y elementos de la carta. La dirección
-                puede aportar una sensación de avance, retroceso,
-                acercamiento o alejamiento.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">04</span>
-            <h3>COLORES</h3>
-            <p>
-                Los colores predominantes pueden ayudarte a percibir
-                el clima de la carta. Observa si predominan tonos
-                intensos, claros, oscuros, cálidos o fríos y qué
-                sensación producen en conjunto.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">05</span>
-            <h3>ELEMENTOS</h3>
-            <p>
-                Agua, fuego, tierra, aire, animales, objetos,
-                construcciones y otros elementos pueden aportar
-                información adicional sobre la situación representada.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">06</span>
-            <h3>MOVIMIENTO</h3>
-            <p>
-                Observa si la escena transmite movimiento o quietud.
-                Una carta dinámica puede sugerir acción, cambios o
-                evolución, mientras que una escena estática puede
-                señalar pausa, espera o estabilidad.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">07</span>
-            <h3>PAISAJE</h3>
-            <p>
-                El entorno también forma parte del mensaje visual.
-                Observa el cielo, el terreno, el agua, las montañas,
-                los caminos y cualquier detalle que ayude a comprender
-                dónde se desarrolla la escena.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">08</span>
-            <h3>EXPRESIONES</h3>
-            <p>
-                Las expresiones corporales y faciales pueden aportar
-                pistas sobre el estado emocional de los personajes:
-                tranquilidad, tensión, tristeza, alegría, miedo,
-                seguridad o incertidumbre.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">09</span>
-            <h3>SÍMBOLOS IMPORTANTES</h3>
-            <p>
-                Algunos objetos, animales o detalles visuales pueden
-                tener un significado simbólico. Aprende a reconocerlos
-                sin convertir cada elemento de la imagen en una regla
-                absoluta.
-            </p>
-        </div>
-
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="#inicio">ASTRO <span>ROJO</span></a>
+    <nav class="navlinks">
+      <a href="#amor">Lectura de amor</a>
+      <a href="#tiradas">Tiradas</a>
+      <a href="#simbolismo">Simbolismo</a>
+      <a class="next" href="index4.html">Ejercicios ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="eyebrow">ASTRO ROJO · ESTUDIO III</div>
+    <h1>EL ARTE<span>de interpretar el Tarot.</span></h1>
+    <p>Aprendé a conectar los significados de las cartas, interpretar tiradas de amor, observar el simbolismo de las imágenes y construir lecturas completas con criterio y sensibilidad.</p>
+    <div class="actions">
+      <a class="btn primary" href="#amor">Comenzar a estudiar ↘</a>
+      <a class="btn" href="#interpretacion">Método de lectura</a>
     </div>
-
-    <p style="margin-top: 30px;">
-        La observación visual no reemplaza el significado tradicional
-        de la carta. Su función es complementarlo y permitir que el
-        tarotista construya una interpretación más profunda,
-        coherente y conectada con la pregunta realizada.
-    </p>
-
+  </div>
 </section>
 
+<div class="strip">
+  <div class="wrap stripgrid">
+    <div class="stripitem"><strong>Lecturas de amor</strong><small>Sentimientos y vínculos</small></div>
+    <div class="stripitem"><strong>Tiradas</strong><small>De 3 a 7 cartas</small></div>
+    <div class="stripitem"><strong>Simbolismo</strong><small>Imágenes y detalles</small></div>
+    <div class="stripitem"><strong>Interpretación</strong><small>Contexto y combinación</small></div>
+  </div>
+</div>
 
-
-<section class="lesson">
-
-    <h2>CARTAS DIFÍCILES</h2>
-
-    <p>
-        Algunas cartas pueden generar temor cuando aparecen en una
-        lectura, especialmente cuando representan cambios profundos,
-        pérdidas, conflictos o procesos emocionales intensos.
-    </p>
-
-    <p>
-        Sin embargo, una carta difícil no significa necesariamente
-        que vaya a ocurrir algo negativo. Su interpretación depende
-        de la pregunta, la posición que ocupa, las cartas que la
-        acompañan y el contexto de la persona consultante.
-    </p>
-
-    <p>
-        El objetivo del tarotista es aprender a comunicar estas
-        cartas con claridad y responsabilidad, sin generar miedo
-        ni presentar una interpretación como una certeza absoluta.
-    </p>
-
-    <div class="tiradas-grid">
-
-        <div class="tirada-card">
-            <span class="tirada-numero">01</span>
-            <h3>LA TORRE</h3>
-            <p>
-                Puede representar una ruptura de estructuras, una
-                revelación o un cambio que obliga a replantear una
-                situación. No debe interpretarse automáticamente
-                como una desgracia.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">02</span>
-            <h3>LA MUERTE</h3>
-            <p>
-                Generalmente habla de transformación, cierre de una
-                etapa y comienzo de un proceso diferente. No debe
-                interpretarse literalmente como muerte física.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">03</span>
-            <h3>EL DIABLO</h3>
-            <p>
-                Puede señalar apegos, dependencias, tentaciones,
-                deseos intensos o situaciones que dificultan actuar
-                con libertad. Su significado depende del contexto.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">04</span>
-            <h3>3 DE ESPADAS</h3>
-            <p>
-                Puede representar dolor emocional, decepción,
-                separación o una verdad difícil de aceptar. También
-                puede señalar un proceso necesario de reconocimiento
-                y elaboración emocional.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">05</span>
-            <h3>5 DE COPAS</h3>
-            <p>
-                Habla de pérdida, tristeza, arrepentimiento o
-                decepción, pero también invita a observar aquello
-                que todavía permanece disponible y puede recuperarse.
-            </p>
-        </div>
-
-        <div class="tirada-card">
-            <span class="tirada-numero">06</span>
-            <h3>10 DE ESPADAS</h3>
-            <p>
-                Puede señalar el final de una etapa difícil,
-                agotamiento o la necesidad de aceptar que algo
-                llegó a su límite. También puede marcar el comienzo
-                de una nueva etapa después del cierre.
-            </p>
-        </div>
-
+<section id="amor">
+  <div class="wrap">
+    <div class="sectionhead">
+      <div>
+        <div class="eyebrow">01 · VÍNCULOS Y EMOCIONES</div>
+        <h2>Lectura<br>de amor.</h2>
+      </div>
+      <p>Una lectura amorosa explora la dinámica de una conexión, los sentimientos que pueden estar presentes, las dificultades y las posibles formas de evolución del vínculo.</p>
     </div>
 
-    <p style="margin-top: 30px;">
-        <strong>REGLA FUNDAMENTAL:</strong>
-        ninguna carta debe interpretarse de manera aislada.
-        Antes de comunicar una conclusión, observa la pregunta,
-        la posición de la carta, las cartas que la rodean y el
-        contexto general de la lectura.
-    </p>
-
+    <div class="introgrid">
+      <article class="feature">
+        <div class="mark">♡</div>
+        <h3>Comprender la conexión</h3>
+        <p>Las cartas pueden utilizarse para reflexionar sobre emociones, expectativas, comportamientos y necesidades dentro de una relación. La lectura no permite comprobar con certeza lo que otra persona piensa o siente: ofrece un lenguaje simbólico para explorar posibilidades.</p>
+      </article>
+      <article class="feature">
+        <div class="mark">☾</div>
+        <h3>Leer más allá del resultado</h3>
+        <p>El propósito no es solamente preguntar qué ocurrirá. También podemos observar qué está sucediendo en el presente, qué obstáculos existen, qué necesita atención y qué decisiones están al alcance de cada persona.</p>
+      </article>
+    </div>
+  </div>
 </section>
 
+<section id="tirada-amor">
+  <div class="wrap">
+    <div class="sectionhead">
+      <div><div class="eyebrow">02 · TIRADA DE SIETE CARTAS</div><h2>Explorá las capas<br>de un vínculo.</h2></div>
+      <p>Esta tirada organiza la consulta en siete posiciones. Cada una representa una perspectiva distinta y debe interpretarse junto con las demás.</p>
+    </div>
 
+    <div class="tiradas-grid">
+      <article class="tirada-card"><span class="tirada-numero">01</span><h3>SENTIMIENTO PRINCIPAL</h3><p>Explora la emoción central que podría estar presente en la conexión y cómo se manifiesta en la situación consultada.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">02</span><h3>LO QUE PIENSA</h3><p>Invita a reflexionar sobre la percepción del vínculo, las ideas que lo rodean y la manera en que se interpreta la relación.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">03</span><h3>LO QUE NO EXPRESA</h3><p>Representa aspectos poco comunicados, dudas o emociones que pueden no estar encontrando una expresión clara.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">04</span><h3>LO QUE DESEA</h3><p>Explora las expectativas, necesidades y aspiraciones que podrían influir en la forma de vivir el vínculo.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">05</span><h3>LO QUE LA FRENA</h3><p>Ayuda a observar temores, inseguridades, conflictos o circunstancias que pueden dificultar una decisión o un acercamiento.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">06</span><h3>PRÓXIMO MOVIMIENTO</h3><p>Señala una posible tendencia de comportamiento que debe entenderse como una posibilidad, no como una acción garantizada.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">07</span><h3>EVOLUCIÓN DEL VÍNCULO</h3><p>Integra las energías de la tirada para explorar cómo podría desarrollarse la conexión si se mantienen las circunstancias actuales.</p></article>
+    </div>
+  </div>
+</section>
 
-    <!-- =========================================================
-         ÉTICA DEL TAROT
-    ========================================================= -->
+<section id="tres-cartas">
+  <div class="wrap">
+    <div class="sectionhead">
+      <div><div class="eyebrow">03 · TIRADA BREVE</div><h2>Pasado, presente<br>y posible evolución.</h2></div>
+      <p>Una estructura sencilla para practicar la lectura de secuencias y observar cómo una situación puede transformarse a lo largo del tiempo.</p>
+    </div>
+    <div class="tirada-introduccion">
+      <span class="tirada-numero">TIRADA DE TRES CARTAS</span>
+      <h3>PASADO · PRESENTE · FUTURO</h3>
+      <p>El pasado aporta contexto, el presente muestra el punto de partida y la tercera carta sugiere una posible dirección si las condiciones actuales continúan.</p>
+    </div>
+    <div class="tiradas-grid">
+      <article class="tirada-card"><span class="tirada-numero">01</span><h3>PASADO</h3><p>Representa experiencias, decisiones o emociones anteriores que pueden seguir influyendo en la situación.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">02</span><h3>PRESENTE</h3><p>Describe los temas centrales de la situación actual y aquello que merece atención en este momento.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">03</span><h3>POSIBLE EVOLUCIÓN</h3><p>Explora una tendencia futura condicionada por las circunstancias y las decisiones que se tomen.</p></article>
+    </div>
+  </div>
+</section>
 
-    <section class="lesson">
+<section id="numeros">
+  <div class="wrap">
+    <div class="sectionhead">
+      <div><div class="eyebrow">04 · PATRONES</div><h2>Repetición<br>de números.</h2></div>
+      <p>Cuando un número aparece varias veces, puede convertirse en un tema relevante de la lectura. No es una regla absoluta: el contexto siempre tiene prioridad.</p>
+    </div>
+    <div class="tiradas-grid">
+      <article class="tirada-card"><span class="tirada-numero">01</span><h3>NÚMEROS REPETIDOS</h3><p>La repetición puede invitar a prestar atención a una etapa, un aprendizaje o un tipo de experiencia que aparece en distintas áreas.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">02</span><h3>OBSERVAR EL CONTEXTO</h3><p>El significado depende del palo, de las posiciones de la tirada, de la pregunta y de las cartas que acompañan al número repetido.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">03</span><h3>ENERGÍA DOMINANTE</h3><p>Un patrón numérico puede ayudar a reconocer un tema recurrente y a formular preguntas más precisas durante la interpretación.</p></article>
+    </div>
+  </div>
+</section>
 
-        <h2>ÉTICA DEL TAROT</h2>
+<section id="interpretacion">
+  <div class="wrap">
+    <div class="sectionhead">
+      <div><div class="eyebrow">05 · MÉTODO</div><h2>Cómo hacer<br>una lectura completa.</h2></div>
+      <p>Una buena interpretación no es una suma mecánica de definiciones. Es una síntesis coherente entre la pregunta, las posiciones, las imágenes y las relaciones entre las cartas.</p>
+    </div>
+    <div class="steps">
+      <article class="step"><b>01 · PREPARACIÓN</b><h3>Crear el espacio</h3><p>Tomate un momento para concentrarte y definir qué aspecto de la situación querés explorar.</p></article>
+      <article class="step"><b>02 · PREGUNTA</b><h3>Ser concreto</h3><p>Formulá una pregunta clara y abierta, centrada en comprender la situación en lugar de exigir una certeza.</p></article>
+      <article class="step"><b>03 · TIRADA</b><h3>Elegir posiciones</h3><p>Seleccioná un método que se adapte a la profundidad y al tipo de consulta.</p></article>
+      <article class="step"><b>04 · SELECCIÓN</b><h3>Elegir las cartas</h3><p>Distribuí las cartas de acuerdo con las posiciones establecidas para la tirada.</p></article>
+      <article class="step"><b>05 · OBSERVACIÓN</b><h3>Leer cada carta</h3><p>Identificá el significado tradicional, los detalles visuales y la función de cada posición.</p></article>
+      <article class="step"><b>06 · COMBINACIÓN</b><h3>Relacionar mensajes</h3><p>Buscá conexiones, contrastes, repeticiones y cambios de energía entre las cartas.</p></article>
+      <article class="step"><b>07 · SÍNTESIS</b><h3>Construir la lectura</h3><p>Uní las observaciones en una explicación clara, evitando contradicciones o conclusiones exageradas.</p></article>
+      <article class="step"><b>08 · REFLEXIÓN</b><h3>Orientar la consulta</h3><p>Cerrá con una idea útil, una pregunta de reflexión o una acción realista que la persona pueda considerar.</p></article>
+    </div>
+  </div>
+</section>
 
-        <p>
-            Una buena lectura de Tarot también requiere
-            responsabilidad. El tarotista debe comprender que
-            sus palabras pueden influir en la persona que consulta
-            y, por eso, la interpretación debe realizarse con
-            respeto, claridad y criterio.
-        </p>
+<section id="simbolismo">
+  <div class="wrap">
+    <div class="sectionhead">
+      <div><div class="eyebrow">06 · LENGUAJE VISUAL</div><h2>Cómo leer la imagen<br>de una carta.</h2></div>
+      <p>Los símbolos aportan profundidad a la interpretación. Primero observá la escena completa y después prestá atención a los detalles.</p>
+    </div>
+    <div class="tiradas-grid">
+      <article class="tirada-card"><span class="tirada-numero">01</span><h3>PERSONAJES</h3><p>Observá quién aparece, qué hace y qué papel podría representar dentro de la escena.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">02</span><h3>MIRADAS</h3><p>La dirección de la mirada puede ayudarte a observar dónde se concentra la atención de los personajes.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">03</span><h3>DIRECCIÓN</h3><p>Fijate si los personajes parecen avanzar, detenerse, acercarse o alejarse de algo.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">04</span><h3>COLORES</h3><p>Los tonos cálidos, fríos, claros u oscuros pueden contribuir al clima emocional de la ilustración.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">05</span><h3>ELEMENTOS</h3><p>El agua, el fuego, la tierra, el aire, los animales y los objetos pueden aportar pistas simbólicas.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">06</span><h3>MOVIMIENTO</h3><p>Una escena dinámica o estática puede sugerir ritmos diferentes: acción, pausa, transición o estabilidad.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">07</span><h3>PAISAJE</h3><p>El cielo, los caminos, las montañas y el terreno forman parte del contexto visual de la carta.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">08</span><h3>EXPRESIONES</h3><p>La postura y los gestos pueden ayudarte a explorar tensión, calma, seguridad o incertidumbre.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">09</span><h3>SÍMBOLOS</h3><p>Buscá objetos o detalles que se repitan y relacioná su significado con el mensaje general.</p></article>
+    </div>
+    <article class="feature" style="margin-top:18px">
+      <h3>Del detalle a la interpretación</h3>
+      <p>La observación visual complementa el significado tradicional, pero no lo sustituye. Evitá atribuir un sentido fijo a cada elemento sin considerar el contexto, la pregunta y las otras cartas de la tirada.</p>
+    </article>
+  </div>
+</section>
 
+<section id="cartas-dificiles">
+  <div class="wrap">
+    <div class="sectionhead">
+      <div><div class="eyebrow">07 · CARTAS DESAFIANTES</div><h2>Interpretar sin<br>generar miedo.</h2></div>
+      <p>Las cartas difíciles no son sentencias. Pueden señalar crisis, cambios, dolor o conflictos, pero su significado depende de la lectura completa.</p>
+    </div>
+    <div class="tiradas-grid">
+      <article class="tirada-card"><span class="tirada-numero">ARCANO XVI</span><h3>LA TORRE</h3><p>Puede representar una estructura que se cuestiona, una revelación o un cambio que obliga a revisar lo establecido.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">ARCANO XIII</span><h3>LA MUERTE</h3><p>Se asocia con transformación, cierre de etapa y renovación. No debe interpretarse automáticamente como muerte física.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">ARCANO XV</span><h3>EL DIABLO</h3><p>Puede invitar a observar apegos, tentaciones, dependencias, deseos intensos o patrones que limitan la libertad.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">ARCANO MENOR</span><h3>TRES DE ESPADAS</h3><p>Puede simbolizar dolor emocional, decepción o una verdad difícil de procesar. También abre la posibilidad de reconocer lo que duele.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">ARCANO MENOR</span><h3>CINCO DE COPAS</h3><p>Habla de pérdida, tristeza o arrepentimiento, e invita a reconocer tanto lo que falta como lo que todavía permanece.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">ARCANO MENOR</span><h3>DIEZ DE ESPADAS</h3><p>Puede señalar agotamiento o el cierre de una etapa difícil y la necesidad de recuperar fuerzas para continuar.</p></article>
+    </div>
+    <article class="ethics" style="margin-top:18px">
+      <div class="eyebrow">PRINCIPIO DE INTERPRETACIÓN</div>
+      <h2>Ninguna carta habla sola.</h2>
+      <p>Antes de llegar a una conclusión, considerá la pregunta, la posición, las cartas que la rodean y la situación general. Una lectura responsable describe posibilidades y reflexiones, no acontecimientos inevitables.</p>
+    </article>
+  </div>
+</section>
 
-        <div class="tiradas-grid">
+<section id="etica">
+  <div class="wrap">
+    <div class="sectionhead">
+      <div><div class="eyebrow">08 · RESPONSABILIDAD</div><h2>Ética del Tarot.</h2></div>
+      <p>Interpretar también implica reconocer los límites de la herramienta y respetar a la persona que consulta.</p>
+    </div>
+    <div class="tiradas-grid">
+      <article class="tirada-card"><span class="tirada-numero">01</span><h3>RESPONSABILIDAD</h3><p>Comunicá tus interpretaciones con cuidado y evitá utilizar el miedo para influir en otras personas.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">02</span><h3>LIBRE DECISIÓN</h3><p>Una lectura no elimina la capacidad de elegir. Cada persona conserva la responsabilidad sobre sus decisiones.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">03</span><h3>CLARIDAD</h3><p>Diferenciá una posibilidad simbólica de un hecho comprobado o de una predicción garantizada.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">04</span><h3>RESPETO</h3><p>Respetá la intimidad, los límites y las circunstancias de quien consulta.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">05</span><h3>AUTONOMÍA</h3><p>El Tarot debe favorecer la reflexión, no crear dependencia de lecturas constantes.</p></article>
+      <article class="tirada-card"><span class="tirada-numero">06</span><h3>LÍMITES</h3><p>Una lectura no sustituye asesoramiento médico, psicológico, jurídico o financiero profesional.</p></article>
+    </div>
+  </div>
+</section>
 
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">01</span>
-
-                <h3>RESPONSABILIDAD</h3>
-
-                <p>
-                    La lectura debe realizarse con seriedad,
-                    evitando utilizar las cartas para generar
-                    miedo o dependencia.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">02</span>
-
-                <h3>LIBRE DECISIÓN</h3>
-
-                <p>
-                    Las cartas pueden mostrar tendencias y
-                    posibilidades, pero cada persona conserva
-                    la capacidad de tomar sus propias decisiones.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">03</span>
-
-                <h3>INTERPRETACIÓN RESPONSABLE</h3>
-
-                <p>
-                    Es importante comunicar la interpretación
-                    de manera clara, evitando presentar una
-                    posibilidad como una certeza absoluta.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">04</span>
-
-                <h3>RESPETO</h3>
-
-                <p>
-                    Toda lectura debe respetar la intimidad,
-                    las decisiones y las circunstancias de la
-                    persona que consulta.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">05</span>
-
-                <h3>SIN DEPENDENCIA</h3>
-
-                <p>
-                    El Tarot debe utilizarse como una herramienta
-                    de reflexión y orientación, no como algo que
-                    sustituya el criterio personal.
-                </p>
-
-            </div>
-
-
-            <div class="tirada-card">
-
-                <span class="tirada-numero">06</span>
-
-                <h3>LÍMITES DEL TAROT</h3>
-
-                <p>
-                    Una lectura no reemplaza el asesoramiento
-                    profesional necesario en situaciones médicas,
-                    legales, psicológicas o financieras.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
+<section class="final">
+  <div class="wrap">
+    <div class="eyebrow">ASTRO ROJO · PRÁCTICA</div>
+    <h2>Las cartas muestran símbolos.<br>La interpretación construye el sentido.</h2>
+    <p>Usá lo aprendido para practicar tus propias lecturas. Observá, relacioná y construí una interpretación coherente sin perder de vista la pregunta.</p>
+    <a class="btn primary" href="index4.html">Continuar a los ejercicios ↗</a>
+    <a class="btn" href="#inicio">Volver al inicio ↑</a>
+  </div>
+</section>
 
 <div class="siguiente-leccion">
-    <a href="index4.html">IR A EJERCICIOS →</a>
+  <a href="index4.html">IR A EJERCICIOS →</a>
 </div>
+
 </main>
 
+<footer>
+  <div class="wrap footrow">
+    <span class="brand">ASTRO <span>ROJO</span></span>
+    <span>Curso de Tarot · Interpretación y simbolismo</span>
+  </div>
+</footer>
 
 </body>
-
 </html>
-
