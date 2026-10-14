@@ -100,36 +100,9 @@
             <div class="price"></div>
 
            
-
-<button class="button" type="button" onclick="pago()">
-    Comenzar 
-</button>
-
-<script>
-async function pago() {
-    try {
-        const respuesta = await fetch("/api/crear-pago", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({})
-        });
-
-        const datos = await respuesta.json();
-
-        if (!respuesta.ok || !datos.init_point) {
-            throw new Error(datos.error || "No se pudo crear el pago");
-        }
-
-        window.location.href = datos.init_point;
-
-    } catch (error) {
-        console.error(error);
-        alert("No se pudo iniciar el pago. Intentá nuevamente.");
-    }
-}
-</script>
+<a href="astrologia/index.html">
+    <button type="button">Comenzar</button>
+</a>
 
 
 
